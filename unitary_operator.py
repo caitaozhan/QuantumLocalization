@@ -1,10 +1,13 @@
 '''
 Model the unitary operator as a function of distance
+From Xia Yi's PhD Thesis titled Distributed Quantum Sensing: Theoretical Foundation, Experimental Platform and Applications
+Link: https://repository.arizona.edu/handle/10150/661283
 '''
 
 import numpy as np
 import math
 from scipy.linalg import expm
+from typing import Tuple
 
 
 class UnitaryOperator:
@@ -24,13 +27,24 @@ class UnitaryOperator:
     def wave_length(self):
         return 3*10**8 / (self.frequency)
     
-    def compute(self, distance: float) -> np.array:
+    def compute(self, distance: float) -> Tuple[float, np.array]:
+        '''
+        Args:
+            distance -- the distance between the TX and RX
+        Return:
+            displacement     -- the displacement at the RF-Photonic senser
+            unitary_operator -- the effect of the RF wave on the qubit at of the RF-Phonotic sensor
+        TODO: 1) The amplitude model A = self.amplitude_reference / distance can be refined.
+              2) rethink quadrature operator and Pauli z matrix
+        '''
         c = 100
         delta_distance = math.fmod(distance, self.wave_length)
-        displacement = c * self.amplitude_reference / distance * np.sin(delta_distance * 2 * np.pi / self.wave_length)
+        displacement = c * self.amplitude_reference / distance * np.sin(2 * np.pi * delta_distance / self.wave_length)
         generator = np.array([[0, complex(0, 0.5)], [-complex(0, 0.5), 0]])   # quadrature operator
+        # generator = np.array([[0.5, 0], [0, -0.5]])                           # half of Pauli z matrix
         exponent = -complex(0, 1) * generator * displacement
-        return displacement, expm(exponent)
+        unitary_operator = expm(exponent)
+        return displacement, unitary_operator
 
 
 def main1():

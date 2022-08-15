@@ -1,60 +1,53 @@
 '''generate sensor data, sensor is in continuous locations, i.e., not confined at the center of a grid cell
 '''
 import json
+from my_encoder import MyJSONEncoder
 
 
-def one_level_4sensor(filename):
-    '''one level 4 sensors in a 4 by 4 grid
-    '''
-    sensor = [(2, 0), (4, 2), (2, 4), (0, 2)]
-    levels = {}
-    sets = {}
-    sensordict = {}
-    for i, loc in enumerate(sensor):
-        sensordict[i] = loc
-    sets['set-1'] = sensordict
-    levels['level-1'] = sets
-
-    with open(filename, 'w') as f:
-        json.dump(levels, f)
-
-
-def two_level_4sensor(filename):
+def two_level_4by4grid(filename):
     '''two level 4 sensors in a 4 by 4 grid
     '''
-    # level 1 has 1 set of 4 sensors
-    sensor = [(2, 0), (4, 2), (2, 4), (0, 2)]
+    sensor_data = {}
+    
+    info = "grid size is 4x4, 12 sensors at 2 levels."
+    sensor_data['info'] = info
+
+    sensors = {
+        0: (0, 1),
+        1: (0, 3),
+        2: (1, 0),
+        3: (1, 2),
+        4: (1, 4),
+        5: (2, 1),
+        6: (2, 3),
+        7: (3, 0),
+        8: (3, 2),
+        9: (3, 4),
+        10: (4, 1),
+        11: (4, 3)
+    }
+    sensor_data['sensors'] = sensors
+
     levels = {}
     sets = {}
-    sensordict = {}
-    for i, loc in enumerate(sensor):
-        sensordict[i] = loc
-    sets['set-1'] = sensordict
+    sets['set-0'] = [0, 4, 11, 7]  # sensor ID
     levels['level-1'] = sets
-
-    # level 2 has 4 set of 4 sensors
-    sensor = [[(0.5, 0.5), (0.5, 1.5), (1.5, 0.5), (1.5, 1.5)],
-              [(0.5, 2.5), (0.5, 3.5), (1.5, 2.5), (1.5, 3.5)],
-              [(2.5, 0.5), (2.5, 1.5), (3.5, 0.5), (3.5, 1.5)],
-              [(2.5, 2.5), (2.5, 3.5), (3.5, 2.5), (3.5, 3.5)]]
-    
     sets = {}
-    for set_num, set_sensor in enumerate(sensor):
-        sensordict = {}
-        for i, loc in enumerate(set_sensor):
-            sensordict[i] = loc
-        sets[f'set-{set_num}'] = sensordict
+    sets['set-0'] = [0, 2, 3, 5]
+    sets['set-1'] = [1, 3, 4, 6]
+    sets['set-2'] = [5, 7, 8, 10]
+    sets['set-3'] = [6, 8, 9, 11]
     levels['level-2'] = sets
+    sensor_data['levels'] = levels
 
     with open(filename, 'w') as f:
-        json.dump(levels, f)
+        json.dump(sensor_data, f, indent=2, cls=MyJSONEncoder)
 
+    print(json.dumps(sensor_data, indent=2, cls=MyJSONEncoder))
 
 
 
 if __name__ == '__main__':
-    filename = '4x4-onelevel.json'
-    one_level_4sensor(filename)
     
     filename = '4x4-twolevel.json'
-    two_level_4sensor(filename)
+    two_level_4by4grid(filename)

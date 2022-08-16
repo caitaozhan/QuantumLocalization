@@ -39,13 +39,6 @@ def two_level_4by4grid(filename):
     sets['set-3'] = {'sensors': [6, 8, 9, 11], 'area': [[2, 2], [4, 4]]}
     levels['level-2'] = sets
     sensor_data['levels'] = levels
-    # two level mapping -- level 1's sensor -> level 2's set
-    mappings = {}
-    mappings['level-1-sensor-0']  = 'level-2-set-0'
-    mappings['level-1-sensor-4']  = 'level-2-set-1'
-    mappings['level-1-sensor-7']  = 'level-2-set-2'
-    mappings['level-1-sensor-11'] = 'level-2-set-3'
-    sensor_data['mappings'] = mappings
 
     with open(filename, 'w') as f:
         json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)

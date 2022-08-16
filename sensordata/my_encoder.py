@@ -12,7 +12,6 @@ class MyJSONEncoder(json.JSONEncoder):
             if s.startswith('['):
                 list_lvl += 1
                 s = s.replace('\n', '').replace(' ', '')
-
             elif 0 < list_lvl:
                 s = s.replace('\n', '').replace(' ', '')
                 if s and s[-1] == ',':

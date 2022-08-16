@@ -3,6 +3,7 @@ some utility tools
 '''
 
 import numpy as np
+from typing import Union
 # from qiskit.quantum_info.operators.operator import Operator
 
 
@@ -31,3 +32,9 @@ class Utility:
                     imag = '+' + imag
                 print(f'({real:>8}{imag:>8}i)', end=' ')
             print()
+
+    @staticmethod
+    def distance(loc1: Union[list, tuple], loc2: Union[list, tuple], cell_length: float) -> float:
+        '''return the distance between loc1 and loc2
+        '''
+        return cell_length * np.sqrt((loc1[0] - loc2[0]) ** 2 + (loc1[1] - loc2[1]) ** 2)

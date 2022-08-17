@@ -8,6 +8,7 @@ from utility import Utility
 from unitary_operator import UnitaryOperator
 from povm import Povm
 from quantum_state import QuantumState
+from qiskit.quantum_info.operators.operator import Operator
 
 
 class QuantumLocalization:
@@ -42,8 +43,8 @@ class QuantumLocalization:
                 print(info)
                 a, b = area[0], area[1]  # a is top left, b is bottom right
                 tx0 = (a[0] + (b[0] - a[0])/4,   a[1] + (b[1] - a[1])/4)
-                tx1 = (a[0] + 3*(b[0] - a[0])/4, a[1] + (b[1] - a[1])/4)
-                tx2 = (a[0] + (b[0] - a[0])/4,   a[1] + 3*(b[1] - a[1])/4)
+                tx1 = (a[0] + (b[0] - a[0])/4,   a[1] + 3*(b[1] - a[1])/4)
+                tx2 = (a[0] + 3*(b[0] - a[0])/4, a[1] + (b[1] - a[1])/4)
                 tx3 = (a[0] + 3*(b[0] - a[0])/4, a[1] + 3*(b[1] - a[1])/4)
                 evolve_operators = []
                 tx_loc = {}
@@ -63,10 +64,95 @@ class QuantumLocalization:
                         qstates.append(QuantumState(num_sensor=4, state_vector=np.dot(evolve, init_state)))
                     povm.semidefinite_programming_minerror(qstates, priors, debug=False)
                     key = f'{level}-{set_i}'
-                    self.povms[key] = {'povm': povm.operators, 'info':tx_loc}
+                    self.povms[key] = {'povm': povm.operators, 'tx_loc':tx_loc}
                 elif initial_state == 'optimal':
                     raise NotImplementedError('initial state optimization')
         print('training POVM done!')
 
-    def testing_fourstate_povm(self, inital):
-        pass
+    def check_correct(self, tx_truth: tuple, tx: tuple, grid_len: int) -> bool:
+        x1 = int(tx_truth[0] / grid_len)
+        y1 = int(tx_truth[1] / grid_len)
+        x2 = int(tx[0] / grid_len)
+        y2 = int(tx[1] / grid_len)
+        if x1 == x2 and y1 == y2:
+            return True
+        else:
+            return False
+
+    def testing_fourstate_povm(self, tx_truth: tuple, inital_state: str):
+        '''currently only supports two level
+        Args:
+            tx            -- the location of the transmitter
+            initial_state -- 'simple' or 'optimal'
+        '''
+        # print(f'tx={tx}', end='  ')
+        # level 0, only has one set of sensors
+        level_i = 0
+        set_i = 0
+        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+        evolve = 1
+        for rx_i in set_['sensors']:
+            rx = self.sensordata['sensors'][f'{rx_i}']
+            distance = Utility.distance(tx_truth, rx, self.cell_length)
+            _, uo = self.unitary_operator.compute(distance)
+            evolve = np.kron(evolve, uo)
+            init_state = self.get_simple_initial_state(4)
+        qstate = QuantumState(num_sensor=4, state_vector=np.dot(evolve, init_state))
+        povm = self.povms[f'level-{level_i}-set-{set_i}']
+        probs = []
+        for operator in povm['povm']:
+            prob = np.trace(np.dot(operator.data, qstate.density_matrix))
+            probs.append(prob)
+        # print('level-0', probs)
+        max_i = 0
+        maxx = 0
+        for i, prob in enumerate(probs):
+            if prob > maxx:
+                max_i = i
+                maxx = prob
+        tx_level0 = povm['tx_loc'][max_i]
+        level_0_correct = self.check_correct(tx_truth, tx_level0, grid_len=2)
+        print('level-0 tx', tx_level0, level_0_correct)
+        
+        # level 1
+        # step 1: get the set in level 1 according to tx_level0
+        level_i = 1
+        min_distance = float('inf')
+        mapping_set = 0
+        for set_i in range(4):
+            set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+            a, b = set_['area']
+            center = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+            distance = Utility.distance(tx_level0, center, 1)
+            if distance < min_distance:
+                min_distance = distance
+                mapping_set = set_i
+        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{mapping_set}']
+        # step 2: get the evolving operator and the quantum state
+        evolve = 1
+        for rx_i in set_['sensors']:
+            rx = self.sensordata['sensors'][f'{rx_i}']
+            distance = Utility.distance(tx_truth, rx, self.cell_length)
+            _, uo = self.unitary_operator.compute(distance)
+            evolve = np.kron(evolve, uo)
+            init_state = self.get_simple_initial_state(4)
+        qstate = QuantumState(num_sensor=4, state_vector=np.dot(evolve, init_state))
+        # step 3: compute the probabilities
+        povm = self.povms[f'level-{level_i}-set-{mapping_set}']
+        probs = []
+        for operator in povm['povm']:
+            prob = np.trace(np.dot(operator.data, qstate.density_matrix))
+            probs.append(prob)
+        # print('level-0', probs)
+        max_i = 0
+        maxx = 0
+        for i, prob in enumerate(probs):
+            if prob > maxx:
+                max_i = i
+                maxx = prob
+        tx = povm['tx_loc'][max_i]
+        level_1_correct = self.check_correct(tx_truth, tx, grid_len=1)
+        print('level-2 tx', tx, level_1_correct)
+        if level_0_correct is False and level_1_correct is True:
+            raise Exception()
+        return level_0_correct, level_1_correct

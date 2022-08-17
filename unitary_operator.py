@@ -54,12 +54,12 @@ def main1():
     plt.rcParams['font.size'] = 45
     plt.rcParams['lines.linewidth'] = 4
 
-    frequency = 915 * 10**6        # Hz
+    frequency = 900 * 10**6        # Hz
     amplitude_reference = 0.1      # V/m
     uo = UnitaryOperator(frequency, amplitude_reference)
     X = []
     y = []
-    for distance in np.linspace(2, 10, 801):
+    for distance in np.linspace(0.1, 10, 901):
         # distance = i               # m
         # Utility.print_matrix('unitary operator', uo.compute(distance))
         displacement, operator = uo.compute(distance)
@@ -74,13 +74,13 @@ def main1():
         # Utility.print_matrix('conjugate transpose', operator_ct)
         # break
     
-    # fig, ax = plt.subplots(1, 1, figsize=(20, 14))
-    # fig.subplots_adjust(left=0.1, right=0.96, top=0.9, bottom=0.15)
-    # ax.plot(X, y)
-    # ax.set_title('RF-Photonic Sensing')
-    # ax.set_xlabel('Distance (m)')
-    # ax.set_ylabel('Phase Quadrature Displacement')
-    # fig.savefig('tmp.png')
+    fig, ax = plt.subplots(1, 1, figsize=(20, 14))
+    fig.subplots_adjust(left=0.12, right=0.96, top=0.9, bottom=0.15)
+    ax.plot(X, y)
+    ax.set_title('RF-Photonic Sensing')
+    ax.set_xlabel('Distance (m)')
+    ax.set_ylabel('Phase Quadrature Displacement')
+    fig.savefig('tmp.png')
 
 if __name__ == '__main__':
     main1()

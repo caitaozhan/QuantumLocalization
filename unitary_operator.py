@@ -8,6 +8,7 @@ import numpy as np
 import math
 from scipy.linalg import expm
 from typing import Tuple
+from default import Default
 
 
 class UnitaryOperator:
@@ -27,8 +28,9 @@ class UnitaryOperator:
     def wave_length(self):
         return 3*10**8 / (self.frequency)
     
-    def compute(self, distance: float) -> Tuple[float, np.array]:
-        '''
+    # def compute(self, distance: float) -> Tuple[float, np.array]:
+    def compute_arizona(self, distance: float) -> Tuple[float, np.array]:
+        '''sticking to the Arizona RF Photonic sensing
         Args:
             distance -- the distance between the TX and RX
         Return:
@@ -41,11 +43,39 @@ class UnitaryOperator:
         delta_distance = math.fmod(distance, self.wave_length)
         displacement = c * self.amplitude_reference / distance * np.sin(2 * np.pi * delta_distance / self.wave_length)
         generator = np.array([[0, complex(0, 0.5)], [-complex(0, 0.5), 0]])   # quadrature operator
-        # generator = np.array([[0.5, 0], [0, -0.5]])                           # half of Pauli z matrix
         exponent = -complex(0, 1) * generator * displacement
         unitary_operator = expm(exponent)
         return displacement, unitary_operator
 
+    def compute(self, distance: float) -> Tuple[float, np.array]:
+        '''making changes to work better, such as get rid of phase
+        Args:
+            distance -- the distance between the TX and RX
+        Return:
+            displacement     -- the displacement at the RF-Photonic senser
+            unitary_operator -- the effect of the RF wave on the qubit at of the RF-Phonotic sensor
+        TODO: 1) The amplitude model A = self.amplitude_reference / distance can be refined.
+        '''
+        def dist_modify(distance: float) -> float:
+            # return max(distance, 0.5)
+            return distance
+        
+        def amp2dbm(amp: float) -> float:
+            '''amp (V) -> power (W) -> power (mW) -> power (dBm)
+            '''
+            power = 10*math.log10(amp**2 * 1000)
+            return max(power, Default.noise_floor)
+        
+        def dbm_scaled(dbm: float) -> float:
+            return dbm - Default.noise_floor
+
+        c = 0.1
+        amp = self.amplitude_reference / dist_modify(distance)
+        displacement = c * dbm_scaled(amp2dbm(amp))
+        generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
+        exponent = -complex(0, 1) * generator * displacement
+        unitary_operator = expm(exponent)
+        return displacement, unitary_operator
 
 def main1():
     from qiskit.quantum_info.operators.operator import Operator
@@ -81,6 +111,7 @@ def main1():
     ax.set_xlabel('Distance (m)')
     ax.set_ylabel('Phase Quadrature Displacement')
     fig.savefig('tmp.png')
+
 
 if __name__ == '__main__':
     main1()

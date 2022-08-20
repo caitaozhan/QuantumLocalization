@@ -2,6 +2,8 @@
 Quantum enhanced localization
 '''
 
+import pickle
+import time
 import numpy as np
 import json
 from utility import Utility
@@ -27,7 +29,7 @@ class QuantumLocalization:
         return np.array([amplitude]*2**num)
 
     def training_fourstate_povm(self, initial_state: str):
-        '''train the POVM for each set of sensors (similar to classifier)
+        '''train the POVM for each set of sensors (similar to classifier) -- two levels
            each POVM is doing a 4 state discrimination
         Args:
             initial_state -- 'simple' or 'optimal', different ways to get the initial state
@@ -96,7 +98,7 @@ class QuantumLocalization:
             distance = Utility.distance(tx_truth, rx, self.cell_length)
             _, uo = self.unitary_operator.compute(distance)
             evolve = np.kron(evolve, uo)
-            init_state = self.get_simple_initial_state(4)
+        init_state = self.get_simple_initial_state(4)
         qstate = QuantumState(num_sensor=4, state_vector=np.dot(evolve, init_state))
         povm = self.povms[f'level-{level_i}-set-{set_i}']
         probs = []
@@ -135,7 +137,7 @@ class QuantumLocalization:
             distance = Utility.distance(tx_truth, rx, self.cell_length)
             _, uo = self.unitary_operator.compute(distance)
             evolve = np.kron(evolve, uo)
-            init_state = self.get_simple_initial_state(4)
+        init_state = self.get_simple_initial_state(4)
         qstate = QuantumState(num_sensor=4, state_vector=np.dot(evolve, init_state))
         # step 3: compute the probabilities
         povm = self.povms[f'level-{level_i}-set-{mapping_set}']
@@ -156,3 +158,74 @@ class QuantumLocalization:
         if level_0_correct is False and level_1_correct is True:
             raise Exception()
         return level_0_correct, level_1_correct
+
+    def training_16state_povm(self, file: str = ''):
+        '''pretty good measurement, using a simple initial state
+        '''
+        if file != '':
+            key = 'level-0-set-0'
+            with open(file, 'rb') as f:
+                self.povms[key] = pickle.load(f)
+            return
+        else:
+            file = 'tmp-folder/16povm'
+
+        povm = Povm()
+        priors = [1/16] * 16
+        txs = []
+        tx_loc = {}
+        for i in range(4):
+            for j in range(4):
+                x = i + 0.5
+                y = j + 0.5
+                txs.append((x, y))
+                tx_loc[i*4 + j] = (x, y)
+        qstates = []
+        sensors = sorted(self.sensordata['sensors'].keys())
+        for tx in txs:
+            evolve = 1
+            for rx_i in sensors:  # rx_i is in str
+                rx = self.sensordata['sensors'][rx_i]
+                distance = Utility.distance(tx, rx, self.cell_length)
+                _, uo = self.unitary_operator.compute(distance)
+                evolve = np.kron(evolve, uo)
+            initial_state = self.get_simple_initial_state(len(sensors))
+            qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, initial_state)))
+        povm.pretty_good_measurement(qstates, priors, debug=False)
+        key = 'level-0-set-0'
+        self.povms[key] = {'povm': povm.operators, 'tx_loc': tx_loc}
+        with open(file, 'wb') as f:
+            pickle.dump(self.povms[key], f)
+        print('training POVM done!')
+    
+    def testing_16state_povm(self, tx_truth: tuple):
+        '''single level 16 state discrimination
+        '''
+        sensors = sorted(self.sensordata['sensors'].keys())
+        evolve = 1
+        for rx_i in sensors:
+            rx = self.sensordata['sensors'][rx_i]
+            distance = Utility.distance(tx_truth, rx, self.cell_length)
+            _, uo = self.unitary_operator.compute(distance)
+            evolve = np.kron(evolve, uo)
+        initial_state = self.get_simple_initial_state(len(sensors))
+        qstate = QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, initial_state))
+        key = 'level-0-set-0'
+        povm = self.povms[key]
+        probs = []
+        for operator in povm['povm']:
+            prob = np.trace(np.dot(operator.data, qstate.density_matrix))
+            probs.append(prob)
+        max_i = 0
+        maxx = 0
+        for i, prob in enumerate(probs):
+            if prob > maxx:
+                max_i = i
+                maxx = prob
+        tx_level0 = povm['tx_loc'][max_i]
+        level_0_correct = self.check_correct(tx_truth, tx_level0, grid_len=1)
+        print('level 0 tx', tx_level0, level_0_correct)
+        return level_0_correct
+
+
+

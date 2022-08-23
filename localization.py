@@ -10,7 +10,7 @@ from utility import Utility
 from unitary_operator import UnitaryOperator
 from povm import Povm
 from quantum_state import QuantumState
-from qiskit.quantum_info.operators.operator import Operator
+from plot import Plot
 
 
 class QuantumLocalization:
@@ -163,12 +163,12 @@ class QuantumLocalization:
         '''pretty good measurement, using a simple initial state
         '''
         if file != '':
-            key = 'level-0-set-0'
+            key = 'level-0-all'
             with open(file, 'rb') as f:
                 self.povms[key] = pickle.load(f)
             return
         else:
-            file = 'tmp-folder/16povm'
+            file = 'tmp-folder/onelevel_16povm.povm'
 
         povm = Povm()
         priors = [1/16] * 16
@@ -192,7 +192,7 @@ class QuantumLocalization:
             initial_state = self.get_simple_initial_state(len(sensors))
             qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, initial_state)))
         povm.pretty_good_measurement(qstates, priors, debug=False)
-        key = 'level-0-set-0'
+        key = 'level-0-all'
         self.povms[key] = {'povm': povm.operators, 'tx_loc': tx_loc}
         with open(file, 'wb') as f:
             pickle.dump(self.povms[key], f)
@@ -224,6 +224,7 @@ class QuantumLocalization:
                 maxx = prob
         tx_level0 = povm['tx_loc'][max_i]
         level_0_correct = self.check_correct(tx_truth, tx_level0, grid_len=1)
+        Plot.prob_heatmap(probs, n=4, filename=f'tmp-folder/truth={tx_truth}, pred={tx_level0}.png')
         print('level 0 tx', tx_level0, level_0_correct)
         return level_0_correct
 
@@ -287,6 +288,7 @@ class QuantumLocalization:
                 max_i = i
                 maxx = prob
         tx_level0 = povm['tx_loc'][max_i]
+        Plot.prob_heatmap(probs, n=4, filename=f'tmp-folder/truth={tx_truth}, pred={tx_level0}.png')
         level_0_correct = self.check_correct(tx_truth, tx_level0, grid_len=1)
         print('level 0 tx', tx_level0, level_0_correct)
         return level_0_correct

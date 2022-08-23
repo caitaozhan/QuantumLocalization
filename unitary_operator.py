@@ -57,8 +57,8 @@ class UnitaryOperator:
         TODO: 1) The amplitude model A = self.amplitude_reference / distance can be refined.
         '''
         def dist_modify(distance: float) -> float:
-            # return max(distance, 0.5)
-            return distance
+            return max(distance, 0.1)
+            # return distance
         
         def amp2dbm(amp: float) -> float:
             '''amp (V) -> power (W) -> power (mW) -> power (dBm)

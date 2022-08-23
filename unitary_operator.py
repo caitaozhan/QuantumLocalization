@@ -57,7 +57,7 @@ class UnitaryOperator:
         TODO: 1) The amplitude model A = self.amplitude_reference / distance can be refined.
         '''
         def dist_modify(distance: float) -> float:
-            return max(distance, 0.1)
+            return max(distance, 0.5)
             # return distance
         
         def amp2dbm(amp: float) -> float:
@@ -69,7 +69,7 @@ class UnitaryOperator:
         def dbm_scaled(dbm: float) -> float:
             return dbm - Default.noise_floor
 
-        c = 0.1
+        c = 2*np.pi/80
         amp = self.amplitude_reference / dist_modify(distance)
         displacement = c * dbm_scaled(amp2dbm(amp))
         generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
@@ -85,11 +85,11 @@ def main1():
     plt.rcParams['lines.linewidth'] = 4
 
     frequency = 900 * 10**6        # Hz
-    amplitude_reference = 0.1      # V/m
+    amplitude_reference = Default.amplitude_ref      # V/m
     uo = UnitaryOperator(frequency, amplitude_reference)
     X = []
     y = []
-    for distance in np.linspace(0.1, 10, 901):
+    for distance in np.linspace(0.5, 5000, 900):
         # distance = i               # m
         # Utility.print_matrix('unitary operator', uo.compute(distance))
         displacement, operator = uo.compute(distance)

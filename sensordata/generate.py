@@ -1,5 +1,6 @@
 '''generate sensor data, sensor is in continuous locations, i.e., not confined at the center of a grid cell
 '''
+
 import json
 from my_encoder import MyJSONEncoder
 
@@ -42,6 +43,26 @@ def two_level_4by4grid(filename):
 
     with open(filename, 'w') as f:
         json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)
+
+
+def two_level_16by16grid(filename):
+
+    def generate_4sensors_4x4grid():
+        '''generate 4 sensors in a 4x4 grid
+        '''
+        sensors = []
+        myset = set([(i, j) for j in range(4) for i in range(4)])
+        
+
+
+    sensor_data = {}
+    # information
+    info = 'grid size is 16x16, 64 sensors at 2 levels'
+    sensor_data['info'] = info
+
+    for i in range(4):
+        for j in range(4):
+            pass
 
 
 

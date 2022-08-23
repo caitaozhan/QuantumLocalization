@@ -13,5 +13,5 @@ class Default:
     cell_length: int       = 10            # in meters
     # frequency: int         = 20 * 10**6 # 915 * 10**5  # Hz
     frequency: int         = 915 * 10**6 # 915 * 10**5  # Hz
-    amplitude_ref: float   = 0.01          # V/m, amplitude reference
-    noise_floor: int       = -80          # dBm
+    amplitude_ref: float   = 0.005         # V/m, amplitude reference, the amplitude at 1 meters away from the TX
+    noise_floor: int       = -90           # dBm

@@ -89,7 +89,7 @@ def main1():
     uo = UnitaryOperator(frequency, amplitude_reference)
     X = []
     y = []
-    for distance in np.linspace(0.5, 5000, 900):
+    for distance in np.linspace(0.5, 40, 900):
         # distance = i               # m
         # Utility.print_matrix('unitary operator', uo.compute(distance))
         displacement, operator = uo.compute(distance)

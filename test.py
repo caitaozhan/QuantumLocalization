@@ -244,8 +244,8 @@ def localization_onelevel_4sensor_discrete():
 
 if __name__ == '__main__':
     # localization_onelevel_4sensor()
-    # localization_onelevel_4sensor_discrete()
+    localization_onelevel_4sensor_discrete()
     # localization_onelevel_12sensor()
-    localization_onelevel_12sensor_discrete()
+    # localization_onelevel_12sensor_discrete()
     # localization_twolevel()
 

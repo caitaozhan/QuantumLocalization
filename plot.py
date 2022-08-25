@@ -16,7 +16,7 @@ class Plot:
         for i in range(n):
             for j in range(n):
                 grid[i][j] = probs[4*i + j]
-        plt.subplots(figsize=(8, 8))
+        plt.subplots(figsize=(16, 16))
         sns.heatmap(grid, linewidth=0.1, vmin=0, vmax=0.5, annot=True)
         plt.savefig(filename)
 

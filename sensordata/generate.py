@@ -79,7 +79,7 @@ def two_level_16by16grid(filename: str, fig_filename: str):
         local_sensors = sets[f'set-{i}']['sensors']
         level0_sensors.append(random.sample(local_sensors, 1)[0]) 
     level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (16, 16)]}
-    levels['level-0'] = level0_set
+    levels['level-0'] = {'set-0': level0_set}
     levels['level-1'] = sets
     sensor_data['levels'] = levels
     Plot.visualize_sensors(sensors, level0_sensors, fig_filename)

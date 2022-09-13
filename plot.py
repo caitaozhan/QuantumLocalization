@@ -15,7 +15,7 @@ class Plot:
         grid = np.zeros((n, n))
         for i in range(n):
             for j in range(n):
-                grid[i][j] = probs[4*i + j]
+                grid[i][j] = probs[4*i + j].real
         plt.subplots(figsize=(16, 16))
         sns.heatmap(grid, linewidth=0.1, vmin=0, vmax=0.5, annot=True)
         plt.savefig(filename)

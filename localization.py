@@ -29,6 +29,8 @@ class QuantumLocalization:
         return np.array([amplitude]*2**num)
 
     def check_correct(self, tx_truth: tuple, tx: tuple, grid_len: int) -> bool:
+        '''change grid_len to cell_length?
+        '''
         x1 = int(tx_truth[0] / grid_len)
         y1 = int(tx_truth[1] / grid_len)
         x2 = int(tx[0] / grid_len)

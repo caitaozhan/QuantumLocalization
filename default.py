@@ -14,4 +14,7 @@ class Default:
     # frequency: int         = 20 * 10**6 # 915 * 10**5  # Hz
     frequency: int         = 915 * 10**6 # 915 * 10**5  # Hz
     amplitude_ref: float   = 0.01         # V/m, amplitude reference, the amplitude at 1 meters away from the TX
-    noise_floor: int       = -90           # dBm
+    power_ref: float       = -10          # dBm, power reference, the power at 1 meters away from the TX
+    noise_floor: int       = -90          # dBm
+    alpha: float           = 3.5            # the alpha for propagation model
+    std: float             = 0            # the std of noise or shadowing for propagation model

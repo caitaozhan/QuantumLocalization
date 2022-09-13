@@ -12,21 +12,36 @@ from default import Default
 
 
 class UnitaryOperator:
-    def __init__(self, frequency: float, amplitude_reference: float):
-        self._frequency = frequency                         # the RF signal's carrier frequency
-        self._amplitude_reference = amplitude_reference     # the RF signal's amplitude at 1 meter
-    
+    def __init__(self, alpha: float, std: float, power_reference: float):
+        self._alpha = alpha                                 # the alpha in the propagation model
+        self._std = std                                     # the std in the propagation model
+        self._power_reference = power_reference             # the RF signal's power at 1 meters
+        # self._frequency = frequency                         # the RF signal's carrier frequency
+        # self._amplitude_reference = amplitude_reference     # the RF signal's amplitude at 1 meter
+
     @property
-    def frequency(self):
-        return self._frequency
-    
+    def alpha(self):
+        return self._alpha
+
     @property
-    def amplitude_reference(self):
-        return self._amplitude_reference
-    
+    def std(self):
+        return self._std
+
     @property
-    def wave_length(self):
-        return 3*10**8 / (self.frequency)
+    def power_reference(self):
+        return self._power_reference
+
+    # @property
+    # def frequency(self):
+    #     return self._frequency
+    
+    # @property
+    # def amplitude_reference(self):
+    #     return self._amplitude_reference
+    
+    # @property
+    # def wave_length(self):
+    #     return 3*10**8 / (self.frequency)
     
     # def compute(self, distance: float) -> Tuple[float, np.array]:
     def compute_arizona(self, distance: float) -> Tuple[float, np.array]:
@@ -47,7 +62,7 @@ class UnitaryOperator:
         unitary_operator = expm(exponent)
         return displacement, unitary_operator
 
-    def compute(self, distance: float) -> Tuple[float, np.array]:
+    def compute_amp(self, distance: float) -> Tuple[float, np.array]:
         '''making changes to work better, such as get rid of phase
         Args:
             distance -- the distance between the TX and RX
@@ -58,7 +73,6 @@ class UnitaryOperator:
         '''
         def dist_modify(distance: float) -> float:
             return max(distance, 1)
-            # return distance
         
         def amp2dbm(amp: float) -> float:
             '''amp (V) -> power (W) -> power (mW) -> power (dBm)
@@ -69,9 +83,32 @@ class UnitaryOperator:
         def dbm_scaled(dbm: float) -> float:
             return dbm - Default.noise_floor
 
-        c = 2*np.pi/80
-        amp = self.amplitude_reference / dist_modify(distance)**1.5
+        c = 2 * np.pi / 80
+        amp = self.amplitude_reference / dist_modify(distance)**2
         displacement = c * dbm_scaled(amp2dbm(amp))
+        generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
+        exponent = -complex(0, 1) * generator * displacement
+        unitary_operator = expm(exponent)
+        return displacement, unitary_operator
+
+
+    def compute(self, distance: float) -> Tuple[float, np.array]:
+        '''making changes to work better, such as get rid of phase
+        Args:
+            distance -- the distance between the TX and RX
+        Return:
+            displacement     -- the displacement at the RF-Photonic senser
+            unitary_operator -- the effect of the RF wave on the qubit at of the RF-Phonotic sensor
+        '''
+        def dist_modify(distance: float) -> float:
+            return max(distance, 1)
+        
+        c = 2 * np.pi / 80
+        freespace = 10 * self.alpha * math.log10(dist_modify(distance))
+        shadowing = np.random.normal(0, self.std)
+        power = self._power_reference - freespace + shadowing
+        power_scaled = power - Default.noise_floor
+        displacement = c * power_scaled
         generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
         exponent = -complex(0, 1) * generator * displacement
         unitary_operator = expm(exponent)
@@ -85,12 +122,15 @@ def main1():
     plt.rcParams['font.size'] = 45
     plt.rcParams['lines.linewidth'] = 4
 
-    frequency = 900 * 10**6        # Hz
-    amplitude_reference = Default.amplitude_ref      # V/m
-    uo = UnitaryOperator(frequency, amplitude_reference)
+    # frequency = 900 * 10**6        # Hz
+    # amplitude_reference = Default.amplitude_ref      # V/m
+    alpha = Default.alpha
+    std   = Default.std
+    power_reference = Default.power_ref
+    uo = UnitaryOperator(alpha, std, power_reference)
     X = []
     y = []
-    for distance in np.linspace(0.5, 230, 900):
+    for distance in np.linspace(0, 100, 101):
         # distance = i               # m
         # Utility.print_matrix('unitary operator', uo.compute(distance))
         displacement, operator = uo.compute(distance)
@@ -112,7 +152,7 @@ def main1():
     ax.set_title('RF-Photonic Sensing')
     ax.set_xlabel('Distance (m)')
     ax.set_ylabel('Phase Quadrature Displacement')
-    fig.savefig('tmp-1.5.png')
+    fig.savefig(f'tmp-{Default.alpha}.png')
 
 
 if __name__ == '__main__':

@@ -169,7 +169,7 @@ def localization_onelevel_4sensor():
     wrong_x, wrong_y = [], []
     for i, tx in enumerate(tx_list):
         print(f'{i}, truth tx = ({tx[0]:.2f}, {tx[1]:.2f})')
-        ret = ql.testing_onelevel_level_0_set_0(tx)
+        ret = ql.testing_onelevel_36state_level_0_set_0(tx)
         if ret:
             level_0_right += 1
             right_x.append(tx[0])
@@ -214,8 +214,53 @@ def localization_onelevel_4sensor_discrete():
     wrong_x, wrong_y = [], []
     for i, tx in enumerate(tx_list):
         print(f'{i}, truth tx = ({tx[0]:.2f}, {tx[1]:.2f})')
-        # ret = ql.testing_onelevel_level_0_set_0(tx, grid_length=4)
-        ret = ql.testing_onelevel_level_0_set_0_initstate(tx, grid_length=4)
+        # ret = ql.testing_onelevel_16state_level_0_set_0(tx, grid_length=4)
+        ret = ql.testing_onelevel_16state_level_0_set_0_initstate(tx, grid_length=4)
+        if ret:
+            level_0_right += 1
+            right_x.append(tx[0])
+            right_y.append(tx[1])
+        else:
+            wrong_x.append(tx[0])
+            wrong_y.append(tx[1])
+    print()
+
+    print(f'accuracy = {level_0_right/len(tx_list)}')
+    plt.rcParams['font.size'] = 20
+    fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+    ax.scatter(right_x, right_y, c='green')
+    ax.set_title('Scatter Plot for Right Test Sample')
+    ax.grid()
+    fig.savefig('tmp.right.png')
+
+    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+    ax.scatter(wrong_x, wrong_y, c='red')
+    ax.grid()
+    ax.set_title('Scatter Plot for Wrong Test Sample')
+    fig.savefig('tmp.wrong.png')
+
+
+'''6x6 grid, one level localization'''
+def localization_onelevel_4sensor_6x6grid():
+    random.seed(3)
+    grid_len = 6
+    sensordata = 'sensordata/6x6-onelevel.json'
+    unitary_operator = UnitaryOperator(Default.alpha, Default.std, Default.power_ref)
+    ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
+                             sensordata_filename=sensordata, unitary_operator=unitary_operator)
+    # ql.training_onelevel_36state_level_0_set_0()              # simple initial state
+    ql.training_onelevel_36state_level_0_set_0_initstate()    # optimizes initial state
+
+    tx_list = []
+    for x in range(6):
+        for y in range(6):
+            tx_list.append((x + 0.5, y + 0.5))
+    level_0_right = 0
+    right_x, right_y = [], []
+    wrong_x, wrong_y = [], []
+    for i, tx in enumerate(tx_list):
+        print(f'{i}, truth tx = ({tx[0]:.2f}, {tx[1]:.2f})')
+        ret = ql.testing_onelevel_36state_level_0_set_0(tx, grid_length=grid_len, opt_init_state=True)
         if ret:
             level_0_right += 1
             right_x.append(tx[0])
@@ -262,7 +307,7 @@ def localization_onelevel_16x16grid():
     for i, tx in enumerate(tx_list):
         print(f'{i}, truth tx = ({tx[0]:.2f}, {tx[1]:.2f})')
         start = time.time()
-        ret = ql.testing_onelevel_level_0_set_0(tx, grid_length=grid_length)
+        ret = ql.testing_onelevel_36state_level_0_set_0(tx, grid_length=grid_length)
         print(f'time = {time.time() - start}')
         if ret:
             level_0_right += 1
@@ -343,13 +388,14 @@ if __name__ == '__main__':
     # 4x4 grid
 
     # localization_onelevel_4sensor()
-    localization_onelevel_4sensor_discrete()
+    # localization_onelevel_4sensor_discrete()
     # localization_onelevel_12sensor()
     # localization_onelevel_12sensor_discrete()
     # localization_twolevel_4x4grid()
 
-
     # 16x16 grid
-
     # localization_onelevel_16x16grid()
     # localization_twolevel_16x16grid()
+
+    # 6x6 grid
+    localization_onelevel_4sensor_6x6grid()

@@ -7,6 +7,32 @@ import random
 from my_encoder import MyJSONEncoder
 
 
+'''two level 4 sensors in a 4 by 4 grid'''
+def one_level_6by6grid(filename, fig_filename):
+    sensor_data = {}
+    # information
+    info = "grid size is 6x6, 4 sensors in one level."
+    sensor_data['info'] = info
+    # location of 4 sensors
+    sensors = {
+        0: (1, 5),
+        1: (2, 1),
+        2: (4, 2),
+        3: (4, 5),
+    }
+    sensor_data['sensors'] = sensors
+    # one level
+    levels = {}
+    sets = {}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3], 'area': [[0, 0], [6, 6]]}
+    levels['level-0'] = sets
+    sensor_data['levels'] = levels
+    grid_len = 6
+    Plot.visualize_sensors(grid_len, sensors, sensors, fig_filename)
+    with open(filename, 'w') as f:
+        json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)
+
+
 def two_level_4by4grid(filename):
     '''two level 4 sensors in a 4 by 4 grid
     '''
@@ -93,7 +119,10 @@ if __name__ == '__main__':
     # filename = '4x4-twolevel.json'
     # two_level_4by4grid(filename)
 
-    filename = 'sensordata/16x16-twolevel.json'
-    fig_filename = 'sensordata/tmp.16x16grid.png'
-    two_level_16by16grid(filename, fig_filename)
+    # filename = 'sensordata/16x16-twolevel.json'
+    # fig_filename = 'sensordata/tmp.16x16grid.png'
+    # two_level_16by16grid(filename, fig_filename)
 
+    filename = 'sensordata/6x6-onelevel.json'
+    fig_filename = 'sensordata/tmp.6x6grid.png'
+    one_level_6by6grid(filename, fig_filename)

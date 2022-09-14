@@ -441,7 +441,7 @@ class QuantumLocalization:
         self.povms[key] = {'povm': povm.operators, 'tx_loc': tx_loc}
         print('training POVM done!')
     
-    def testing_onelevel_level_0_set_0(self, tx_truth: tuple, grid_length: int):
+    def testing_onelevel_16state_level_0_set_0(self, tx_truth: tuple, grid_length: int):
         '''4x4 grid, single level 4 state discrimination
         '''
         level_i = 0
@@ -475,7 +475,7 @@ class QuantumLocalization:
         return level_0_correct
 
     def training_onelevel_16state_level_0_set_0_initstate(self):
-        '''4x4 grid, pretty good measurement, using a simple initial state
+        '''4x4 grid, pretty good measurement, optimize the initial state
         '''
         optimize_initstate = OptimizeInitialState(num_sensor=4)
         povm = Povm()
@@ -502,19 +502,18 @@ class QuantumLocalization:
                 _, uo = self.unitary_operator.compute(distance)
                 evolve = np.kron(evolve, uo)
             evolution_operators.append(Operator(evolve))
-        max_time = 10
         init_step = Default.init_step
         max_stuck = Default.max_stuck
         cooling_rate = Default.cooling_rate
         stepsize_decreasing_rate = Default.stepsize_decreasing_rate
         epsilon = Default.EPSILON
-        initstate, operators = optimize_initstate.simulated_annealing(max_time, num_sensor, evolution_operators, priors, init_step,
+        initstate, operators = optimize_initstate.simulated_annealing(num_sensor, evolution_operators, priors, init_step,
                                                                       stepsize_decreasing_rate, epsilon, max_stuck, cooling_rate)
         key = f'level-{level_i}-set-{set_i}'
         self.povms[key] = {'init_state': initstate, 'povm': operators, 'tx_loc': tx_loc}
         print('training POVM done!')
-    
-    def testing_onelevel_level_0_set_0_initstate(self, tx_truth: tuple, grid_length: int):
+
+    def testing_onelevel_16state_level_0_set_0_initstate(self, tx_truth: tuple, grid_length: int):
         '''4x4 grid, single level 4 state discrimination
         '''
         level_i = 0
@@ -531,6 +530,113 @@ class QuantumLocalization:
         povm = self.povms[key]
         initial_state = povm['init_state']
         qstate = QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, initial_state.state_vector))
+        probs = []
+        for operator in povm['povm']:
+            prob = np.trace(np.dot(operator.data, qstate.density_matrix))
+            probs.append(prob)
+        max_i = 0
+        maxx = 0
+        for i, prob in enumerate(probs):
+            if prob > maxx:
+                max_i = i
+                maxx = prob
+        tx_level0 = povm['tx_loc'][max_i]
+        Plot.prob_heatmap(probs, n=grid_length, filename=f'tmp-folder/truth={tx_truth}, pred={tx_level0}.png')
+        level_0_correct = self.check_correct(tx_truth, tx_level0, grid_len=1)
+        print('level 0 tx', tx_level0, level_0_correct)
+        return level_0_correct
+
+    def training_onelevel_36state_level_0_set_0(self):
+        '''6x6 grid, pretty good measurement, using a simple initial state
+        '''
+        povm = Povm()
+        priors = [1/36] * 36
+        txs = []
+        tx_loc = {}
+        for i in range(6):
+            for j in range(6):
+                x = i + 0.5
+                y = j + 0.5
+                txs.append((x, y))
+                tx_loc[i*6 + j] = (x, y)
+        qstates = []
+        level_i = 0
+        set_i   = 0
+        set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+        sensors = set_data['sensors']
+        for tx in txs:
+            evolve = 1
+            for rx_i in sensors:  # rx_i is in str
+                rx = self.sensordata['sensors'][f'{rx_i}']
+                distance = Utility.distance(tx, rx, self.cell_length)
+                _, uo = self.unitary_operator.compute(distance)
+                evolve = np.kron(evolve, uo)
+            initial_state = self.get_simple_initial_state(len(sensors))
+            qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, initial_state)))
+        povm.pretty_good_measurement(qstates, priors, debug=False)
+        key = f'level-{level_i}-set-{set_i}'
+        self.povms[key] = {'povm': povm.operators, 'tx_loc': tx_loc}
+        print('training POVM done!')
+
+    def training_onelevel_36state_level_0_set_0_initstate(self):
+        '''6x6 grid, pretty good measurement, optimize initial state using simulated annealing
+        '''
+        optimize_initstate = OptimizeInitialState(num_sensor=4)
+        priors = [1/36] * 36
+        txs = []
+        tx_loc = {}
+        for i in range(6):
+            for j in range(6):
+                x = i + 0.5
+                y = j + 0.5
+                txs.append((x, y))
+                tx_loc[i*6 + j] = (x, y)
+        level_i = 0
+        set_i   = 0
+        set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+        sensors = set_data['sensors']
+        num_sensor = len(sensors)
+        evolution_operators = []
+        for tx in txs:
+            evolve = 1
+            for rx_i in sensors:  # rx_i is in str
+                rx = self.sensordata['sensors'][f'{rx_i}']
+                distance = Utility.distance(tx, rx, self.cell_length)
+                _, uo = self.unitary_operator.compute(distance)
+                evolve = np.kron(evolve, uo)
+            evolution_operators.append(Operator(evolve))
+        init_step = Default.init_step
+        max_stuck = Default.max_stuck
+        cooling_rate = Default.cooling_rate
+        stepsize_decreasing_rate = Default.stepsize_decreasing_rate
+        epsilon = Default.EPSILON
+        initstate, operators = optimize_initstate.simulated_annealing(num_sensor, evolution_operators, priors, init_step,
+                                                                      stepsize_decreasing_rate, epsilon, max_stuck, cooling_rate)
+        key = f'level-{level_i}-set-{set_i}'
+        self.povms[key] = {'init_state': initstate, 'povm': operators, 'tx_loc': tx_loc}
+        print('training POVM done!')
+
+    def testing_onelevel_36state_level_0_set_0(self, tx_truth: tuple, grid_length: int, opt_init_state: bool = False):
+        '''6x6 grid, single level 36 state discrimination
+        '''
+        level_i = 0
+        set_i   = 0
+        set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+        sensors = set_data['sensors']
+        evolve = 1
+        for rx_i in sensors:
+            rx = self.sensordata['sensors'][f'{rx_i}']
+            distance = Utility.distance(tx_truth, rx, self.cell_length)
+            _, uo = self.unitary_operator.compute(distance)
+            evolve = np.kron(evolve, uo)
+        key = f'level-{level_i}-set-{set_i}'
+        povm = self.povms[key]
+        if opt_init_state:
+            init_state = povm['init_state']
+            qstate = QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state.state_vector))
+        else:
+            init_state = self.get_simple_initial_state(len(sensors))
+            qstate = QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state))
         probs = []
         for operator in povm['povm']:
             prob = np.trace(np.dot(operator.data, qstate.density_matrix))

@@ -69,7 +69,7 @@ class OptimizeInitialState:
         return np.std(scores)
 
 
-    def simulated_annealing(self, max_time: float, num_sensor: int, evolution_operators: list, priors: list, init_step: float, stepsize_decreasing_rate: float,
+    def simulated_annealing(self, num_sensor: int, evolution_operators: list, priors: list, init_step: float, stepsize_decreasing_rate: float,
                             epsilon: float, max_stuck: int, cooling_rate: float) -> Tuple[QuantumState, list]:
         '''optimize the initial state by simulated annealing
         Args:
@@ -85,8 +85,8 @@ class OptimizeInitialState:
         qstate = QuantumState(num_sensor, self.get_simple_initial_state(num=num_sensor))
         N = 2 ** num_sensor
         init_temp_neighbors = 10
-        # init_temperature = self._generate_init_temperature(qstate, init_step, init_temp_neighbors, evolution_operators, priors, povm)
-        init_temperature = 0.00000000001
+        init_temperature = self._generate_init_temperature(qstate, init_step, init_temp_neighbors, evolution_operators, priors, povm)
+        # init_temperature = 0.00000000001
         temperature = init_temperature
         score1, povm_operators1 = self._evaluate(qstate, evolution_operators, priors, povm)
         scores = [score1]

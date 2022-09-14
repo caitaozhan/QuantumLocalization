@@ -20,7 +20,7 @@ class QuantumState:
         '''
         self._num_sensor = num_sensor
         self._state_vector = state_vector
-        self._density_matrix = None
+        self._density_matrix = np.outer(self._state_vector, np.conj(self._state_vector))
 
     @property
     def num_sensor(self):
@@ -36,10 +36,6 @@ class QuantumState:
 
     @property
     def density_matrix(self):
-        if self._density_matrix is None:
-            if self._state_vector is None:
-                raise Exception('state_vector is None!')
-            self._density_matrix = np.outer(self._state_vector, np.conj(self._state_vector))  # don't forget the conjugate ...
         return self._density_matrix
 
     def check_state(self):
@@ -108,6 +104,7 @@ class QuantumState:
         operator_dim = np.product(operator.input_dims()) # for N qubits, the input_dims() return (2, 2, ..., 2), N twos.
         if dim == operator_dim:
             self._state_vector = np.dot(operator._data, self._state_vector)
+            self._density_matrix = np.outer(self._state_vector, np.conj(self._state_vector))
         else:
             raise Exception('state_vector and operator dimension not equal')
 

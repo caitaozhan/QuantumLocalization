@@ -96,6 +96,13 @@ class Povm:
 
         return 1.*error_count / repeat
 
+    def compute_theoretical_accuracy(self, quantum_states: list, priors: list) -> float:
+        if not (len(quantum_states) == len(self._operators) == len(priors)):
+            raise Exception('not satisfied: number of quantum states == number of POVM elements == length of priors')
+        accuracy = []
+        for qstate, operator in zip(quantum_states, self.operators):
+            accuracy.append(np.trace(np.dot(qstate.density_matrix, operator.data)))
+        return sum([acc * prior for acc, prior in zip(accuracy, priors)])
 
     def computational_basis(self, num_sensor: int, quantum_states: list, priors: list):
         '''using a fixed computational basis, get the success probability empirically through simulation

@@ -9,9 +9,8 @@ from default import Default
 from unitary_operator import UnitaryOperator
 
 
+'''4x4 grid, two level localization'''
 def localization_twolevel_4x4grid():
-    '''4x4 grid, two level localization
-    '''
     random.seed(3)
     sensordata = 'sensordata/4x4-twolevel.json'
     unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
@@ -64,9 +63,8 @@ def localization_twolevel_4x4grid():
     fig.savefig('tmp.wrong.png')
 
 
+'''4x4 grid, one level localization'''
 def localization_onelevel_12sensor_discrete():
-    '''4x4 grid, one level localization
-    '''
     random.seed(3)
     sensordata = 'sensordata/4x4-twolevel.json'
     unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
@@ -110,9 +108,8 @@ def localization_onelevel_12sensor_discrete():
     fig.savefig('tmp.wrong.png')
 
 
+'''4x4 grid, one level localization'''
 def localization_onelevel_12sensor():
-    '''4x4 grid, one level localization
-    '''
     random.seed(3)
     sensordata = 'sensordata/4x4-twolevel.json'
     unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
@@ -155,15 +152,14 @@ def localization_onelevel_12sensor():
     fig.savefig('tmp.wrong.png')
 
 
+'''4x4 grid, one level localization'''
 def localization_onelevel_4sensor():
-    '''4x4 grid, one level localization
-    '''
     random.seed(3)
     sensordata = 'sensordata/4x4-twolevel.json'
     unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
     ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
                              sensordata_filename=sensordata, unitary_operator=unitary_operator)
-    ql.training_onelevel_16state_4sensor()
+    ql.training_onelevel_16state_level_0_set_0()
     repeat = 100
     level_0_right = 0
     tx_list = []
@@ -198,15 +194,16 @@ def localization_onelevel_4sensor():
     fig.savefig('tmp.wrong.png')
 
 
+'''4x4 grid, one level localization'''
 def localization_onelevel_4sensor_discrete():
-    '''4x4 grid, one level localization
-    '''
+
     random.seed(3)
     sensordata = 'sensordata/4x4-twolevel.json'
     unitary_operator = UnitaryOperator(Default.alpha, Default.std, Default.power_ref)
     ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
                              sensordata_filename=sensordata, unitary_operator=unitary_operator)
-    ql.training_onelevel_16state_4sensor()
+    # ql.training_onelevel_16state_level_0_set_0()
+    ql.training_onelevel_16state_level_0_set_0_initstate()    # optimizes initial state
 
     tx_list = []
     for x in range(4):
@@ -217,7 +214,8 @@ def localization_onelevel_4sensor_discrete():
     wrong_x, wrong_y = [], []
     for i, tx in enumerate(tx_list):
         print(f'{i}, truth tx = ({tx[0]:.2f}, {tx[1]:.2f})')
-        ret = ql.testing_onelevel_level_0_set_0(tx, grid_length=4)
+        # ret = ql.testing_onelevel_level_0_set_0(tx, grid_length=4)
+        ret = ql.testing_onelevel_level_0_set_0_initstate(tx, grid_length=4)
         if ret:
             level_0_right += 1
             right_x.append(tx[0])
@@ -242,9 +240,8 @@ def localization_onelevel_4sensor_discrete():
     fig.savefig('tmp.wrong.png')
 
 
+'''16x16 grid, one level localization, testing locations are discrete'''
 def localization_onelevel_16x16grid():
-    '''16x16 grid, one level localization, testing locations are discrete
-    '''
     grid_length = 16
     random.seed(3)
     sensordata = 'sensordata/16x16-twolevel.json'
@@ -291,9 +288,8 @@ def localization_onelevel_16x16grid():
     fig.savefig('tmp.wrong.png')
 
 
+'''16x16 grid, two level localization, discrete'''
 def localization_twolevel_16x16grid():
-    '''16x16 grid, two level localization, discrete
-    '''
     random.seed(3)
     sensordata = 'sensordata/16x16-twolevel.json'
     unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)

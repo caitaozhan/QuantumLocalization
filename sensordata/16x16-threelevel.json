@@ -1,5 +1,5 @@
 {
-    "info": "grid size is 16x16, 64 sensors, 2 levels",
+    "info": "grid size is 16x16, 64 sensors, 3 levels",
     "sensors": {
         "0": [0,1],
         "1": [2,1],
@@ -74,6 +74,24 @@
             }
         },
         "level-1": {
+            "set-0": {
+                "sensors": [3,7,19,21],
+                "area": [[0,0],[8,8]]
+            },
+            "set-1": {
+                "sensors": [8,15,24,31],
+                "area": [[0,8],[8,16]]
+            },
+            "set-2": {
+                "sensors": [35,36,51,54],
+                "area": [[8,0],[16,8]]
+            },
+            "set-3": {
+                "sensors": [41,44,58,60],
+                "area": [[8,8],[16,16]]
+            }
+        },
+        "level-2": {
             "set-0": {
                 "sensors": [0,1,2,3],
                 "area": [[0,0],[4,4]]

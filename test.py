@@ -13,7 +13,7 @@ from unitary_operator import UnitaryOperator
 def localization_twolevel_4x4grid():
     random.seed(3)
     sensordata = 'sensordata/4x4-twolevel.json'
-    unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
+    unitary_operator = UnitaryOperator(Default.alpha, Default.std, Default.power_ref)
     initial_state = 'simple'
     ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
                              sensordata_filename=sensordata, unitary_operator=unitary_operator)
@@ -67,7 +67,7 @@ def localization_twolevel_4x4grid():
 def localization_onelevel_12sensor_discrete():
     random.seed(3)
     sensordata = 'sensordata/4x4-twolevel.json'
-    unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
+    unitary_operator = UnitaryOperator(Default.alpha, Default.std, Default.power_ref)
     ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
                              sensordata_filename=sensordata, unitary_operator=unitary_operator)
     save = 'tmp-folder/onelevel_16state.povm'
@@ -112,7 +112,7 @@ def localization_onelevel_12sensor_discrete():
 def localization_onelevel_12sensor():
     random.seed(3)
     sensordata = 'sensordata/4x4-twolevel.json'
-    unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
+    unitary_operator = UnitaryOperator(Default.alpha, Default.std, Default.power_ref)
     ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
                              sensordata_filename=sensordata, unitary_operator=unitary_operator)
     save = 'tmp-folder/onelevel_16state.povm'
@@ -156,7 +156,7 @@ def localization_onelevel_12sensor():
 def localization_onelevel_4sensor():
     random.seed(3)
     sensordata = 'sensordata/4x4-twolevel.json'
-    unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
+    unitary_operator = UnitaryOperator(Default.alpha, Default.std, Default.power_ref)
     ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
                              sensordata_filename=sensordata, unitary_operator=unitary_operator)
     ql.training_onelevel_16state_level_0_set_0()
@@ -290,10 +290,10 @@ def localization_onelevel_16x16grid():
     grid_length = 16
     random.seed(3)
     sensordata = 'sensordata/16x16-twolevel.json'
-    unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
+    unitary_operator = UnitaryOperator(Default.alpha, Default.std, Default.power_ref)
     ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
                              sensordata_filename=sensordata, unitary_operator=unitary_operator)
-    filename = 'tmp-folder/grid16_onelevel.povm'
+    # filename = 'tmp-folder/grid16_onelevel.povm'
     filename = ''
     ql.training_onelevel_16x16grid(filename)
 
@@ -307,7 +307,7 @@ def localization_onelevel_16x16grid():
     for i, tx in enumerate(tx_list):
         print(f'{i}, truth tx = ({tx[0]:.2f}, {tx[1]:.2f})')
         start = time.time()
-        ret = ql.testing_onelevel_36state_level_0_set_0(tx, grid_length=grid_length)
+        ret = ql.testing_onelevel_16x16grid(tx, grid_length=grid_length)
         print(f'time = {time.time() - start}')
         if ret:
             level_0_right += 1
@@ -333,11 +333,11 @@ def localization_onelevel_16x16grid():
     fig.savefig('tmp.wrong.png')
 
 
-'''16x16 grid, two level localization, discrete'''
+'''16x16 grid, two level localization'''
 def localization_twolevel_16x16grid():
     random.seed(3)
     sensordata = 'sensordata/16x16-twolevel.json'
-    unitary_operator = UnitaryOperator(Default.frequency, Default.amplitude_ref)
+    unitary_operator = UnitaryOperator(Default.alpha, Default.std, Default.power_ref)
     ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
                              sensordata_filename=sensordata, unitary_operator=unitary_operator)
     ql.training_twolevel_16x16grid()
@@ -382,6 +382,61 @@ def localization_twolevel_16x16grid():
     fig.savefig('tmp.wrong.png')
 
 
+'''16x16 grid, two threes localization'''
+def localization_threelevel_16x16grid():
+    random.seed(3)
+    sensordata = 'sensordata/16x16-threelevel.json'
+    unitary_operator = UnitaryOperator(Default.alpha, Default.std, Default.power_ref)
+    ql = QuantumLocalization(grid_length=Default.grid_length_small, cell_length=Default.cell_length,
+                             sensordata_filename=sensordata, unitary_operator=unitary_operator)
+    ql.training_threelevel_16x16grid()
+    level_0_right = 0
+    level_1_right = 0
+    level_2_right = 0
+    tx_list = []
+    for x in range(16):
+        for y in range(16):
+            tx_list.append((x + 0.5, y + 0.5))
+    # for x in [0, 8]:
+    #     for y in [0, 8]:
+    #         tx_list.append((x, y))
+    right_x, right_y = [], []
+    wrong_x, wrong_y = [], []
+    for i, tx in enumerate(tx_list):
+        print(f'{i}, truth tx = ({tx[0]:.2f}, {tx[1]:.2f})')
+        ret0, ret1, ret2 = ql.testing_threelevel_16x16grid(tx)
+        correct = False
+        if ret0:
+            level_0_right += 1
+            if ret1:
+                level_1_right += 1
+                if ret2:
+                    correct = True
+                    level_2_right += 1
+                    right_x.append(tx[0])
+                    right_y.append(tx[1])
+        if correct is False:
+            wrong_x.append(tx[0])
+            wrong_y.append(tx[1])
+        print()
+    print(f'level-0 accuracy={level_0_right/len(tx_list)}')
+    print(f'level-1 accuracy={level_1_right/len(tx_list)}')
+    print(f'level-2 accuracy={level_2_right/len(tx_list)}')
+    
+    plt.rcParams['font.size'] = 20
+    fig, ax = plt.subplots(1, 1, figsize=(20, 20))
+    ax.scatter(right_x, right_y, c='green')
+    ax.set_title('Scatter Plot for Right Test Sample')
+    ax.grid()
+    fig.savefig('tmp.right.png')
+
+    fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+    ax.scatter(wrong_x, wrong_y, c='red')
+    ax.grid()
+    ax.set_title('Scatter Plot for Wrong Test Sample')
+    fig.savefig('tmp.wrong.png')
+
+
 
 if __name__ == '__main__':
 
@@ -394,8 +449,9 @@ if __name__ == '__main__':
     # localization_twolevel_4x4grid()
 
     # 16x16 grid
-    # localization_onelevel_16x16grid()
+    localization_onelevel_16x16grid()
     # localization_twolevel_16x16grid()
+    # localization_threelevel_16x16grid()
 
     # 6x6 grid
-    localization_onelevel_4sensor_6x6grid()
+    # localization_onelevel_4sensor_6x6grid()

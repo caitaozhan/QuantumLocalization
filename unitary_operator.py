@@ -107,7 +107,7 @@ class UnitaryOperator:
         freespace = 10 * self.alpha * math.log10(dist_modify(distance))
         shadowing = np.random.normal(0, self.std)
         power = self._power_reference - freespace + shadowing
-        power_scaled = power - Default.noise_floor
+        power_scaled = max(power - Default.noise_floor, 0)     # power cannot be lower than nose floor
         displacement = c * power_scaled
         generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
         exponent = -complex(0, 1) * generator * displacement
@@ -130,7 +130,7 @@ def main1():
     uo = UnitaryOperator(alpha, std, power_reference)
     X = []
     y = []
-    for distance in np.linspace(0, 100, 101):
+    for distance in np.linspace(0, 200, 101):
         # distance = i               # m
         # Utility.print_matrix('unitary operator', uo.compute(distance))
         displacement, operator = uo.compute(distance)

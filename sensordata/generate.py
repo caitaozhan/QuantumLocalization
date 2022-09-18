@@ -115,6 +115,49 @@ def two_level_16by16grid(filename: str, fig_filename: str):
         json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)
 
 
+# level-0: 1 set of 10 (4) sensors that do 25 state discrimination
+# level-1: 25 set of 3 sensors, each set do 9 state discrimination
+def two_level_15by15grid(filename: str, fig_filename: str):
+    levels = {}
+    sensor_data = {}
+    info = 'grid size is 15x15, 64 sensors, 2 levels'
+    sensor_data['info'] = info
+    sensors = {0: (3, 3), 1: (3, 12), 2: (12, 3), 3: (12, 12)}
+    level0_sensors = [0, 1, 2, 3]
+    level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (15, 15)]}
+    levels['level-0'] = {'set-0': level0_set}
+    sensor_i = 4
+    sensors_reverse = {}
+    for i in range(6):
+        for j in range(5):
+            sensors[sensor_i] = (3 * i, 3 * (j + 0.5))
+            sensors_reverse[(3 * i, 3 * (j + 0.5))] = sensor_i
+            sensor_i += 1
+        if i == 5:
+            continue
+        for j in range(6):
+            sensors[sensor_i] = (3 * (i + 0.5), 3 * j)
+            sensors_reverse[(3 * (i + 0.5), 3 * j)] = sensor_i
+            sensor_i += 1
+    sensor_data['sensors'] = sensors
+    sets = {}
+    set_i = 0
+    for i in range(5):
+        for j in range(5):
+            sensor_list = []
+            for x, y in [(0, 0.5), (0.5, 0), (0.5, 1), (1, 0.5)]:
+                loc = (3 * (i + x), 3 * (j + y))
+                sensor_list.append(sensors_reverse[loc])
+            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(3 * i, 3 * j), (3 * (i + 1), 3 * (j + 1))]}
+            set_i += 1
+    levels['level-1'] = sets
+    sensor_data['levels'] = levels
+    grid_len = 15
+    Plot.visualize_sensors(grid_len, sensors, level0_sensors, fig_filename)
+    with open(filename, 'w') as f:
+        json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)
+
+
 # level-0: 1 set of 10 sensors that do 4 state discrimination
 # level-1: 4 set of 10 sensors, each set do 4 state discrimination
 # level-2: 16 set of 4 sensors, each set do 16 state discrimination
@@ -187,9 +230,9 @@ if __name__ == '__main__':
     # filename = '4x4-twolevel.json'
     # two_level_4by4grid(filename)
 
-    filename = 'sensordata/16x16-twolevel.json'
-    fig_filename = 'sensordata/tmp.16x16grid.png'
-    two_level_16by16grid(filename, fig_filename)
+    # filename = 'sensordata/16x16-twolevel.json'
+    # fig_filename = 'sensordata/tmp.16x16grid.png'
+    # two_level_16by16grid(filename, fig_filename)
 
     # filename = 'sensordata/16x16-threelevel.json'
     # fig_filename = 'sensordata/tmp.16x16grid.png'
@@ -198,3 +241,7 @@ if __name__ == '__main__':
     # filename = 'sensordata/6x6-onelevel.json'
     # fig_filename = 'sensordata/tmp.6x6grid.png'
     # one_level_6by6grid(filename, fig_filename)
+
+    filename = 'sensordata/15x15-twolevel.json'
+    fig_filename = 'sensordata/tmp.15x15grid.png'
+    two_level_15by15grid(filename, fig_filename)

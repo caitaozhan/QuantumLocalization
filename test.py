@@ -55,7 +55,6 @@ def localization_onelevel_12sensor_discrete():
     fig.savefig('tmp.wrong.png')
 
 
-
 '''4x4 grid, one level localization'''
 def localization_onelevel_4sensor_discrete():
 

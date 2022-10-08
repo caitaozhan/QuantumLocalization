@@ -18,6 +18,10 @@ class Default:
     alpha: float           = 3.5          # the alpha for propagation model
     std: float             = 0            # the std of noise or shadowing for propagation model
 
+    method: str            = 'POVM-Loc'   # the localization method
+    continuous: bool       = False        # whether the testing locations are continuous or not
+    grid_length: int       = 16           # the grid's size is grid_length x grid_length
+
     # below are for simulated annealing
     init_step = 0.2                 # initial step size
     max_stuck = 5                   # max stuck in a same temperature

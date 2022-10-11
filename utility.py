@@ -5,8 +5,7 @@ some utility tools
 import numpy as np
 from typing import Union
 from default import Default
-# from qiskit.quantum_info.operators.operator import Operator
-
+from typing import List, Tuple, Dict
 
 class Utility:
 
@@ -41,7 +40,7 @@ class Utility:
         return cell_length * np.sqrt((loc1[0] - loc2[0]) ** 2 + (loc1[1] - loc2[1]) ** 2)
 
     @staticmethod
-    def check_zero(matrix):
+    def check_zero(matrix) -> bool:
         '''check if a matrix contains all zero entries
         Args:
             matrix -- np.array -- the matrix to be checked
@@ -56,7 +55,7 @@ class Utility:
             return False
 
     @staticmethod
-    def check_optimal(quantum_states: list, priors: list, povms: list):
+    def check_optimal(quantum_states: list, priors: list, povms: list) -> bool:
         '''check the optimality for minimum error povm
         Args:
             quantum_states -- a list of QuantumState objects
@@ -81,3 +80,12 @@ class Utility:
                 if Utility.check_zero(product) == False:
                     return False
         return True
+
+    @staticmethod
+    def read_logs(logs: List[str]) -> List[Tuple('Input', Dict[str, ])]:
+        '''
+        Args:
+            logs -- a list of filenames
+        Return:
+            data 
+        '''

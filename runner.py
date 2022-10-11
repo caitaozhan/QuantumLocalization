@@ -21,12 +21,12 @@ if  __name__ == '__main__':
     # ]
     # 8 sensors
     config = [
-        ['POVM-Loc-One', 2, 8, 1,  'onelevel.8sen.varygrid'],
-        ['POVM-Loc-One', 4, 8, 1,  'onelevel.8sen.varygrid'],
-        ['POVM-Loc-One', 6, 8, 1,  'onelevel.8sen.varygrid'],
-        ['POVM-Loc-One', 8, 8, 1,  'onelevel.8sen.varygrid'],
-        ['POVM-Loc-One', 10, 8, 1, 'onelevel.8sen.varygrid'],
-        ['POVM-Loc-One', 12, 8, 1, 'onelevel.8sen.varygrid'],
+        # ['POVM-Loc-One', 2, 8, 1,  'onelevel.8sen.varygrid'],
+        # ['POVM-Loc-One', 4, 8, 1,  'onelevel.8sen.varygrid'],
+        # ['POVM-Loc-One', 6, 8, 1,  'onelevel.8sen.varygrid'],
+        # ['POVM-Loc-One', 8, 8, 1,  'onelevel.8sen.varygrid'],
+        # ['POVM-Loc-One', 10, 8, 1, 'onelevel.8sen.varygrid']
+        # ['POVM-Loc-One', 12, 8, 1, 'onelevel.8sen.varygrid'],
         ['POVM-Loc-One', 16, 8, 1, 'onelevel.8sen.varygrid']
     ]
 

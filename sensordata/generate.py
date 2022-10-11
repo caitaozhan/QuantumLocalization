@@ -298,7 +298,7 @@ def onelevel_6x6grid_8sen(filename, fig_filename):
     # one levels
     levels = {}
     sets = {}
-    sets['set-0'] = {'sensors': [0, 1, 2, 3], 'area': [[0, 0], [grid_length, grid_length]]}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7], 'area': [[0, 0], [grid_length, grid_length]]}
     levels['level-0'] = sets
     sensor_data['levels'] = levels
     Plot.visualize_sensors(grid_length, sensors, sensors, fig_filename)

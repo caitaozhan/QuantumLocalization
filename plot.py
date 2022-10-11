@@ -21,3 +21,19 @@ class Plot:
         plt.savefig(filename)
 
 
+    @staticmethod
+    def povmloc_one_vary_gridsize(data):
+        pass
+
+
+
+def povmloc_one_varygridsize():
+    '''evaluate the performance of the single level POVM-Loc One
+    '''
+    logs = ['results/onelevel.4sen.varygrid', 'results/onelevel.8sen.varygrid']
+    # data = 
+
+
+if __name__ == '__main__':
+
+    povmloc_one_varygridsize()

@@ -81,11 +81,11 @@ class Utility:
                     return False
         return True
 
-    @staticmethod
-    def read_logs(logs: List[str]) -> List[Tuple('Input', Dict[str, ])]:
-        '''
-        Args:
-            logs -- a list of filenames
-        Return:
-            data 
-        '''
+    # @staticmethod
+    # def read_logs(logs: List[str]) -> List[Tuple('Input', Dict[str, ])]:
+    #     '''
+    #     Args:
+    #         logs -- a list of filenames
+    #     Return:
+    #         data 
+    #     '''

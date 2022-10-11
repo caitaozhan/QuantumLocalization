@@ -92,12 +92,13 @@ class UnitaryOperator:
         return displacement, unitary_operator
 
 
-    def compute(self, distance: float) -> Tuple[float, np.array]:
+    def compute(self, distance: float, noise: bool = False) -> Tuple[float, np.array]:
         '''making changes to work better, such as get rid of phase
         Args:
             distance -- the distance between the TX and RX
+            noise    -- whether consider the shadowing effect
         Return:
-            displacement     -- the displacement at the RF-Photonic senser
+            phase shift      -- the phase shift at the RF-Photonic senser
             unitary_operator -- the effect of the RF wave on the qubit at of the RF-Phonotic sensor
         '''
         def dist_modify(distance: float) -> float:
@@ -105,8 +106,11 @@ class UnitaryOperator:
         
         c = 2 * np.pi / 80
         freespace = 10 * self.alpha * math.log10(dist_modify(distance))
-        shadowing = np.random.normal(0, self.std)
-        power = self._power_reference - freespace + shadowing
+        if noise:
+            shadowing = np.random.normal(0, self.std)
+            power = self._power_reference - freespace + shadowing
+        else:
+            power = self._power_reference - freespace
         power_scaled = max(power - Default.noise_floor, 0)     # power cannot be lower than nose floor
         displacement = c * power_scaled
         generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix

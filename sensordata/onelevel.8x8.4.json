@@ -1,0 +1,17 @@
+{
+    "info": "grid size is 8x8, 4 sensors in one level.",
+    "sensors": {
+        "0": [1,4],
+        "1": [4,1],
+        "2": [4,7],
+        "3": [7,4]
+    },
+    "levels": {
+        "level-0": {
+            "set-0": {
+                "sensors": [0,1,2,3],
+                "area": [[0,0],[8,8]]
+            }
+        }
+    }
+}

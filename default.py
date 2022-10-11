@@ -8,7 +8,7 @@ from dataclasses import dataclass
 class Default:
     EPSILON: float         = 1e-8         # the epsilon for zero
     EPSILON_SEMIDEFINITE   = 8e-4         # relaxed for semidefinate programming optimal condition checking......
-    grid_length_small: int = 4            # 4 x 4 grid
+    grid_length: int       = 4            # 4 x 4 grid
     cell_length: int       = 10            # in meters
     # frequency: int         = 20 * 10**6 # 915 * 10**5  # Hz
     frequency: int         = 915 * 10**6 # 915 * 10**5  # Hz
@@ -21,6 +21,11 @@ class Default:
     method: str            = 'POVM-Loc'   # the localization method
     continuous: bool       = False        # whether the testing locations are continuous or not
     grid_length: int       = 16           # the grid's size is grid_length x grid_length
+    sensor_num: int        = 4            # the number of sensors for the one level case
+    repeat: int            = 1000         # repeat how many shots during the sensing protocol
+
+    output_dir: str        = 'results'    # the director of of the logged output file
+    output_file: str       = 'tmp'        # the filename of the logged output file
 
     # below are for simulated annealing
     init_step = 0.2                 # initial step size

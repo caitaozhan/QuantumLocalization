@@ -234,8 +234,9 @@ class Povm:
         rho_invsqrt = np.linalg.inv(sqrtm(rho))
         self._operators = []
         for qs, p in zip(quantum_states, priors):
-            # Pi = p * np.dot(rho_invsqrt, np.dot(qs.density_matrix, rho_invsqrt))  # wrong
-            Pi = p * np.dot(np.dot(rho_invsqrt, qs.density_matrix), rho_invsqrt)    # right
+            # Pi = p * np.dot(rho_invsqrt, np.dot(qs.density_matrix, rho_invsqrt))
+            # Pi = p * np.dot(np.dot(rho_invsqrt, qs.density_matrix), rho_invsqrt)
+            Pi = p * rho_invsqrt @ qs.density_matrix @ rho_invsqrt
             self._operators.append(Operator(Pi))
         self._method = 'Pretty Good'
         self._theoretical_error = None

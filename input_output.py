@@ -4,12 +4,16 @@ Input and output parameters
 
 from dataclasses import dataclass
 import json
+from typing import Tuple
+
 
 @dataclass
 class Input:
-    continuous: bool  # whether the locations are continous during the testing phase
-    level_length: int # by default, a level's length equals width, level one and level two has the same size
-    noise: int        # the standard deviation of shadowing
+    ground_truth: Tuple  # the truth location of the transmitter
+    grid_length: int     # by default, length equal width, i.e., a square
+    sensor_num: int      # the number of sensors for the one level method (for two levels, the sensors are fixed)
+    noise: int           # the standard deviation of shadowing
+    continuous: bool     # whether the locations are continous during the testing phase
 
     def __str__(self):
         return self.to_json_str()
@@ -18,25 +22,29 @@ class Input:
         '''return json formatting string
         '''
         inputdict = {
-            'continuous': self.continuous,
-            'level_length': self.level_length,
-            'noise': self.noise
+            'ground_truth': self.ground_truth,
+            'grid_length': self.grid_length,
+            'sensor_num': self.sensor_num,
+            'noise': self.noise,
+            'continuous': self.continuous
         }
-        return json.dump(inputdict)
+        return json.dumps(inputdict)
 
     @classmethod
     def from_json_str(cls, json_str: str) -> 'Input':
         '''init an Input object from json str
         '''
         indict = json.loads(json_str)
-        return cls(indict['continuous'], indict['level_length'], indict['noise'])
+        return cls(indict['ground_truth'], indict['grid_length'], indict['sensor_num'], indict['noise'], indict['continuous'])
 
 
 @dataclass
 class Output:
     method: str               # 'POVM-Loc One', 'POVM-Loc', 'POVM-Loc Pro', 'POVM_Loc Max'
-    accuracy: float           # the metric when continuous == False, i.e., discrete case
+    correct: float            # the metric when continuous == False, either correct or incorrect
     localization_error: float # the metric when continuous == True
+    pred: Tuple               # the predicted location
+    elapse: float             # the time
 
     def __str__(self):
         return self.to_json_str()
@@ -44,12 +52,14 @@ class Output:
     def to_json_str(self) -> str:
         outputdict = {
             'method': self.method,
-            'accuracy': self.accuracy,
-            'localization_error': self.localization_error
+            'correct': self.correct,
+            'localization_error': self.localization_error,
+            'pred': self.pred,
+            'elapse': self.elapse
         }
         return json.dumps(outputdict)
 
     @classmethod
     def from_json_str(cls, json_str) -> 'Output':
         outdict = json.loads(json_str)
-        return cls(outdict['method'], outdict['accuracy'], outdict['localization_error'])
+        return cls(outdict['method'], outdict['correct'], outdict['localization_error'], outdict['pred'], outdict['elapse'])

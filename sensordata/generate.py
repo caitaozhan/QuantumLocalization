@@ -537,11 +537,10 @@ def two_level_16by16grid(filename: str, fig_filename: str):
     info = 'grid size is 16x16, 48 sensors, 2.5 levels'
     sensor_data['info'] = info
     # level 0
-    num_sensor = 8
-    selected_sensors = random_sensors(grid_length=16, num_sensor=num_sensor)
-    sensors = {i: tuple(loc) for i, loc in zip(range(num_sensor), selected_sensors)}
-    # sensors = {0: (4, 4), 1: (4, 12), 2: (12, 4), 3: (12, 12), 4: (0, 8), 5: (8, 0), 6: (8, 16), 7: (16, 8)}
-    # sensors = {0: (4, 5), 1: (3, 12), 2: (7, 6), 3: (10, 14), 4: (3, 9), 5: (4, 2), 6: (13, 4), 7: (11, 9)}
+    # num_sensor = 8
+    # selected_sensors = random_sensors(grid_length=16, num_sensor=num_sensor)
+    # sensors = {i: tuple(loc) for i, loc in zip(range(num_sensor), selected_sensors)}
+    sensors = {0: (4, 4), 1: (4, 12), 2: (12, 4), 3: (12, 12), 4: (0, 8), 5: (8, 0), 6: (8, 16), 7: (16, 8)}
     level0_sensors = [0, 1, 2, 3, 4, 5, 6, 7]
     level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (16, 16)]}
     levels['level-0'] = {'set-0': level0_set}
@@ -571,7 +570,7 @@ def two_level_16by16grid(filename: str, fig_filename: str):
             sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))]}
             set_i += 1
     levels['level-1'] = sets
-    # level 2
+    # level 1.5
     sets = {}
     set_i = 0
     for i in [0.5, 1.5, 2.5]:
@@ -615,42 +614,26 @@ if __name__ == '__main__':
     # onelevel_16x16grid_4sen(filename, fig_filename)
 
     # ONE level 8 sensor
-    filename = 'sensordata/onelevel.2x2.8.json'
-    onelevel_2x2grid_8sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.4x4.8.json'
-    onelevel_4x4grid_8sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.6x6.8.json'
-    onelevel_6x6grid_8sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.8x8.8.json'
-    onelevel_8x8grid_8sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.10x10.8.json'
-    onelevel_10x10grid_8sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.12x12.8.json'
-    onelevel_12x12grid_8sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.14x14.8.json'
-    onelevel_14x14grid_8sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.16x16.8.json'
-    onelevel_16x16grid_8sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.2x2.8.json'
+    # onelevel_2x2grid_8sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.4x4.8.json'
+    # onelevel_4x4grid_8sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.6x6.8.json'
+    # onelevel_6x6grid_8sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.8x8.8.json'
+    # onelevel_8x8grid_8sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.10x10.8.json'
+    # onelevel_10x10grid_8sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.12x12.8.json'
+    # onelevel_12x12grid_8sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.14x14.8.json'
+    # onelevel_14x14grid_8sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.16x16.8.json'
+    # onelevel_16x16grid_8sen(filename, fig_filename)
 
 
+    # TWO level
 
-    # filename = 'sensordata/16x16-onelevel.json'
-    # fig_filename = 'sensordata/tmp.16x16grid.png'
-    # one_level_16by16grid(filename, fig_filename)
-
-
-    # filename = 'sensordata/16x16-twolevel.random.json'
-    # fig_filename = 'sensordata/tmp.16x16grid.png'
-    # two_level_16by16grid(filename, fig_filename)
-
-    # filename = 'sensordata/16x16-threelevel.json'
-    # fig_filename = 'sensordata/tmp.16x16grid.png'
-    # three_level_16by16grid(filename, fig_filename)
-
-    # filename = 'sensordata/6x6-onelevel.json'
-    # fig_filename = 'sensordata/tmp.6x6grid.png'
-    # one_level_6by6grid(filename, fig_filename)
-
-    # filename = 'sensordata/15x15-twolevel.json'
-    # fig_filename = 'sensordata/tmp.15x15grid.png'
-    # two_level_15by15grid(filename, fig_filename)
+    filename = 'sensordata/twolevel.16x16.json'
+    fig_filename = 'sensordata/tmp.16x16grid.png'
+    two_level_16by16grid(filename, fig_filename)

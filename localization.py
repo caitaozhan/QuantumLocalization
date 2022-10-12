@@ -2,7 +2,7 @@
 Quantum enhanced localization
 '''
 
-import pickle
+import math
 from typing import Tuple
 import numpy as np
 import json
@@ -134,7 +134,7 @@ class QuantumLocalization:
                 max_i = i
         return max_i, count
 
-    def train_onelevel(self):
+    def train_povmloc_one(self):
         '''train the one level POVM localization method
         '''
         num_loc = self.grid_length * self.grid_length
@@ -189,66 +189,104 @@ class QuantumLocalization:
         return level_0_correct, tx_level0
 
 
-    # def training_onelevel_16x16grid(self, filename: str = ''):
-    #     '''16x16 grid, 256 state, 10 sensors
-    #        pretty good measurement
-    #     '''
-    #     if filename != '':
-    #         key = 'level-0-set-0'
-    #         with open(filename, 'rb') as f:
-    #             self.povms[key] = pickle.load(f)
-    #         return
-    #     else:
-    #         filename = 'tmp-folder/grid16_onelevel.povm'
+    def get_txloc(self, a: tuple, b: tuple) -> list:
+        '''get the tx locations during the training phase
+           Assumption: dividing a N x N grid into sqrt(N) row sqrt(N) column of blocks, where each block is sqrt(N) x sqrt(N)
+                       So the number of tx equals sqrt(N) x sqrt(N) = N = grid_length
+        Args:
+            a -- top left corner
+            b -- bottom right corner
+        Return:
+            a list of 2D location tuples
+        '''
+        sqrtn = int(math.sqrt(self.grid_length) + 10**-6)
+        tx_list = []
+        for i in range(sqrtn):
+            for j in range(sqrtn):
+                tx = (a[0] + (2*i+1)*(b[0] - a[0])/(2*sqrtn), a[1] + (2*j+1)*(b[1] - a[1])/(2*sqrtn))
+                tx_list.append(tx)
+        return tx_list
 
-    #     povm = Povm()
-    #     priors = [1./256] * 256
-    #     txs = []
-    #     tx_loc = {}
-    #     for i in range(16):
-    #         for j in range(16):
-    #             x = i + 0.5
-    #             y = j + 0.5
-    #             txs.append((x, y))
-    #             tx_loc[16*i + j] = (x, y)
-    #     qstates = []
-    #     level_i = 0
-    #     set_i = 0
-    #     set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-    #     sensors = set_data['sensors']
-    #     for tx in txs:
-    #         evolve = 1
-    #         for rx_i in sensors:
-    #             rx = self.sensordata['sensors'][f'{rx_i}']
-    #             distance = Utility.distance(tx, rx, self.cell_length)
-    #             _, uo = self.unitary_operator.compute(distance)
-    #             evolve = np.kron(evolve, uo)
-    #         initial_state = self.get_simple_initial_state(len(sensors))
-    #         state_vector = np.dot(evolve, initial_state)
-    #         qstates.append(QuantumState(num_sensor=len(sensors), state_vector=state_vector))
-    #     povm.pretty_good_measurement(qstates, priors, debug=False)
-    #     key = f'level-{level_i}-set-{set_i}'
-    #     self.povms[key] = {'povm': povm.operators, 'tx_loc': tx_loc}
-    #     with open(filename, 'wb') as f:
-    #         pickle.dump(self.povms[key], f)
-    #     print('training POVM done')
 
-    # def testing_onelevel_16x16grid(self, tx_truth: tuple, grid_length: int):
-    #     '''16x16 grid, one level 256 state discrimination, using set-0 in level-0
-    #     '''
-    #     level_i = 0
-    #     set_i   = 0
-    #     set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-    #     sensors = set_data['sensors']
-    #     qstate = self.get_sensor_data(tx_truth, sensors)
-    #     key = f'level-{level_i}-set-{set_i}'
-    #     povm = self.povms[key]
-    #     max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
-    #     tx_level0 = povm['tx_loc'][max_i]
-    #     # Plot.prob_heatmap(probs, n=grid_length, filename=f'tmp-folder/truth={tx_truth}, pred={tx_level0}.png')
-    #     level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=1)
-    #     print('level 0 tx', tx_level0, level_0_correct)
-    #     return level_0_correct
+    def train_povmloc(self,):
+        '''training the POVMs for two level POVMLoc
+        '''
+        povm = Povm()
+        priors = [1 / self.grid_length] * self.grid_length  # the number of states equals self.grid_length for both the first and second level
+        levels = self.sensordata['levels']
+        for level_, sets in levels.items():
+            for set_, set_data in sets.items():
+                sensors = set_data['sensors']
+                area = set_data['area']
+                info = f'level={level_}, set={set_}, sensors={sensors}, area={area}'
+                print(info)
+                a, b = area[0], area[1]  # a is top left, b is bottom right
+                tx_list = self.get_txloc(a, b)
+                evolve_operators = []
+                tx_loc = {}
+                qstates = []
+                init_state = self.get_simple_initial_state(num=len(sensors))
+                for i, tx in enumerate(tx_list):  # each tx leads to one evolve operator
+                    tx_loc[i] = tx
+                    evolve = 1
+                    for rx_i in sensors:          # each evolve operator is a product state of some unitary operators
+                        rx = self.sensordata['sensors'][f'{rx_i}']
+                        distance = Utility.distance(tx, rx, self.cell_length)
+                        disp, uo = self.unitary_operator.compute(distance, noise=False)  # training has no noise
+                        evolve = np.kron(evolve, uo)
+                    evolve_operators.append(evolve)
+                    qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state)))
+                povm.pretty_good_measurement(qstates, priors, debug=False)
+                key = f'{level_}-{set_}'
+                self.povms[key] = {'povm': povm.operators, 'tx_loc':tx_loc}
+        print('training POVM done!')
+
+
+    def povmloc(self, tx_truth: tuple):
+        '''the two level POVM-Loc
+        Args:
+            tx -- the location of the transmitter
+        '''
+        seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
+        np.random.seed(seed)
+        random.seed(seed)
+        # level 0, only has one set of sensors
+        block_length = int(math.sqrt(self.grid_length) + 10**-6)   # in level 0, locating a block that is 4x4
+        level_i = 0
+        set_i = 0
+        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+        sensors = set_['sensors']
+        povm = self.povms[f'level-{level_i}-set-{set_i}']
+        # the sensing protocol
+        max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
+        print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
+        tx_level0 = povm['tx_loc'][max_i]
+        level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=block_length)
+        print('level-0 tx', tx_level0, level_0_correct, end='; ')
+        
+        # level 1
+        # step 1: get the set in level 1 according to tx_level0
+        level_i = 1
+        min_distance = float('inf')
+        mapping_set = 0
+        num_set = len(self.sensordata['levels'][f'level-1'])
+        for set_i in range(num_set):
+            set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+            a, b = set_['area']
+            center = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+            distance = Utility.distance(tx_level0, center, 1)
+            if distance < min_distance:
+                min_distance = distance
+                mapping_set = set_i
+        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{mapping_set}']
+        # step 2: the sensing protocol
+        sensors = set_['sensors']
+        povm = self.povms[f'level-{level_i}-set-{mapping_set}']
+        max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
+        tx_level1 = povm['tx_loc'][max_i]
+        level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
+        print('level-1 tx', tx_level1, level_1_correct)
+        return level_1_correct, tx_level1
 
 
     def training_twolevel_16x16grid(self):
@@ -300,6 +338,7 @@ class QuantumLocalization:
                 key = f'{level_}-{set_}'
                 self.povms[key] = {'povm': povm.operators, 'tx_loc':tx_loc}
         print('training POVM done!')
+
 
     def testing_twolevel_16x16grid(self, tx_truth: tuple):
         '''currently only supports two level
@@ -460,126 +499,4 @@ class QuantumLocalization:
             level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
             print('level-1.5 tx', tx_level1, level_1_correct)
         return level_0_correct, level_1_correct
-
-
-    # def training_onelevel_16state_level_0_set_0(self):
-    #     '''4x4 grid, pretty good measurement, using a simple initial state
-    #     '''
-    #     povm = Povm()
-    #     priors = [1/16] * 16
-    #     txs = []
-    #     tx_loc = {}
-    #     for i in range(4):
-    #         for j in range(4):
-    #             x = i + 0.5
-    #             y = j + 0.5
-    #             txs.append((x, y))
-    #             tx_loc[i*4 + j] = (x, y)
-    #     qstates = []
-    #     level_i = 0
-    #     set_i   = 0
-    #     set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-    #     sensors = set_data['sensors']
-    #     for tx in txs:
-    #         evolve = 1
-    #         for rx_i in sensors:  # rx_i is in str
-    #             rx = self.sensordata['sensors'][f'{rx_i}']
-    #             distance = Utility.distance(tx, rx, self.cell_length)
-    #             _, uo = self.unitary_operator.compute(distance)
-    #             evolve = np.kron(evolve, uo)
-    #         initial_state = self.get_simple_initial_state(len(sensors))
-    #         qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, initial_state)))
-    #     povm.pretty_good_measurement(qstates, priors, debug=False)
-    #     key = f'level-{level_i}-set-{set_i}'
-    #     self.povms[key] = {'povm': povm.operators, 'tx_loc': tx_loc}
-    #     print('training POVM done!')
-    
-    # def testing_onelevel_16state_level_0_set_0(self, tx_truth: tuple, grid_length: int):
-    #     '''4x4 grid, single level 4 state discrimination
-    #     '''
-    #     level_i = 0
-    #     set_i   = 0
-    #     set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-    #     sensors = set_data['sensors']
-    #     qstate = self.get_sensor_data(tx_truth, sensors)
-    #     key = f'level-{level_i}-set-{set_i}'
-    #     povm = self.povms[key]
-    #     max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
-    #     tx_level0 = povm['tx_loc'][max_i]
-    #     Plot.prob_heatmap(probs, n=grid_length, filename=f'tmp-folder/truth={tx_truth}, pred={tx_level0}.png')
-    #     level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=1)
-    #     print('level 0 tx', tx_level0, level_0_correct)
-    #     return level_0_correct
-
-
-    # def training_onelevel_36state_level_0_set_0(self):
-    #     '''6x6 grid, pretty good measurement, using a simple initial state
-    #     '''
-    #     povm = Povm()
-    #     priors = [1/36] * 36
-    #     txs = []
-    #     tx_loc = {}
-    #     for i in range(6):
-    #         for j in range(6):
-    #             x = i + 0.5
-    #             y = j + 0.5
-    #             txs.append((x, y))
-    #             tx_loc[i*6 + j] = (x, y)
-    #     qstates = []
-    #     level_i = 0
-    #     set_i   = 0
-    #     set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-    #     sensors = set_data['sensors']
-    #     for tx in txs:
-    #         evolve = 1
-    #         for rx_i in sensors:  # rx_i is in str
-    #             rx = self.sensordata['sensors'][f'{rx_i}']
-    #             distance = Utility.distance(tx, rx, self.cell_length)
-    #             _, uo = self.unitary_operator.compute(distance)
-    #             evolve = np.kron(evolve, uo)
-    #         initial_state = self.get_simple_initial_state(len(sensors))
-    #         qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, initial_state)))
-    #     povm.pretty_good_measurement(qstates, priors, debug=False)
-    #     key = f'level-{level_i}-set-{set_i}'
-    #     self.povms[key] = {'povm': povm.operators, 'tx_loc': tx_loc}
-    #     print('training POVM done!')
-
-    # def testing_onelevel_36state_level_0_set_0(self, tx_truth: tuple, grid_length: int, opt_init_state: bool = False):
-    #     '''6x6 grid, single level 36 state discrimination
-    #     '''
-    #     level_i = 0
-    #     set_i   = 0
-    #     set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-    #     sensors = set_data['sensors']
-    #     evolve = 1
-    #     for rx_i in sensors:
-    #         rx = self.sensordata['sensors'][f'{rx_i}']
-    #         distance = Utility.distance(tx_truth, rx, self.cell_length)
-    #         _, uo = self.unitary_operator.compute(distance)
-    #         evolve = np.kron(evolve, uo)
-    #     key = f'level-{level_i}-set-{set_i}'
-    #     povm = self.povms[key]
-    #     if opt_init_state:
-    #         init_state = povm['init_state']
-    #         qstate = QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state.state_vector))
-    #     else:
-    #         init_state = self.get_simple_initial_state(len(sensors))
-    #         qstate = QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state))
-    #     probs = []
-    #     for operator in povm['povm']:
-    #         prob = np.trace(np.dot(operator.data, qstate.density_matrix))
-    #         probs.append(prob)
-    #     max_i = 0
-    #     maxx = 0
-    #     for i, prob in enumerate(probs):
-    #         if prob > maxx:
-    #             max_i = i
-    #             maxx = prob
-    #     tx_level0 = povm['tx_loc'][max_i]
-    #     Plot.prob_heatmap(probs, n=grid_length, filename=f'tmp-folder/truth={tx_truth}, pred={tx_level0}.png')
-    #     level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=1)
-    #     print('level 0 tx', tx_level0, level_0_correct)
-    #     return level_0_correct
-
-
 

@@ -36,41 +36,38 @@ if __name__ == '__main__':
     unitary_operator = UnitaryOperator(Default.alpha, noise, Default.power_ref)
     # training phase
     qls = {}
-    if 'POVM-Loc-One' in methods:
+    if 'povmloc-one' in methods:
         sensordata = f'sensordata/onelevel.{grid_length}x{grid_length}.{sensor_num}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
-        ql.train_onelevel()
-        qls['onelevel'] = ql
-    if 'POVM-Loc' in methods:
-        pass
-    if 'POVM-Loc-Plus' in methods:
-        pass
-    if 'POVM-Loc-Pro' in methods:
+        ql.train_povmloc_one()
+        qls['povmloc-one'] = ql
+    if 'povmloc' in methods:
+        sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.json'
+        ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
+        ql.train_povmloc()
+        qls['povmloc'] = ql
+    if 'povmloc-pro' in methods:
         pass
     
-    mylogger = MyLogger(output_dir, output_file)
     # testing phase
-    tx_list = []
-    for x in range(grid_length):
-        for y in range(grid_length):
-            tx_list.append((x + 0.5, y + 0.5))
-
+    mylogger = MyLogger(output_dir, output_file)
+    tx_list = [(x + 0.5, y + 0.5) for x in range(grid_length) for y in range(grid_length)]
     for i, tx in enumerate(tx_list):
         myinput = Input(tx, grid_length, sensor_num, noise, continuous)
         outputs = []
-        if 'POVM-Loc-One' in methods:
-            sensordata = f'sensordata/onelevel.{grid_length}x{grid_length}.{sensor_num}.json'
-            ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
-            ql = qls['onelevel']
+        if 'povmloc-one' in methods:
+            ql = qls['povmloc-one']
             start = time.time()
             correct, pred = ql.povmloc_one(tx)
             elapse = round(time.time() - start, 2)
-            outputs.append(Output('POVM-Loc-One', correct, localization_error=-1, pred=pred, elapse=elapse))
-        if 'POVM-Loc' in methods:
-            pass
-        if 'POVM-Loc-Plus' in methods:
-            pass
-        if 'POVM-Loc-Pro' in methods:
+            outputs.append(Output('povmloc-one', correct, localization_error=-1, pred=pred, elapse=elapse))
+        if 'povmloc' in methods:
+            ql = qls['povmloc']
+            start = time.time()
+            correct, pred = ql.povmloc(tx)
+            elapse = round(time.time() - start, 2)
+            outputs.append(Output('povmloc', correct, localization_error=-1, pred=pred, elapse=elapse))
+        if 'povmloc-pro' in methods:
             pass
         
         mylogger.log(myinput, outputs)

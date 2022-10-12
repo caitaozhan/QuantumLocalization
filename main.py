@@ -56,8 +56,6 @@ if __name__ == '__main__':
             tx_list.append((x + 0.5, y + 0.5))
 
     for i, tx in enumerate(tx_list):
-        if not 250 <= i <= 255:
-            continue
         myinput = Input(tx, grid_length, sensor_num, noise, continuous)
         outputs = []
         if 'POVM-Loc-One' in methods:

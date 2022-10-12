@@ -8,7 +8,7 @@ from utility import Utility
 
 class Plot:
 
-    plt.rcParams['font.size'] = 60
+    plt.rcParams['font.size'] = 65
     plt.rcParams['lines.linewidth'] = 10
     plt.rcParams['lines.markersize'] = 35
 
@@ -70,13 +70,14 @@ class Plot:
         fig.subplots_adjust(left=0.14, right=0.99, top=0.9, bottom=0.14)
         ax.plot(X, y_8sen, linestyle='-', marker='P', label="8 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
         ax.plot(X, y_4sen, linestyle='--',  marker='^', label="4 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
-        fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=52, handlelength=4.5)
-        ax.set_xlabel('Grid Size', labelpad=20)
+        fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=52, handlelength=3.5)
+        ax.set_xlabel('Grid Size', labelpad=40)
         ax.set_xticks(X)
         ax.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
         ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=52)
         ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3)
         ax.set_ylabel('Localization Accuracy (%)', fontsize=70, labelpad=20)
+        ax.set_ylim([0, 105])
         method = Plot.LEGEND['povmloc-one']
         ax.set_title(f'Performance of {method}', pad=30)
         fig.savefig(figname)
@@ -89,10 +90,28 @@ def povmloc_one_varygridsize():
     '''
     logs = ['results/onelevel.4sen.varygrid', 'results/onelevel.8sen.varygrid']
     data = Utility.read_logs(logs)
-    figname = 'results/tmp.onelevel-varygrid.png'
+    figname = 'results/onelevel-varygrid.png'
     Plot.povmloc_one_vary_gridsize(data, figname)
 
 
 if __name__ == '__main__':
 
     povmloc_one_varygridsize()
+
+
+'''
+
+POVM-Loc (one level)
+
+  Grid Length         4         8
+-------------  --------  --------
+            2  1         1
+            4  1         1
+            6  0.861111  1
+            8  0.5625    0.984375
+           10  0.25      0.83
+           12  0.236111  0.611111
+           14  0.173469  0.433673
+           16  0.117188  0.296875
+
+'''

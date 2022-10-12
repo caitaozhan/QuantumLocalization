@@ -17,20 +17,20 @@ if  __name__ == '__main__':
     #     ['POVM-Loc-One', 8, 4, 1,  'onelevel.4sen.varygrid'],
     #     ['POVM-Loc-One', 10, 4, 1, 'onelevel.4sen.varygrid'],
     #     ['POVM-Loc-One', 12, 4, 1, 'onelevel.4sen.varygrid'],
-        ['POVM-Loc-One', 14, 4, 1, 'onelevel.4sen.varygrid'],
+        # ['POVM-Loc-One', 14, 4, 1, 'onelevel.4sen.varygrid'],
     #     ['POVM-Loc-One', 16, 4, 1, 'onelevel.4sen.varygrid']
     ]
     # 8 sensors
-    # config = [
+    config = [
         # ['POVM-Loc-One', 2, 8, 1,  'onelevel.8sen.varygrid'],
         # ['POVM-Loc-One', 4, 8, 1,  'onelevel.8sen.varygrid'],
         # ['POVM-Loc-One', 6, 8, 1,  'onelevel.8sen.varygrid'],
         # ['POVM-Loc-One', 8, 8, 1,  'onelevel.8sen.varygrid'],
         # ['POVM-Loc-One', 10, 8, 1, 'onelevel.8sen.varygrid']
         # ['POVM-Loc-One', 12, 8, 1, 'onelevel.8sen.varygrid'],
-        # ['POVM-Loc-One', 14, 8, 1, 'onelevel.8sen.varygrid']
+        ['POVM-Loc-One', 14, 8, 1, 'onelevel.8sen.varygrid']
         # ['POVM-Loc-One', 16, 8, 1, 'onelevel.8sen.varygrid']
-    # ]
+    ]
 
     for i, c in enumerate(config):
         # if c[1] != 16:

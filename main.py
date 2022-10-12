@@ -53,6 +53,8 @@ if __name__ == '__main__':
     mylogger = MyLogger(output_dir, output_file)
     tx_list = [(x + 0.5, y + 0.5) for x in range(grid_length) for y in range(grid_length)]
     for i, tx in enumerate(tx_list):
+        if i not in [7, 11]:
+            continue
         myinput = Input(tx, grid_length, sensor_num, noise, continuous)
         outputs = []
         if 'povmloc-one' in methods:

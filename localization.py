@@ -6,7 +6,6 @@ import math
 from typing import Tuple
 import numpy as np
 import json
-import random
 from bisect import bisect_left
 from itertools import accumulate
 from collections import Counter
@@ -14,7 +13,6 @@ from utility import Utility
 from unitary_operator import UnitaryOperator
 from povm import Povm
 from quantum_state import QuantumState
-from plot import Plot
 from default import Default
 from qiskit.quantum_info.operators.operator import Operator
 
@@ -119,11 +117,11 @@ class QuantumLocalization:
                 probs.append(prob.real if prob.real > 0 else 0)    # ignore the negative real numbers...
             cumulate = list(accumulate(probs))
             maxx = max(cumulate)
-            pick = random.uniform(0, maxx)
+            pick = np.random.uniform(0, maxx)
             i = bisect_left(cumulate, pick)
             count[i] += 1
             # early stop
-            if early_stop and it % 100 == 99 and it >= 200 and self.sense_early_stop(count):
+            if early_stop and it % 100 == 99 and it >= 400 and self.sense_early_stop(count):
                 break
 
         max_i = -1
@@ -173,7 +171,6 @@ class QuantumLocalization:
         '''
         seed = int(tx_truth[0]) * 16 + int(tx_truth[1])
         np.random.seed(seed)
-        random.seed(seed)
         level_i = 0
         set_i   = 0
         set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
@@ -249,7 +246,6 @@ class QuantumLocalization:
         '''
         seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
         np.random.seed(seed)
-        random.seed(seed)
         # level 0, only has one set of sensors
         block_length = int(math.sqrt(self.grid_length) + 10**-6)   # in level 0, locating a block that is 4x4
         level_i = 0
@@ -348,7 +344,6 @@ class QuantumLocalization:
         '''
         seed = int(tx_truth[0]) * 16 + int(tx_truth[1])
         np.random.seed(seed)
-        random.seed(seed)
         # level 0, only has one set of sensors
         level_i = 0
         block_length = 4   # in level 0, locating a block that is 4x4
@@ -412,7 +407,6 @@ class QuantumLocalization:
         '''
         seed = int(tx_truth[0]) * 16 + int(tx_truth[1])
         np.random.seed(seed)
-        random.seed(seed)
         # level 0, only has one set of sensors
         level_i = 0
         block_length = 4   # in level 0, locating a block that is 4x4

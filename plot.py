@@ -12,6 +12,14 @@ class Plot:
     plt.rcParams['lines.linewidth'] = 10
     plt.rcParams['lines.markersize'] = 35
 
+    METHOD  = ['povmloc-one', 'povmloc-two', 'povmloc-two-pro']
+    _LEGEND = ['POVM-Loc (one level)', 'POVM-Loc', 'POVM-Loc Pro']
+    LEGEND  = dict(zip(METHOD, _LEGEND))
+
+    METHOD  = ['povmloc-one', 'povmloc-two', 'povmloc-two-pro']
+    _COLOR  = ['tab:orange',  'blue',        'r']
+    COLOR   = dict(zip(METHOD, _COLOR))
+
     @staticmethod
     def prob_heatmap(probs: list, n: int, filename: str):
         '''
@@ -60,16 +68,17 @@ class Plot:
         # step 2: plotting
         fig, ax = plt.subplots(1, 1, figsize=(25, 18))
         fig.subplots_adjust(left=0.14, right=0.99, top=0.9, bottom=0.14)
-        ax.plot(X, y_8sen, linestyle='--', marker='P', label="8 Quantum Sensors", mfc='r', mec='b')
-        ax.plot(X, y_4sen, linestyle='-',  marker='^', label="4 Quantum Sensors", mfc='r', mec='b')
-        fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=52)
+        ax.plot(X, y_8sen, linestyle='-', marker='P', label="8 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
+        ax.plot(X, y_4sen, linestyle='--',  marker='^', label="4 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
+        fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=52, handlelength=4.5)
         ax.set_xlabel('Grid Size', labelpad=20)
         ax.set_xticks(X)
         ax.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=50)
+        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=52)
         ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3)
         ax.set_ylabel('Localization Accuracy (%)', fontsize=70, labelpad=20)
-        ax.set_title('The Performance of POVM-Loc-OneLevel', pad=30)
+        method = Plot.LEGEND['povmloc-one']
+        ax.set_title(f'Performance of {method}', pad=30)
         fig.savefig(figname)
 
 

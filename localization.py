@@ -119,7 +119,7 @@ class QuantumLocalization:
             maxx = max(cumulate)
             pick = np.random.uniform(0, maxx)
             i = bisect_left(cumulate, pick)
-            if it % 100 == 0:
+            if Default.DEBUG and it % 100 == 0:
                 print(f'{it}, probs = {[round(p, 3) for p in probs]}, max = {maxx:0.5f}, pick = {pick:0.5f}, i = {i}')
             count[i] += 1
             # early stop

@@ -1378,3 +1378,30 @@
 {"ground_truth": [7.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
 {"method": "POVM-Loc-One", "correct": true, "localization_error": -1, "pred": [7.5, 15.5], "elapse": 100.25}
 
+{"ground_truth": [1.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
+{"method": "POVM-Loc-One", "correct": false, "localization_error": -1, "pred": [0.5, 7.5], "elapse": 95.89}
+
+{"ground_truth": [1.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
+{"method": "POVM-Loc-One", "correct": false, "localization_error": -1, "pred": [0.5, 7.5], "elapse": 99.9}
+
+{"ground_truth": [1.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
+{"method": "POVM-Loc-One", "correct": false, "localization_error": -1, "pred": [0.5, 9.5], "elapse": 99.9}
+
+{"ground_truth": [1.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
+{"method": "POVM-Loc-One", "correct": false, "localization_error": -1, "pred": [0.5, 9.5], "elapse": 100.54}
+
+{"ground_truth": [1.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
+{"method": "POVM-Loc-One", "correct": false, "localization_error": -1, "pred": [0.5, 12.5], "elapse": 100.77}
+
+{"ground_truth": [1.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
+{"method": "POVM-Loc-One", "correct": false, "localization_error": -1, "pred": [0.5, 13.5], "elapse": 100.34}
+
+{"ground_truth": [1.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
+{"method": "POVM-Loc-One", "correct": true, "localization_error": -1, "pred": [1.5, 13.5], "elapse": 60.2}
+
+{"ground_truth": [1.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
+{"method": "POVM-Loc-One", "correct": false, "localization_error": -1, "pred": [0.5, 15.5], "elapse": 100.37}
+
+{"ground_truth": [1.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 1.0, "continuous": false}
+{"method": "POVM-Loc-One", "correct": true, "localization_error": -1, "pred": [1.5, 15.5], "elapse": 100.38}
+

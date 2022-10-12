@@ -1,5 +1,5 @@
 {
-    "info": "grid size is 8x8, 4 sensors in one level.",
+    "info": "grid size is 8x8, 8 sensors in one level.",
     "sensors": {
         "0": [0,4],
         "1": [2,2],

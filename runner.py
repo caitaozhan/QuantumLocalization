@@ -46,18 +46,18 @@ def plot2():
     # plot 2: POVMLoc and POVMLoc-Pro. Y: accuracy, X: varying noise
     
                                   # length, size, noise, continuous
-    template = 'python main.py -m {} -l {} -n {} -of {}'
+    template = 'python main.py -m {} {} -l {} -n {} -of {}'
     config = [
-        ['povmloc-pro', 16, 0, 'twolevel.noise0'],
-        ['povmloc-pro', 16, 0.5, 'twolevel.noise2'],
-        ['povmloc-pro', 16, 1.5, 'twolevel.noise3'],
-        ['povmloc-pro', 16, 2, 'twolevel.noise4'],
+        ['povmloc', 'povmloc-pro', 16, 0, 'twolevel.noise0'],
+        ['povmloc', 'povmloc-pro', 16, 0.5, 'twolevel.noise0_5'],
+        ['povmloc', 'povmloc-pro', 16, 1.5, 'twolevel.noise1_5'],
+        ['povmloc', 'povmloc-pro', 16, 2, 'twolevel.noise2'],
     ]
 
     for i, c in enumerate(config):
         # if c[1] != 16:
         #     continue
-        command = template.format(c[0], c[1], c[2], c[3])
+        command = template.format(c[0], c[1], c[2], c[3], c[4])
         print(command)
         p = Popen(command, shell=True)
         p.wait()

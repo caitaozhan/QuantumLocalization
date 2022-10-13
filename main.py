@@ -72,7 +72,7 @@ if __name__ == '__main__':
             start = time.time()
             correct, pred = ql.povmloc_pro(tx)
             elapse = round(time.time() - start, 2)
-            outputs.append(Output('povmloc', correct, localization_error=-1, pred=pred, elapse=elapse))
+            outputs.append(Output('povmloc-pro', correct, localization_error=-1, pred=pred, elapse=elapse))
 
         
         mylogger.log(myinput, outputs)

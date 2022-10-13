@@ -41,20 +41,18 @@ if __name__ == '__main__':
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         ql.train_povmloc_one()
         qls['povmloc-one'] = ql
-    if 'povmloc' in methods:
+    if 'povmloc' in methods or 'povmloc-pro' in methods:
         sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         ql.train_povmloc()
         qls['povmloc'] = ql
-    if 'povmloc-pro' in methods:
-        pass
     
     # testing phase
     mylogger = MyLogger(output_dir, output_file)
     tx_list = [(x + 0.5, y + 0.5) for x in range(grid_length) for y in range(grid_length)]
     for i, tx in enumerate(tx_list):
-        # if i not in [7]:
-        #     continue
+        if i not in [36]:
+            continue
         myinput = Input(tx, grid_length, sensor_num, noise, continuous)
         outputs = []
         if 'povmloc-one' in methods:
@@ -70,7 +68,12 @@ if __name__ == '__main__':
             elapse = round(time.time() - start, 2)
             outputs.append(Output('povmloc', correct, localization_error=-1, pred=pred, elapse=elapse))
         if 'povmloc-pro' in methods:
-            pass
+            ql = qls['povmloc']
+            start = time.time()
+            correct, pred = ql.povmloc_pro(tx)
+            elapse = round(time.time() - start, 2)
+            outputs.append(Output('povmloc', correct, localization_error=-1, pred=pred, elapse=elapse))
+
         
         mylogger.log(myinput, outputs)
         time.sleep(0.5)

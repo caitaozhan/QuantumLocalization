@@ -43,12 +43,15 @@ def plot1():
 
 
 def plot2():
-    # plot 2: POVMLoc and POVMLoc-Pro. Y: accuracy, X: varying grid size
+    # plot 2: POVMLoc and POVMLoc-Pro. Y: accuracy, X: varying noise
     
                                   # length, size, noise, continuous
     template = 'python main.py -m {} -l {} -n {} -of {}'
     config = [
-        ['povmloc-pro', 16, 1, 'twolevel.varygrid']
+        ['povmloc-pro', 16, 0, 'twolevel.noise0'],
+        ['povmloc-pro', 16, 0.5, 'twolevel.noise2'],
+        ['povmloc-pro', 16, 1.5, 'twolevel.noise3'],
+        ['povmloc-pro', 16, 2, 'twolevel.noise4'],
     ]
 
     for i, c in enumerate(config):

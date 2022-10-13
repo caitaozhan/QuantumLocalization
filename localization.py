@@ -48,7 +48,7 @@ class QuantumLocalization:
         else:
             return False
 
-    def is_blockedge(self, tx, grid_length, block_length):
+    def is_blockedge_old(self, tx, grid_length, block_length):
         '''currently excluding the "grid edge", only "block edge"
         '''
         m = grid_length // block_length  # number of blocks horizontally / vertically
@@ -56,6 +56,17 @@ class QuantumLocalization:
             if abs(tx[0] - i * block_length) < 1 and 2 < tx[0] < grid_length - 2 and 2 < tx[1] < grid_length - 2:
                 return True
             if abs(tx[1] - i * block_length) < 1 and 2 < tx[0] < grid_length - 2 and 2 < tx[1] < grid_length - 2:
+                return True
+        return False
+
+    def is_blockedge(self, tx, grid_length, block_length):
+        '''currently excluding the "grid edge", only "block edge"
+        '''
+        m = grid_length // block_length  # number of blocks horizontally / vertically
+        for i in range(1, m):
+            if abs(tx[0] - i * block_length) < 1:
+                return True
+            if abs(tx[1] - i * block_length) < 1:
                 return True
         return False
 
@@ -78,6 +89,7 @@ class QuantumLocalization:
             evolve = np.kron(evolve, uo)
         init_state = self.get_simple_initial_state(num=len(sensors))
         return QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state))
+
 
     def measure_maxprob_index(self, qstate: QuantumState, povm: list) -> Tuple[int, list]:
         '''do measurement using POVM and get the max probability
@@ -136,6 +148,7 @@ class QuantumLocalization:
                 max_i = i
         return max_i, count
 
+
     def train_povmloc_one(self):
         '''train the one level POVM localization method
         '''
@@ -190,20 +203,21 @@ class QuantumLocalization:
         return level_0_correct, tx_level0
 
 
-    def get_txloc(self, a: tuple, b: tuple) -> list:
+    def get_txloc(self, a: tuple, b: tuple, cell_length: float) -> list:
         '''get the tx locations during the training phase
-           Based on Assumption 1
         Args:
-            a -- top left corner
-            b -- bottom right corner
+            a           -- top left corner
+            b           -- bottom right corner
+            cell_length -- the length of the cell
         Return:
             a list of 2D location tuples
         '''
-        sqrtn = int(math.sqrt(self.grid_length) + 10**-6)
+        row = int((b[0] - a[0]) / cell_length + 10**-6)
+        col = int((b[1] - a[1]) / cell_length + 10**-6)
         tx_list = []
-        for i in range(sqrtn):
-            for j in range(sqrtn):
-                tx = (a[0] + (2*i+1)*(b[0] - a[0])/(2*sqrtn), a[1] + (2*j+1)*(b[1] - a[1])/(2*sqrtn))
+        for i in range(row):
+            for j in range(col):
+                tx = (a[0] + (2*i+1)*(b[0] - a[0])/(2*row), a[1] + (2*j+1)*(b[1] - a[1])/(2*col))
                 tx_list.append(tx)
         return tx_list
 
@@ -212,16 +226,16 @@ class QuantumLocalization:
         '''training the POVMs for two level POVMLoc, including POVMLoc and POVMLoc Pro
         '''
         povm = Povm()
-        priors = [1 / self.grid_length] * self.grid_length  # the number of states equals self.grid_length for both the first and second level
         levels = self.sensordata['levels']
         for level_, sets in levels.items():
             for set_, set_data in sets.items():
                 sensors = set_data['sensors']
                 area = set_data['area']
+                cell_length = set_data['cell_length']
                 info = f'level={level_}, set={set_}, sensors={sensors}, area={area}'
                 print(info)
                 a, b = area[0], area[1]  # a is top left, b is bottom right
-                tx_list = self.get_txloc(a, b)
+                tx_list = self.get_txloc(a, b, cell_length)
                 evolve_operators = []
                 tx_loc = {}
                 qstates = []
@@ -236,6 +250,7 @@ class QuantumLocalization:
                         evolve = np.kron(evolve, uo)
                     evolve_operators.append(evolve)
                     qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state)))
+                priors = [1 / len(qstates)] * len(qstates)    # equal prior
                 povm.pretty_good_measurement(qstates, priors, debug=False)
                 key = f'{level_}-{set_}'
                 self.povms[key] = {'povm': povm.operators, 'tx_loc':tx_loc}
@@ -290,7 +305,7 @@ class QuantumLocalization:
         return level_1_correct, tx_level1
 
 
-    def povmloc_pro(self, tx_truth: tuple) -> tuple:
+    def povmloc_pro_old(self, tx_truth: tuple) -> tuple:
         '''the two level POVM-Loc Pro, it do another POVM for block edge cases
         Args:
             tx -- the location of the transmitter
@@ -337,7 +352,7 @@ class QuantumLocalization:
         print('level-1 tx', tx_level1, level_1_correct, end='; ')
         
         # level 1.5 for block edge
-        if self.is_blockedge(tx_level1, self.grid_length, block_length):
+        if self.is_blockedge_old(tx_level1, self.grid_length, block_length):
             # step 1: get the set in level 1.5 according to tx_level1
             level_i = 1.5
             mapping_set = 0
@@ -364,6 +379,76 @@ class QuantumLocalization:
         return level_1_correct, tx_level1
 
 
+    def povmloc_pro(self, tx_truth: tuple) -> tuple:
+        '''the two level POVM-Loc Pro, it do another POVM for block edge cases
+        Args:
+            tx -- the location of the transmitter
+        Return:
+            (bool, (x, y)) -- correct/wrong, the predicted 2D location
+        '''
+        seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
+        np.random.seed(seed)
+        # level 0, only has one set of sensors
+        block_length = int(math.sqrt(self.grid_length) + 10**-6)   # based on Assumption 1
+        level_i = 0
+        set_i = 0
+        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+        sensors = set_['sensors']
+        povm = self.povms[f'level-{level_i}-set-{set_i}']
+        # the sensing protocol
+        max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
+        print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
+        tx_level0 = povm['tx_loc'][max_i]
+        level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=block_length)
+        print('level-0 tx', tx_level0, level_0_correct, end='; ')
+        
+        # level 1
+        # step 1: get the set in level 1 according to tx_level0
+        level_i = 1
+        mapping_set = -1
+        num_set = len(self.sensordata['levels'][f'level-{level_i}'])
+        for set_i in range(num_set):
+            set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+            a, b = set_['area']
+            if a[0] <= tx_level0[0] <= b[0] and a[1] <= tx_level0[1] <= b[1]:
+                    mapping_set = set_i
+                    break
+        else:
+            raise Exception('Error in level 1!')
+        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{mapping_set}']
+        # step 2: the sensing protocol
+        sensors = set_['sensors']
+        povm = self.povms[f'level-{level_i}-set-{mapping_set}']
+        max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
+        tx_level1 = povm['tx_loc'][max_i]
+        level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
+        print('level-1 tx', tx_level1, level_1_correct, end='; ')
+        
+        # level 1.5 for block edge
+        if self.is_blockedge(tx_level1, self.grid_length, block_length):
+            # step 1: get the set in level 1.5 according to tx_level1
+            level_i = 1.5
+            mapping_set = -1
+            num_set = len(self.sensordata['levels'][f'level-{level_i}'])
+            for set_i in range(num_set):
+                set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+                a, b = set_['area']
+                if a[0] <= tx_level1[0] <= b[0] and a[1] <= tx_level1[1] <= b[1]:
+                    mapping_set = set_i
+                    break
+            else:
+                raise Exception('Error in level 1.5!')
+            set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{mapping_set}']
+            # step 2: the sensing protocol
+            sensors = set_['sensors']
+            povm = self.povms[f'level-{level_i}-set-{mapping_set}']
+            max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)            
+            tx_level1 = povm['tx_loc'][max_i]
+            level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
+            print('level-1.5 tx', tx_level1, level_1_correct)
+            return level_1_correct, tx_level1
+        print()
+        return level_1_correct, tx_level1
 
 
     def training_twolevel_16x16grid(self):

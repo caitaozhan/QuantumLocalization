@@ -48,10 +48,10 @@ def plot2():
                                   # length, size, noise, continuous
     template = 'python main.py -m {} {} -l {} -n {} -of {}'
     config = [
-        ['povmloc', 'povmloc-pro', 16, 0, 'twolevel.noise0'],
-        ['povmloc', 'povmloc-pro', 16, 0.5, 'twolevel.noise0_5'],
-        ['povmloc', 'povmloc-pro', 16, 1.5, 'twolevel.noise1_5'],
+        ['', 'povmloc-pro', 16, 0, 'twolevel.noise0'],
+        ['', 'povmloc-pro', 16, 1, 'twolevel.noise1'],
         ['povmloc', 'povmloc-pro', 16, 2, 'twolevel.noise2'],
+        ['povmloc', 'povmloc-pro', 16, 3, 'twolevel.noise3'],
     ]
 
     for i, c in enumerate(config):

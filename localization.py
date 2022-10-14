@@ -412,7 +412,7 @@ class QuantumLocalization:
         else:
             level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
             print('level-1 tx', tx_level1, round(level_1_locerror, 3))
-            return level_1_locerror, tx_level1
+            return level_1_correct, level_1_locerror, tx_level1
 
 
     def training_twolevel_16x16grid(self):

@@ -172,10 +172,12 @@ class QuantumLocalization:
         print('training POVM done!')
 
 
-    def povmloc_one(self, tx_truth: tuple) -> tuple:
+    def povmloc_one(self, tx_truth: tuple, continuous: bool = False) -> tuple:
         '''Localization using a single level POVM
+           If discrete,   return (bool, (x, y))
+           If continuous, return (bool, float, (x, y)) -- (correct/wrong, localization error, predicted location)
         '''
-        seed = int(tx_truth[0]) * 16 + int(tx_truth[1])
+        seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
         np.random.seed(seed)
         level_i = 0
         set_i   = 0
@@ -189,7 +191,12 @@ class QuantumLocalization:
         tx_level0 = povm['tx_loc'][max_i]
         level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=1)
         print('level 0 tx', tx_level0, level_0_correct)
-        return level_0_correct, tx_level0
+        if not continuous:
+            return level_0_correct, tx_level0
+        else:
+            level_0_locerror = Utility.distance(tx_truth, tx_level0, Default.cell_length)
+            print('level-0 tx', tx_level0, level_0_locerror)
+            return level_0_correct, level_0_locerror, tx_level0
 
 
     def get_txloc(self, a: tuple, b: tuple, cell_length: float) -> list:
@@ -267,12 +274,14 @@ class QuantumLocalization:
         print('training POVM done!')
 
 
-    def povmloc(self, tx_truth: tuple) -> tuple:
+    def povmloc(self, tx_truth: tuple, continuous: bool = False) -> tuple:
         '''the two level POVM-Loc
         Args:
-            tx -- the location of the transmitter
+            tx         -- the location of the transmitter
+            continuous -- during the testing phase, whether the TX is continuous or not. The difference is in the output only
         Return:
-            (bool, (x, y)) -- correct/wrong, the predicted 2D location
+           If discrete,   return (bool, (x, y))
+           If continuous, return (bool, float, (x, y)) -- (correct/wrong, localization error, predicted location)
         '''
         seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
         np.random.seed(seed)
@@ -312,15 +321,22 @@ class QuantumLocalization:
         tx_level1 = povm['tx_loc'][max_i]
         level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
         print('level-1 tx', tx_level1, level_1_correct)
-        return level_1_correct, tx_level1
+        if not continuous:
+            return level_1_correct, tx_level1
+        else:
+            level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
+            print('level-1 tx', tx_level1, level_1_locerror)
+            return level_1_correct, level_1_locerror, tx_level1
 
 
-    def povmloc_pro(self, tx_truth: tuple) -> tuple:
+    def povmloc_pro(self, tx_truth: tuple, continuous: bool = True) -> tuple:
         '''the two level POVM-Loc Pro, it do another POVM for block edge cases
         Args:
-            tx -- the location of the transmitter
+            tx         -- the location of the transmitter
+            continuous -- during the testing phase, whether the TX is continuous or not. The difference is in the output only
         Return:
-            (bool, (x, y)) -- correct/wrong, the predicted 2D location
+           If discrete,   return (bool, (x, y))
+           If continuous, return (bool, float, (x, y)) -- (correct/wrong, localization error, predicted location)
         '''
         seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
         np.random.seed(seed)
@@ -380,12 +396,22 @@ class QuantumLocalization:
             povm = self.povms[f'level-{level_i}-set-{mapping_set}']
             max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)            
             tx_level1 = povm['tx_loc'][max_i]
-            level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
             print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
+            level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
             print('level-1.5 tx', tx_level1, level_1_correct)
-            return level_1_correct, tx_level1
+            if not continuous:
+                return level_1_correct, tx_level1
+            else:
+                level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
+                print('level-1.5 tx', tx_level1, level_1_locerror)
+                return level_1_correct, level_1_locerror, tx_level1
         print()
-        return level_1_correct, tx_level1
+        if not continuous:
+            return level_1_correct, tx_level1
+        else:
+            level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
+            print('level-1 tx', tx_level1, level_1_locerror)
+            return level_1_locerror, tx_level1
 
 
     def training_twolevel_16x16grid(self):
@@ -409,7 +435,6 @@ class QuantumLocalization:
 
         povm = Povm()
         # 16 state discrimination, pretty good measurement
-        priors = [1/16] * 16
         levels = self.sensordata['levels']
         for level_, sets in levels.items():
             for set_, set_data in sets.items():
@@ -419,6 +444,8 @@ class QuantumLocalization:
                 print(info)
                 a, b = area[0], area[1]  # a is top left, b is bottom right
                 tx_list = get_16txloc(a, b)
+                if level_ == 'level-1.5':
+                    tx_list = self.filter_tx(a, b, tx_list)
                 evolve_operators = []
                 tx_loc = {}
                 qstates = []
@@ -433,11 +460,11 @@ class QuantumLocalization:
                         evolve = np.kron(evolve, uo)
                     evolve_operators.append(evolve)
                     qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state)))
+                priors = [1 / len(qstates)] * len(qstates)    # equal prior
                 povm.pretty_good_measurement(qstates, priors, debug=False)
                 key = f'{level_}-{set_}'
                 self.povms[key] = {'povm': povm.operators, 'tx_loc':tx_loc}
         print('training POVM done!')
-
 
     def testing_twolevel_16x16grid(self, tx_truth: tuple):
         '''currently only supports two level
@@ -457,10 +484,10 @@ class QuantumLocalization:
         povm = self.povms[f'level-{level_i}-set-{set_i}']
         
         # shortcut way
-        # max_i_theory, probs = self.measure_maxprob_index(qstate, povm['povm'])
+        max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
         # the sensing protocol
-        max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
-        print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
+        # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
+        # print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
         # if max_i_theory != max_i:
         #     print(f'level_0 theory: {max_i_theory}, simulation: {max_i}')
 
@@ -490,11 +517,11 @@ class QuantumLocalization:
         povm = self.povms[f'level-{level_i}-set-{mapping_set}']
         
         # shortcut way
-        max_i_theory, probs = self.measure_maxprob_index(qstate, povm['povm'])
+        max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
         # the sensing protocol
-        max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
-        if max_i_theory != max_i:
-            print(f'level_1 theory: {max_i_theory}, simulation: {max_i}')
+        # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
+        # if max_i_theory != max_i:
+        #     print(f'level_1 theory: {max_i_theory}, simulation: {max_i}')
 
         tx = povm['tx_loc'][max_i]
         level_1_correct = self.check_correct(tx_truth, tx, block_len=1)
@@ -503,7 +530,7 @@ class QuantumLocalization:
             raise Exception()
         return level_0_correct, level_1_correct
 
-    def testing_twolevel_16x16grid_plus(self, tx_truth: tuple):
+    def testing_twolevel_16x16grid_pro(self, tx_truth: tuple):
         '''two level plus a confirmation (level-1.5)
         Args:
             tx            -- the location of the transmitter
@@ -521,11 +548,11 @@ class QuantumLocalization:
         
         # shortcut way
         qstate = self.get_sensor_data(tx_truth, sensors)
-        max_i_theory, probs = self.measure_maxprob_index(qstate, povm['povm'])
+        max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
         # the sensing protocol
-        max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
-        if max_i_theory != max_i:
-            print(f'level_0 theory: {max_i_theory}, simulation: {max_i}')
+        # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
+        # if max_i_theory != max_i:
+        #     print(f'level_0 theory: {max_i_theory}, simulation: {max_i}')
        
         tx_level0 = povm['tx_loc'][max_i]
         level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=block_length)
@@ -534,17 +561,16 @@ class QuantumLocalization:
         # level 1
         # step 1: get the set in level 1 according to tx_level0
         level_i = 1
-        min_distance = float('inf')
-        mapping_set = 0
+        mapping_set = -1
         num_set = len(self.sensordata['levels'][f'level-{level_i}'])
         for set_i in range(num_set):
             set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
             a, b = set_['area']
-            center = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
-            distance = Utility.distance(tx_level0, center, 1)
-            if distance < min_distance:
-                min_distance = distance
-                mapping_set = set_i
+            if a[0] <= tx_level0[0] <= b[0] and a[1] <= tx_level0[1] <= b[1]:
+                    mapping_set = set_i
+                    break
+        else:
+            raise Exception('Error in level 1!')
         set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{mapping_set}']
         # step 2: get the evolving operator and the quantum state
         sensors = set_['sensors']
@@ -553,11 +579,11 @@ class QuantumLocalization:
         povm = self.povms[f'level-{level_i}-set-{mapping_set}']
 
         # the shortcut way
-        max_i_theory, probs = self.measure_maxprob_index(qstate, povm['povm'])
+        max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
         # the sensing protocol
-        max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
-        if max_i_theory != max_i:
-            print(f'level_1 theory: {max_i_theory}, simulation: {max_i}')
+        # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
+        # if max_i_theory != max_i:
+        #     print(f'level_1 theory: {max_i_theory}, simulation: {max_i}')
 
         tx_level1 = povm['tx_loc'][max_i]
         level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
@@ -568,18 +594,16 @@ class QuantumLocalization:
         if self.is_blockedge(tx_level1, grid_length, block_length):
             # step 1: get the set in level 1.5 according to tx_level1
             level_i = 1.5
-            mapping_set = 0
-            min_distance = float('inf')
+            mapping_set = -1
             num_set = len(self.sensordata['levels'][f'level-{level_i}'])
             for set_i in range(num_set):
                 set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
                 a, b = set_['area']
-                center = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
-                distance = Utility.distance(tx_level1, center, 1)
-                if distance < min_distance:
-                    min_distance = distance
+                if a[0] <= tx_level1[0] <= b[0] and a[1] <= tx_level1[1] <= b[1]:
                     mapping_set = set_i
-            set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{mapping_set}']
+                    break
+            else:
+                raise Exception('Error in level 1.5!')
             # step 2: get the evolving operator and the quantum state
             sensors = set_['sensors']
             qstate = self.get_sensor_data(tx_truth, sensors)
@@ -587,11 +611,11 @@ class QuantumLocalization:
             povm = self.povms[f'level-{level_i}-set-{mapping_set}']
             
             # the shortcut way
-            max_i_theory, probs = self.measure_maxprob_index(qstate, povm['povm'])
+            max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
             # the sensing protocol
-            max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
-            if max_i_theory != max_i:
-                print(f'level_1.5 theory: {max_i_theory}, simulation: {max_i}')
+            # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
+            # if max_i_theory != max_i:
+            #     print(f'level_1.5 theory: {max_i_theory}, simulation: {max_i}')
             
             tx_level1 = povm['tx_loc'][max_i]
             level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)

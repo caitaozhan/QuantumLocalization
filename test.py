@@ -14,11 +14,10 @@ from unitary_operator import UnitaryOperator
 
 '''16x16 grid, two level localization'''
 def localization_twolevel_16x16grid():
-    np.random.seed(1)
-    random.seed(0)
-    sensordata = 'sensordata/16x16-twolevel.5.json'
+    np.random.seed(0)
+    sensordata = 'sensordata/twolevel.16x16.json'
     # sensordata = 'sensordata/16x16-twolevel.random.json'
-    unitary_operator = UnitaryOperator(Default.alpha,1, Default.power_ref)
+    unitary_operator = UnitaryOperator(Default.alpha, 1, Default.power_ref)
     ql = QuantumLocalization(grid_length=Default.grid_length, cell_length=Default.cell_length,
                              sensordata=sensordata, unitary_operator=unitary_operator)
     ql.training_twolevel_16x16grid()
@@ -27,17 +26,16 @@ def localization_twolevel_16x16grid():
     tx_list = []
     for x in range(16):
         for y in range(16):
-            tx_list.append((x + 0.5, y + 0.5))
+            tx_list.append((x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)))
+            # tx_list.append((x + 0.5, y + 0.5))
     right_x, right_y = [], []
     wrong_x, wrong_y = [], []
     for i, tx in enumerate(tx_list):
-        # if i not in [7, 18, 22, 25, 34, 36, 42, 45, 53, 71, 72, 85, 93, 101, 102, 103, 113, 119, 125, 132, 136, 139, 140, 145, \
-        #              146, 154, 173, 174, 176, 179, 184, 191, 194, 196, 202, 203, 205, 212, 220, 222, 225, 226, 248, 251]:
-        if i not in [7]:
-            continue
+        # if i not in [7]:
+        #     continue
         print(f'{i}, truth tx = ({tx[0]:.2f}, {tx[1]:.2f})')
-        ret0, ret1 = ql.testing_twolevel_16x16grid(tx)
-        # ret0, ret1 = ql.testing_twolevel_16x16grid_plus(tx)
+        # ret0, ret1 = ql.testing_twolevel_16x16grid(tx)
+        ret0, ret1 = ql.testing_twolevel_16x16grid_pro(tx)
         if ret0:
             level_0_right += 1
             if ret1:

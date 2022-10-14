@@ -45,7 +45,6 @@ def plot1():
 def plot2():
     # plot 2: POVMLoc and POVMLoc-Pro. Y: accuracy, X: varying noise
     
-                                  # length, size, noise, continuous
     template = 'python main.py -m {} {} -l {} -n {} -of {}'
     config = [
         ['', 'povmloc-pro', 16, 0, 'twolevel.noise0'],
@@ -56,8 +55,6 @@ def plot2():
     ]
 
     for i, c in enumerate(config):
-        # if c[1] != 16:
-        #     continue
         command = template.format(c[0], c[1], c[2], c[3], c[4])
         print(command)
         p = Popen(command, shell=True)
@@ -65,8 +62,31 @@ def plot2():
 
 
 
+def plot3():
+    # plot 3: POVMLoc (one level), POVMLoc and POVMLoc-Pro. The localization error CDF plot. Y: percentage, X: error
+    
+    template = 'python main.py -m {} {} -l {} -n {} -of {} -c'
+    config = [
+        ['povmloc', 'povmloc-pro', 16, 1, 'twolevel.errorcdf'],
+    ]
+
+    # template = 'python main.py -m {} -l {} -n {} -of {} -c'
+    # config = [
+    #     ['povmloc-one', 16, 1, 'twolevel.errorcdf'],
+    # ]
+
+    for i, c in enumerate(config):
+        command = template.format(c[0], c[1], c[2], c[3], c[4])
+        print(command)
+        p = Popen(command, shell=True)
+        p.wait()
+
+
+
+
 if  __name__ == '__main__':
     
     # plot1()
-    plot2()
+    # plot2()
+    plot3()
     

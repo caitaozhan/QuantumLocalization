@@ -34,4 +34,4 @@ class Default:
     stepsize_decreasing_rate = 0.96 # the stepsize decreasing rate
     EPSILON = 1e-6
 
-    DEBUG = True
+    DEBUG = False

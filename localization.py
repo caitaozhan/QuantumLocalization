@@ -190,10 +190,11 @@ class QuantumLocalization:
         print(f'({round(tx_truth[0], 3)}, {round(tx_truth[1], 3)})', sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
         tx_level0 = povm['tx_loc'][max_i]
         level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=1)
-        print('level 0 tx', tx_level0, level_0_correct)
         if not continuous:
+            print('level-0 tx', tx_level0, level_0_correct)
             return level_0_correct, tx_level0
         else:
+            print('level-0 tx', tx_level0, level_0_correct, end='; ')
             level_0_locerror = Utility.distance(tx_truth, tx_level0, Default.cell_length)
             print('level-0 tx', tx_level0, round(level_0_locerror, 3))
             return level_0_correct, level_0_locerror, tx_level0
@@ -399,14 +400,14 @@ class QuantumLocalization:
             tx_level1 = povm['tx_loc'][max_i]
             # print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
             level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
-            print('level-1.5 tx', tx_level1, level_1_correct)
             if not continuous:
+                print('level-1.5 tx', tx_level1, level_1_correct)
                 return level_1_correct, tx_level1
             else:
+                print('level-1.5 tx', tx_level1, level_1_correct, end='; ')
                 level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
                 print('level-1.5 tx', tx_level1, round(level_1_locerror, 3))
                 return level_1_correct, level_1_locerror, tx_level1
-        print()
         if not continuous:
             return level_1_correct, tx_level1
         else:

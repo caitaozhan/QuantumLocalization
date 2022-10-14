@@ -187,7 +187,7 @@ class QuantumLocalization:
         povm = self.povms[key]
         early_stop = True if len(sensors) >= 8 else False
         max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], repeat=Default.repeat, early_stop=early_stop)
-        print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
+        print(f'({round(tx_truth[0], 3)}, {round(tx_truth[1], 3)})', sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
         tx_level0 = povm['tx_loc'][max_i]
         level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=1)
         print('level 0 tx', tx_level0, level_0_correct)
@@ -195,7 +195,7 @@ class QuantumLocalization:
             return level_0_correct, tx_level0
         else:
             level_0_locerror = Utility.distance(tx_truth, tx_level0, Default.cell_length)
-            print('level-0 tx', tx_level0, level_0_locerror)
+            print('level-0 tx', tx_level0, round(level_0_locerror, 3))
             return level_0_correct, level_0_locerror, tx_level0
 
 
@@ -294,7 +294,7 @@ class QuantumLocalization:
         povm = self.povms[f'level-{level_i}-set-{set_i}']
         # the sensing protocol
         max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
-        print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
+        print(f'({round(tx_truth[0], 3)}, {round(tx_truth[1], 3)})', sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
         tx_level0 = povm['tx_loc'][max_i]
         level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=block_length)
         print('level-0 tx', tx_level0, level_0_correct, end='; ')
@@ -320,12 +320,13 @@ class QuantumLocalization:
         max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
         tx_level1 = povm['tx_loc'][max_i]
         level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
-        print('level-1 tx', tx_level1, level_1_correct)
         if not continuous:
+            print('level-1 tx', tx_level1, level_1_correct)
             return level_1_correct, tx_level1
         else:
+            print('level-1 tx', tx_level1, level_1_correct, end='; ')
             level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
-            print('level-1 tx', tx_level1, level_1_locerror)
+            print('level-1 tx', tx_level1, round(level_1_locerror, 3))
             return level_1_correct, level_1_locerror, tx_level1
 
 
@@ -349,7 +350,7 @@ class QuantumLocalization:
         povm = self.povms[f'level-{level_i}-set-{set_i}']
         # the sensing protocol
         max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
-        print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
+        print(f'({round(tx_truth[0], 3)}, {round(tx_truth[1], 3)})', sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
         tx_level0 = povm['tx_loc'][max_i]
         level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=block_length)
         print('level-0 tx', tx_level0, level_0_correct, end='; ')
@@ -396,21 +397,21 @@ class QuantumLocalization:
             povm = self.povms[f'level-{level_i}-set-{mapping_set}']
             max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)            
             tx_level1 = povm['tx_loc'][max_i]
-            print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
+            # print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
             level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
             print('level-1.5 tx', tx_level1, level_1_correct)
             if not continuous:
                 return level_1_correct, tx_level1
             else:
                 level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
-                print('level-1.5 tx', tx_level1, level_1_locerror)
+                print('level-1.5 tx', tx_level1, round(level_1_locerror, 3))
                 return level_1_correct, level_1_locerror, tx_level1
         print()
         if not continuous:
             return level_1_correct, tx_level1
         else:
             level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
-            print('level-1 tx', tx_level1, level_1_locerror)
+            print('level-1 tx', tx_level1, round(level_1_locerror, 3))
             return level_1_locerror, tx_level1
 
 

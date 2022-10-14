@@ -85,7 +85,7 @@ if __name__ == '__main__':
         for i, tx in enumerate(tx_list):
             # if i not in [4]:
             #     continue
-            myinput = Input(tx, grid_length, sensor_num, noise, continuous)
+            myinput = Input((round(tx[0], 3), round(tx[1], 3)), grid_length, sensor_num, noise, continuous)
             outputs = []
             if 'povmloc-one' in methods:
                 ql = qls['povmloc-one']

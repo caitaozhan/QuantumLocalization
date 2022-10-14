@@ -12,12 +12,12 @@ class Plot:
     plt.rcParams['lines.linewidth'] = 10
     plt.rcParams['lines.markersize'] = 35
 
-    METHOD  = ['povmloc-one', 'povmloc-two', 'povmloc-two-pro']
+    METHOD  = ['povmloc-one',          'povmloc',  'povmloc-pro']
     _LEGEND = ['POVM-Loc (one level)', 'POVM-Loc', 'POVM-Loc Pro']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
-    METHOD  = ['povmloc-one', 'povmloc-two', 'povmloc-two-pro']
-    _COLOR  = ['tab:orange',  'blue',        'r']
+    METHOD  = ['povmloc-one', 'povmloc', 'povmloc-pro']
+    _COLOR  = ['tab:orange',  'blue',    'r']
     COLOR   = dict(zip(METHOD, _COLOR))
 
     @staticmethod
@@ -68,20 +68,55 @@ class Plot:
         # step 2: plotting
         fig, ax = plt.subplots(1, 1, figsize=(25, 18))
         fig.subplots_adjust(left=0.14, right=0.99, top=0.9, bottom=0.14)
-        ax.plot(X, y_8sen, linestyle='-', marker='P', label="8 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
-        ax.plot(X, y_4sen, linestyle='--',  marker='^', label="4 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
+        ax.plot(X, y_8sen, linestyle='-',  marker='^', label="8 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
+        ax.plot(X, y_4sen, linestyle='--', marker='^', label="4 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
         fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=52, handlelength=3.5)
         ax.set_xlabel('Grid Size', labelpad=40)
         ax.set_xticks(X)
         ax.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
         ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=52)
         ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3)
-        ax.set_ylabel('Localization Accuracy (%)', fontsize=70, labelpad=20)
+        ax.set_ylabel('Localization Accuracy (%)', labelpad=20)
         ax.set_ylim([0, 105])
         method = Plot.LEGEND['povmloc-one']
-        ax.set_title(f'Performance of {method}', pad=30)
+        ax.set_title(f'Performance of {method}', pad=30, fontsize=65)
         fig.savefig(figname)
 
+
+    @staticmethod
+    def povmloc_vary_noise(data: list, figname: str):
+        reduce = Plot.reduce_accuracy
+        # step 1: prepare data
+        table = defaultdict(list)
+        for myinput, output_by_method in data:
+            table[int(myinput.noise)].append({method: output.correct for method, output in output_by_method.items()})
+        
+        print_table = []
+        methods = ['povmloc', 'povmloc-pro']
+        for x, list_of_y_by_method in sorted(table.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Noise'] + methods))
+        arr = np.array(print_table)
+        X      = arr[:, 0]
+        y_povmloc     = arr[:, 1] * 100  # percentage
+        y_povmloc_pro = arr[:, 2] * 100
+
+        # step 2: plotting
+        fig, ax = plt.subplots(1, 1, figsize=(25, 18))
+        fig.subplots_adjust(left=0.14, right=0.99, top=0.9, bottom=0.14)
+        ax.plot(X, y_povmloc_pro, marker='^', label=Plot.LEGEND['povmloc-pro'], mfc='black', mec='b', color=Plot.COLOR['povmloc-pro'])
+        ax.plot(X, y_povmloc,     marker='^', label=Plot.LEGEND['povmloc'],   mfc='black', mec='b', color=Plot.COLOR['povmloc'])
+        fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=55, handlelength=3.5)
+        ax.set_xlabel('Noise (Std. of Shadowing)', labelpad=40)
+        ax.set_xticks(X)
+        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=60)
+        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3, labelsize=60)
+        ax.set_ylabel('Localization Accuracy (%)', labelpad=20)
+        ax.set_ylim([87, 101])
+        method1 = Plot.LEGEND['povmloc']
+        ax.set_title(f'Performance of {method1} and Pro in 16x16 Grid', pad=30, fontsize=65, loc='right')
+        fig.savefig(figname)
 
 
 
@@ -94,9 +129,21 @@ def povmloc_one_varygridsize():
     Plot.povmloc_one_vary_gridsize(data, figname)
 
 
+def povmloc_varynoise():
+    '''evaluate the performance of povmloc and povmloc-pro against varying noise
+    '''
+    logs = ['results/twolevel.noise0', 'results/twolevel.noise1', 'results/twolevel.noise2', 'results/twolevel.noise3', 'results/twolevel.noise4']
+    data = Utility.read_logs(logs)
+    figname = 'results/twolevel-varynoise.png'
+    Plot.povmloc_vary_noise(data, figname)
+
+
+
 if __name__ == '__main__':
 
     povmloc_one_varygridsize()
+
+    povmloc_varynoise()
 
 
 '''
@@ -113,5 +160,16 @@ POVM-Loc (one level)
            12  0.236111  0.611111
            14  0.173469  0.433673
            16  0.117188  0.296875
+
+
+POVM-Loc and POVM-Loc Pro
+
+  Noise    povmloc    povmloc-pro
+-------  ---------  -------------
+      0   0.925781       0.996094
+      1   0.925781       0.992188
+      2   0.929688       0.996094
+      3   0.921875       0.996094
+      4   0.914062       0.992188
 
 '''

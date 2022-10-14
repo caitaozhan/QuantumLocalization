@@ -381,6 +381,7 @@ class QuantumLocalization:
             max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)            
             tx_level1 = povm['tx_loc'][max_i]
             level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
+            print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
             print('level-1.5 tx', tx_level1, level_1_correct)
             return level_1_correct, tx_level1
         print()

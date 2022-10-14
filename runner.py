@@ -52,6 +52,7 @@ def plot2():
         ['', 'povmloc-pro', 16, 1, 'twolevel.noise1'],
         ['povmloc', 'povmloc-pro', 16, 2, 'twolevel.noise2'],
         ['povmloc', 'povmloc-pro', 16, 3, 'twolevel.noise3'],
+        ['povmloc', 'povmloc-pro', 16, 4, 'twolevel.noise4'],
     ]
 
     for i, c in enumerate(config):

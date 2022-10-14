@@ -80,18 +80,18 @@ def onelevel_4x4grid_5sen(filename, fig_filename):
     sensor_data['info'] = info
     # location of 4 sensors
     sensors = {
-        0: (0, 2),
-        1: (2, 0),
+        0: (0, 0),
+        1: (0, 4),
         2: (2, 2),
-        3: (2, 4),
-        4: (4, 2)
+        3: (4, 0),
+        4: (4, 4)
     }
 
     sensor_data['sensors'] = sensors
     # one levels
     levels = {}
     sets = {}
-    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4], 'area': [[0, 0], [grid_length, grid_length]]}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3], 'area': [[0, 0], [grid_length, grid_length]]}
     levels['level-0'] = sets
     sensor_data['levels'] = levels
     Plot.visualize_sensors(grid_length, sensors, sensors, fig_filename)
@@ -567,7 +567,7 @@ def two_level_16by16grid(filename: str, fig_filename: str):
     for i in [0, 3]:
         for j in [0.5, 1.5, 2.5]:
             sensor_list = []
-            for x, y in [(0, 0), (1, 0), (0.5, 0.5), (1, 0), (1, 1)]:
+            for x, y in [(0, 0), (1, 0), (1, 0), (1, 1)]:
                 loc = (4 * (i + x), 4 * (j + y))
                 sensor_list.append(sensors_reverse[loc])
             sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'cell_length': 1}
@@ -575,7 +575,7 @@ def two_level_16by16grid(filename: str, fig_filename: str):
     for i in [0.5, 1.5, 2.5]:
         for j in [0, 3]:
             sensor_list = []
-            for x, y in [(0, 0), (1, 0), (0.5, 0.5), (1, 0), (1, 1)]:
+            for x, y in [(0, 0), (1, 0), (1, 0), (1, 1)]:
                 loc = (4 * (i + x), 4 * (j + y))
                 sensor_list.append(sensors_reverse[loc])
             sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'cell_length': 1}
@@ -600,8 +600,8 @@ if __name__ == '__main__':
     # onelevel_2x2grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.4x4.4.json'
     # onelevel_4x4grid_4sen(filename, fig_filename)
-    # filename = 'sensordata/onelevel.4x4.5.json'
-    # onelevel_4x4grid_5sen(filename, fig_filename)
+    filename = 'sensordata/onelevel.4x4.5.json'
+    onelevel_4x4grid_5sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.6x6.4.json'
     # onelevel_6x6grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.6x6.4.json'
@@ -638,6 +638,6 @@ if __name__ == '__main__':
 
     # TWO level
 
-    filename = 'sensordata/twolevel.16x16.json'
-    fig_filename = 'sensordata/tmp.16x16grid.png'
-    two_level_16by16grid(filename, fig_filename)
+    # filename = 'sensordata/twolevel.16x16.json'
+    # fig_filename = 'sensordata/tmp.16x16grid.png'
+    # two_level_16by16grid(filename, fig_filename)

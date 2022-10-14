@@ -65,15 +65,15 @@ def plot2():
 def plot3():
     # plot 3: POVMLoc (one level), POVMLoc and POVMLoc-Pro. The localization error CDF plot. Y: percentage, X: error
     
-    template = 'python main.py -m {} {} -l {} -n {} -of {} -c'
-    config = [
-        ['povmloc', 'povmloc-pro', 16, 1, 'twolevel.errorcdf'],
-    ]
+    #template = 'python main.py -m {} {} -l {} -n {} -of {} -c'
+    #config = [
+    #    ['povmloc', 'povmloc-pro', 16, 1, 'twolevel.errorcdf'],
+    #]
 
-    # template = 'python main.py -m {} -l {} -n {} -of {} -c'
-    # config = [
-    #     ['povmloc-one', 16, 1, 'twolevel.errorcdf'],
-    # ]
+    template = 'python main.py -m {} -l {} -s {} -n {} -of {} -c'
+    config = [
+        ['povmloc-one', 16, 8,  1, 'onelevel.errorcdf'],
+    ]
 
     for i, c in enumerate(config):
         command = template.format(c[0], c[1], c[2], c[3], c[4])

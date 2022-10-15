@@ -202,10 +202,6 @@
 {"method": "povmloc", "correct": true, "localization_error": 2.907, "pred": [3.5, 2.5], "elapse": 24.08}
 {"method": "povmloc-pro", "correct": true, "localization_error": 2.907, "pred": [3.5, 2.5], "elapse": 25.18}
 
-{"ground_truth": [3.735, 3.962], "grid_length": 16, "sensor_num": 4, "noise": 1.0, "continuous": true}
-{"method": "povmloc", "correct": false, "localization_error": 100.716, "pred": [0.5, 13.5], "elapse": 24.2}
-{"method": "povmloc-pro", "correct": false, "localization_error": 100.716, "pred": [0.5, 13.5], "elapse": 24.16}
-
 {"ground_truth": [3.249, 4.576], "grid_length": 16, "sensor_num": 4, "noise": 1.0, "continuous": true}
 {"method": "povmloc", "correct": false, "localization_error": 12.536, "pred": [4.5, 4.5], "elapse": 17.19}
 {"method": "povmloc-pro", "correct": true, "localization_error": 2.625, "pred": [3.5, 4.5], "elapse": 18.13}

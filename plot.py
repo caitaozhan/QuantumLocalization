@@ -1,4 +1,5 @@
 from collections import defaultdict
+from distutils.log import error
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -11,6 +12,8 @@ class Plot:
     plt.rcParams['font.size'] = 65
     plt.rcParams['lines.linewidth'] = 10
     plt.rcParams['lines.markersize'] = 35
+    plt.rcParams['font.weight'] = 'bold'
+    plt.rcParams['axes.labelweight'] = 'bold'
 
     METHOD  = ['povmloc-one',          'povmloc',  'povmloc-pro']
     _LEGEND = ['POVM-Loc (one level)', 'POVM-Loc', 'POVM-Loc Pro']
@@ -67,19 +70,20 @@ class Plot:
 
         # step 2: plotting
         fig, ax = plt.subplots(1, 1, figsize=(25, 18))
-        fig.subplots_adjust(left=0.14, right=0.99, top=0.9, bottom=0.14)
-        ax.plot(X, y_8sen, linestyle='-',  marker='^', label="8 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
-        ax.plot(X, y_4sen, linestyle='--', marker='^', label="4 Quantum Sensors", mfc='r', mec='b', color=Plot.COLOR['povmloc-one'])
+        fig.subplots_adjust(left=0.14, right=0.98, top=0.9, bottom=0.14)
+        ax.plot(X, y_8sen, linestyle='-',  marker='^', label="8 Quantum Sensors", mfc='black', mec='b', color=Plot.COLOR['povmloc-one'])
+        ax.plot(X, y_4sen, linestyle='--', marker='^', label="4 Quantum Sensors", mfc='black', mec='b', color=Plot.COLOR['povmloc-one'])
         fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=52, handlelength=3.5)
         ax.set_xlabel('Grid Size', labelpad=40)
+        ax.grid(True)
         ax.set_xticks(X)
         ax.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
         ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=52)
         ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3)
         ax.set_ylabel('Localization Accuracy (%)', labelpad=20)
-        ax.set_ylim([0, 105])
+        ax.set_ylim([0, 102])
         method = Plot.LEGEND['povmloc-one']
-        ax.set_title(f'Performance of {method}', pad=30, fontsize=65)
+        ax.set_title(f'Performance of {method}', pad=30, fontsize=65, fontweight='bold')
         fig.savefig(figname)
 
 
@@ -104,20 +108,55 @@ class Plot:
 
         # step 2: plotting
         fig, ax = plt.subplots(1, 1, figsize=(25, 18))
-        fig.subplots_adjust(left=0.14, right=0.99, top=0.9, bottom=0.14)
+        fig.subplots_adjust(left=0.14, right=0.98, top=0.9, bottom=0.14)
         ax.plot(X, y_povmloc_pro, marker='^', label=Plot.LEGEND['povmloc-pro'], mfc='black', mec='b', color=Plot.COLOR['povmloc-pro'])
         ax.plot(X, y_povmloc,     marker='^', label=Plot.LEGEND['povmloc'],   mfc='black', mec='b', color=Plot.COLOR['povmloc'])
         fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=55, handlelength=3.5)
         ax.set_xlabel('Noise (Std. of Shadowing)', labelpad=40)
+        ax.grid(True)
         ax.set_xticks(X)
         ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=60)
         ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3, labelsize=60)
         ax.set_ylabel('Localization Accuracy (%)', labelpad=20)
-        ax.set_ylim([87, 101])
+        ax.set_ylim([87, 100.2])
         method1 = Plot.LEGEND['povmloc']
-        ax.set_title(f'Performance of {method1} and Pro in 16x16 Grid', pad=30, fontsize=65, loc='right')
+        ax.set_title(f'Performance of {method1} and Pro in 16x16 Grid', pad=30, fontsize=63, loc='right', fontweight='bold')
         fig.savefig(figname)
 
+
+    @staticmethod
+    def error_cdf(data: list, figname: str):
+        table = defaultdict(list)
+        for myinput, output_by_method in data:
+            for method, output in output_by_method.items():
+                table[method].append(output.localization_error)
+                if output.localization_error > 50:
+                    print(myinput)
+        
+        n_bins = 200
+        method_n_bins = []
+        for method, error_list in table.items():
+            print(f'method={method}, avg. error = {np.average(error_list)}, error std. = {np.std(error_list)}')
+            n, bins, _ = plt.hist(error_list, n_bins, density=True, histtype='step', cumulative=True, label=method)
+            method_n_bins.append((method, n, bins))
+        method_n_bins[0], method_n_bins[1] = method_n_bins[1], method_n_bins[0]  # switch ...
+        plt.close()
+        fig, ax = plt.subplots(figsize=(25, 18))
+        fig.subplots_adjust(left=0.15, right=0.97, top=0.9, bottom=0.15)
+        for method, n, bins in method_n_bins:
+            ax.plot(bins[1:], n, label=Plot.LEGEND[method], color=Plot.COLOR[method])
+        
+        ax.grid(True)
+        ax.legend(loc='lower right')
+        ax.set_xlabel('Localization Error (m)', labelpad=40)
+        ax.set_ylabel('Cumulative Distribution (CDF)', labelpad=40)
+        ax.set_ylim([0, 1.003])
+        ax.set_xlim([0, 30])
+        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=60)
+        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3, labelsize=60)
+        ax.set_title('CDF of Localization Error in 16x16 Grid', pad=30, fontsize=63, fontweight='bold')
+        fig.savefig(figname)
+        
 
 
 def povmloc_one_varygridsize():
@@ -138,12 +177,23 @@ def povmloc_varynoise():
     Plot.povmloc_vary_noise(data, figname)
 
 
+def localization_error_cdf():
+    '''the classic error CDF plot
+    '''
+    logs = ['results/twolevel.errorcdf', 'results/onelevel.errorcdf']
+    data = Utility.read_logs(logs)
+    figname = 'results/error_cdf.png'
+    Plot.error_cdf(data, figname)
+
+
 
 if __name__ == '__main__':
 
     povmloc_one_varygridsize()
 
     povmloc_varynoise()
+
+    localization_error_cdf()
 
 
 '''

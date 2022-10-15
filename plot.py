@@ -16,7 +16,7 @@ class Plot:
     plt.rcParams['axes.labelweight'] = 'bold'
 
     METHOD  = ['povmloc-one',          'povmloc',  'povmloc-pro']
-    _LEGEND = ['POVM-Loc (one level)', 'POVM-Loc', 'POVM-Loc Pro']
+    _LEGEND = ['POVM-Loc One', 'POVM-Loc', 'POVM-Loc Pro']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
     METHOD  = ['povmloc-one', 'povmloc', 'povmloc-pro']
@@ -40,7 +40,7 @@ class Plot:
 
 
     @staticmethod
-    def reduce_accuracy(vals: list):
+    def reduce_accuracy(vals: list) -> float:
         '''vals is a list of True/False bools
         '''
         vals = [val for val in vals if val is not None]
@@ -48,6 +48,15 @@ class Plot:
             return vals.count(True) / len(vals)
         else:
             return 0
+
+
+    @staticmethod
+    def reduce_average(vals: list) -> float:
+        '''vals is a list of float
+        '''
+        vals = [val for val in vals if val is not None]
+        return np.mean(vals)
+
 
     @staticmethod
     def povmloc_one_vary_gridsize(data: list, figname: str):
@@ -78,8 +87,8 @@ class Plot:
         ax.grid(True)
         ax.set_xticks(X)
         ax.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=52)
-        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3)
+        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=52)
+        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
         ax.set_ylabel('Localization Accuracy (%)', labelpad=20)
         ax.set_ylim([0, 102])
         method = Plot.LEGEND['povmloc-one']
@@ -115,8 +124,8 @@ class Plot:
         ax.set_xlabel('Noise (Std. of Shadowing)', labelpad=40)
         ax.grid(True)
         ax.set_xticks(X)
-        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=60)
-        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3, labelsize=60)
+        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
+        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelsize=60)
         ax.set_ylabel('Localization Accuracy (%)', labelpad=20)
         ax.set_ylim([87, 100.2])
         method1 = Plot.LEGEND['povmloc']
@@ -152,11 +161,26 @@ class Plot:
         ax.set_ylabel('Cumulative Distribution (CDF)', labelpad=40)
         ax.set_ylim([0, 1.003])
         ax.set_xlim([0, 30])
-        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=3, labelsize=60)
-        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=3, labelsize=60)
+        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
+        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelsize=60)
         ax.set_title('CDF of Localization Error in 16x16 Grid', pad=30, fontsize=63, fontweight='bold')
         fig.savefig(figname)
         
+
+    @staticmethod
+    def print_runtime(data: list):
+        reduce = Plot.reduce_average
+        methods = ['povmloc-one', 'povmloc', 'povmloc-pro']
+        table = defaultdict(list)
+        for myinput, output_by_method in data:
+            # if myinput.sensor_num == 8:
+            if myinput.sensor_num == 4:
+                table[myinput.grid_length].append({method: output.elapse for method, output in output_by_method.items()})
+        print_table = []
+        for x, list_of_y_by_method in sorted(table.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + methods))
 
 
 def povmloc_one_varygridsize():
@@ -186,6 +210,14 @@ def localization_error_cdf():
     Plot.error_cdf(data, figname)
 
 
+def runtime():
+    '''the runtime
+    '''
+    logs = ['results/runtime']
+    data = Utility.read_logs(logs)
+    Plot.print_runtime(data)
+
+
 
 if __name__ == '__main__':
 
@@ -194,6 +226,8 @@ if __name__ == '__main__':
     povmloc_varynoise()
 
     localization_error_cdf()
+
+    runtime()
 
 
 '''
@@ -221,5 +255,30 @@ POVM-Loc and POVM-Loc Pro
       2   0.929688       0.996094
       3   0.921875       0.996094
       4   0.914062       0.992188
+
+
+Runtime
+
+Grid Length    povmloc-one    povmloc    povmloc-pro
+-------------  -------------  ---------  -------------
+            2        4.77333    nan            nan
+            4        9.0775     nan            nan
+            6       27.4        nan            nan
+            8       53.06       nan            nan
+           10       80.565      nan            nan
+           12      113.365      nan            nan
+           14      149.387      nan            nan
+           16      193.818       10.256         11.252
+
+Grid Length    povmloc-one    povmloc    povmloc-pro
+-------------  -------------  ---------  -------------
+            2         1.04          nan            nan
+            4         1.0675        nan            nan
+            6         1.222         nan            nan
+            8         1.424         nan            nan
+           10         1.626         nan            nan
+           12         1.996         nan            nan
+           14         2.314         nan            nan
+           16         2.666         nan            nan
 
 '''

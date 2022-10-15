@@ -331,7 +331,7 @@ class QuantumLocalization:
             return level_1_correct, level_1_locerror, tx_level1
 
 
-    def povmloc_pro(self, tx_truth: tuple, continuous: bool = True) -> tuple:
+    def povmloc_pro(self, tx_truth: tuple, continuous: bool = False) -> tuple:
         '''the two level POVM-Loc Pro, it do another POVM for block edge cases
         Args:
             tx         -- the location of the transmitter
@@ -409,10 +409,11 @@ class QuantumLocalization:
                 print('level-1.5 tx', tx_level1, round(level_1_locerror, 3))
                 return level_1_correct, level_1_locerror, tx_level1
         if not continuous:
+            print()
             return level_1_correct, tx_level1
         else:
             level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
-            print('level-1 tx', tx_level1, round(level_1_locerror, 3))
+            print('error', round(level_1_locerror, 3))
             return level_1_correct, level_1_locerror, tx_level1
 
 

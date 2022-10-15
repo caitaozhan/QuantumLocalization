@@ -82,11 +82,54 @@ def plot3():
         p.wait()
 
 
+def table():
+    '''a table for run time. the experiment data for plots 1,2,3 are collected on different machines
+       to collect runtime, need to run experiments on the same machine
+    '''
+    # template = 'python main.py -m {} {} {} -l {} -s {} -n {} -of {}'
+    # config = [
+    #    ['povmloc', 'povmloc-pro', 'povmloc-one', 16, 8, 1, 'runtime'],
+    # ]
+
+    # for i, c in enumerate(config):
+    #     command = template.format(c[0], c[1], c[2], c[3], c[4], c[5], c[6])
+    #     print(command)
+    #     p = Popen(command, shell=True)
+    #     p.wait()
+
+    template = 'python main.py -m {} -l {} -s {} -n {} -of {}'
+    config = [
+    #    ['povmloc-one', 2, 4, 1, 'runtime'],
+    #    ['povmloc-one', 4, 4, 1, 'runtime'],
+    #    ['povmloc-one', 6, 4, 1, 'runtime'],
+    #    ['povmloc-one', 8, 4, 1, 'runtime'],
+    #    ['povmloc-one', 10, 4, 1, 'runtime'],
+    #    ['povmloc-one', 12, 4, 1, 'runtime'],
+    #    ['povmloc-one', 14, 4, 1, 'runtime'],
+    #    ['povmloc-one', 16, 4, 1, 'runtime'],
+    #    ['povmloc-one', 2, 8, 1, 'runtime'],
+       ['povmloc-one', 4, 8, 1, 'runtime'],
+    #    ['povmloc-one', 6, 8, 1, 'runtime'],
+    #    ['povmloc-one', 8, 8, 1, 'runtime'],
+    #    ['povmloc-one', 10, 8, 1, 'runtime'],
+    #    ['povmloc-one', 12, 8, 1, 'runtime'],
+    #    ['povmloc-one', 14, 8, 1, 'runtime'],
+    ]
+
+    for i, c in enumerate(config):
+        command = template.format(c[0], c[1], c[2], c[3], c[4])
+        print(command)
+        p = Popen(command, shell=True)
+        p.wait()
+
+
 
 
 if  __name__ == '__main__':
     
     # plot1()
     # plot2()
-    plot3()
+    # plot3()
+
+    table()
     

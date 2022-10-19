@@ -16,7 +16,7 @@ class Plot:
     plt.rcParams['axes.labelweight'] = 'bold'
 
     METHOD  = ['povmloc-one',          'povmloc',  'povmloc-pro']
-    _LEGEND = ['POVM-Loc One', 'POVM-Loc', 'POVM-Loc Pro']
+    _LEGEND = ['OneLevel', 'POVM-Loc', 'POVM-Loc Pro']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
     METHOD  = ['povmloc-one', 'povmloc', 'povmloc-pro']

@@ -3,7 +3,6 @@
 
 import time
 import numpy as np
-import random
 import matplotlib.pyplot as plt
 from localization import QuantumLocalization
 from default import Default

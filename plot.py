@@ -11,17 +11,20 @@ class Plot:
 
     plt.rcParams['font.size'] = 65
     plt.rcParams['lines.linewidth'] = 10
-    plt.rcParams['lines.markersize'] = 35
+    plt.rcParams['lines.markersize'] = 25
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one',          'povmloc',  'povmloc-pro']
-    _LEGEND = ['OneLevel', 'POVM-Loc', 'POVM-Loc Pro']
+    METHOD  = ['povmloc-one', 'povmloc',  'povmloc-pro']
+    _LEGEND = ['OneLevel',    'TwoLevel', 'TwoLevel-Pro']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
-    METHOD  = ['povmloc-one', 'povmloc', 'povmloc-pro']
-    _COLOR  = ['tab:orange',  'blue',    'r']
+    _COLOR  = ['b',  'r',        'r']
     COLOR   = dict(zip(METHOD, _COLOR))
+
+    _LINE   = ['-',           '--',       '-']
+    LINE    = dict(zip(METHOD, _LINE))
+
 
     @staticmethod
     def prob_heatmap(probs: list, n: int, filename: str):
@@ -60,8 +63,8 @@ class Plot:
 
     @staticmethod
     def povmloc_one_vary_gridsize(data: list, figname: str):
+        # step 1.1: prepare accuracy data
         reduce = Plot.reduce_accuracy
-        # step 1: prepare data
         table = defaultdict(list)
         for myinput, output_by_method in data:
             table[myinput.grid_length].append({myinput.sensor_num: output.correct for output in output_by_method.values()})
@@ -77,29 +80,56 @@ class Plot:
         y_4sen = arr[:, 1] * 100  # percentage
         y_8sen = arr[:, 2] * 100
 
+        # step 1.2: prepare error data
+        reduce = Plot.reduce_average
+        table = defaultdict(list)
+        for myinput, output_by_method in data:
+            table[myinput.grid_length].append({myinput.sensor_num: output.localization_error for output in output_by_method.values()})
+        
+        print_table = []
+        sensornum = [4, 8]
+        for x, list_of_y_by_sensornum in sorted(table.items()):
+            tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
+        arr = np.array(print_table)
+        X      = arr[:, 0]
+        y_4sen_error = arr[:, 1]     # error
+        y_8sen_error = arr[:, 2]
+
         # step 2: plotting
-        fig, ax = plt.subplots(1, 1, figsize=(25, 18))
-        fig.subplots_adjust(left=0.14, right=0.98, top=0.9, bottom=0.14)
-        ax.plot(X, y_8sen, linestyle='-',  marker='^', label="8 Quantum Sensors", mfc='black', mec='b', color=Plot.COLOR['povmloc-one'])
-        ax.plot(X, y_4sen, linestyle='--', marker='^', label="4 Quantum Sensors", mfc='black', mec='b', color=Plot.COLOR['povmloc-one'])
-        fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=52, handlelength=3.5)
-        ax.set_xlabel('Grid Size', labelpad=40)
-        ax.grid(True)
-        ax.set_xticks(X)
-        ax.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=52)
-        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax.set_ylabel('Localization Accuracy (%)', labelpad=20)
-        ax.set_ylim([0, 102])
+        povmloc_one_color2 = 'black'
+        fig, ax1 = plt.subplots(1, 1, figsize=(23, 20))
+        fig.subplots_adjust(left=0.13, right=0.895, top=0.78, bottom=0.12)
+        ax2 = ax1.twinx()
+        ax1.plot(X, y_8sen, linestyle='-',  marker='^', label="$CC_{acc}$ 8 Sensors", mfc='black', mec='b', color=povmloc_one_color2)
+        ax1.plot(X, y_4sen, linestyle='--', marker='^', label="$CC_{acc}$ 4 Sensors", mfc='black', mec='b', color=povmloc_one_color2)
+        ax2.plot(X, y_8sen_error, linestyle='-',  marker='o', label="$L_{acc}$ 8 Sensors", mfc='black', mec='b', color=Plot.COLOR['povmloc-one'])
+        ax2.plot(X, y_4sen_error, linestyle='--', marker='o', label="$L_{acc}$ 4 Sensors", mfc='black', mec='b', color=Plot.COLOR['povmloc-one'])
+        # ax1
+        fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
+        ax1.set_xlabel('Grid Size', labelpad=20)
+        ax1.grid(True)
+        ax1.set_xticks(X)
+        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=50, rotation=12)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=povmloc_one_color2)
+        ax1.set_ylabel('$CC_{acc}$ (%)', fontsize=55, color=povmloc_one_color2)
+        ax1.set_ylim([0, 102])
         method = Plot.LEGEND['povmloc-one']
-        ax.set_title(f'Performance of {method}', pad=30, fontsize=65, fontweight='bold')
+        ax1.set_title(f'Performance of {method}', pad=30, fontsize=65, fontweight='bold')
+        # ax2
+        ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc-one'])
+        ax2.set_ylabel('$L_{acc}$ (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc-one'])
+        ax2.set_ylim([0, 20.4])
+        ax2.set_yticks(range(0, 21, 4))
         fig.savefig(figname)
 
 
     @staticmethod
     def povmloc_vary_noise(data: list, figname: str):
+        # step 1.1: prepare accuracy
         reduce = Plot.reduce_accuracy
-        # step 1: prepare data
         table = defaultdict(list)
         for myinput, output_by_method in data:
             table[int(myinput.noise)].append({method: output.correct for method, output in output_by_method.items()})
@@ -111,25 +141,54 @@ class Plot:
             print_table.append([x] + tmp_list)
         print(tabulate.tabulate(print_table, headers=['Noise'] + methods))
         arr = np.array(print_table)
-        X      = arr[:, 0]
+        X             = arr[:, 0]
         y_povmloc     = arr[:, 1] * 100  # percentage
         y_povmloc_pro = arr[:, 2] * 100
 
+        # step 1.2: prepare localization error
+        reduce = Plot.reduce_average
+        table = defaultdict(list)
+        for myinput, output_by_method in data:
+            table[int(myinput.noise)].append({method: output.localization_error for method, output in output_by_method.items()})
+        
+        print_table = []
+        methods = ['povmloc', 'povmloc-pro']
+        for x, list_of_y_by_method in sorted(table.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Noise'] + methods))
+        arr = np.array(print_table)
+        X                   = arr[:, 0]
+        y_povmloc_error     = arr[:, 1]  # error
+        y_povmloc_pro_error = arr[:, 2]
+        
         # step 2: plotting
-        fig, ax = plt.subplots(1, 1, figsize=(25, 18))
-        fig.subplots_adjust(left=0.14, right=0.98, top=0.9, bottom=0.14)
-        ax.plot(X, y_povmloc_pro, marker='^', label=Plot.LEGEND['povmloc-pro'], mfc='black', mec='b', color=Plot.COLOR['povmloc-pro'])
-        ax.plot(X, y_povmloc,     marker='^', label=Plot.LEGEND['povmloc'],   mfc='black', mec='b', color=Plot.COLOR['povmloc'])
-        fig.legend(ncol=1, loc='lower left', bbox_to_anchor=(0.14, 0.14), fontsize=55, handlelength=3.5)
-        ax.set_xlabel('Noise (Std. of Shadowing)', labelpad=40)
-        ax.grid(True)
-        ax.set_xticks(X)
-        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
-        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelsize=60)
-        ax.set_ylabel('Localization Accuracy (%)', labelpad=20)
-        ax.set_ylim([87, 100.2])
+        povmloc_one_color2 = 'black'
+        fig, ax1 = plt.subplots(1, 1, figsize=(23, 20))
+        fig.subplots_adjust(left=0.13, right=0.88, top=0.78, bottom=0.12)
+        ax2 = ax1.twinx()
+        cc_acc = "$CC_{acc}$"
+        l_acc  = "$L_{acc}$"
+        ourpro_label = Plot.LEGEND['povmloc-pro']
+        our_label    = Plot.LEGEND['povmloc']
+        ax1.plot(X, y_povmloc_pro,       linestyle=Plot.LINE['povmloc-pro'],  marker='^', label=f"{cc_acc} {ourpro_label}", mfc='black', mec='b', color=povmloc_one_color2)
+        ax1.plot(X, y_povmloc,           linestyle=Plot.LINE['povmloc'],      marker='^', label=f"{cc_acc} {our_label}",   mfc='black', mec='b', color=povmloc_one_color2)
+        ax2.plot(X, y_povmloc_pro_error, linestyle=Plot.LINE['povmloc-pro'],  marker='o', label=f"{l_acc} {ourpro_label}", mfc='black', mec='b', color=Plot.COLOR['povmloc-pro'])
+        ax2.plot(X, y_povmloc_error,     linestyle=Plot.LINE['povmloc'],      marker='o', label=f"{l_acc} {our_label}",   mfc='black', mec='b', color=Plot.COLOR['povmloc'])
+        fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
+        ax1.set_xlabel('Noise', labelpad=20)
+        ax1.set_xticks(X)
+        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelsize=60)
+        ax1.set_ylabel('$CC_{acc}$ (%)', fontsize=55)
+        ax1.set_ylim([90, 100.2])
         method1 = Plot.LEGEND['povmloc']
-        ax.set_title(f'Performance of {method1} and Pro in 16x16 Grid', pad=30, fontsize=63, loc='right', fontweight='bold')
+        ax1.set_title(f'Performance of {method1}, TwoLevel-Pro', pad=30, fontsize=60, fontweight='bold')
+        # ax2
+        ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc'])
+        ax2.set_ylabel('$L_{acc}$ (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc'])
+        ax2.set_ylim([0, 1.2])
+        ax2.set_yticks(np.linspace(0, 1.2, 4))
         fig.savefig(figname)
 
 
@@ -153,7 +212,7 @@ class Plot:
         fig, ax = plt.subplots(figsize=(25, 18))
         fig.subplots_adjust(left=0.15, right=0.97, top=0.9, bottom=0.15)
         for method, n, bins in method_n_bins:
-            ax.plot(bins[1:], n, label=Plot.LEGEND[method], color=Plot.COLOR[method])
+            ax.plot(bins[1:], n, label=Plot.LEGEND[method], color=Plot.COLOR[method], linestyle=Plot.LINE[method])
         
         ax.grid(True)
         ax.legend(loc='lower right')
@@ -186,18 +245,20 @@ class Plot:
 def povmloc_one_varygridsize():
     '''evaluate the performance of the single level POVM-Loc One
     '''
-    logs = ['results/onelevel.4sen.varygrid', 'results/onelevel.8sen.varygrid']
+    # logs = ['results/onelevel.4sen.varygrid', 'results/onelevel.8sen.varygrid']
+    logs = ['results/onelevel.varygrid']
     data = Utility.read_logs(logs)
-    figname = 'results/onelevel-varygrid.png'
+    figname = 'results/onelevel-varygrid.2.png'
     Plot.povmloc_one_vary_gridsize(data, figname)
 
 
 def povmloc_varynoise():
     '''evaluate the performance of povmloc and povmloc-pro against varying noise
     '''
-    logs = ['results/twolevel.noise0', 'results/twolevel.noise1', 'results/twolevel.noise2', 'results/twolevel.noise3', 'results/twolevel.noise4']
+    # logs = ['results/twolevel.noise0', 'results/twolevel.noise1', 'results/twolevel.noise2', 'results/twolevel.noise3', 'results/twolevel.noise4']
+    logs = ['results/twolevel.noise']
     data = Utility.read_logs(logs)
-    figname = 'results/twolevel-varynoise.png'
+    figname = 'results/twolevel-varynoise.2.png'
     Plot.povmloc_vary_noise(data, figname)
 
 
@@ -227,7 +288,7 @@ if __name__ == '__main__':
 
     localization_error_cdf()
 
-    runtime()
+    # runtime()
 
 
 '''

@@ -11,7 +11,7 @@ class Plot:
 
     plt.rcParams['font.size'] = 65
     plt.rcParams['lines.linewidth'] = 10
-    plt.rcParams['lines.markersize'] = 25
+    plt.rcParams['lines.markersize'] = 30
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
@@ -99,8 +99,8 @@ class Plot:
 
         # step 2: plotting
         povmloc_one_color2 = 'black'
-        fig, ax1 = plt.subplots(1, 1, figsize=(23, 20))
-        fig.subplots_adjust(left=0.13, right=0.895, top=0.78, bottom=0.12)
+        fig, ax1 = plt.subplots(1, 1, figsize=(23, 22))
+        fig.subplots_adjust(left=0.13, right=0.895, top=0.81, bottom=0.16)
         ax2 = ax1.twinx()
         ax1.plot(X, y_8sen, linestyle='-',  marker='^', label="$CC_{acc}$ 8 Sensors", mfc='black', mec='b', color=povmloc_one_color2)
         ax1.plot(X, y_4sen, linestyle='--', marker='^', label="$CC_{acc}$ 4 Sensors", mfc='black', mec='b', color=povmloc_one_color2)
@@ -117,12 +117,13 @@ class Plot:
         ax1.set_ylabel('$CC_{acc}$ (%)', fontsize=55, color=povmloc_one_color2)
         ax1.set_ylim([0, 102])
         method = Plot.LEGEND['povmloc-one']
-        ax1.set_title(f'Performance of {method}', pad=30, fontsize=65, fontweight='bold')
+        ax1.set_title(f'Performance of {method}', pad=30, fontsize=60, fontweight='bold')
         # ax2
         ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc-one'])
         ax2.set_ylabel('$L_{acc}$ (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc-one'])
         ax2.set_ylim([0, 20.4])
         ax2.set_yticks(range(0, 21, 4))
+        plt.figtext(0.485, 0.01, '(a)')
         fig.savefig(figname)
 
 
@@ -164,8 +165,8 @@ class Plot:
         
         # step 2: plotting
         povmloc_one_color2 = 'black'
-        fig, ax1 = plt.subplots(1, 1, figsize=(23, 20))
-        fig.subplots_adjust(left=0.13, right=0.88, top=0.78, bottom=0.12)
+        fig, ax1 = plt.subplots(1, 1, figsize=(23, 22))
+        fig.subplots_adjust(left=0.13, right=0.88, top=0.81, bottom=0.16)
         ax2 = ax1.twinx()
         cc_acc = "$CC_{acc}$"
         l_acc  = "$L_{acc}$"
@@ -176,19 +177,19 @@ class Plot:
         ax2.plot(X, y_povmloc_pro_error, linestyle=Plot.LINE['povmloc-pro'],  marker='o', label=f"{l_acc} {ourpro_label}", mfc='black', mec='b', color=Plot.COLOR['povmloc-pro'])
         ax2.plot(X, y_povmloc_error,     linestyle=Plot.LINE['povmloc'],      marker='o', label=f"{l_acc} {our_label}",   mfc='black', mec='b', color=Plot.COLOR['povmloc'])
         fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
-        ax1.set_xlabel('Noise', labelpad=20)
+        ax1.set_xlabel('Noise', labelpad=50)
         ax1.set_xticks(X)
         ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelsize=60)
         ax1.set_ylabel('$CC_{acc}$ (%)', fontsize=55)
         ax1.set_ylim([90, 100.2])
-        method1 = Plot.LEGEND['povmloc']
-        ax1.set_title(f'Performance of {method1}, TwoLevel-Pro', pad=30, fontsize=60, fontweight='bold')
+        ax1.set_title(f'Performance of TwoLevel, TwoLevel-Pro', pad=30, fontsize=60, fontweight='bold')
         # ax2
         ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc'])
         ax2.set_ylabel('$L_{acc}$ (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc'])
         ax2.set_ylim([0, 1.2])
         ax2.set_yticks(np.linspace(0, 1.2, 4))
+        plt.figtext(0.475, 0.01, '(b)')
         fig.savefig(figname)
 
 

@@ -179,6 +179,8 @@ class Plot:
         ax2.plot(X, y_povmloc_pro_error, linestyle=Plot.LINE['povmloc-pro'],  marker='o', label=f"{l_err} {ourpro_label}",  mfc=Plot.COLOR['povmloc-pro'], mec='b', color=Plot.COLOR['povmloc-pro'])
         ax2.plot(X, y_povmloc_error,     linestyle=Plot.LINE['povmloc'],      marker='o', label=f"{l_err} {our_label}",     mfc=Plot.COLOR['povmloc-pro'], mec='b', color=Plot.COLOR['povmloc'])
         fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
+        # ax1
+        ax1.grid(True)
         ax1.set_xlabel('Noise', labelpad=50)
         ax1.set_xticks(X)
         ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)

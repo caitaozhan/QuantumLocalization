@@ -98,14 +98,16 @@ class Plot:
         y_8sen_error = arr[:, 2]
 
         # step 2: plotting
+        cc_acc = "$CC_{acc}$"
+        l_err  = "$L_{err}$"
         povmloc_one_color2 = 'black'
         fig, ax1 = plt.subplots(1, 1, figsize=(23, 22))
         fig.subplots_adjust(left=0.13, right=0.895, top=0.81, bottom=0.16)
         ax2 = ax1.twinx()
-        ax1.plot(X, y_8sen, linestyle='-',  marker='^', label="$CC_{acc}$ 8 Sensors", mfc='black', mec='b', color=povmloc_one_color2)
-        ax1.plot(X, y_4sen, linestyle='--', marker='^', label="$CC_{acc}$ 4 Sensors", mfc='black', mec='b', color=povmloc_one_color2)
-        ax2.plot(X, y_8sen_error, linestyle='-',  marker='o', label="$L_{acc}$ 8 Sensors", mfc='black', mec='b', color=Plot.COLOR['povmloc-one'])
-        ax2.plot(X, y_4sen_error, linestyle='--', marker='o', label="$L_{acc}$ 4 Sensors", mfc='black', mec='b', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X, y_8sen,       linestyle='-',  marker='^', label=f"{cc_acc} 8 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
+        ax1.plot(X, y_4sen,       linestyle='--', marker='^', label=f"{cc_acc} 4 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
+        ax2.plot(X, y_8sen_error, linestyle='-',  marker='o', label=f"{l_err} 8 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
+        ax2.plot(X, y_4sen_error, linestyle='--', marker='o', label=f"{l_err} 4 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
         # ax1
         fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
         ax1.set_xlabel('Grid Size', labelpad=20)
@@ -114,13 +116,13 @@ class Plot:
         ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
         ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=50, rotation=12)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=povmloc_one_color2)
-        ax1.set_ylabel('$CC_{acc}$ (%)', fontsize=55, color=povmloc_one_color2)
+        ax1.set_ylabel(f'{cc_acc} (%)', fontsize=55, color=povmloc_one_color2)
         ax1.set_ylim([0, 102])
         method = Plot.LEGEND['povmloc-one']
         ax1.set_title(f'Performance of {method}', pad=30, fontsize=60, fontweight='bold')
         # ax2
         ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc-one'])
-        ax2.set_ylabel('$L_{acc}$ (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc-one'])
+        ax2.set_ylabel(f'{l_err} (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc-one'])
         ax2.set_ylim([0, 20.4])
         ax2.set_yticks(range(0, 21, 4))
         plt.figtext(0.485, 0.01, '(a)')
@@ -169,24 +171,24 @@ class Plot:
         fig.subplots_adjust(left=0.13, right=0.88, top=0.81, bottom=0.16)
         ax2 = ax1.twinx()
         cc_acc = "$CC_{acc}$"
-        l_acc  = "$L_{acc}$"
+        l_err  = "$L_{err}$"
         ourpro_label = Plot.LEGEND['povmloc-pro']
         our_label    = Plot.LEGEND['povmloc']
-        ax1.plot(X, y_povmloc_pro,       linestyle=Plot.LINE['povmloc-pro'],  marker='^', label=f"{cc_acc} {ourpro_label}", mfc='black', mec='b', color=povmloc_one_color2)
-        ax1.plot(X, y_povmloc,           linestyle=Plot.LINE['povmloc'],      marker='^', label=f"{cc_acc} {our_label}",   mfc='black', mec='b', color=povmloc_one_color2)
-        ax2.plot(X, y_povmloc_pro_error, linestyle=Plot.LINE['povmloc-pro'],  marker='o', label=f"{l_acc} {ourpro_label}", mfc='black', mec='b', color=Plot.COLOR['povmloc-pro'])
-        ax2.plot(X, y_povmloc_error,     linestyle=Plot.LINE['povmloc'],      marker='o', label=f"{l_acc} {our_label}",   mfc='black', mec='b', color=Plot.COLOR['povmloc'])
+        ax1.plot(X, y_povmloc_pro,       linestyle=Plot.LINE['povmloc-pro'],  marker='^', label=f"{cc_acc} {ourpro_label}", mfc='black',                   mec='b', color=povmloc_one_color2)
+        ax1.plot(X, y_povmloc,           linestyle=Plot.LINE['povmloc'],      marker='^', label=f"{cc_acc} {our_label}",    mfc='black',                   mec='b', color=povmloc_one_color2)
+        ax2.plot(X, y_povmloc_pro_error, linestyle=Plot.LINE['povmloc-pro'],  marker='o', label=f"{l_err} {ourpro_label}",  mfc=Plot.COLOR['povmloc-pro'], mec='b', color=Plot.COLOR['povmloc-pro'])
+        ax2.plot(X, y_povmloc_error,     linestyle=Plot.LINE['povmloc'],      marker='o', label=f"{l_err} {our_label}",     mfc=Plot.COLOR['povmloc-pro'], mec='b', color=Plot.COLOR['povmloc'])
         fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
         ax1.set_xlabel('Noise', labelpad=50)
         ax1.set_xticks(X)
         ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelsize=60)
-        ax1.set_ylabel('$CC_{acc}$ (%)', fontsize=55)
+        ax1.set_ylabel(f'{cc_acc} (%)', fontsize=55)
         ax1.set_ylim([90, 100.2])
         ax1.set_title(f'Performance of TwoLevel, TwoLevel-Pro', pad=30, fontsize=60, fontweight='bold')
         # ax2
         ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc'])
-        ax2.set_ylabel('$L_{acc}$ (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc'])
+        ax2.set_ylabel(f'{l_err} (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc'])
         ax2.set_ylim([0, 1.2])
         ax2.set_yticks(np.linspace(0, 1.2, 4))
         plt.figtext(0.475, 0.01, '(b)')
@@ -217,13 +219,13 @@ class Plot:
         
         ax.grid(True)
         ax.legend(loc='lower right')
-        ax.set_xlabel('Localization Error (m)', labelpad=40)
-        ax.set_ylabel('Cumulative Distribution (CDF)', labelpad=40)
+        ax.set_xlabel('$L_{err}$ (m)', labelpad=40)
+        ax.set_ylabel('Percentage (%)', labelpad=40)
         ax.set_ylim([0, 1.003])
         ax.set_xlim([0, 30])
         ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
         ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelsize=60)
-        ax.set_title('CDF of Localization Error in 16x16 Grid', pad=30, fontsize=63, fontweight='bold')
+        ax.set_title('CDF of $L_{err}$', pad=30, fontsize=63, fontweight='bold')
         fig.savefig(figname)
         
 

@@ -210,19 +210,22 @@ class Plot:
         method_n_bins = []
         for method, error_list in table.items():
             print(f'method={method}, avg. error = {np.average(error_list)}, error std. = {np.std(error_list)}')
-            n, bins, _ = plt.hist(error_list, n_bins, density=True, histtype='step', cumulative=True, label=method)
-            method_n_bins.append((method, n, bins))
+            Y, bins, _ = plt.hist(error_list, n_bins, density=True, histtype='step', cumulative=True, label=method)
+            method_n_bins.append((method, Y, bins))
         method_n_bins[0], method_n_bins[1] = method_n_bins[1], method_n_bins[0]  # switch ...
         plt.close()
         fig, ax = plt.subplots(figsize=(25, 18))
         fig.subplots_adjust(left=0.15, right=0.97, top=0.9, bottom=0.15)
-        for method, n, bins in method_n_bins:
-            ax.plot(bins[1:], n, label=Plot.LEGEND[method], color=Plot.COLOR[method], linestyle=Plot.LINE[method])
+        for method, Y, bins in method_n_bins:
+            ax.plot(bins[1:], Y, label=Plot.LEGEND[method], color=Plot.COLOR[method], linestyle=Plot.LINE[method])
         
         ax.grid(True)
         ax.legend(loc='lower right')
         ax.set_xlabel('$L_{err}$ (m)', labelpad=40)
         ax.set_ylabel('Percentage (%)', labelpad=40)
+        Y = np.linspace(0, 1, 6)
+        ax.set_yticks(Y)
+        ax.set_yticklabels([int(y*100) for y in Y])
         ax.set_ylim([0, 1.003])
         ax.set_xlim([0, 30])
         ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
@@ -287,9 +290,9 @@ def runtime():
 
 if __name__ == '__main__':
 
-    povmloc_one_varygridsize()
+    # povmloc_one_varygridsize()
 
-    povmloc_varynoise()
+    # povmloc_varynoise()
 
     localization_error_cdf()
 

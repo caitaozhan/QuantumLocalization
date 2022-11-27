@@ -111,12 +111,12 @@ class UnitaryOperator:
             power = self._power_reference - freespace + shadowing
         else:
             power = self._power_reference - freespace
-        power_scaled = max(power - Default.noise_floor, 0)     # power cannot be lower than nose floor
-        displacement = c * power_scaled
+        power_scaled = max(power - Default.noise_floor, 0)     # power cannot be lower than noise floor
+        phase_shift = c * power_scaled
         generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
-        exponent = -complex(0, 1) * generator * displacement
+        exponent = -complex(0, 1) * generator * phase_shift
         unitary_operator = expm(exponent)
-        return displacement, unitary_operator
+        return phase_shift, unitary_operator
 
 
 def main1():

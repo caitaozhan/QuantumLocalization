@@ -23,6 +23,8 @@ if __name__ == '__main__':
     parser.add_argument('-n', '--noise', type=float, nargs=1, default=[Default.std], help='the standard deviation of the zero mean shadowing')
     parser.add_argument('-od', '--output_dir', type=str, nargs=1, default=[Default.output_dir], help='the directory of the logged outputs')
     parser.add_argument('-of', '--output_file', type=str, nargs=1, default=[Default.output_file], help='the filename of the logged outputs')
+    parser.add_argument('-rd', '--root_dir', type=str, nargs=1, default=[Default.root_dir], help='the root directory for training data in the quantum ml method')
+    parser.add_argument('-gd', '--generate_data', action='store_true', default=False, help='whether generate new training data or use existing training data')
 
 
     args         = parser.parse_args()
@@ -47,14 +49,21 @@ if __name__ == '__main__':
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         ql.train_povmloc()
         qls['povmloc'] = ql
+    if 'qml' in methods:
+        sensordata = f'sensordata/onelevel.{grid_length}x{grid_length}.{sensor_num}.json'
+        ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
+        root_dir = args.root_dir[0]
+        generate_data = args.generate_data
+        ql.train_quantum_ml(root_dir, generate_data)
+        qls['qml'] = ql
     
     # testing phase for discrete
     mylogger = MyLogger(output_dir, output_file)
     if continuous == False:
         tx_list = [(x + 0.5, y + 0.5) for x in range(grid_length) for y in range(grid_length)]
         for i, tx in enumerate(tx_list):
-            if i not in [1, 4, 16, 64]:
-                continue
+            # if i not in [1, 4, 16, 64]:
+            #     continue
             myinput = Input(tx, grid_length, sensor_num, noise, continuous)
             outputs = []
             if 'povmloc-one' in methods:

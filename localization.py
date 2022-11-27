@@ -6,6 +6,8 @@ import math
 from typing import Tuple
 import numpy as np
 import json
+import torch
+import os
 from bisect import bisect_left
 from itertools import accumulate
 from collections import Counter
@@ -14,7 +16,7 @@ from unitary_operator import UnitaryOperator
 from povm import Povm
 from quantum_state import QuantumState
 from default import Default
-
+from qnn import QuantumSensing, QuantumML
 
 
 class QuantumLocalization:
@@ -29,11 +31,13 @@ class QuantumLocalization:
             self.sensordata = json.load(f)
         self.povms = {}                              # the trained POVMs
 
+
     def get_simple_initial_state(self, num: int) -> np.array:
         '''get an initial state that all amplitudes are equal real numbers
         '''
         amplitude = np.sqrt(1/(2**num))
         return np.array([amplitude]*2**num)
+
 
     def check_correct(self, tx_truth: tuple, tx: tuple, block_len: int) -> bool:
         '''for the case when the truth TX and the POVM location are not the same
@@ -108,6 +112,7 @@ class QuantumLocalization:
         if values[0] > summ / 2 or values[0] > values[1] * 1.5:
             return True
         return False
+
 
     def sense_measure_index(self, tx: tuple, sensors: list, povm: list, repeat: int, early_stop: bool) -> Tuple[int, list]:
         '''the quantum sensing protocol
@@ -415,6 +420,74 @@ class QuantumLocalization:
             level_1_locerror = Utility.distance(tx_truth, tx_level1, Default.cell_length)
             print('error', round(level_1_locerror, 3))
             return level_1_correct, level_1_locerror, tx_level1
+
+
+    def train_quantum_ml(self, root_dir: str, generate_data: bool):
+        '''train the one level quantum machine learning model
+        Args:
+            root_dir -- the root directory of the training data
+            generate -- True is generate new training data; False if use existing training data
+        '''
+        # step 1: generate simulated training data (also the testing data)
+        if generate_data:
+            Utility.remove_make(root_dir)
+            train_phase_dir = os.path.join(root_dir, 'train', 'phase')
+            train_label_dir = os.path.join(root_dir, 'train', 'label')
+            test_phase_dir = os.path.join(root_dir, 'test', 'phase')
+            test_label_dir = os.path.join(root_dir, 'test', 'label')
+            os.makedirs(train_phase_dir)
+            os.makedirs(train_label_dir)
+            os.makedirs(test_phase_dir)
+            os.makedirs(test_label_dir)
+            txs = []
+            tx_loc = {}
+            for i in range(self.grid_length):     # the transmitter locations
+                for j in range(self.grid_length):
+                    x = i + 0.5
+                    y = j + 0.5
+                    txs.append((x, y))
+                    tx_loc[i*self.grid_length + j] = (x, y)
+            level_i = 0
+            set_i   = 0
+            set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+            sensors = set_data['sensors']
+            repeat = 75
+            counter = 0
+            for i, tx in enumerate(txs):
+                for _ in range(repeat):
+                    thetas = []
+                    for rx_i in sensors:  # rx_i is in str
+                        rx = self.sensordata['sensors'][f'{rx_i}']
+                        distance = Utility.distance(tx, rx, self.cell_length)
+                        phase_shift, _ = self.unitary_operator.compute(distance, noise=True)  # there is noise for quantum ml
+                        thetas.append(phase_shift)
+                    np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
+                    np.save(f'{train_label_dir}/{counter}.npy', np.array([i]).astype(np.int32))
+                    counter += 1
+            repeat = 25
+            counter = 0
+            for i, tx in enumerate(txs):
+                for _ in range(repeat):
+                    thetas = []
+                    for rx_i in sensors:  # rx_i is in str
+                        rx = self.sensordata['sensors'][f'{rx_i}']
+                        distance = Utility.distance(tx, rx, self.cell_length)
+                        phase_shift, _ = self.unitary_operator.compute(distance, noise=True)  # there is noise for quantum ml
+                        thetas.append(phase_shift)
+                    np.save(f'{test_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
+                    np.save(f'{test_label_dir}/{counter}.npy', np.array([i]).astype(np.int32))
+                    counter += 1
+        else:
+            if os.path.exists(root_dir) is False:
+                raise Exception(f'directory {root_dir} does not exist')
+        
+        # step 2: train the quantum ml model
+        # use_cuda = torch.cuda.is_available()
+        # device = torch.device('cuda' if use_cuda else 'cpu')
+        # batch_size = 32
+        # qsensing = QuantumSensing(n_qubits=len(sensors), thetas=thetas)
+        
+        print('training POVM done!')
 
 
     def training_twolevel_16x16grid(self):

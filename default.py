@@ -34,4 +34,7 @@ class Default:
     stepsize_decreasing_rate = 0.96 # the stepsize decreasing rate
     EPSILON = 1e-6
 
+    # below are for quantum ml
+    root_dir = 'qml-data/toy'
+
     DEBUG = False

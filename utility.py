@@ -2,6 +2,8 @@
 some utility tools
 '''
 
+import os
+import shutil
 import numpy as np
 from typing import Union
 from default import Default
@@ -107,3 +109,12 @@ class Utility:
                     line = f.readline()
                 data.append((myinput, output_by_method))
         return data
+
+    @staticmethod
+    def remove_make(root_dir: str):
+        '''if root_dir exists, remove all the content
+           make directory
+        '''
+        if os.path.exists(root_dir):
+            shutil.rmtree(root_dir)
+        os.makedirs(root_dir)

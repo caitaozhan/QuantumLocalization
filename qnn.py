@@ -4,7 +4,8 @@ import torch.nn.functional as F
 import torchquantum as tq
 import torchquantum.functional as tqf
 import numpy as np
-
+from torch.utils.data import DataLoader
+from dataset import QuantumSensingDataset
 
 
 class QuantumSensing(tq.QuantumModule):
@@ -25,7 +26,7 @@ class QuantumSensing(tq.QuantumModule):
         self.q_state = tq.QuantumState(n_wires=self.n_wires)
         self.rzs = []
         for thetas in list_of_thetas:
-            self.rzs.append([tq.RZ(has_params=True, init_params=theta) for theta in thetas])
+            self.rzs.append([tq.RZ(has_params=True, init_params=theta.item()) for theta in thetas])
     
     def forward(self, q_state: tq.QuantumState):
         q_state_list = []
@@ -37,7 +38,7 @@ class QuantumSensing(tq.QuantumModule):
                 rz(q_state_tmp, wires=j)          # quantum sensing model
             q_state_list.append(q_state_tmp.states)
         q_state_concat = torch.cat(q_state_list)
-        q_state.set_states(q_state_concat)
+        q_state.clone_states(q_state_concat)
 
 
 
@@ -80,6 +81,27 @@ def test():
     print(outputs)
 
 
+def test2():
+    qlocalize = QuantumML(n_wires=4, n_locations=4)
+    root_dir = 'qml-data/toy/train'
+    train_dataset = QuantumSensingDataset(root_dir)
+    train_dataloader = DataLoader(train_dataset, batch_size=3, shuffle=False, num_workers=2)
+    for t, sample in enumerate(train_dataloader):
+        X = sample['phase']
+        y = sample['label']
+        bsz = X.shape[0]
+        n_qubits = X.shape[1]
+        qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=X)
+        qstate = tq.QuantumState(n_wires=n_qubits, bsz=bsz)
+        qsensing(qstate)
+        print(qstate)
+        q_device = tq.QuantumDevice(n_wires=n_qubits)
+        q_device.reset_states(bsz=bsz)
+        outputs = qlocalize(q_device, qstate.states)
+        print(outputs)
+        break
+
 
 if __name__ == '__main__':
-    test()
+    # test()
+    test2()

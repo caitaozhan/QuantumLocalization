@@ -11,7 +11,7 @@ class QuantumSensingDataset(Dataset):
         self.root_dir = root_dir
         self.phase_dir = os.path.join(root_dir, 'phase')
         self.label_dir = os.path.join(root_dir, 'label')
-        if len(os.listdir(self.phase_dir)) != os.listdir(self.label_dir):
+        if len(os.listdir(self.phase_dir)) != len(os.listdir(self.label_dir)):
             raise Exception('phase and label number are not equal')
         self.length = len(os.listdir(self.phase_dir))
     

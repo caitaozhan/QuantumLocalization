@@ -11,12 +11,15 @@ import os
 from bisect import bisect_left
 from itertools import accumulate
 from collections import Counter
+from torch.utils.data import DataLoader
 from utility import Utility
 from unitary_operator import UnitaryOperator
 from povm import Povm
 from quantum_state import QuantumState
 from default import Default
 from qnn import QuantumSensing, QuantumML
+from dataset import QuantumSensingDataset
+
 
 
 class QuantumLocalization:
@@ -482,9 +485,14 @@ class QuantumLocalization:
                 raise Exception(f'directory {root_dir} does not exist')
         
         # step 2: train the quantum ml model
-        # use_cuda = torch.cuda.is_available()
-        # device = torch.device('cuda' if use_cuda else 'cpu')
-        # batch_size = 32
+        train_root_dir = os.path.join(root_dir, 'train')
+        train_dataset = QuantumSensingDataset(train_root_dir)
+        batch_size = 32
+        train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
+        
+        use_cuda = torch.cuda.is_available()
+        device = torch.device('cuda' if use_cuda else 'cpu')
+
         # qsensing = QuantumSensing(n_qubits=len(sensors), thetas=thetas)
         
         print('training POVM done!')

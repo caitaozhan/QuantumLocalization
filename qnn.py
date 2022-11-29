@@ -42,8 +42,9 @@ class QuantumSensing(tq.QuantumModule):
 
 
 
-class QuantumML(tq.QuantumModule):
+class QuantumML0(tq.QuantumModule):
     '''the localization part is quantum classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
+       the quantum layer part is tq.layers.U3CU3Layer0
     '''
     def __init__(self, n_wires, n_locations):
         super().__init__()
@@ -51,6 +52,29 @@ class QuantumML(tq.QuantumModule):
         self.q_device = tq.QuantumDevice(n_wires=self.n_wires)
         self.arch = {'n_wires': self.n_wires, 'n_blocks': 4, 'n_layers_per_block': 2}
         self.quantum_layer = tq.layers.U3CU3Layer0(self.arch)
+        self.measure = tq.MeasureAll(tq.PauliZ)
+        self.linear = nn.Linear(n_wires, n_locations)
+    
+    def forward(self, q_device: tq.QuantumDevice, input_states: torch.tensor):
+        q_device.set_states(input_states)
+        # quantum part
+        self.quantum_layer(q_device)
+        x = self.measure(q_device)
+        # classical part
+        x = self.linear(x)
+        return F.log_softmax(x, -1)
+
+
+class QuantumML1(tq.QuantumModule):
+    '''the localization part is quantum classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
+       the quantum layer part is tq.layers.RXYZCXLayer0
+    '''
+    def __init__(self, n_wires, n_locations):
+        super().__init__()
+        self.n_wires = n_wires
+        self.q_device = tq.QuantumDevice(n_wires=self.n_wires)
+        self.arch = {'n_wires': self.n_wires, 'n_blocks': 4, 'n_layers_per_block': 2}
+        self.quantum_layer = tq.layers.RXYZCXLayer0(self.arch)
         self.measure = tq.MeasureAll(tq.PauliZ)
         self.linear = nn.Linear(n_wires, n_locations)
     
@@ -72,7 +96,7 @@ def test():
                       [np.pi/0.7, np.pi/1.7, np.pi/2.7, np.pi/3.5],
                       [np.pi/0.9, np.pi/2.1, np.pi/2.9, np.pi/3.9]]
     qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=list_of_thetas)
-    qlocalize = QuantumML(n_wires=n_qubits, n_locations=n_locations)
+    qlocalize = QuantumML0(n_wires=n_qubits, n_locations=n_locations)
     q_device = tq.QuantumDevice(n_wires=n_qubits)
     q_device.reset_states(bsz=batch_size)
     state = tq.QuantumState(n_wires=n_qubits, bsz=2)
@@ -84,7 +108,7 @@ def test():
 def test2():
     use_cuda = torch.cuda.is_available()
     device = torch.device('cuda' if use_cuda else 'cpu')
-    qlocalize = QuantumML(n_wires=4, n_locations=4)
+    qlocalize = QuantumML0(n_wires=4, n_locations=4)
     root_dir = 'qml-data/toy/train'
     train_dataset = QuantumSensingDataset(root_dir)
     train_dataloader = DataLoader(train_dataset, batch_size=3, shuffle=False, num_workers=2)

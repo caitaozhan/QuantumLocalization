@@ -17,8 +17,8 @@ from unitary_operator import UnitaryOperator
 from povm import Povm
 from quantum_state import QuantumState
 from default import Default
-from qnn import QuantumSensing, QuantumML
-from dataset import QuantumSensingDataset
+# from qnn import QuantumSensing, QuantumML0
+# from dataset import QuantumSensingDataset
 
 
 

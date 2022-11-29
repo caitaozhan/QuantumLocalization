@@ -12,7 +12,7 @@ class QuantumSensing(tq.QuantumModule):
     '''Model the quantum sensing process (state preparation).
        For a single quantum state
     '''
-    def __init__(self, n_qubits: int, list_of_thetas: list):
+    def __init__(self, n_qubits: int, list_of_thetas: list, device: torch.device):
         '''
         Params:
             n_qubits       -- number of qubits
@@ -21,13 +21,13 @@ class QuantumSensing(tq.QuantumModule):
         super().__init__()
         if n_qubits != len(list_of_thetas[0]):
             raise Exception('n_qubit != len(thetas)')
-        self.bsz = len(list_of_thetas)
         self.n_wires = n_qubits
-        self.q_state = tq.QuantumState(n_wires=self.n_wires)
+        self.device = device
+        self.bsz = len(list_of_thetas)
         self.rzs = []
         for thetas in list_of_thetas:
             self.rzs.append([tq.RZ(has_params=True, init_params=theta.item()) for theta in thetas])
-    
+
     def forward(self, q_state: tq.QuantumState):
         q_state_list = []
         for i in range(self.bsz):
@@ -37,7 +37,7 @@ class QuantumSensing(tq.QuantumModule):
             for j, rz in enumerate(self.rzs[i]):
                 rz(q_state_tmp, wires=j)          # quantum sensing model
             q_state_list.append(q_state_tmp.states)
-        q_state_concat = torch.cat(q_state_list)
+        q_state_concat = torch.cat(q_state_list).to(self.device)
         q_state.clone_states(q_state_concat)
 
 
@@ -82,6 +82,8 @@ def test():
 
 
 def test2():
+    use_cuda = torch.cuda.is_available()
+    device = torch.device('cuda' if use_cuda else 'cpu')
     qlocalize = QuantumML(n_wires=4, n_locations=4)
     root_dir = 'qml-data/toy/train'
     train_dataset = QuantumSensingDataset(root_dir)
@@ -91,7 +93,7 @@ def test2():
         y = sample['label']
         bsz = X.shape[0]
         n_qubits = X.shape[1]
-        qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=X)
+        qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=X, device=device)
         qstate = tq.QuantumState(n_wires=n_qubits, bsz=bsz)
         qsensing(qstate)
         print(qstate)

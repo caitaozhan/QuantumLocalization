@@ -1,6 +1,6 @@
 __pycache__
 *tmp*
 .vscode
-qml-data/toy
+qml-data/
 .ipynb_checkpoints
 .virtual_documents

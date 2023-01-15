@@ -57,6 +57,7 @@ if __name__ == '__main__':
         ql.train_quantum_ml(root_dir, generate_data)
         qls['qml'] = ql
     
+    
     # testing phase for discrete
     mylogger = MyLogger(output_dir, output_file)
     if continuous == False:
@@ -86,7 +87,7 @@ if __name__ == '__main__':
                 outputs.append(Output('povmloc-pro', correct, localization_error=-1, pred=pred, elapse=elapse))
             
             mylogger.log(myinput, outputs)
-            time.sleep(0.5)
+            # time.sleep(0.5)
     else:
         np.random.seed(0)
         tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
@@ -115,4 +116,4 @@ if __name__ == '__main__':
                 outputs.append(Output('povmloc-pro', correct, localization_error=round(error, 3), pred=pred, elapse=elapse))
 
             mylogger.log(myinput, outputs)
-            time.sleep(0.5)
+            # time.sleep(0.5)

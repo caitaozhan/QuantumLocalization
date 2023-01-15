@@ -33,6 +33,7 @@ class QuantumState:
     @state_vector.setter
     def state_vector(self, vector: np.array):
         self._state_vector = vector
+        self._density_matrix = np.outer(self._state_vector, np.conj(self._state_vector))
 
     @property
     def density_matrix(self):
@@ -121,3 +122,4 @@ class QuantumState:
                 imag = float(imag[:-1].strip())
                 statevector.append(complex(real, imag))
         self._state_vector = np.array(statevector)
+        self._density_matrix = np.outer(self._state_vector, np.conj(self._state_vector))

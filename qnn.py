@@ -41,10 +41,9 @@ class QuantumSensing(tq.QuantumModule):
         q_state.clone_states(q_state_concat)
 
 
-
+# quantum-classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
 class QuantumML0(tq.QuantumModule):
-    '''the localization part is quantum classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
-       the quantum layer part is tq.layers.U3CU3Layer0
+    ''' the quantum layer part is tq.layers.U3CU3Layer0 (4 blocks)
     '''
     def __init__(self, n_wires, n_locations):
         super().__init__()
@@ -64,10 +63,9 @@ class QuantumML0(tq.QuantumModule):
         x = self.linear(x)
         return F.log_softmax(x, -1)
 
-
+# quantum-classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
 class QuantumML1(tq.QuantumModule):
-    '''the localization part is quantum classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
-       the quantum layer part is tq.layers.RXYZCXLayer0
+    '''the quantum layer part is tq.layers.RXYZCXLayer0 (4 blocks)
     '''
     def __init__(self, n_wires, n_locations):
         super().__init__()
@@ -82,6 +80,107 @@ class QuantumML1(tq.QuantumModule):
         q_device.set_states(input_states)
         # quantum part
         self.quantum_layer(q_device)
+        x = self.measure(q_device)
+        # classical part
+        x = self.linear(x)
+        return F.log_softmax(x, -1)
+
+
+# quantum-classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
+class QuantumML2(tq.QuantumModule):
+    '''the quantum layer part is tq.layers.RXYZCXLayer0 (1 block)
+    '''
+    def __init__(self, n_wires, n_locations):
+        super().__init__()
+        self.n_wires = n_wires
+        self.q_device = tq.QuantumDevice(n_wires=self.n_wires)
+        self.arch = {'n_wires': self.n_wires, 'n_blocks': 1, 'n_layers_per_block': 2}
+        self.quantum_layer = tq.layers.RXYZCXLayer0(self.arch)
+        self.measure = tq.MeasureAll(tq.PauliZ)
+        self.linear = nn.Linear(n_wires, n_locations)
+    
+    def forward(self, q_device: tq.QuantumDevice, input_states: torch.tensor):
+        q_device.set_states(input_states)
+        # quantum part
+        self.quantum_layer(q_device)
+        x = self.measure(q_device)
+        # classical part
+        x = self.linear(x)
+        return F.log_softmax(x, -1)
+
+
+# non-trainable version of RXYZCX
+class MyRXYZCXLayer(tq.layers.LayerTemplate0):
+    def build_layers(self):
+        layers_all = tq.QuantumModuleList()
+        for _ in range(self.arch['n_blocks']):
+            layers_all.append(tq.Op1QAllLayer(op=tq.RX, n_wires=self.n_wires, has_params=True, trainable=False))
+            layers_all.append(tq.Op1QAllLayer(op=tq.RY, n_wires=self.n_wires, has_params=True, trainable=False))
+            layers_all.append(tq.Op1QAllLayer(op=tq.RZ, n_wires=self.n_wires, has_params=True, trainable=False))
+            layers_all.append(tq.Op2QAllLayer(op=tq.CNOT, n_wires=self.n_wires, jump=1, circular=True))
+        return layers_all
+
+
+# quantum-classic hybrid that consists of both a (non-trainable) quantum convolutional layer and classical fully connected layer
+class QuantumML3(tq.QuantumModule):
+    '''the quantum layer part is MyRXYZCXLayer (4 block)
+    '''
+    def __init__(self, n_wires, n_locations):
+        super().__init__()
+        self.n_wires = n_wires
+        self.q_device = tq.QuantumDevice(n_wires=self.n_wires)
+        self.arch = {'n_wires': self.n_wires, 'n_blocks': 4, 'n_layers_per_block': 2}
+        self.quantum_layer = MyRXYZCXLayer(self.arch)
+        self.measure = tq.MeasureAll(tq.PauliZ)
+        self.linear = nn.Linear(n_wires, n_locations)
+    
+    def forward(self, q_device: tq.QuantumDevice, input_states: torch.tensor):
+        q_device.set_states(input_states)
+        # quantum part
+        self.quantum_layer(q_device)
+        x = self.measure(q_device)
+        # classical part
+        x = self.linear(x)
+        return F.log_softmax(x, -1)
+
+
+# quantum-classic hybrid that consists of both a (non-trainable) quantum convolutional layer and classical fully connected layer
+class QuantumML4(tq.QuantumModule):
+    '''the quantum layer part is MyRXYZCXLayer (1 block)
+    '''
+    def __init__(self, n_wires, n_locations):
+        super().__init__()
+        self.n_wires = n_wires
+        self.q_device = tq.QuantumDevice(n_wires=self.n_wires)
+        self.arch = {'n_wires': self.n_wires, 'n_blocks': 1, 'n_layers_per_block': 2}
+        self.quantum_layer = MyRXYZCXLayer(self.arch)
+        self.measure = tq.MeasureAll(tq.PauliZ)
+        self.linear = nn.Linear(n_wires, n_locations)
+    
+    def forward(self, q_device: tq.QuantumDevice, input_states: torch.tensor):
+        q_device.set_states(input_states)
+        # quantum part
+        self.quantum_layer(q_device)
+        x = self.measure(q_device)
+        # classical part
+        x = self.linear(x)
+        return F.log_softmax(x, -1)
+
+
+# no quantum convolutional layer, only classical fully connected layer
+class NoQuantumML(tq.QuantumModule):
+    '''the quantum layer part is MyRXYZCXLayer (1 block)
+    '''
+    def __init__(self, n_wires, n_locations):
+        super().__init__()
+        self.n_wires = n_wires
+        self.q_device = tq.QuantumDevice(n_wires=self.n_wires)
+        self.measure = tq.MeasureAll(tq.PauliZ)
+        self.linear = nn.Linear(n_wires, n_locations)
+    
+    def forward(self, q_device: tq.QuantumDevice, input_states: torch.tensor):
+        q_device.set_states(input_states)
+        # quantum part
         x = self.measure(q_device)
         # classical part
         x = self.linear(x)

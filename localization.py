@@ -454,7 +454,7 @@ class QuantumLocalization:
             set_i   = 0
             set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
             sensors = set_data['sensors']
-            repeat = 75
+            repeat = 15
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
@@ -467,7 +467,7 @@ class QuantumLocalization:
                     np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
                     np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
                     counter += 1
-            repeat = 25
+            repeat = 5
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):

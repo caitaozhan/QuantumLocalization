@@ -36,7 +36,7 @@ if __name__ == '__main__':
     output_dir   = args.output_dir[0]
     output_file  = args.output_file[0]
 
-    unitary_operator = UnitaryOperator(Default.alpha, noise, Default.power_ref)
+    unitary_operator = UnitaryOperator(Default.pathloss_expo, noise, Default.power_ref)
     # training phase
     qls = {}
     if 'povmloc-one' in methods:

@@ -16,7 +16,7 @@ def localization_twolevel_16x16grid():
     np.random.seed(0)
     sensordata = 'sensordata/twolevel.16x16.json'
     # sensordata = 'sensordata/16x16-twolevel.random.json'
-    unitary_operator = UnitaryOperator(Default.alpha, 1, Default.power_ref)
+    unitary_operator = UnitaryOperator(Default.pathloss_expo, 1, Default.power_ref)
     ql = QuantumLocalization(grid_length=Default.grid_length, cell_length=Default.cell_length,
                              sensordata=sensordata, unitary_operator=unitary_operator)
     ql.training_twolevel_16x16grid()

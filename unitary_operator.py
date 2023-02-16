@@ -104,7 +104,7 @@ class UnitaryOperator:
         def dist_modify(distance: float) -> float:
             return max(distance, 1)
         
-        c = 2 * np.pi / 80
+        c = 2 * np.pi / (Default.power_ref - Default.noise_floor)
         freespace = 10 * self.alpha * math.log10(dist_modify(distance))
         if noise:
             shadowing = np.random.normal(0, self.std)
@@ -119,6 +119,37 @@ class UnitaryOperator:
         return phase_shift, unitary_operator
 
 
+    def compute_new(self, distance: float, noise: bool = False, qsensor: bool = True) -> Tuple[float, np.array]:
+        '''making changes to work better, such as get rid of phase
+        Args:
+            distance -- the distance between the TX and RX
+            noise    -- whether consider the shadowing effect
+        Return:
+            phase shift      -- the phase shift at the RF-Photonic senser
+            unitary_operator -- the effect of the RF wave on the qubit at of the RF-Phonotic sensor
+        '''
+        def dist_modify(distance: float) -> float:
+            return max(distance, 1)
+        
+        c = 2 * (np.pi - Default.alpha_nf_q) / (Default.power_ref - Default.noise_floor_q)
+        freespace = 10 * self.alpha * math.log10(dist_modify(distance))
+        if noise:
+            shadowing = np.random.normal(0, self.std)
+            power = min(self._power_reference - freespace + shadowing, self._power_reference)
+        else:
+            power = self._power_reference - freespace
+        if qsensor:
+            power_sensed = max(power - Default.noise_floor_q, 0)     # power cannot be lower than noise floor
+        else:
+            power_sensed = max(power - Default.noise_floor, 0) + (Default.noise_floor - Default.noise_floor_q)
+        phase_shift = c * power_sensed + Default.alpha_nf_q
+        generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
+        exponent = -complex(0, 1) * generator * phase_shift
+        unitary_operator = expm(exponent)
+        return phase_shift, unitary_operator
+
+
+
 def main1():
     from qiskit.quantum_info.operators.operator import Operator
     import matplotlib.pyplot as plt
@@ -128,16 +159,17 @@ def main1():
 
     # frequency = 900 * 10**6        # Hz
     # amplitude_reference = Default.amplitude_ref      # V/m
-    alpha = Default.alpha
+    alpha = Default.pathloss_expo
     std   = Default.std
     power_reference = Default.power_ref
     uo = UnitaryOperator(alpha, std, power_reference)
     X = []
     y = []
-    for distance in np.linspace(0, 200, 101):
+    for distance in np.linspace(0, 800, 101):
         # distance = i               # m
         # Utility.print_matrix('unitary operator', uo.compute(distance))
-        displacement, operator = uo.compute(distance)
+        # displacement, operator = uo.compute(distance)
+        displacement, operator = uo.compute_new(distance, qsensor=False)
         op = Operator(operator)
         X.append(distance)
         y.append(displacement)
@@ -153,10 +185,10 @@ def main1():
     fig.subplots_adjust(left=0.12, right=0.96, top=0.9, bottom=0.15)
     ax.plot(X, y)
     ax.set_ylim([0, 7])
-    ax.set_title('RF-Photonic Sensing')
+    ax.set_title('Classical Sensing Model')
     ax.set_xlabel('Distance (m)')
     ax.set_ylabel('Phase Quadrature Displacement')
-    fig.savefig(f'tmp-{Default.alpha}.png')
+    fig.savefig(f'tmp-{Default.pathloss_expo}.classic.png')
 
 
 if __name__ == '__main__':

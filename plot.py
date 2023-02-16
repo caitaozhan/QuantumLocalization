@@ -106,8 +106,8 @@ class Plot:
         ax2 = ax1.twinx()
         ax1.plot(X, y_8sen,       linestyle='-',  marker='^', label=f"{cc_acc} 8 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
         ax1.plot(X, y_4sen,       linestyle='--', marker='^', label=f"{cc_acc} 4 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
-        ax2.plot(X, y_8sen_error, linestyle='-',  marker='o', label=f"{l_err} 8 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
-        ax2.plot(X, y_4sen_error, linestyle='--', marker='o', label=f"{l_err} 4 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
+        # ax2.plot(X, y_8sen_error, linestyle='-',  marker='o', label=f"{l_err} 8 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
+        # ax2.plot(X, y_4sen_error, linestyle='--', marker='o', label=f"{l_err} 4 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
         # ax1
         fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
         ax1.set_xlabel('Grid Size', labelpad=20)
@@ -256,7 +256,8 @@ def povmloc_one_varygridsize():
     # logs = ['results/onelevel.4sen.varygrid', 'results/onelevel.8sen.varygrid']
     logs = ['results/onelevel.varygrid']
     data = Utility.read_logs(logs)
-    figname = 'results/onelevel-varygrid.2.png'
+    # figname = 'results/onelevel-varygrid.2.png'
+    figname = 'results2/onelevel-varygrid.2.png'
     Plot.povmloc_one_vary_gridsize(data, figname)
 
 
@@ -290,11 +291,11 @@ def runtime():
 
 if __name__ == '__main__':
 
-    # povmloc_one_varygridsize()
+    povmloc_one_varygridsize()
 
     # povmloc_varynoise()
 
-    localization_error_cdf()
+    # localization_error_cdf()
 
     # runtime()
 

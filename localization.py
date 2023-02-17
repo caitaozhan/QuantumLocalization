@@ -17,8 +17,8 @@ from unitary_operator import UnitaryOperator
 from povm import Povm
 from quantum_state import QuantumState
 from default import Default
-# from qnn import QuantumSensing, QuantumML0
-# from dataset import QuantumSensingDataset
+from qnn import QuantumSensing, QuantumML0
+from dataset import QuantumSensingDataset
 
 
 
@@ -78,6 +78,31 @@ class QuantumLocalization:
         Return:
             the QuantumState of the sensors
         '''
+        evolve = 1
+        for rx_i in sensors:
+            rx = self.sensordata['sensors'][f'{rx_i}']
+            distance = Utility.distance(tx, rx, self.cell_length)
+            _, uo = self.unitary_operator.compute(distance, noise)
+            evolve = np.kron(evolve, uo)
+        init_state = self.get_simple_initial_state(num=len(sensors))
+        return QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state))
+
+
+    def get_sensor_data_qml(self, tx: tuple, sensors: list, noise: bool = False) -> Tuple:
+        '''Given the Tx and sensors, return the sensing data of the sensors, i.e., a quantum state of sensors
+           Assuming a simple initial state
+        Args:
+            tx -- tx location
+            sensors -- a list of sensor index
+            noise -- noise or no noise
+        Return:
+            QuantumDevice, QuantumState
+        '''
+        # step 1: get the phases
+        for rx_i in sensors:
+            rx = self.sensordata['sensors'][f'{rx_i}']
+            # distance = Utility.distance(tx, rx, self.)
+
         evolve = 1
         for rx_i in sensors:
             rx = self.sensordata['sensors'][f'{rx_i}']
@@ -208,17 +233,17 @@ class QuantumLocalization:
             return level_0_correct, level_0_locerror, tx_level0
 
 
-    def get_txloc(self, a: tuple, b: tuple, cell_length: float) -> list:
+    def get_txloc(self, a: tuple, b: tuple, block_cell_ratio: float) -> list:
         '''get the tx locations during the training phase
         Args:
             a           -- top left corner
             b           -- bottom right corner
-            cell_length -- the length of the cell
+            block_cell_ratio -- the ratio of block to cell in length
         Return:
             a list of 2D location tuples
         '''
-        row = int((b[0] - a[0]) / cell_length + 10**-6)
-        col = int((b[1] - a[1]) / cell_length + 10**-6)
+        row = int((b[0] - a[0]) / block_cell_ratio + 10**-6)
+        col = int((b[1] - a[1]) / block_cell_ratio + 10**-6)
         tx_list = []
         for i in range(row):
             for j in range(col):
@@ -255,11 +280,11 @@ class QuantumLocalization:
             for set_, set_data in sets.items():
                 sensors = set_data['sensors']
                 area = set_data['area']
-                cell_length = set_data['cell_length']
+                block_cell_ratio = set_data['block_cell_ratio']
                 info = f'level={level_}, set={set_}, sensors={sensors}, area={area}'
                 print(info)
                 a, b = area[0], area[1]  # a is top left, b is bottom right
-                tx_list = self.get_txloc(a, b, cell_length)
+                tx_list = self.get_txloc(a, b, block_cell_ratio)
                 if level_ == 'level-1.5':
                     tx_list = self.filter_tx(a, b, tx_list)
                 evolve_operators = []
@@ -489,7 +514,7 @@ class QuantumLocalization:
         print('training POVM done!')
 
 
-    def train_quantum_ml_twolevel(self, root_dir: str):
+    def train_quantum_ml_two(self, root_dir: str):
         '''train the two level quantum machine learning model
         Args:
             root_dir -- the root directory of the training data
@@ -506,15 +531,15 @@ class QuantumLocalization:
                 os.makedirs(train_label_dir)
                 sensors = set_data['sensors']
                 area = set_data['area']
-                cell_length = set_data['cell_length']
+                block_cell_ratio = set_data['block_cell_ratio']
                 info = {'level':level_, 'set': set_, 'sensors': sensors, 'sensor_num': len(sensors), 
-                        'area': area, 'cell_length': cell_length}
+                        'area': area, 'cell_length': block_cell_ratio}
                 info_file = os.path.join(info_dir, 'info')
                 with open(info_file, 'w') as f:
                     json.dump(info, f)
                 print(info)
                 a, b = area[0], area[1]  # a is top left, b is bottom right
-                tx_list = self.get_txloc(a, b, cell_length)
+                tx_list = self.get_txloc(a, b, block_cell_ratio)
                 repeat = 75
                 counter = 0
                 for i, tx in enumerate(tx_list):
@@ -529,6 +554,28 @@ class QuantumLocalization:
                         np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
                         counter += 1
         print('Generating data done!')
+
+    def qml_two(self, tx_truth: tuple, continuous: bool = False) -> tuple:
+        '''
+        Args:
+            tx         -- the location of the transmitter
+            continuous -- during the testing phase, whether the TX is continuous or not. The difference is in the output only
+        Return:
+           If discrete,   return (bool, (x, y))
+           If continuous, return (bool, float, (x, y)) -- (correct/wrong, localization error, predicted location)
+        '''
+        seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
+        np.random.seed(seed)
+        # block_length = int()
+        level_i = 0
+        set_i = 0
+        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+        area = set_['area']
+        cell_length = set_['cell_length']
+        block_length = (area[1][0] - area[0][0]) // cell_length
+        sensors = set_['sensors']
+        # prepare sensing data and model
+        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True)
 
 
     def training_twolevel_16x16grid(self):

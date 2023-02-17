@@ -134,8 +134,8 @@ def train_save(folder: str):
         device = torch.device('cuda' if use_cuda else 'cpu')
         n_qubits = info['sensor_num']
         area = info['area']
-        cell_length = info['cell_length']
-        grid_length = (area[1][0] - area[0][0]) // cell_length
+        block_cell_ratio = info['block_cell_ratio']
+        grid_length = (area[1][0] - area[0][0]) // block_cell_ratio
         n_locations = grid_length ** 2
         model = QuantumML0(n_wires=n_qubits, n_locations=n_locations).to(device)
         n_epochs = 80

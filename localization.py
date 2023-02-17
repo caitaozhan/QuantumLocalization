@@ -533,7 +533,7 @@ class QuantumLocalization:
                 area = set_data['area']
                 block_cell_ratio = set_data['block_cell_ratio']
                 info = {'level':level_, 'set': set_, 'sensors': sensors, 'sensor_num': len(sensors), 
-                        'area': area, 'cell_length': block_cell_ratio}
+                        'area': area, 'block_cell_ratio': block_cell_ratio}
                 info_file = os.path.join(info_dir, 'info')
                 with open(info_file, 'w') as f:
                     json.dump(info, f)

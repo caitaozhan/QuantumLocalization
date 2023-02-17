@@ -56,6 +56,12 @@ if __name__ == '__main__':
         generate_data = args.generate_data
         ql.train_quantum_ml(root_dir, generate_data)
         qls['qml'] = ql
+    if 'qml-two' in methods:
+        sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.json'
+        ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
+        root_dir = args.root_dir[0]
+        ql.train_quantum_ml_twolevel(root_dir)
+        qls['qml'] = ql
     
     
     # testing phase for discrete

@@ -489,6 +489,48 @@ class QuantumLocalization:
         print('training POVM done!')
 
 
+    def train_quantum_ml_twolevel(self, root_dir: str):
+        '''train the two level quantum machine learning model
+        Args:
+            root_dir -- the root directory of the training data
+        '''
+        Utility.remove_make(root_dir)
+        levels = self.sensordata['levels']
+        for level_, sets in levels.items():
+            for set_, set_data in sets.items():
+                key = f'{level_}-{set_}'
+                train_phase_dir = os.path.join(root_dir, key, 'train', 'phase')
+                train_label_dir = os.path.join(root_dir, key, 'train', 'label')
+                info_dir = os.path.join(root_dir, key)
+                os.makedirs(train_phase_dir)
+                os.makedirs(train_label_dir)
+                sensors = set_data['sensors']
+                area = set_data['area']
+                cell_length = set_data['cell_length']
+                info = {'level':level_, 'set': set_, 'sensors': sensors, 'sensor_num': len(sensors), 
+                        'area': area, 'cell_length': cell_length}
+                info_file = os.path.join(info_dir, 'info')
+                with open(info_file, 'w') as f:
+                    json.dump(info, f)
+                print(info)
+                a, b = area[0], area[1]  # a is top left, b is bottom right
+                tx_list = self.get_txloc(a, b, cell_length)
+                repeat = 75
+                counter = 0
+                for i, tx in enumerate(tx_list):
+                    for _ in range(repeat):
+                        thetas = []
+                        for rx_i in sensors:
+                            rx = self.sensordata['sensors'][f'{rx_i}']
+                            distance = Utility.distance(tx, rx, self.cell_length)
+                            phase_shift, _ = self.unitary_operator.compute(distance, noise=True)
+                            thetas.append(phase_shift)
+                        np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
+                        np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
+                        counter += 1
+        print('Generating data done!')
+
+
     def training_twolevel_16x16grid(self):
         '''train the POVM for each set of sensors (similar to classifier) -- two levels
            each POVM is doing a 16 state discrimination

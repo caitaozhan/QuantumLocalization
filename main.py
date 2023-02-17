@@ -24,7 +24,7 @@ if __name__ == '__main__':
     parser.add_argument('-od', '--output_dir', type=str, nargs=1, default=[Default.output_dir], help='the directory of the logged outputs')
     parser.add_argument('-of', '--output_file', type=str, nargs=1, default=[Default.output_file], help='the filename of the logged outputs')
     parser.add_argument('-rd', '--root_dir', type=str, nargs=1, default=[Default.root_dir], help='the root directory for training data in the quantum ml method')
-    parser.add_argument('-gd', '--generate_data', action='store_true', default=False, help='whether generate new training data or use existing training data')
+    parser.add_argument('-gd', '--generate_data', action='store_true', default=False, help='generate new training data, for QML')
 
 
     args         = parser.parse_args()
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     noise        = args.noise[0]
     output_dir   = args.output_dir[0]
     output_file  = args.output_file[0]
-
+    
     unitary_operator = UnitaryOperator(Default.pathloss_expo, noise, Default.power_ref)
     # training phase
     qls = {}
@@ -53,20 +53,22 @@ if __name__ == '__main__':
         sensordata = f'sensordata/onelevel.{grid_length}x{grid_length}.{sensor_num}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         root_dir = args.root_dir[0]
-        generate_data = args.generate_data
-        ql.train_quantum_ml(root_dir, generate_data)
+        generate_data = args.generate_data  # in POVM-Loc, the training and testing are all together
+        if generate_data:                   # in QML, training and testing are separate (training takes too much time)
+            ql.train_quantum_ml(root_dir, generate_data)
         qls['qml'] = ql
     if 'qml-two' in methods:
         sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         root_dir = args.root_dir[0]
-        ql.train_quantum_ml_twolevel(root_dir)
-        qls['qml'] = ql
+        generate_data = args.generate_data  # in POVM-Loc, the training and testing are all together
+        if generate_data:                   # in QML, training and testing are separate (training takes too much time)
+            ql.train_quantum_ml_two(root_dir)
+        qls['qml-two'] = ql
     
-    
-    # testing phase for discrete
     mylogger = MyLogger(output_dir, output_file)
     if continuous == False:
+        # testing phase for discrete
         tx_list = [(x + 0.5, y + 0.5) for x in range(grid_length) for y in range(grid_length)]
         for i, tx in enumerate(tx_list):
             # if i not in [1, 4, 16, 64]:
@@ -91,10 +93,20 @@ if __name__ == '__main__':
                 correct, pred = ql.povmloc_pro(tx)
                 elapse = round(time.time() - start, 2)
                 outputs.append(Output('povmloc-pro', correct, localization_error=-1, pred=pred, elapse=elapse))
-            
+            if 'qml-two' in methods:
+                generate_data = args.generate_data  # in POVM-Loc, the training and testing are all together
+                if not generate_data:                   # in QML, training and testing are separate (training takes too much time)
+                    ql = qls['qml-two']
+                    root_dir = args.root_dir[0]
+                    start = time.time()
+                    correct, pred = ql.qml_two(tx, root_dir)
+                    elapse = round(time.time() - start, 2)
+                    outputs.append(Output('qml-two', correct, localization_error=-1, pred=pred, elapse=elapse))
+
             mylogger.log(myinput, outputs)
             # time.sleep(0.5)
     else:
+        # testing phase for continuous
         np.random.seed(0)
         tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
         for i, tx in enumerate(tx_list):

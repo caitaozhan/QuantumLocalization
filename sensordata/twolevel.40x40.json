@@ -143,134 +143,134 @@
             "set-0": {
                 "sensors": [7,13,19,25,37,42,47,52,63,68,73,78,89,94,99,104],
                 "area": [[0,0],[40,40]],
-                "cell_length": 8
+                "block_cell_ratio": 8
             }
         },
         "level-1": {
             "set-0": {
                 "sensors": [0,1,2,3,4,5,6,7],
                 "area": [[0,0],[8,8]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-1": {
                 "sensors": [6,7,8,9,10,11,12,13],
                 "area": [[0,8],[8,16]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-2": {
                 "sensors": [12,13,14,15,16,17,18,19],
                 "area": [[0,16],[8,24]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-3": {
                 "sensors": [18,19,20,21,22,23,24,25],
                 "area": [[0,24],[8,32]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-4": {
                 "sensors": [24,25,26,27,28,29,30,31],
                 "area": [[0,32],[8,40]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-5": {
                 "sensors": [1,32,33,34,35,36,7,37],
                 "area": [[8,0],[16,8]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-6": {
                 "sensors": [7,37,38,39,40,41,13,42],
                 "area": [[8,8],[16,16]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-7": {
                 "sensors": [13,42,43,44,45,46,19,47],
                 "area": [[8,16],[16,24]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-8": {
                 "sensors": [19,47,48,49,50,51,25,52],
                 "area": [[8,24],[16,32]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-9": {
                 "sensors": [25,52,53,54,55,56,31,57],
                 "area": [[8,32],[16,40]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-10": {
                 "sensors": [32,58,59,60,61,62,37,63],
                 "area": [[16,0],[24,8]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-11": {
                 "sensors": [37,63,64,65,66,67,42,68],
                 "area": [[16,8],[24,16]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-12": {
                 "sensors": [42,68,69,70,71,72,47,73],
                 "area": [[16,16],[24,24]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-13": {
                 "sensors": [47,73,74,75,76,77,52,78],
                 "area": [[16,24],[24,32]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-14": {
                 "sensors": [52,78,79,80,81,82,57,83],
                 "area": [[16,32],[24,40]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-15": {
                 "sensors": [58,84,85,86,87,88,63,89],
                 "area": [[24,0],[32,8]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-16": {
                 "sensors": [63,89,90,91,92,93,68,94],
                 "area": [[24,8],[32,16]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-17": {
                 "sensors": [68,94,95,96,97,98,73,99],
                 "area": [[24,16],[32,24]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-18": {
                 "sensors": [73,99,100,101,102,103,78,104],
                 "area": [[24,24],[32,32]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-19": {
                 "sensors": [78,104,105,106,107,108,83,109],
                 "area": [[24,32],[32,40]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-20": {
                 "sensors": [84,110,111,112,113,114,89,115],
                 "area": [[32,0],[40,8]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-21": {
                 "sensors": [89,115,116,117,118,119,94,120],
                 "area": [[32,8],[40,16]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-22": {
                 "sensors": [94,120,121,122,123,124,99,125],
                 "area": [[32,16],[40,24]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-23": {
                 "sensors": [99,125,126,127,128,129,104,130],
                 "area": [[32,24],[40,32]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             },
             "set-24": {
                 "sensors": [104,130,131,132,133,134,109,135],
                 "area": [[32,32],[40,40]],
-                "cell_length": 1
+                "block_cell_ratio": 1
             }
         }
     }

@@ -122,7 +122,9 @@ def train_test(grid_length: int, num_sensor: int):
 
 '''train all the qml models and save them'''
 def train_save(folder: str):
-    for dataset_dir in sorted(glob.glob(folder + '/*')):   # eg. ../40x40.two/level-0-set-0
+    for i, dataset_dir in enumerate(sorted(glob.glob(folder + '/*'))):   # eg. ../40x40.two/level-0-set-0
+        # if i == 0:
+        #     continue
         info = json.load(open(os.path.join(dataset_dir, 'info')))
         print(info)
         root_dir = os.path.join(dataset_dir, 'train')
@@ -136,7 +138,7 @@ def train_save(folder: str):
         grid_length = (area[1][0] - area[0][0]) // cell_length
         n_locations = grid_length ** 2
         model = QuantumML0(n_wires=n_qubits, n_locations=n_locations).to(device)
-        n_epochs = 40
+        n_epochs = 80
         optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
         scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
         
@@ -208,7 +210,12 @@ def train_save(folder: str):
             # epoch_time = time.time() - start
             print(f'epoch={e}, time = {epoch_time:.2f}, test loss={train_loss[-1]:.4f}, test accuracy={train_acc[-1]:.4f}')
 
-        with open(os.path.join(dataset_dir, 'model.pt'), 'wb') as f:
+        model_dir = dataset_dir.replace('qml-data', 'qml-model')
+        if os.path.exists(model_dir):
+            raise Exception(f'directory {model_dir} already exist!')
+        else:
+            os.makedirs(model_dir)
+        with open(os.path.join(model_dir, 'model.pt'), 'wb') as f:
             device = torch.device('cpu')
             model.to(device)
             pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)

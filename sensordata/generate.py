@@ -873,7 +873,7 @@ def two_level_16by16grid(filename: str, fig_filename: str):
     # level 0
     sensors = {0: (4, 4), 1: (4, 12), 2: (12, 4), 3: (12, 12), 4: (0, 8), 5: (8, 0), 6: (8, 16), 7: (16, 8)}
     level0_sensors = [0, 1, 2, 3, 4, 5, 6, 7]
-    level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (16, 16)], 'cell_length': 4}
+    level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (16, 16)], 'block_cell_ratio': 4}
     levels['level-0'] = {'set-0': level0_set}
     sensor_i = 8
     sensors_reverse = {}
@@ -898,7 +898,7 @@ def two_level_16by16grid(filename: str, fig_filename: str):
             for x, y in [(0, 0.5), (0.5, 0), (0.5, 1), (1, 0.5)]:
                 loc = (4 * (i + x), 4 * (j + y))
                 sensor_list.append(sensors_reverse[loc])
-            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'cell_length': 1}
+            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'block_cell_ratio': 1}
             set_i += 1
     levels['level-1'] = sets
     # level 1.5
@@ -911,7 +911,7 @@ def two_level_16by16grid(filename: str, fig_filename: str):
             for x, y in [(0, 0.5), (0.5, 0), (0.5, 1), (1, 0.5)]:
                 loc = (4 * (i + x), 4 * (j + y))
                 sensor_list.append(sensors_reverse[loc])
-            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'cell_length': 1}
+            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'block_cell_ratio': 1}
             set_i += 1
     # blocks at the grid edge, 5 sensors per block
     for i in [0, 3]:
@@ -920,7 +920,7 @@ def two_level_16by16grid(filename: str, fig_filename: str):
             for x, y in [(0, 0), (1, 0), (1, 0), (1, 1)]:
                 loc = (4 * (i + x), 4 * (j + y))
                 sensor_list.append(sensors_reverse[loc])
-            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'cell_length': 1}
+            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'block_cell_ratio': 1}
             set_i += 1
     for i in [0.5, 1.5, 2.5]:
         for j in [0, 3]:
@@ -928,7 +928,7 @@ def two_level_16by16grid(filename: str, fig_filename: str):
             for x, y in [(0, 0), (1, 0), (1, 0), (1, 1)]:
                 loc = (4 * (i + x), 4 * (j + y))
                 sensor_list.append(sensors_reverse[loc])
-            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'cell_length': 1}
+            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'block_cell_ratio': 1}
             set_i += 1
 
     levels['level-1.5'] = sets
@@ -967,7 +967,7 @@ def two_level_40by40grid(filename: str, fig_filename: str):
                           (24, 8), (24, 16), (24, 24), (24, 32), (32, 8), (32, 16), (32, 24), (32, 32)]
     
     level0_sensors = [sensors_reverse[loc] for loc in level0_sensors_loc]
-    level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (40, 40)], 'cell_length': 8}
+    level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (40, 40)], 'block_cell_ratio': 8}
     levels['level-0'] = {'set-0': level0_set}
     # level 1
     sets = {}
@@ -980,7 +980,7 @@ def two_level_40by40grid(filename: str, fig_filename: str):
             for r in relative:
                 loc = (base[0] + r[0], base[1] + r[1])
                 sensor_list.append(sensors_reverse[loc])
-            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(8 * i, 8 * j), (8 * (i + 1), 8 * (j + 1))], 'cell_length': 1}
+            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(8 * i, 8 * j), (8 * (i + 1), 8 * (j + 1))], 'block_cell_ratio': 1}
             set_i += 1
     levels['level-1'] = sets
     # level 1.5
@@ -993,7 +993,7 @@ def two_level_40by40grid(filename: str, fig_filename: str):
     #         for x, y in [(0, 0.5), (0.5, 0), (0.5, 1), (1, 0.5)]:
     #             loc = (4 * (i + x), 4 * (j + y))
     #             sensor_list.append(sensors_reverse[loc])
-    #         sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'cell_length': 1}
+    #         sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'block_cell_ratio': 1}
     #         set_i += 1
     # # blocks at the grid edge, 5 sensors per block
     # for i in [0, 3]:
@@ -1002,7 +1002,7 @@ def two_level_40by40grid(filename: str, fig_filename: str):
     #         for x, y in [(0, 0), (1, 0), (1, 0), (1, 1)]:
     #             loc = (4 * (i + x), 4 * (j + y))
     #             sensor_list.append(sensors_reverse[loc])
-    #         sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'cell_length': 1}
+    #         sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'block_cell_ratio': 1}
     #         set_i += 1
     # for i in [0.5, 1.5, 2.5]:
     #     for j in [0, 3]:
@@ -1010,7 +1010,7 @@ def two_level_40by40grid(filename: str, fig_filename: str):
     #         for x, y in [(0, 0), (1, 0), (1, 0), (1, 1)]:
     #             loc = (4 * (i + x), 4 * (j + y))
     #             sensor_list.append(sensors_reverse[loc])
-    #         sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'cell_length': 1}
+    #         sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(4 * i, 4 * j), (4 * (i + 1), 4 * (j + 1))], 'block_cell_ratio': 1}
     #         set_i += 1
 
     # levels['level-1.5'] = sets

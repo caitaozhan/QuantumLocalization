@@ -63,6 +63,7 @@ class QuantumML0(tq.QuantumModule):
         x = self.linear(x)
         return F.log_softmax(x, -1)
 
+
 # quantum-classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
 class QuantumML1(tq.QuantumModule):
     '''the quantum layer part is tq.layers.RXYZCXLayer0 (4 blocks)

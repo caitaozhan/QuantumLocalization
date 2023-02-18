@@ -562,6 +562,41 @@ class QuantumLocalization:
                         counter += 1
         print('Generating data done!')
 
+    def load_qml_model(self, level_i: int, set_i: int, root_dir: str) -> tq.QuantumModule:
+        '''given the level and set index, return the according QML model
+        Args:
+            level_i  -- {0, 1}
+            set_i    -- {0, 1, ..., N**2}
+            root_dir -- the directory for the training data
+        Return:
+            the QML model
+        '''
+        model_dir = os.path.join(os.getcwd(), root_dir.replace('data', 'model'), f'level-{level_i}-set-{set_i}')
+        model_file = os.path.join(model_dir, 'model.pt')
+        if os.path.exists(model_file) is False:
+            raise Exception(f'model does not exist: {model_file}')
+        with open(model_file, 'rb') as f:
+            use_cuda = torch.cuda.is_available()
+            device = torch.device('cuda' if use_cuda else 'cpu')
+            model = pickle.load(f)
+            model.to(device)
+            model.eval()
+        return model
+
+
+    def check_block_correct_qml(self, tx_truth: tuple, max_i: int, block_cell_ratio: int, grid_length_block) -> bool:
+        '''check if the max_i (block index) is correct
+        Args:
+            tx_truth -- (x, y)
+            max_i    -- block index from level 0
+            block_cell_ratio -- how the length of a block
+        Return:
+            is block correct or not
+        '''
+        tx_block = (int(tx_truth[0] / block_cell_ratio), int(tx_truth[1] / block_cell_ratio))
+        block_i = tx_block[0] * grid_length_block + tx_block[1]
+        return max_i == block_i, tx_block
+
 
     def qml_two(self, tx_truth: tuple, root_dir: str, continuous: bool = False) -> tuple:
         '''
@@ -575,34 +610,33 @@ class QuantumLocalization:
         '''
         seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
         np.random.seed(seed)
-        # block_length = int()
+        # step 1: level 0
         level_i = 0
         set_i = 0
         set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-        area = set_['area']
-        block_cell_ratio = set_['block_cell_ratio']
-        block_length = (area[1][0] - area[0][0]) // block_cell_ratio
         sensors = set_['sensors']
         # prepare model
         level_i = 0
         set_i = 0
-        model_dir = os.path.join(os.getcwd(), root_dir.replace('data', 'model'), f'level-{level_i}-set-{set_i}')
-        model_file = os.path.join(model_dir, 'model.pt')
-        if os.path.exists(model_file) is False:
-            raise Exception(f'model does not exist: {model_file}')
-        with open(model_file, 'rb') as f:
-            use_cuda = torch.cuda.is_available()
-            device = torch.device('cuda' if use_cuda else 'cpu')
-            model = pickle.load(f)
-            model.to(device)
-            model.eval()
+        area = set_['area']
+        block_cell_ratio = set_['block_cell_ratio']
+        grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
+        model = self.load_qml_model(level_i, set_i, root_dir)
         # prepare sensing data
         q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True)
         # feed the data into the model
         output = model(q_device, qstate.states)
         output = output.cpu().detach().numpy()
-        print(output)
-        print(np.argmax(output))
+        # print(output)
+        max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
+        correct, tx_block = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
+        return correct, tx_block
+        # step 2: level 1
+        # level_i = 1
+        # set_i = max_i
+
+
+
 
 
     def training_twolevel_16x16grid(self):

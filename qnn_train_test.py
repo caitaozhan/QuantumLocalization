@@ -123,8 +123,8 @@ def train_test(grid_length: int, num_sensor: int):
 '''train all the qml models and save them'''
 def train_save(folder: str):
     for i, dataset_dir in enumerate(sorted(glob.glob(folder + '/*'))):   # eg. ../40x40.two/level-0-set-0
-        # if i == 0:
-        #     continue
+        if i > 0:
+            continue
         info = json.load(open(os.path.join(dataset_dir, 'info')))
         print(info)
         root_dir = os.path.join(dataset_dir, 'train')
@@ -252,7 +252,8 @@ def test_savemodel():
         # cell_length = info['cell_length']
         # grid_length = (area[1][0] - area[0][0]) // cell_length
         # n_locations = grid_length ** 2
-        with open(os.path.join(dataset_dir, 'model.pt'), 'rb') as f:
+        model_dir = dataset_dir.replace('data', 'model')
+        with open(os.path.join(model_dir, 'model.pt'), 'rb') as f:
             model = pickle.load(f)
         model.to(device=device)
         model.eval()
@@ -292,5 +293,5 @@ def test_savemodel():
 
 if __name__ == '__main__':
     # main()
-    main2()
-    # test_savemodel()
+    # main2()
+    test_savemodel()

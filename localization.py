@@ -3,11 +3,13 @@ Quantum enhanced localization
 '''
 
 import math
-from typing import Tuple
 import numpy as np
 import json
 import torch
 import os
+import pickle
+import torchquantum as tq
+from typing import Tuple
 from bisect import bisect_left
 from itertools import accumulate
 from collections import Counter
@@ -96,21 +98,26 @@ class QuantumLocalization:
             sensors -- a list of sensor index
             noise -- noise or no noise
         Return:
-            QuantumDevice, QuantumState
+            tq.QuantumDevice, tq.QuantumState
         '''
         # step 1: get the phases
-        for rx_i in sensors:
-            rx = self.sensordata['sensors'][f'{rx_i}']
-            # distance = Utility.distance(tx, rx, self.)
-
-        evolve = 1
+        thetas = []
         for rx_i in sensors:
             rx = self.sensordata['sensors'][f'{rx_i}']
             distance = Utility.distance(tx, rx, self.cell_length)
-            _, uo = self.unitary_operator.compute(distance, noise)
-            evolve = np.kron(evolve, uo)
-        init_state = self.get_simple_initial_state(num=len(sensors))
-        return QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state))
+            phase_shift, _ = self.unitary_operator.compute(distance, noise=noise)
+            thetas.append(phase_shift)
+        bsz = 1
+        thetas = torch.Tensor([thetas])  # add a batch dimension
+        n_qubits = len(sensors)
+        qstate = tq.QuantumState(n_wires=n_qubits, bsz=bsz)
+        use_cuda = torch.cuda.is_available()
+        device = torch.device('cuda' if use_cuda else 'cpu')
+        qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=thetas, device=device)
+        qsensing(qstate)
+        q_device = tq.QuantumDevice(n_wires=n_qubits)
+        q_device.reset_states(bsz=bsz)
+        return q_device, qstate
 
 
     def measure_maxprob_index(self, qstate: QuantumState, povm: list) -> Tuple[int, list]:
@@ -555,10 +562,12 @@ class QuantumLocalization:
                         counter += 1
         print('Generating data done!')
 
-    def qml_two(self, tx_truth: tuple, continuous: bool = False) -> tuple:
+
+    def qml_two(self, tx_truth: tuple, root_dir: str, continuous: bool = False) -> tuple:
         '''
         Args:
             tx         -- the location of the transmitter
+            root_dir   -- the root directory of the training data
             continuous -- during the testing phase, whether the TX is continuous or not. The difference is in the output only
         Return:
            If discrete,   return (bool, (x, y))
@@ -571,11 +580,29 @@ class QuantumLocalization:
         set_i = 0
         set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
         area = set_['area']
-        cell_length = set_['cell_length']
-        block_length = (area[1][0] - area[0][0]) // cell_length
+        block_cell_ratio = set_['block_cell_ratio']
+        block_length = (area[1][0] - area[0][0]) // block_cell_ratio
         sensors = set_['sensors']
-        # prepare sensing data and model
+        # prepare model
+        level_i = 0
+        set_i = 0
+        model_dir = os.path.join(os.getcwd(), root_dir.replace('data', 'model'), f'level-{level_i}-set-{set_i}')
+        model_file = os.path.join(model_dir, 'model.pt')
+        if os.path.exists(model_file) is False:
+            raise Exception(f'model does not exist: {model_file}')
+        with open(model_file, 'rb') as f:
+            use_cuda = torch.cuda.is_available()
+            device = torch.device('cuda' if use_cuda else 'cpu')
+            model = pickle.load(f)
+            model.to(device)
+            model.eval()
+        # prepare sensing data
         q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True)
+        # feed the data into the model
+        output = model(q_device, qstate.states)
+        output = output.cpu().detach().numpy()
+        print(output)
+        print(np.argmax(output))
 
 
     def training_twolevel_16x16grid(self):

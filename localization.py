@@ -529,6 +529,8 @@ class QuantumLocalization:
         Utility.remove_make(root_dir)
         levels = self.sensordata['levels']
         for level_, sets in levels.items():
+            # if level_ != 'level-0':
+            #     continue
             for set_, set_data in sets.items():
                 key = f'{level_}-{set_}'
                 train_phase_dir = os.path.join(root_dir, key, 'train', 'phase')
@@ -561,6 +563,7 @@ class QuantumLocalization:
                         np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
                         counter += 1
         print('Generating data done!')
+
 
     def load_qml_model(self, level_i: int, set_i: int, root_dir: str) -> tq.QuantumModule:
         '''given the level and set index, return the according QML model
@@ -655,7 +658,6 @@ class QuantumLocalization:
         level1_correct = self.check_correct(tx_truth, tx_level1, block_length)
         print('level-1 tx', tx_level1, level1_correct)
         return level1_correct, tx_level1
-
 
 
     def training_twolevel_16x16grid(self):

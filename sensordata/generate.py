@@ -960,11 +960,23 @@ def two_level_40by40grid(filename: str, fig_filename: str):
                     sensors[sensor_i] = loc
                     sensors_reverse[loc] = sensor_i
                     sensor_i += 1
+    sensors[sensor_i] = (0, 20)
+    sensors_reverse[(0, 20)] = sensor_i
+    sensor_i += 1
+    sensors[sensor_i] = (20, 0)
+    sensors_reverse[(20, 0)] = sensor_i
+    sensor_i += 1
+    sensors[sensor_i] = (20, 40)
+    sensors_reverse[(20, 40)] = sensor_i
+    sensor_i += 1
+    sensors[sensor_i] = (40, 20)
+    sensors_reverse[(40, 20)] = sensor_i
     sensor_data['sensors'] = sensors
 
     # level 0
     level0_sensors_loc = [(8, 8),  (8, 16),  (8, 24),  (8, 32),  (16, 8), (16, 16), (16, 24), (16, 32),
-                          (24, 8), (24, 16), (24, 24), (24, 32), (32, 8), (32, 16), (32, 24), (32, 32)]
+                          (24, 8), (24, 16), (24, 24), (24, 32), (32, 8), (32, 16), (32, 24), (32, 32),
+                          (0, 20), (20, 0),  (20, 40), (40, 20)]
     
     level0_sensors = [sensors_reverse[loc] for loc in level0_sensors_loc]
     level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (40, 40)], 'block_cell_ratio': 8}

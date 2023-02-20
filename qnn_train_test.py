@@ -293,8 +293,8 @@ def test_savemodel():
 
 if __name__ == '__main__':
     # main()
-    # main2()
-    test_savemodel()
+    main2()
+    # test_savemodel()
 
 
 # train on 3080ti, then copy to caitao-desktop

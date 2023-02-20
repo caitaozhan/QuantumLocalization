@@ -529,8 +529,8 @@ class QuantumLocalization:
         Utility.remove_make(root_dir)
         levels = self.sensordata['levels']
         for level_, sets in levels.items():
-            # if level_ != 'level-0':
-            #     continue
+            if level_ != 'level-0':
+                continue
             for set_, set_data in sets.items():
                 key = f'{level_}-{set_}'
                 train_phase_dir = os.path.join(root_dir, key, 'train', 'phase')

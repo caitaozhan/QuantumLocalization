@@ -129,7 +129,7 @@ def train_save(folder: str):
         print(info)
         root_dir = os.path.join(dataset_dir, 'train')
         train_dataset = QuantumSensingDataset(root_dir)
-        train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
+        train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
         use_cuda = torch.cuda.is_available()
         device = torch.device('cuda' if use_cuda else 'cpu')
         n_qubits = info['sensor_num']
@@ -210,16 +210,13 @@ def train_save(folder: str):
             # epoch_time = time.time() - start
             print(f'epoch={e}, time = {epoch_time:.2f}, test loss={train_loss[-1]:.4f}, test accuracy={train_acc[-1]:.4f}')
 
-        model_dir = dataset_dir.replace('qml-data', 'qml-model')
-        if os.path.exists(model_dir):
-            raise Exception(f'directory {model_dir} already exist!')
-        else:
-            os.makedirs(model_dir)
-        with open(os.path.join(model_dir, 'model.pt'), 'wb') as f:
-            device = torch.device('cpu')
-            model.to(device)
-            pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
-        # break
+            model_dir = dataset_dir.replace('qml-data', 'qml-model')
+            if not os.path.exists(model_dir):
+                os.makedirs(model_dir)
+            with open(os.path.join(model_dir, 'model.pt'), 'wb') as f:
+                device = torch.device('cpu')
+                model.to(device)
+                pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
 
     print('\nfinal train loss:\n', train_loss)
     print('final train accu:\n', train_acc)

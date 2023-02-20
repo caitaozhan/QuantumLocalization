@@ -66,9 +66,10 @@ if __name__ == '__main__':
             ql.train_quantum_ml_two(root_dir)
         qls['qml-two'] = ql
     
+    # testing phase
     mylogger = MyLogger(output_dir, output_file)
     if continuous == False:
-        # testing phase for discrete
+        # testing discrete
         tx_list = [(x + 0.5, y + 0.5) for x in range(grid_length) for y in range(grid_length)]
         for i, tx in enumerate(tx_list):
             # if i not in [1, 4, 16, 64]:
@@ -106,7 +107,7 @@ if __name__ == '__main__':
             mylogger.log(myinput, outputs)
             # time.sleep(0.5)
     else:
-        # testing phase for continuous
+        # testing: continuous
         np.random.seed(0)
         tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
         for i, tx in enumerate(tx_list):

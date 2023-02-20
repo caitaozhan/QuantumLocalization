@@ -178,45 +178,14 @@ def train_save(folder: str):
             scheduler.step()
             epoch_time = time.time() - start
         
-            # model.eval()
-            # train_loss = []
-            # train_acc = []
-            # loss_list = []
-            # target_all = []
-            # output_all = []
-            # with torch.no_grad():
-            #     for t, sample in enumerate(train_dataloader):
-            #         thetas = sample['phase']
-            #         targets = sample['label'].to(device)
-            #         bsz = thetas.shape[0]
-            #         n_qubits = thetas.shape[1]
-            #         qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=thetas, device=device)
-            #         qstate = tq.QuantumState(n_wires=n_qubits, bsz=bsz)
-            #         qsensing(qstate)
-            #         q_device = tq.QuantumDevice(n_wires=n_qubits)
-            #         q_device.reset_states(bsz=bsz)
-            #         # the model
-            #         outputs = model(q_device, qstate.states)
-            #         loss = F.nll_loss(outputs, targets)
-            #         loss_list.append(loss.item())
-            #         target_all.append(targets)
-            #         output_all.append(outputs)
-            #     target_all = torch.cat(target_all)
-            #     output_all = torch.cat(output_all)
-            # train_loss.append(np.mean(loss_list))
-            # accuracy = compute_accuracy(output_all, target_all)
-            # train_acc.append(accuracy)
-            # scheduler.step()
-            # epoch_time = time.time() - start
             print(f'epoch={e}, time = {epoch_time:.2f}, test loss={train_loss[-1]:.4f}, test accuracy={train_acc[-1]:.4f}')
 
-            model_dir = dataset_dir.replace('qml-data', 'qml-model')
-            if not os.path.exists(model_dir):
-                os.makedirs(model_dir)
-            with open(os.path.join(model_dir, 'model.pt'), 'wb') as f:
-                device = torch.device('cpu')
-                model.to(device)
-                pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
+            if e % 5 == 4: # save a model every 5 epochs
+                model_dir = dataset_dir.replace('qml-data', 'qml-model')
+                if not os.path.exists(model_dir):
+                    os.makedirs(model_dir)
+                with open(os.path.join(model_dir, 'model.pt'), 'wb') as f:
+                    pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
 
     print('\nfinal train loss:\n', train_loss)
     print('final train accu:\n', train_acc)

@@ -584,18 +584,19 @@ class QuantumLocalization:
         return model
 
 
-    def check_block_correct_qml(self, tx_truth: tuple, max_i: int, block_cell_ratio: int, grid_length_block) -> bool:
+    def check_block_correct_qml(self, tx_truth: tuple, max_i: int, block_cell_ratio: int, grid_length_block) -> Tuple:
         '''check if the max_i (block index) is correct
         Args:
             tx_truth -- (x, y)
             max_i    -- block index from level 0
             block_cell_ratio -- how the length of a block
         Return:
-            is block correct or not
+            is block correct or not, predicted block
         '''
-        tx_block = (int(tx_truth[0] / block_cell_ratio), int(tx_truth[1] / block_cell_ratio))
-        block_i = tx_block[0] * grid_length_block + tx_block[1]
-        return max_i == block_i, tx_block
+        tx_truth_block = (int(tx_truth[0] / block_cell_ratio), int(tx_truth[1] / block_cell_ratio))
+        block_i = tx_truth_block[0] * grid_length_block + tx_truth_block[1]
+        pred = (max_i // grid_length_block, max_i % grid_length_block)
+        return max_i == block_i, pred
 
 
     def qml_two(self, tx_truth: tuple, root_dir: str, continuous: bool = False) -> tuple:
@@ -608,34 +609,52 @@ class QuantumLocalization:
            If discrete,   return (bool, (x, y))
            If continuous, return (bool, float, (x, y)) -- (correct/wrong, localization error, predicted location)
         '''
+        print('truth', tx_truth, end='; ')
         seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
         np.random.seed(seed)
+        
         # step 1: level 0
+        # prepare model
         level_i = 0
         set_i = 0
         set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
         sensors = set_['sensors']
-        # prepare model
-        level_i = 0
-        set_i = 0
-        area = set_['area']
-        block_cell_ratio = set_['block_cell_ratio']
-        grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
         model = self.load_qml_model(level_i, set_i, root_dir)
         # prepare sensing data
         q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True)
         # feed the data into the model
         output = model(q_device, qstate.states)
         output = output.cpu().detach().numpy()
-        # print(output)
         max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
-        correct, tx_block = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
-        return correct, tx_block
+        # print(output)
+        area = set_['area']
+        block_cell_ratio = set_['block_cell_ratio']
+        grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
+        level0_correct, tx_level0 = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
+        print('level-0 tx', tx_level0, level0_correct, end='; ')
+        # return level0_correct, tx_level0
+
         # step 2: level 1
-        # level_i = 1
-        # set_i = max_i
-
-
+        # prepare model
+        level_i = 1
+        set_i = max_i
+        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+        sensors = set_['sensors']
+        model = self.load_qml_model(level_i, set_i, root_dir)
+        # prepare sensing data
+        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True)
+        # feed the data into the model
+        output = model(q_device, qstate.states)
+        output = output.cpu().detach().numpy()
+        max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
+        area = set_['area']
+        block_cell_ratio = set_['block_cell_ratio']  # should be 1
+        block_length = (area[1][0] - area[0][0]) // block_cell_ratio  # block length in terms of cells
+        tx_relative = (max_i // block_length, max_i % block_length)
+        tx_level1 = (area[0][0] + tx_relative[0] + block_cell_ratio/2, area[0][1] + tx_relative[1] + block_cell_ratio/2)
+        level1_correct = self.check_correct(tx_truth, tx_level1, block_length)
+        print('level-1 tx', tx_level1, level1_correct)
+        return level1_correct, tx_level1
 
 
 

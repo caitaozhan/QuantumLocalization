@@ -295,3 +295,7 @@ if __name__ == '__main__':
     # main()
     # main2()
     test_savemodel()
+
+
+# train on 3080ti, then copy to caitao-desktop
+# scp -P 130 -r 40x40.two/ caitao@130.245.144.108:/home/caitao/Project/quantum-localization/qml-model

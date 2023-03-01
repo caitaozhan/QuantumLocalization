@@ -17,7 +17,7 @@ class Plot:
         for sen_i in level0_sensors:
             X0.append(sensors[sen_i][0])
             Y0.append(sensors[sen_i][1])
-        fig, ax = plt.subplots(1, 1, figsize=(8, 8))
+        fig, ax = plt.subplots(1, 1, figsize=(12, 12))
         ax.scatter(X, Y, c='red', s=40)
         ax.scatter(X0, Y0, c='black', s=60)
         ax.grid()

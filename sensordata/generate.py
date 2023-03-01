@@ -1033,6 +1033,57 @@ def two_level_40by40grid(filename: str, fig_filename: str):
         json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)
 
 
+# level-0: 1 set of 20 sensors that do 100 state discrimination
+# level-1: 100 set of 10 sensors, each set do 100 state discrimination
+def two_level_100by100grid(filename: str, fig_filename: str):
+    levels = {}
+    sensor_data = {}
+    info = 'grid size is 100x100, 48 sensors, 2 levels'
+    sensor_data['info'] = info
+    sensors = {}
+    sensors_reverse = {}
+    sensor_i = 0
+    for i in range(10):   # in level-0, there are 10x10 blocks
+        for j in range(10):
+            relative = [(0, 0), (0, 5), (0, 10), (3, 3), (3, 7), (5, 0), (5, 10), (7, 3), (7, 7), (10, 0), (10, 5), (10, 10)]
+            base = (i * 10, j * 10)
+            for r in relative:
+                loc = (base[0] + r[0], base[1] + r[1])
+                if loc not in sensors_reverse:
+                    sensors[sensor_i] = loc
+                    sensors_reverse[loc] = sensor_i
+                    sensor_i += 1
+    sensor_data['sensors'] = sensors
+
+    # level 0
+    level0_sensors_loc = [(0, 50), (20, 20), (20, 40), (20, 60), (20, 80), 
+                          (40, 20), (40, 40), (40, 60), (40, 80), (50, 0), (50, 100),
+                          (60, 20), (60, 40), (60, 60), (60, 80), 
+                          (80, 20), (80, 40), (80, 60), (80, 80), (100, 50)]
+    
+    level0_sensors = [sensors_reverse[loc] for loc in level0_sensors_loc]
+    level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (100, 100)], 'block_cell_ratio': 10}
+    levels['level-0'] = {'set-0': level0_set}
+    # level 1
+    sets = {}
+    set_i = 0
+    for i in range(10):
+        for j in range(10):
+            sensor_list = []
+            relative = [(0, 0), (0, 5), (0, 10), (3, 3), (3, 7), (5, 0), (5, 10), (7, 3), (7, 7), (10, 0), (10, 5), (10, 10)]
+            base = (i * 10, j * 10)
+            for r in relative:
+                loc = (base[0] + r[0], base[1] + r[1])
+                sensor_list.append(sensors_reverse[loc])
+            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(10 * i, 10 * j), (10 * (i + 1), 10 * (j + 1))], 'block_cell_ratio': 1}
+            set_i += 1
+    levels['level-1'] = sets
+
+    sensor_data['levels'] = levels
+    grid_len = 100
+    Plot.visualize_sensors(grid_len, sensors, level0_sensors, fig_filename)
+    with open(filename, 'w') as f:
+        json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)
 
 
 
@@ -1106,6 +1157,9 @@ if __name__ == '__main__':
     # filename = 'sensordata/twolevel.16x16.json'
     # fig_filename = 'sensordata/tmp.16x16grid.png'
     # two_level_16by16grid(filename, fig_filename)
-    filename = 'sensordata/twolevel.40x40.json'
-    fig_filename = 'sensordata/tmp.40x40grid.png'
-    two_level_40by40grid(filename, fig_filename)
+    # filename = 'sensordata/twolevel.40x40.json'
+    # fig_filename = 'sensordata/tmp.40x40grid.png'
+    # two_level_40by40grid(filename, fig_filename)
+    filename = 'sensordata/twolevel.100x100.json'
+    fig_filename = 'sensordata/tmp.100x100grid.png'
+    two_level_100by100grid(filename, fig_filename)

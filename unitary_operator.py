@@ -7,6 +7,7 @@ Link: https://repository.arizona.edu/handle/10150/661283
 import numpy as np
 import math
 from scipy.linalg import expm
+from scipy import constants
 from typing import Tuple
 from default import Default
 
@@ -149,6 +150,34 @@ class UnitaryOperator:
         return phase_shift, unitary_operator
 
 
+    def compute_H(self, distance: float, noise: bool = False) -> Tuple[float, np.array]:
+        '''this version is based on Hamiltonian
+        Args:
+            distance -- the distance between the TX and RX
+            noise    -- whether consider the shadowing effect
+        Return:
+            phase shift      -- the phase shift at the RF-Photonic senser
+            unitary_operator -- the effect of the RF wave on the qubit at of the RF-Phonotic sensor
+        '''
+        def dist_modify(distance: float) -> float:
+            return max(distance, Default.cell_length / 2)
+        
+        f = 10**9  # the frequency is 1GHz
+        T = 1 / f  # time period of a cycle
+        E = np.sqrt(30 * Default.tx_power) / (dist_modify(distance))  # electric field
+        sensing_time = 0.1  # seconds
+        n = sensing_time / T
+        # to make 5 meters distance have a phase shift of 2pi
+        E_5 = np.sqrt(30 * Default.tx_power) / (dist_modify(5))
+        gamma = (np.pi**2 * constants.h) / (E_5 * sensing_time)
+        phi_T = 2 / (np.pi * constants.h) * gamma * E * T
+        phase_shift = n * phi_T
+        generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
+        exponent = -complex(0, 1) * generator * phase_shift
+        unitary_operator = expm(exponent)
+        return phase_shift, unitary_operator
+
+
 
 def main1():
     from qiskit.quantum_info.operators.operator import Operator
@@ -165,11 +194,11 @@ def main1():
     uo = UnitaryOperator(alpha, std, power_reference)
     X = []
     y = []
-    for distance in np.linspace(0, 800, 101):
+    for distance in np.linspace(1, 400, 101):
         # distance = i               # m
         # Utility.print_matrix('unitary operator', uo.compute(distance))
         # displacement, operator = uo.compute(distance)
-        displacement, operator = uo.compute_new(distance, qsensor=False)
+        displacement, operator = uo.compute_H(distance)
         op = Operator(operator)
         X.append(distance)
         y.append(displacement)
@@ -185,10 +214,10 @@ def main1():
     fig.subplots_adjust(left=0.12, right=0.96, top=0.9, bottom=0.15)
     ax.plot(X, y)
     ax.set_ylim([0, 7])
-    ax.set_title('Classical Sensing Model')
+    ax.set_title('Quantum Sensing Model')
     ax.set_xlabel('Distance (m)')
-    ax.set_ylabel('Phase Quadrature Displacement')
-    fig.savefig(f'tmp-{Default.pathloss_expo}.classic.png')
+    ax.set_ylabel('Phase Shift')
+    fig.savefig(f'tmp-hamiltonian.png')
 
 
 if __name__ == '__main__':

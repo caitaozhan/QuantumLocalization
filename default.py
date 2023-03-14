@@ -14,6 +14,7 @@ class Default:
     frequency: int       = 915 * 10**6 # 915 * 10**5  # Hz
     amplitude_ref: float = 0.01         # V/m, amplitude reference, the amplitude at 1 meters away from the TX
     power_ref: float     = -10          # dBm, power reference, the power at 1 meters away from the TX
+    tx_power: float      = 0.1          # the power of the TX is 0.1 watt (approximately a WiFi AP)
     noise_floor: int     = -90          # dBm
     noise_floor_q: int   = -110         # dBm
     pathloss_expo: float = 3.5          # the path loss exponent for propagation model

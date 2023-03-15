@@ -486,7 +486,15 @@ class QuantumLocalization:
             set_i   = 0
             set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
             sensors = set_data['sensors']
-            repeat = 15
+            area = set_data['area']
+            block_cell_ratio = set_data['block_cell_ratio']
+            info = {'level':level_i, 'set': set_i, 'sensors': sensors, 'sensor_num': len(sensors), 
+                    'area': area, 'block_cell_ratio': block_cell_ratio}
+            info_file = os.path.join(root_dir, 'info')
+            with open(info_file, 'w') as f:
+                json.dump(info, f)
+                print(info)
+            repeat = 75
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
@@ -494,12 +502,12 @@ class QuantumLocalization:
                     for rx_i in sensors:  # rx_i is in str
                         rx = self.sensordata['sensors'][f'{rx_i}']
                         distance = Utility.distance(tx, rx, self.cell_length)
-                        phase_shift, _ = self.unitary_operator.compute(distance, noise=True)  # there is noise for quantum ml
+                        phase_shift, _ = self.unitary_operator.compute_H(distance, noise=True)  # there is noise for quantum ml
                         thetas.append(phase_shift)
                     np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
                     np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
                     counter += 1
-            repeat = 5
+            repeat = 25
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
@@ -526,7 +534,7 @@ class QuantumLocalization:
         Args:
             root_dir -- the root directory of the training data
         '''
-        Utility.remove_make(root_dir)
+        # Utility.remove_make(root_dir)
         levels = self.sensordata['levels']
         for level_, sets in levels.items():
             if level_ != 'level-0':
@@ -546,10 +554,10 @@ class QuantumLocalization:
                 info_file = os.path.join(info_dir, 'info')
                 with open(info_file, 'w') as f:
                     json.dump(info, f)
-                print(info)
+                    print(info)
                 a, b = area[0], area[1]  # a is top left, b is bottom right
                 tx_list = self.get_txloc(a, b, block_cell_ratio)
-                repeat = 75
+                repeat = 25
                 counter = 0
                 for i, tx in enumerate(tx_list):
                     for _ in range(repeat):
@@ -600,6 +608,42 @@ class QuantumLocalization:
         block_i = tx_truth_block[0] * grid_length_block + tx_truth_block[1]
         pred = (max_i // grid_length_block, max_i % grid_length_block)
         return max_i == block_i, pred
+
+
+    def qml(self, tx_truth: tuple, root_dir: str, continuous: bool = False) -> tuple:
+        ''' one level quantum machine learning method
+        Args:
+            tx         -- the location of the transmitter
+            root_dir   -- the root directory of the training data
+            continuous -- during the testing phase, whether the TX is continuous or not. The difference is in the output only
+        Return:
+           If discrete,   return (bool, (x, y))
+           If continuous, return (bool, float, (x, y)) -- (correct/wrong, localization error, predicted location)
+        '''
+        print('truth', tx_truth, end='; ')
+        seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
+        np.random.seed(seed)
+        
+        # step 1: level 0
+        # prepare model
+        level_i = 0
+        set_i = 0
+        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+        sensors = set_['sensors']
+        model = self.load_qml_model(level_i, set_i, root_dir)
+        # prepare sensing data
+        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True)
+        # feed the data into the model
+        output = model(q_device, qstate.states)
+        output = output.cpu().detach().numpy()
+        max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
+        # print(output)
+        area = set_['area']
+        block_cell_ratio = set_['block_cell_ratio']
+        grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
+        level0_correct, tx_level0 = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
+        print('level-0 tx', tx_level0, level0_correct, end='; ')
+        return level0_correct, tx_level0
 
 
     def qml_two(self, tx_truth: tuple, root_dir: str, continuous: bool = False) -> tuple:

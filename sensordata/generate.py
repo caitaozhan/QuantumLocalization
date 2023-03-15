@@ -314,7 +314,7 @@ def onelevel_4x4grid_8sen(filename, fig_filename):
     # one levels
     levels = {}
     sets = {}
-    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7], 'area': [[0, 0], [grid_length, grid_length]]}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7], 'area': [[0, 0], [grid_length, grid_length]], 'block_cell_ratio': 1}
     levels['level-0'] = sets
     sensor_data['levels'] = levels
     Plot.visualize_sensors(grid_length, sensors, sensors, fig_filename)
@@ -536,7 +536,7 @@ def onelevel_16x16grid_16sen(filename, fig_filename):
     # one levels
     levels = {}
     sets = {}
-    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'area': [[0, 0], [grid_length, grid_length]]}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'area': [[0, 0], [grid_length, grid_length]], 'block_cell_ratio': 1}
     levels['level-0'] = sets
     sensor_data['levels'] = levels
     Plot.visualize_sensors(grid_length, sensors, sensors, fig_filename)
@@ -653,7 +653,7 @@ def onelevel_10x10grid_16sen(filename, fig_filename):
     # one levels
     levels = {}
     sets = {}
-    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'area': [[0, 0], [grid_length, grid_length]]}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'area': [[0, 0], [grid_length, grid_length]], 'block_cell_ratio': 1}
     levels['level-0'] = sets
     sensor_data['levels'] = levels
     Plot.visualize_sensors(grid_length, sensors, sensors, fig_filename)
@@ -692,7 +692,7 @@ def onelevel_8x8grid_16sen(filename, fig_filename):
     # one levels
     levels = {}
     sets = {}
-    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'area': [[0, 0], [grid_length, grid_length]]}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'area': [[0, 0], [grid_length, grid_length]], 'block_cell_ratio': 1}
     levels['level-0'] = sets
     sensor_data['levels'] = levels
     Plot.visualize_sensors(grid_length, sensors, sensors, fig_filename)
@@ -851,7 +851,7 @@ def onelevel_40x40grid_16sen(filename, fig_filename):
     # one levels
     levels = {}
     sets = {}
-    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'area': [[0, 0], [grid_length, grid_length]]}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'area': [[0, 0], [grid_length, grid_length]], 'block_cell_ratio': 1}
     levels['level-0'] = sets
     sensor_data['levels'] = levels
     Plot.visualize_sensors(grid_length, sensors, sensors, fig_filename)
@@ -1148,8 +1148,8 @@ if __name__ == '__main__':
     # onelevel_16x16grid_16sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.24x24.16.json'
     # onelevel_24x24grid_16sen(filename, fig_filename)
-    # filename = 'sensordata/onelevel.40x40.16.json'
-    # onelevel_40x40grid_16sen(filename, fig_filename)
+    filename = 'sensordata/onelevel.40x40.16.json'
+    onelevel_40x40grid_16sen(filename, fig_filename)
 
 
     # TWO level #
@@ -1160,6 +1160,6 @@ if __name__ == '__main__':
     # filename = 'sensordata/twolevel.40x40.json'
     # fig_filename = 'sensordata/tmp.40x40grid.png'
     # two_level_40by40grid(filename, fig_filename)
-    filename = 'sensordata/twolevel.100x100.json'
-    fig_filename = 'sensordata/tmp.100x100grid.png'
-    two_level_100by100grid(filename, fig_filename)
+    # filename = 'sensordata/twolevel.100x100.json'
+    # fig_filename = 'sensordata/tmp.100x100grid.png'
+    # two_level_100by100grid(filename, fig_filename)

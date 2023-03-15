@@ -10,8 +10,9 @@ class Default:
     EPSILON_SEMIDEFINITE = 8e-4         # relaxed for semidefinate programming optimal condition checking......
     grid_length: int     = 4            # 4 x 4 grid
     cell_length: int     = 10           # in meters
-    # frequency: int       = 20 * 10**6 # 915 * 10**5  # Hz
-    frequency: int       = 915 * 10**6 # 915 * 10**5  # Hz
+    frequency: int       = 10**9        # 1 GHz
+    sensing_time: float  = 0.1          # the sensing period in seconds
+    E_noise_perc: float  = 3            # the electric field noise in percentage (%)
     amplitude_ref: float = 0.01         # V/m, amplitude reference, the amplitude at 1 meters away from the TX
     power_ref: float     = -10          # dBm, power reference, the power at 1 meters away from the TX
     tx_power: float      = 0.1          # the power of the TX is 0.1 watt (approximately a WiFi AP)

@@ -17,7 +17,8 @@ class UnitaryOperator:
         self._alpha = alpha                                 # the alpha in the propagation model
         self._std = std                                     # the std in the propagation model
         self._power_reference = power_reference             # the RF signal's power at 1 meters
-        # self._frequency = frequency                         # the RF signal's carrier frequency
+        self._frequency = Default.frequency                 # the RF signal's carrier frequency
+        self._sensing_time = Default.sensing_time           # sensing time in seconds
         # self._amplitude_reference = amplitude_reference     # the RF signal's amplitude at 1 meter
 
     @property
@@ -162,11 +163,13 @@ class UnitaryOperator:
         def dist_modify(distance: float) -> float:
             return max(distance, Default.cell_length / 2)
         
-        f = 10**9  # the frequency is 1GHz
-        T = 1 / f  # time period of a cycle
+        T = 1 / self._frequency  # time period of a cycle
         E = np.sqrt(30 * Default.tx_power) / (dist_modify(distance))  # electric field
+        if noise:
+            rand = np.random.uniform(100 - Default.E_noise_perc, 100 + Default.E_noise_perc) / 100
+            E *= rand
         sensing_time = 0.1  # seconds
-        n = sensing_time / T
+        n = self._sensing_time / T
         # to make 5 meters distance have a phase shift of 2pi
         E_5 = np.sqrt(30 * Default.tx_power) / (dist_modify(5))
         gamma = (np.pi**2 * constants.h) / (E_5 * sensing_time)
@@ -194,11 +197,11 @@ def main1():
     uo = UnitaryOperator(alpha, std, power_reference)
     X = []
     y = []
-    for distance in np.linspace(1, 400, 101):
+    for distance in np.linspace(1, 200, 101):
         # distance = i               # m
         # Utility.print_matrix('unitary operator', uo.compute(distance))
         # displacement, operator = uo.compute(distance)
-        displacement, operator = uo.compute_H(distance)
+        displacement, operator = uo.compute(distance)
         op = Operator(operator)
         X.append(distance)
         y.append(displacement)
@@ -217,7 +220,7 @@ def main1():
     ax.set_title('Quantum Sensing Model')
     ax.set_xlabel('Distance (m)')
     ax.set_ylabel('Phase Shift')
-    fig.savefig(f'tmp-hamiltonian.png')
+    fig.savefig(f'tmp-3.5.old.png')
 
 
 if __name__ == '__main__':

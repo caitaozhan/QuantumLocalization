@@ -55,7 +55,10 @@ if __name__ == '__main__':
         root_dir = args.root_dir[0]
         generate_data = args.generate_data  # in POVM-Loc, the training and testing are all together
         if generate_data:                   # in QML, training and testing are separate (training takes too much time)
-            ql.train_quantum_ml(root_dir, generate_data)
+            if continuous is False:
+                ql.train_quantum_ml(root_dir, generate_data)
+            else:
+                ql.train_quantum_ml_continuous(root_dir, generate_data)
         qls['qml'] = ql
     if 'qml-two' in methods:
         sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.json'
@@ -136,3 +139,6 @@ if __name__ == '__main__':
 
             mylogger.log(myinput, outputs)
             # time.sleep(0.5)
+
+
+# python main.py -m qml -l 40 -s 16 -n 1 -rd qml-data/40x40.16.H -gd

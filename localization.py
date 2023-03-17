@@ -529,6 +529,84 @@ class QuantumLocalization:
         print('training POVM done!')
 
 
+    def train_quantum_ml_continuous(self, root_dir: str, generate_data: bool):
+        '''train the one level quantum machine learning model
+           Continuous case
+        Args:
+            root_dir -- the root directory of the training data
+            generate -- True is generate new training data; False if use existing training data
+        '''
+        # step 1: generate simulated training data (also the testing data)
+        if generate_data:
+            Utility.remove_make(root_dir)
+            train_phase_dir = os.path.join(root_dir, 'train', 'phase')
+            train_label_dir = os.path.join(root_dir, 'train', 'label')
+            test_phase_dir = os.path.join(root_dir, 'test', 'phase')
+            test_label_dir = os.path.join(root_dir, 'test', 'label')
+            os.makedirs(train_phase_dir)
+            os.makedirs(train_label_dir)
+            os.makedirs(test_phase_dir)
+            os.makedirs(test_label_dir)
+            txs = []
+            tx_loc = {}
+            for i in range(self.grid_length):     # the transmitter locations
+                for j in range(self.grid_length):
+                    x = i + 0.5
+                    y = j + 0.5
+                    txs.append((x, y))
+                    tx_loc[i*self.grid_length + j] = (x, y)
+            level_i = 0
+            set_i   = 0
+            set_data = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
+            sensors = set_data['sensors']
+            area = set_data['area']
+            block_cell_ratio = set_data['block_cell_ratio']
+            info = {'level':level_i, 'set': set_i, 'sensors': sensors, 'sensor_num': len(sensors), 
+                    'area': area, 'block_cell_ratio': block_cell_ratio, 'continuous': True}
+            info_file = os.path.join(root_dir, 'info')
+            with open(info_file, 'w') as f:
+                json.dump(info, f)
+                print(info)
+            repeat = 75
+            counter = 0
+            for i, tx in enumerate(txs):
+                for _ in range(repeat):
+                    tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
+                    tx_continuous_target = (tx_continuous[0] / self.grid_length, tx_continuous[1] / self.grid_length)  # normalize values to [0, 1]
+                    thetas = []
+                    for rx_i in sensors:  # rx_i is in str
+                        rx = self.sensordata['sensors'][f'{rx_i}']
+                        distance = Utility.distance(tx_continuous, rx, self.cell_length)
+                        phase_shift, _ = self.unitary_operator.compute_H(distance, noise=True)  # there is noise for quantum ml
+                        thetas.append(phase_shift)
+                    np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
+                    np.save(f'{train_label_dir}/{counter}.npy', np.array(tx_continuous_target).astype(np.float32))
+                    counter += 1
+            repeat = 25
+            counter = 0
+            for i, tx in enumerate(txs):
+                for _ in range(repeat):
+                    tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
+                    tx_continuous_target = (tx_continuous[0] / self.grid_length, tx_continuous[1] / self.grid_length)  # normalize values to [0, 1]
+                    thetas = []
+                    for rx_i in sensors:  # rx_i is in str
+                        rx = self.sensordata['sensors'][f'{rx_i}']
+                        distance = Utility.distance(tx_continuous, rx, self.cell_length)
+                        phase_shift, _ = self.unitary_operator.compute_H(distance, noise=True)  # there is noise for quantum ml
+                        thetas.append(phase_shift)
+                    np.save(f'{test_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
+                    np.save(f'{test_label_dir}/{counter}.npy', np.array(tx_continuous_target).astype(np.float32))
+                    counter += 1
+        else:
+            if os.path.exists(root_dir) is False:
+                raise Exception(f'directory {root_dir} does not exist')
+        
+        # step 2: train the quantum ml model
+        # training the quantum ml part is done on a jupyter notebook        
+        print('training POVM done!')
+
+
+
     def train_quantum_ml_two(self, root_dir: str):
         '''train the two level quantum machine learning model
         Args:

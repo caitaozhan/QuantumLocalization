@@ -65,6 +65,30 @@ class QuantumML0(tq.QuantumModule):
 
 
 # quantum-classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
+class QuantumMLregression(tq.QuantumModule):
+    ''' the quantum layer part is tq.layers.U3CU3Layer0 (4 blocks)
+        the output is not a discrete cell, but a continuous location (x, y)
+    '''
+    def __init__(self, n_wires):
+        super().__init__()
+        self.n_wires = n_wires
+        self.q_device = tq.QuantumDevice(n_wires=self.n_wires)
+        self.arch = {'n_wires': self.n_wires, 'n_blocks': 4, 'n_layers_per_block': 2}
+        self.quantum_layer = tq.layers.U3CU3Layer0(self.arch)
+        self.measure = tq.MeasureAll(tq.PauliZ)
+        self.linear = nn.Linear(n_wires, 2)  # (x, y)
+    
+    def forward(self, q_device: tq.QuantumDevice, input_states: torch.tensor):
+        q_device.set_states(input_states)
+        # quantum part
+        self.quantum_layer(q_device)
+        x = self.measure(q_device)
+        # classical part
+        loc = self.linear(x)
+        return loc
+
+
+# quantum-classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
 class QuantumML1(tq.QuantumModule):
     '''the quantum layer part is tq.layers.RXYZCXLayer0 (4 blocks)
     '''

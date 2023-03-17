@@ -606,16 +606,15 @@ class QuantumLocalization:
         print('training POVM done!')
 
 
-
     def train_quantum_ml_two(self, root_dir: str):
         '''train the two level quantum machine learning model
         Args:
             root_dir -- the root directory of the training data
         '''
-        # Utility.remove_make(root_dir)
+        Utility.remove_make(root_dir)
         levels = self.sensordata['levels']
         for level_, sets in levels.items():
-            if level_ != 'level-0':
+            if level_ == 'level-0':
                 continue
             for set_, set_data in sets.items():
                 key = f'{level_}-{set_}'
@@ -628,7 +627,7 @@ class QuantumLocalization:
                 area = set_data['area']
                 block_cell_ratio = set_data['block_cell_ratio']
                 info = {'level':level_, 'set': set_, 'sensors': sensors, 'sensor_num': len(sensors), 
-                        'area': area, 'block_cell_ratio': block_cell_ratio}
+                        'area': area, 'block_cell_ratio': block_cell_ratio, 'continuous': True}
                 info_file = os.path.join(info_dir, 'info')
                 with open(info_file, 'w') as f:
                     json.dump(info, f)
@@ -643,12 +642,60 @@ class QuantumLocalization:
                         for rx_i in sensors:
                             rx = self.sensordata['sensors'][f'{rx_i}']
                             distance = Utility.distance(tx, rx, self.cell_length)
-                            phase_shift, _ = self.unitary_operator.compute(distance, noise=True)
+                            phase_shift, _ = self.unitary_operator.compute_H(distance, noise=True)
                             thetas.append(phase_shift)
                         np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
                         np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
                         counter += 1
         print('Generating data done!')
+
+
+    def train_quantum_ml_two_continuous(self, root_dir: str):
+        '''train the two level quantum machine learning model
+           continuous version
+        Args:
+            root_dir -- the root directory of the training data
+        '''
+        Utility.remove_make(root_dir)
+        levels = self.sensordata['levels']
+        for level_, sets in levels.items():
+            if level_ == 'level-0':
+                continue
+            for set_, set_data in sets.items():
+                key = f'{level_}-{set_}'
+                train_phase_dir = os.path.join(root_dir, key, 'train', 'phase')
+                train_label_dir = os.path.join(root_dir, key, 'train', 'label')
+                info_dir = os.path.join(root_dir, key)
+                os.makedirs(train_phase_dir)
+                os.makedirs(train_label_dir)
+                sensors = set_data['sensors']
+                area = set_data['area']
+                block_cell_ratio = set_data['block_cell_ratio']
+                info = {'level':level_, 'set': set_, 'sensors': sensors, 'sensor_num': len(sensors), 
+                        'area': area, 'block_cell_ratio': block_cell_ratio, 'continuous': True}
+                info_file = os.path.join(info_dir, 'info')
+                with open(info_file, 'w') as f:
+                    json.dump(info, f)
+                    print(info)
+                a, b = area[0], area[1]  # a is top left, b is bottom right
+                tx_list = self.get_txloc(a, b, 1) # for the continuous case, tx are everywhere
+                repeat = 75
+                counter = 0
+                for i, tx in enumerate(tx_list):
+                    for _ in range(repeat):
+                        tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
+                        tx_continuous_target = (tx_continuous[0] / self.grid_length, tx_continuous[1] / self.grid_length)  # normalize values to [0, 1]
+                        thetas = []
+                        for rx_i in sensors:
+                            rx = self.sensordata['sensors'][f'{rx_i}']
+                            distance = Utility.distance(tx_continuous, rx, self.cell_length)
+                            phase_shift, _ = self.unitary_operator.compute_H(distance, noise=True)
+                            thetas.append(phase_shift)
+                        np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
+                        np.save(f'{train_label_dir}/{counter}.npy', np.array(tx_continuous_target).astype(np.float32))
+                        counter += 1
+        print('Generating data done!')
+
 
 
     def load_qml_model(self, level_i: int, set_i: int, root_dir: str) -> tq.QuantumModule:

@@ -29,10 +29,10 @@ def compute_accuracy(output_all, target_all):
     return accuracy
 
 
-def compute_loc_error(output_all: Tensor, target_all: Tensor, grid_length: int):
+def compute_loc_error(output_all: Tensor, target_all: Tensor, dimension: int):
     errors = []
     for output, target in zip(output_all.cpu().detach().numpy(), target_all.cpu().detach().numpy()):
-        error = Utility.distance(output, target, grid_length)
+        error = Utility.distance(output, target, dimension)
         errors.append(error)
     return np.mean(errors)
 
@@ -227,8 +227,144 @@ def train_test_continuous(grid_length: int, num_sensor: int):
     print('final test accu:\n', test_acc)
 
 
+'''one level + discrete, save model'''
+def train_save_onelevel(dataset_dir: str):
+    info = json.load(open(os.path.join(dataset_dir, 'info')))
+    print(info)
+    root_dir = os.path.join(dataset_dir, 'train')
+    train_dataset = QuantumSensingDataset(root_dir)
+    train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
+    # train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
+    use_cuda = torch.cuda.is_available()
+    device = torch.device('cuda' if use_cuda else 'cpu')
+    n_qubits = info['sensor_num']
+    area = info['area']
+    block_cell_ratio = info['block_cell_ratio']
+    grid_length = (area[1][0] - area[0][0]) // block_cell_ratio
+    n_locations = grid_length ** 2
+    model = QuantumML0(n_wires=n_qubits, n_locations=n_locations).to(device)
+    n_epochs = 80
+    optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
+    scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
+        
+    model.train()
+    train_loss = []
+    train_acc = []
+    for e in range(n_epochs):
+        start = time.time()
+        loss_list = []
+        target_all = []
+        output_all = []
+        for _, sample in enumerate(train_dataloader):
+            thetas = sample['phase']
+            targets = sample['label'].to(device)
+            # preparing sensing data
+            bsz = thetas.shape[0]
+            qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=thetas, device=device)
+            qstate = tq.QuantumState(n_wires=n_qubits, bsz=bsz)
+            qsensing(qstate)
+            q_device = tq.QuantumDevice(n_wires=n_qubits)
+            q_device.reset_states(bsz=bsz)
+            # the model
+            outputs = model(q_device, qstate.states)
+            # compute loss, gradient, optimize ...
+            loss = F.nll_loss(outputs, targets)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            loss_list.append(loss.item())
+            target_all.append(targets)
+            output_all.append(outputs)
+        train_loss.append(np.mean(loss_list))
+        target_all = torch.cat(target_all)
+        output_all = torch.cat(output_all)
+        accuracy = compute_accuracy(output_all, target_all)
+        train_acc.append(accuracy)
+        scheduler.step()
+        epoch_time = time.time() - start
+        
+        print(f'epoch={e}, time = {epoch_time:.2f}, train loss={train_loss[-1]:.4f}, train accuracy={train_acc[-1]:.4f}')
 
-'''train all the qml models and save them'''
+        if e % 5 == 4: # save a model every 5 epochs
+            model_dir = dataset_dir.replace('qml-data', 'qml-model')
+            if not os.path.exists(model_dir):
+                os.makedirs(model_dir)
+            with open(os.path.join(model_dir, 'model.pt'), 'wb') as f:
+                pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
+
+    print('\nfinal train loss:\n', train_loss)
+    print('final train accu:\n', train_acc)
+
+
+'''one level + continuous, save model'''
+def train_save_onelevel_continuous(dataset_dir: str):
+    info = json.load(open(os.path.join(dataset_dir, 'info')))
+    print(info)
+    root_dir = os.path.join(dataset_dir, 'train')
+    train_dataset = QuantumSensingDataset(root_dir)
+    train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
+    # train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
+    use_cuda = torch.cuda.is_available()
+    device = torch.device('cuda' if use_cuda else 'cpu')
+    n_qubits = info['sensor_num']
+    area = info['area']
+    block_cell_ratio = info['block_cell_ratio']
+    grid_length = (area[1][0] - area[0][0]) // block_cell_ratio
+    model = QuantumMLregression(n_wires=n_qubits).to(device)
+    n_epochs = 80
+    optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
+    scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
+
+    model.train()
+    train_loss = []
+    train_error = []
+    for e in range(n_epochs):
+        start = time.time()
+        loss_list = []
+        target_all = []
+        output_all = []
+        for _, sample in enumerate(train_dataloader):
+            thetas = sample['phase']
+            targets = sample['label'].to(device)
+            # preparing sensing data
+            bsz = thetas.shape[0]
+            qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=thetas, device=device)
+            qstate = tq.QuantumState(n_wires=n_qubits, bsz=bsz)
+            qsensing(qstate)
+            q_device = tq.QuantumDevice(n_wires=n_qubits)
+            q_device.reset_states(bsz=bsz)
+            # the model
+            outputs = model(q_device, qstate.states)
+            # compute loss, gradient, optimize ...
+            loss = F.mse_loss(outputs, targets)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            loss_list.append(loss.item())
+            target_all.append(targets)
+            output_all.append(outputs)
+        train_loss.append(np.mean(loss_list))
+        target_all = torch.cat(target_all)
+        output_all = torch.cat(output_all)
+        loc_error = compute_loc_error(output_all, target_all, grid_length * Default.cell_length)
+        train_error.append(loc_error)
+        scheduler.step()
+        epoch_time = time.time() - start
+        
+        print(f'epoch={e}, time = {epoch_time:.2f}, train loss={train_loss[-1]:.4f}, train accuracy={train_error[-1]:.4f}')
+
+        if e % 10 == 9: # save a model every 5 epochs
+            model_dir = dataset_dir.replace('qml-data', 'qml-model')
+            if not os.path.exists(model_dir):
+                os.makedirs(model_dir)
+            with open(os.path.join(model_dir, f'model-{e}.pt'), 'wb') as f:
+                pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
+
+    print('\nfinal train loss:\n', train_loss)
+    print('final train accu:\n', train_error)
+
+
+'''two level + discrete, save model'''
 def train_save_twolevel(folder: str):
     for i, dataset_dir in enumerate(sorted(glob.glob(folder + '/*'))):   # dataset_dir: ../40x40.two/level-0-set-0
         # if i > 0:
@@ -300,11 +436,12 @@ def train_save_twolevel(folder: str):
     print('final train accu:\n', train_acc)
 
 
-'''train all the qml models and save them'''
+'''two level + continuous, save model'''
 def train_save_twolevel_continuous(folder: str):
     for i, dataset_dir in enumerate(sorted(glob.glob(folder + '/*'))):   # dataset_dir: ../40x40.two/level-0-set-0
         # if i > 0:
         #     continue
+        is_level0 = True if 'level-0' in dataset_dir else False
         info = json.load(open(os.path.join(dataset_dir, 'info')))
         print(info)
         root_dir = os.path.join(dataset_dir, 'train')
@@ -315,8 +452,7 @@ def train_save_twolevel_continuous(folder: str):
         device = torch.device('cuda' if use_cuda else 'cpu')
         n_qubits = info['sensor_num']
         area = info['area']
-        block_cell_ratio = info['block_cell_ratio']
-        grid_length = (area[1][0] - area[0][0]) // block_cell_ratio
+        area_length = area[1][0] - area[0][0]   # area is either the whole grid (level0) or a block (level1)
         model = QuantumMLregression(n_wires=n_qubits).to(device)
         n_epochs = 80
         optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
@@ -353,7 +489,7 @@ def train_save_twolevel_continuous(folder: str):
             train_loss.append(np.mean(loss_list))
             target_all = torch.cat(target_all)
             output_all = torch.cat(output_all)
-            loc_error = compute_loc_error(output_all, target_all, grid_length * Default.cell_length)
+            loc_error = compute_loc_error(output_all, target_all, area_length * Default.cell_length)
             train_error.append(loc_error)
             scheduler.step()
             epoch_time = time.time() - start
@@ -366,141 +502,8 @@ def train_save_twolevel_continuous(folder: str):
                     os.makedirs(model_dir)
                 with open(os.path.join(model_dir, f'model-{e}.pt'), 'wb') as f:
                     pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
-
-    print('\nfinal train loss:\n', train_loss)
-    print('final train accu:\n', train_error)
-
-
-def train_save_onelevel(dataset_dir: str):
-    info = json.load(open(os.path.join(dataset_dir, 'info')))
-    print(info)
-    root_dir = os.path.join(dataset_dir, 'train')
-    train_dataset = QuantumSensingDataset(root_dir)
-    train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
-    # train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
-    use_cuda = torch.cuda.is_available()
-    device = torch.device('cuda' if use_cuda else 'cpu')
-    n_qubits = info['sensor_num']
-    area = info['area']
-    block_cell_ratio = info['block_cell_ratio']
-    grid_length = (area[1][0] - area[0][0]) // block_cell_ratio
-    n_locations = grid_length ** 2
-    model = QuantumML0(n_wires=n_qubits, n_locations=n_locations).to(device)
-    n_epochs = 80
-    optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
-    scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
-        
-    model.train()
-    train_loss = []
-    train_acc = []
-    for e in range(n_epochs):
-        start = time.time()
-        loss_list = []
-        target_all = []
-        output_all = []
-        for _, sample in enumerate(train_dataloader):
-            thetas = sample['phase']
-            targets = sample['label'].to(device)
-            # preparing sensing data
-            bsz = thetas.shape[0]
-            qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=thetas, device=device)
-            qstate = tq.QuantumState(n_wires=n_qubits, bsz=bsz)
-            qsensing(qstate)
-            q_device = tq.QuantumDevice(n_wires=n_qubits)
-            q_device.reset_states(bsz=bsz)
-            # the model
-            outputs = model(q_device, qstate.states)
-            # compute loss, gradient, optimize ...
-            loss = F.nll_loss(outputs, targets)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            loss_list.append(loss.item())
-            target_all.append(targets)
-            output_all.append(outputs)
-        train_loss.append(np.mean(loss_list))
-        target_all = torch.cat(target_all)
-        output_all = torch.cat(output_all)
-        accuracy = compute_accuracy(output_all, target_all)
-        train_acc.append(accuracy)
-        scheduler.step()
-        epoch_time = time.time() - start
-        
-        print(f'epoch={e}, time = {epoch_time:.2f}, train loss={train_loss[-1]:.4f}, train accuracy={train_acc[-1]:.4f}')
-
-        if e % 5 == 4: # save a model every 5 epochs
-            model_dir = dataset_dir.replace('qml-data', 'qml-model')
-            if not os.path.exists(model_dir):
-                os.makedirs(model_dir)
-            with open(os.path.join(model_dir, 'model.pt'), 'wb') as f:
-                pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
-
-    print('\nfinal train loss:\n', train_loss)
-    print('final train accu:\n', train_acc)
-
-
-def train_save_onelevel_continuous(dataset_dir: str):
-    info = json.load(open(os.path.join(dataset_dir, 'info')))
-    print(info)
-    root_dir = os.path.join(dataset_dir, 'train')
-    train_dataset = QuantumSensingDataset(root_dir)
-    train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
-    # train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
-    use_cuda = torch.cuda.is_available()
-    device = torch.device('cuda' if use_cuda else 'cpu')
-    n_qubits = info['sensor_num']
-    area = info['area']
-    block_cell_ratio = info['block_cell_ratio']
-    grid_length = (area[1][0] - area[0][0]) // block_cell_ratio
-    model = QuantumMLregression(n_wires=n_qubits).to(device)
-    n_epochs = 80
-    optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
-    scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
-
-    model.train()
-    train_loss = []
-    train_error = []
-    for e in range(n_epochs):
-        start = time.time()
-        loss_list = []
-        target_all = []
-        output_all = []
-        for _, sample in enumerate(train_dataloader):
-            thetas = sample['phase']
-            targets = sample['label'].to(device)
-            # preparing sensing data
-            bsz = thetas.shape[0]
-            qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=thetas, device=device)
-            qstate = tq.QuantumState(n_wires=n_qubits, bsz=bsz)
-            qsensing(qstate)
-            q_device = tq.QuantumDevice(n_wires=n_qubits)
-            q_device.reset_states(bsz=bsz)
-            # the model
-            outputs = model(q_device, qstate.states)
-            # compute loss, gradient, optimize ...
-            loss = F.mse_loss(outputs, targets)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            loss_list.append(loss.item())
-            target_all.append(targets)
-            output_all.append(outputs)
-        train_loss.append(np.mean(loss_list))
-        target_all = torch.cat(target_all)
-        output_all = torch.cat(output_all)
-        loc_error = compute_loc_error(output_all, target_all, grid_length * Default.cell_length)
-        train_error.append(loc_error)
-        scheduler.step()
-        epoch_time = time.time() - start
-        
-        print(f'epoch={e}, time = {epoch_time:.2f}, train loss={train_loss[-1]:.4f}, train accuracy={train_error[-1]:.4f}')
-
-        if e % 10 == 9: # save a model every 5 epochs
-            model_dir = dataset_dir.replace('qml-data', 'qml-model')
-            if not os.path.exists(model_dir):
-                os.makedirs(model_dir)
-            with open(os.path.join(model_dir, f'model-{e}.pt'), 'wb') as f:
-                pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
+                with open(os.path.join(model_dir, 'model.pt'), 'wb') as f:
+                    pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
 
     print('\nfinal train loss:\n', train_loss)
     print('final train accu:\n', train_error)

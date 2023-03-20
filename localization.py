@@ -90,7 +90,7 @@ class QuantumLocalization:
         return QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state))
 
 
-    def get_sensor_data_qml(self, tx: tuple, sensors: list, noise: bool = False) -> Tuple:
+    def get_sensor_data_qml(self, tx: tuple, sensors: list, noise: bool = False, Hamiltonian: bool = False) -> Tuple:
         '''Given the Tx and sensors, return the sensing data of the sensors, i.e., a quantum state of sensors
            Assuming a simple initial state
         Args:
@@ -105,7 +105,10 @@ class QuantumLocalization:
         for rx_i in sensors:
             rx = self.sensordata['sensors'][f'{rx_i}']
             distance = Utility.distance(tx, rx, self.cell_length)
-            phase_shift, _ = self.unitary_operator.compute(distance, noise=noise)
+            if Hamiltonian:
+                phase_shift, _ = self.unitary_operator.compute_H(distance, noise=noise)
+            else:
+                phase_shift, _ = self.unitary_operator.compute(distance, noise=noise)
             thetas.append(phase_shift)
         bsz = 1
         thetas = torch.Tensor([thetas])  # add a batch dimension
@@ -697,7 +700,6 @@ class QuantumLocalization:
         print('Generating data done!')
 
 
-
     def load_qml_model(self, level_i: int, set_i: int, root_dir: str) -> tq.QuantumModule:
         '''given the level and set index, return the according QML model
         Args:
@@ -709,6 +711,24 @@ class QuantumLocalization:
         '''
         model_dir = os.path.join(os.getcwd(), root_dir.replace('data', 'model'), f'level-{level_i}-set-{set_i}')
         model_file = os.path.join(model_dir, 'model.pt')
+        if os.path.exists(model_file) is False:
+            raise Exception(f'model does not exist: {model_file}')
+        with open(model_file, 'rb') as f:
+            use_cuda = torch.cuda.is_available()
+            device = torch.device('cuda' if use_cuda else 'cpu')
+            model = pickle.load(f)
+            model.to(device)
+            model.eval()
+        return model
+
+
+    def load_qml_model_filename(self, model_file: str) -> tq.QuantumModule:
+        '''given the filename of the model, return the according QML model
+        Args:
+            model_file -- the filename (including directory)
+        Return:
+            the QML model
+        '''
         if os.path.exists(model_file) is False:
             raise Exception(f'model does not exist: {model_file}')
         with open(model_file, 'rb') as f:
@@ -743,33 +763,47 @@ class QuantumLocalization:
             continuous -- during the testing phase, whether the TX is continuous or not. The difference is in the output only
         Return:
            If discrete,   return (bool, (x, y))
-           If continuous, return (bool, float, (x, y)) -- (correct/wrong, localization error, predicted location)
+           If continuous, return (float, (x, y)) -- (correct/wrong, localization error, predicted location)
         '''
         print('truth', tx_truth, end='; ')
         seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
         np.random.seed(seed)
         
-        # step 1: level 0
         # prepare model
         level_i = 0
         set_i = 0
         set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
         sensors = set_['sensors']
-        model = self.load_qml_model(level_i, set_i, root_dir)
+        model_file = os.path.join(os.getcwd(), root_dir.replace('data', 'model'), 'model.pt')
+        model = self.load_qml_model_filename(model_file)
         # prepare sensing data
-        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True)
+        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True, Hamiltonian=True)
         # feed the data into the model
         output = model(q_device, qstate.states)
         output = output.cpu().detach().numpy()
-        max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
-        # print(output)
-        area = set_['area']
-        block_cell_ratio = set_['block_cell_ratio']
-        grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
-        level0_correct, tx_level0 = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
-        print('level-0 tx', tx_level0, level0_correct, end='; ')
-        return level0_correct, tx_level0
+        if continuous is False:
+            max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
+            area = set_['area']
+            block_cell_ratio = set_['block_cell_ratio']
+            grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
+            level0_correct, tx_level0 = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
+            print('level-0 tx', tx_level0, level0_correct, end='; ')
+            return level0_correct, tx_level0
+        else:
+            area = set_['area']
+            grid_dimension = area[1][0] - area[0][0]
+            tx_level0 = (output[0][0] * grid_dimension, output[0][1] * grid_dimension)
+            error = Utility.distance(tx_level0, tx_truth, self.cell_length)
+            print('level-0 tx', tx_level0)
+            return error, tx_level0
 
+    
+    def limit_output(self, output: np.array) -> None:
+        output[0][0] = 0 if output[0][0] < 0 else output[0][0]
+        output[0][0] = 0.9999 if output[0][0] > 0.9999 else output[0][0]
+        output[0][1] = 0 if output[0][1] < 0 else output[0][1]
+        output[0][1] = 0.9999 if output[0][1] > 0.9999 else output[0][1]
+        
 
     def qml_two(self, tx_truth: tuple, root_dir: str, continuous: bool = False) -> tuple:
         '''
@@ -779,7 +813,7 @@ class QuantumLocalization:
             continuous -- during the testing phase, whether the TX is continuous or not. The difference is in the output only
         Return:
            If discrete,   return (bool, (x, y))
-           If continuous, return (bool, float, (x, y)) -- (correct/wrong, localization error, predicted location)
+           If continuous, return (bool, float, (x, y)) -- (level0 correct/wrong, localization error, predicted location)
         '''
         print('truth', tx_truth, end='; ')
         seed = int(tx_truth[0]) * self.grid_length + int(tx_truth[1])
@@ -793,18 +827,37 @@ class QuantumLocalization:
         sensors = set_['sensors']
         model = self.load_qml_model(level_i, set_i, root_dir)
         # prepare sensing data
-        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True)
+        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True, Hamiltonian=True) # forgot the damn Hamiltonian!!!
         # feed the data into the model
         output = model(q_device, qstate.states)
         output = output.cpu().detach().numpy()
-        max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
-        # print(output)
-        area = set_['area']
-        block_cell_ratio = set_['block_cell_ratio']
-        grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
-        level0_correct, tx_level0 = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
-        print('level-0 tx', tx_level0, level0_correct, end='; ')
-        # return level0_correct, tx_level0
+        if continuous is False:
+            max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
+            area = set_['area']
+            block_cell_ratio = set_['block_cell_ratio']
+            grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
+            level0_correct, tx_level0 = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
+            print('level-0 tx', tx_level0, level0_correct, end='; ')
+        else:
+            ### directly return the result of level0
+            # area = set_['area']
+            # grid_dimension = area[1][0] - area[0][0]
+            # tx_level0 = (output[0][0] * grid_dimension, output[0][1] * grid_dimension)
+            # error = Utility.distance(tx_level0, tx_truth, self.cell_length)
+            # print('level-0 tx', tx_level0)
+            # return False, error, tx_level0
+            #################
+            
+            area = set_['area']
+            grid_dimension = area[1][0] - area[0][0]
+            self.limit_output(output)
+            tx_level0 = (output[0][0] * grid_dimension, output[0][1] * grid_dimension)
+            block_cell_ratio = set_['block_cell_ratio']
+            block = (int(tx_level0[0] / block_cell_ratio), int(tx_level0[1] / block_cell_ratio))
+            grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
+            max_i = block[0] * grid_length_block + block[1]
+            level0_correct, tx_level0 = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
+            print('level-0 tx', tx_level0, level0_correct, end='; ')
 
         # step 2: level 1
         # prepare model
@@ -814,226 +867,26 @@ class QuantumLocalization:
         sensors = set_['sensors']
         model = self.load_qml_model(level_i, set_i, root_dir)
         # prepare sensing data
-        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True)
+        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True, Hamiltonian=True) # forgot the damn Hamiltonian!!!
         # feed the data into the model
         output = model(q_device, qstate.states)
         output = output.cpu().detach().numpy()
-        max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
-        area = set_['area']
-        block_cell_ratio = set_['block_cell_ratio']  # should be 1
-        block_length = (area[1][0] - area[0][0]) // block_cell_ratio  # block length in terms of cells
-        tx_relative = (max_i // block_length, max_i % block_length)
-        tx_level1 = (area[0][0] + tx_relative[0] + block_cell_ratio/2, area[0][1] + tx_relative[1] + block_cell_ratio/2)
-        level1_correct = self.check_correct(tx_truth, tx_level1, block_length)
-        print('level-1 tx', tx_level1, level1_correct)
-        return level1_correct, tx_level1
-
-
-    def training_twolevel_16x16grid(self):
-        '''train the POVM for each set of sensors (similar to classifier) -- two levels
-           each POVM is doing a 16 state discrimination
-        '''
-        def get_16txloc(a: list, b: list) -> list:
-            '''
-            Args:
-                a -- top left location
-                b -- bottom right location
-            Return:
-                a list of 16 tx locations, each location is a tuple
-            '''
-            tx_list = []
-            for i in range(4):
-                for j in range(4):
-                    tx = (a[0] + (2*i+1)*(b[0] - a[0])/8, a[1] + (2*j+1)*(b[1] - a[1])/8)
-                    tx_list.append(tx)
-            return tx_list
-
-        povm = Povm()
-        # 16 state discrimination, pretty good measurement
-        levels = self.sensordata['levels']
-        for level_, sets in levels.items():
-            for set_, set_data in sets.items():
-                sensors = set_data['sensors']
-                area = set_data['area']
-                info = f'level={level_}, set={set_}, sensors={sensors}, area={area}'
-                print(info)
-                a, b = area[0], area[1]  # a is top left, b is bottom right
-                tx_list = get_16txloc(a, b)
-                if level_ == 'level-1.5':
-                    tx_list = self.filter_tx(a, b, tx_list)
-                evolve_operators = []
-                tx_loc = {}
-                qstates = []
-                init_state = self.get_simple_initial_state(num=len(sensors))
-                for i, tx in enumerate(tx_list):  # each tx leads to one evolve operator
-                    tx_loc[i] = tx
-                    evolve = 1
-                    for rx_i in sensors:          # each evolve operator is a product state of some unitary operators
-                        rx = self.sensordata['sensors'][f'{rx_i}']
-                        distance = Utility.distance(tx, rx, self.cell_length)
-                        disp, uo = self.unitary_operator.compute(distance, noise=False)  # training has no noise
-                        evolve = np.kron(evolve, uo)
-                    evolve_operators.append(evolve)
-                    qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state)))
-                priors = [1 / len(qstates)] * len(qstates)    # equal prior
-                povm.pretty_good_measurement(qstates, priors, debug=False)
-                key = f'{level_}-{set_}'
-                self.povms[key] = {'povm': povm.operators, 'tx_loc':tx_loc}
-        print('training POVM done!')
-
-    def testing_twolevel_16x16grid(self, tx_truth: tuple):
-        '''currently only supports two level
-        Args:
-            tx            -- the location of the transmitter
-            initial_state -- 'simple' or 'optimal'
-        '''
-        seed = int(tx_truth[0]) * 16 + int(tx_truth[1])
-        np.random.seed(seed)
-        # level 0, only has one set of sensors
-        level_i = 0
-        block_length = 4   # in level 0, locating a block that is 4x4
-        set_i = 0
-        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-        sensors = set_['sensors']
-        qstate = self.get_sensor_data(tx_truth, sensors)
-        povm = self.povms[f'level-{level_i}-set-{set_i}']
-        
-        # shortcut way
-        max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
-        # the sensing protocol
-        # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
-        # print(tx_truth, sorted(list(freqs.items()), key=lambda x: -x[1])[:4], end='; ')
-        # if max_i_theory != max_i:
-        #     print(f'level_0 theory: {max_i_theory}, simulation: {max_i}')
-
-        tx_level0 = povm['tx_loc'][max_i]
-        level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=block_length)
-        print('level-0 tx', tx_level0, level_0_correct)
-        
-        # level 1
-        # step 1: get the set in level 1 according to tx_level0
-        level_i = 1
-        min_distance = float('inf')
-        mapping_set = 0
-        num_set = len(self.sensordata['levels'][f'level-1'])
-        for set_i in range(num_set):
-            set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-            a, b = set_['area']
-            center = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
-            distance = Utility.distance(tx_level0, center, 1)
-            if distance < min_distance:
-                min_distance = distance
-                mapping_set = set_i
-        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{mapping_set}']
-        # step 2: get the evolving operator and the quantum state
-        sensors = set_['sensors']
-        qstate = self.get_sensor_data(tx_truth, sensors)
-        # step 3: compute the probabilities
-        povm = self.povms[f'level-{level_i}-set-{mapping_set}']
-        
-        # shortcut way
-        max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
-        # the sensing protocol
-        # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
-        # if max_i_theory != max_i:
-        #     print(f'level_1 theory: {max_i_theory}, simulation: {max_i}')
-
-        tx = povm['tx_loc'][max_i]
-        level_1_correct = self.check_correct(tx_truth, tx, block_len=1)
-        print('level-1 tx', tx, level_1_correct)
-        if level_0_correct is False and level_1_correct is True:
-            raise Exception()
-        return level_0_correct, level_1_correct
-
-    def testing_twolevel_16x16grid_pro(self, tx_truth: tuple):
-        '''two level plus a confirmation (level-1.5)
-        Args:
-            tx            -- the location of the transmitter
-            initial_state -- 'simple' or 'optimal'
-        '''
-        seed = int(tx_truth[0]) * 16 + int(tx_truth[1])
-        np.random.seed(seed)
-        # level 0, only has one set of sensors
-        level_i = 0
-        block_length = 4   # in level 0, locating a block that is 4x4
-        set_i = 0
-        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-        sensors = set_['sensors']
-        povm = self.povms[f'level-{level_i}-set-{set_i}']
-        
-        # shortcut way
-        qstate = self.get_sensor_data(tx_truth, sensors)
-        max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
-        # the sensing protocol
-        # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=True)
-        # if max_i_theory != max_i:
-        #     print(f'level_0 theory: {max_i_theory}, simulation: {max_i}')
-       
-        tx_level0 = povm['tx_loc'][max_i]
-        level_0_correct = self.check_correct(tx_truth, tx_level0, block_len=block_length)
-        print('level-0 tx', tx_level0, level_0_correct)
-        
-        # level 1
-        # step 1: get the set in level 1 according to tx_level0
-        level_i = 1
-        mapping_set = -1
-        num_set = len(self.sensordata['levels'][f'level-{level_i}'])
-        for set_i in range(num_set):
-            set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-            a, b = set_['area']
-            if a[0] <= tx_level0[0] <= b[0] and a[1] <= tx_level0[1] <= b[1]:
-                    mapping_set = set_i
-                    break
+        if continuous is False:
+            max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
+            area = set_['area']
+            block_cell_ratio = set_['block_cell_ratio']  # should be 1
+            block_length = (area[1][0] - area[0][0]) // block_cell_ratio  # block length in terms of cells
+            tx_relative = (max_i // block_length, max_i % block_length)
+            tx_level1 = (area[0][0] + tx_relative[0] + block_cell_ratio/2, area[0][1] + tx_relative[1] + block_cell_ratio/2)
+            level1_correct = self.check_correct(tx_truth, tx_level1, block_length)
+            print('level-1 tx', tx_level1, level1_correct)
+            return level1_correct, tx_level1
         else:
-            raise Exception('Error in level 1!')
-        set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{mapping_set}']
-        # step 2: get the evolving operator and the quantum state
-        sensors = set_['sensors']
-        qstate = self.get_sensor_data(tx_truth, sensors)
-        # step 3: compute the probabilities
-        povm = self.povms[f'level-{level_i}-set-{mapping_set}']
-
-        # the shortcut way
-        max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
-        # the sensing protocol
-        # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
-        # if max_i_theory != max_i:
-        #     print(f'level_1 theory: {max_i_theory}, simulation: {max_i}')
-
-        tx_level1 = povm['tx_loc'][max_i]
-        level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
-        print('level-1 tx', tx_level1, level_1_correct)
-        
-        # level 1.5 for block edge
-        grid_length = 16
-        if self.is_blockedge(tx_level1, grid_length, block_length):
-            # step 1: get the set in level 1.5 according to tx_level1
-            level_i = 1.5
-            mapping_set = -1
-            num_set = len(self.sensordata['levels'][f'level-{level_i}'])
-            for set_i in range(num_set):
-                set_ = self.sensordata['levels'][f'level-{level_i}'][f'set-{set_i}']
-                a, b = set_['area']
-                if a[0] <= tx_level1[0] <= b[0] and a[1] <= tx_level1[1] <= b[1]:
-                    mapping_set = set_i
-                    break
-            else:
-                raise Exception('Error in level 1.5!')
-            # step 2: get the evolving operator and the quantum state
-            sensors = set_['sensors']
-            qstate = self.get_sensor_data(tx_truth, sensors)
-            # step 3: compute the probabilities
-            povm = self.povms[f'level-{level_i}-set-{mapping_set}']
-            
-            # the shortcut way
-            max_i, probs = self.measure_maxprob_index(qstate, povm['povm'])
-            # the sensing protocol
-            # max_i, freqs = self.sense_measure_index(tx_truth, sensors, povm['povm'], Default.repeat, early_stop=False)
-            # if max_i_theory != max_i:
-            #     print(f'level_1.5 theory: {max_i_theory}, simulation: {max_i}')
-            
-            tx_level1 = povm['tx_loc'][max_i]
-            level_1_correct = self.check_correct(tx_truth, tx_level1, block_len=1)
-            print('level-1.5 tx', tx_level1, level_1_correct)
-        return level_0_correct, level_1_correct
+            area = set_['area']
+            grid_dimension = area[1][0] - area[0][0]
+            tx_relative = (output[0][0] * grid_dimension, output[0][1] * grid_dimension)
+            tx_level1 = (area[0][0] + tx_relative[0], area[0][1] + tx_relative[1])
+            level1_error = Utility.distance(tx_level1, tx_truth, self.cell_length)
+            print('level-1 tx', tx_level1, level1_error)
+        return level0_correct, level1_error, tx_level1
 

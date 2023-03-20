@@ -26,7 +26,6 @@ if __name__ == '__main__':
     parser.add_argument('-rd', '--root_dir', type=str, nargs=1, default=[Default.root_dir], help='the root directory for training data in the quantum ml method')
     parser.add_argument('-gd', '--generate_data', action='store_true', default=False, help='generate new training data, for QML')
 
-
     args         = parser.parse_args()
     methods      = args.methods
     grid_length  = args.grid_length[0]
@@ -37,7 +36,7 @@ if __name__ == '__main__':
     output_file  = args.output_file[0]
     
     unitary_operator = UnitaryOperator(Default.pathloss_expo, noise, Default.power_ref)
-    # training phase
+    ## training phase ##
     qls = {}
     if 'povmloc-one' in methods:
         sensordata = f'sensordata/onelevel.{grid_length}x{grid_length}.{sensor_num}.json'
@@ -72,7 +71,7 @@ if __name__ == '__main__':
                 ql.train_quantum_ml_two(root_dir)
         qls['qml-two'] = ql
     
-    # testing phase
+    ## testing phase ##
     mylogger = MyLogger(output_dir, output_file)
     if continuous == False:
         # testing discrete
@@ -117,7 +116,7 @@ if __name__ == '__main__':
         np.random.seed(0)
         tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
         for i, tx in enumerate(tx_list):
-            # if i not in [4]:
+            # if i not in [15]:
             #     continue
             myinput = Input((round(tx[0], 3), round(tx[1], 3)), grid_length, sensor_num, noise, continuous)
             outputs = []
@@ -139,9 +138,22 @@ if __name__ == '__main__':
                 correct, error, pred = ql.povmloc_pro(tx, continuous=True)
                 elapse = round(time.time() - start, 2)
                 outputs.append(Output('povmloc-pro', correct, localization_error=round(error, 3), pred=pred, elapse=elapse))
-
+            if 'qml' in methods:
+                ql = qls['qml']
+                root_dir = args.root_dir[0]
+                start = time.time()
+                error, pred = ql.qml(tx, root_dir, continuous=True)
+                elapse = round(time.time() - start, 2)
+                outputs.append(Output('qml', False, error, pred, elapse))
+            if 'qml-two' in methods:
+                ql = qls['qml-two']
+                root_dir = args.root_dir[0]
+                start = time.time()
+                level0_correct, error, pred = ql.qml_two(tx, root_dir, continuous=True)
+                elapse = round(time.time() - start, 2)
+                outputs.append(Output('qml-two', level0_correct, error, pred, elapse))
             mylogger.log(myinput, outputs)
             # time.sleep(0.5)
 
 
-# python main.py -m qml -l 40 -s 16 -n 1 -rd qml-data/40x40.16.H -gd
+# python main.py -m qml-two -l 40 -s 20 -n 1 -rd qml-data/40x40.two.H.cont -gd -c

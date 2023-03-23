@@ -115,8 +115,12 @@ if __name__ == '__main__':
         # testing: continuous
         np.random.seed(0)
         tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
+        # tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(16) for y in range(16)]
+        # tx_list = [(0.5, 0.5)]
+        
+        # tx_list = [(0 + np.random.uniform(0, 0.2), 0 + np.random.uniform(0, 0.2)) for _ in range(1)]
         for i, tx in enumerate(tx_list):
-            # if i not in [15]:
+            # if i not in [4]:
             #     continue
             myinput = Input((round(tx[0], 3), round(tx[1], 3)), grid_length, sensor_num, noise, continuous)
             outputs = []
@@ -139,19 +143,21 @@ if __name__ == '__main__':
                 elapse = round(time.time() - start, 2)
                 outputs.append(Output('povmloc-pro', correct, localization_error=round(error, 3), pred=pred, elapse=elapse))
             if 'qml' in methods:
-                ql = qls['qml']
-                root_dir = args.root_dir[0]
-                start = time.time()
-                error, pred = ql.qml(tx, root_dir, continuous=True)
-                elapse = round(time.time() - start, 2)
-                outputs.append(Output('qml', False, error, pred, elapse))
+                if not args.generate_data:
+                    ql = qls['qml']
+                    root_dir = args.root_dir[0]
+                    start = time.time()
+                    error, pred = ql.qml(tx, root_dir, continuous=True)
+                    elapse = round(time.time() - start, 2)
+                    outputs.append(Output('qml', False, error, pred, elapse))
             if 'qml-two' in methods:
-                ql = qls['qml-two']
-                root_dir = args.root_dir[0]
-                start = time.time()
-                level0_correct, error, pred = ql.qml_two(tx, root_dir, continuous=True)
-                elapse = round(time.time() - start, 2)
-                outputs.append(Output('qml-two', level0_correct, error, pred, elapse))
+                if not args.generate_data:
+                    ql = qls['qml-two']
+                    root_dir = args.root_dir[0]
+                    start = time.time()
+                    level0_correct, error, pred = ql.qml_two(tx, root_dir, continuous=True)
+                    elapse = round(time.time() - start, 2)
+                    outputs.append(Output('qml-two', level0_correct, error, pred, elapse))
             mylogger.log(myinput, outputs)
             # time.sleep(0.5)
 

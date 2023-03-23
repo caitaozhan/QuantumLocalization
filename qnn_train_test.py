@@ -308,8 +308,7 @@ def train_save_onelevel_continuous(dataset_dir: str):
     device = torch.device('cuda' if use_cuda else 'cpu')
     n_qubits = info['sensor_num']
     area = info['area']
-    block_cell_ratio = info['block_cell_ratio']
-    grid_length = (area[1][0] - area[0][0]) // block_cell_ratio
+    area_length = area[1][0] - area[0][0]
     model = QuantumMLregression(n_wires=n_qubits).to(device)
     n_epochs = 80
     optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
@@ -346,7 +345,7 @@ def train_save_onelevel_continuous(dataset_dir: str):
         train_loss.append(np.mean(loss_list))
         target_all = torch.cat(target_all)
         output_all = torch.cat(output_all)
-        loc_error = compute_loc_error(output_all, target_all, grid_length * Default.cell_length)
+        loc_error = compute_loc_error(output_all, target_all, area_length * Default.cell_length)
         train_error.append(loc_error)
         scheduler.step()
         epoch_time = time.time() - start
@@ -359,6 +358,9 @@ def train_save_onelevel_continuous(dataset_dir: str):
                 os.makedirs(model_dir)
             with open(os.path.join(model_dir, f'model-{e}.pt'), 'wb') as f:
                 pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
+            with open(os.path.join(model_dir, f'model.pt'), 'wb') as f:
+                pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
+
 
     print('\nfinal train loss:\n', train_loss)
     print('final train accu:\n', train_error)
@@ -441,7 +443,6 @@ def train_save_twolevel_continuous(folder: str):
     for i, dataset_dir in enumerate(sorted(glob.glob(folder + '/*'))):   # dataset_dir: ../40x40.two/level-0-set-0
         # if i > 0:
         #     continue
-        is_level0 = True if 'level-0' in dataset_dir else False
         info = json.load(open(os.path.join(dataset_dir, 'info')))
         print(info)
         root_dir = os.path.join(dataset_dir, 'train')
@@ -454,7 +455,7 @@ def train_save_twolevel_continuous(folder: str):
         area = info['area']
         area_length = area[1][0] - area[0][0]   # area is either the whole grid (level0) or a block (level1)
         model = QuantumMLregression(n_wires=n_qubits).to(device)
-        n_epochs = 80
+        n_epochs = 100
         optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
         scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
         
@@ -518,10 +519,10 @@ def main():
 '''for training qml one level'''
 def main1level(continuous: bool):
     if continuous:
-        folder = os.path.join(os.getcwd(), 'qml-data', '10x10.16.H.cont')
+        folder = os.path.join(os.getcwd(), 'qml-data', '4x4.4.H.cont')
         train_save_onelevel_continuous(folder)
-        folder = os.path.join(os.getcwd(), 'qml-data', '16x16.16.H.cont')
-        train_save_onelevel_continuous(folder)
+        # folder = os.path.join(os.getcwd(), 'qml-data', '16x16.16.H.cont')
+        # train_save_onelevel_continuous(folder)
     else:
         folder = os.path.join(os.getcwd(), 'qml-data', '4x4.8.H')
         train_save_onelevel(folder)
@@ -536,7 +537,7 @@ def main1level(continuous: bool):
 '''for training qml two level'''
 def main2level(continuous: bool):
     if continuous:
-        folder = os.path.join(os.getcwd(), 'qml-data', '40x40.two.H.cont')
+        folder = os.path.join(os.getcwd(), 'qml-data', '16x16.two.H.cont')
         train_save_twolevel_continuous(folder)        
     else:
         folder = os.path.join(os.getcwd(), 'qml-data', '40x40.two')

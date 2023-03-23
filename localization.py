@@ -572,6 +572,7 @@ class QuantumLocalization:
                 print(info)
             repeat = 75
             counter = 0
+            np.random.seed(0)  ##
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
                     tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
@@ -585,7 +586,7 @@ class QuantumLocalization:
                     np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
                     np.save(f'{train_label_dir}/{counter}.npy', np.array(tx_continuous_target).astype(np.float32))
                     counter += 1
-            repeat = 25
+            repeat = 5
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
@@ -606,7 +607,7 @@ class QuantumLocalization:
         
         # step 2: train the quantum ml model
         # training the quantum ml part is done on a jupyter notebook        
-        print('training POVM done!')
+        print('Data generation done!')
 
 
     def train_quantum_ml_two(self, root_dir: str):
@@ -681,13 +682,14 @@ class QuantumLocalization:
                     json.dump(info, f)
                     print(info)
                 a, b = area[0], area[1]  # a is top left, b is bottom right
+                area_length = b[0] - a[0]
                 tx_list = self.get_txloc(a, b, 1) # for the continuous case, tx are everywhere
-                repeat = 75
+                repeat = 100
                 counter = 0
-                for i, tx in enumerate(tx_list):
+                for tx in tx_list:
                     for _ in range(repeat):
                         tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
-                        tx_continuous_target = (tx_continuous[0] / self.grid_length, tx_continuous[1] / self.grid_length)  # normalize values to [0, 1]
+                        tx_continuous_target = (tx_continuous[0] / area_length, tx_continuous[1] / area_length)  # normalize values to [0, 1]
                         thetas = []
                         for rx_i in sensors:
                             rx = self.sensordata['sensors'][f'{rx_i}']
@@ -841,17 +843,17 @@ class QuantumLocalization:
         else:
             ### directly return the result of level0
             # area = set_['area']
-            # grid_dimension = area[1][0] - area[0][0]
-            # tx_level0 = (output[0][0] * grid_dimension, output[0][1] * grid_dimension)
+            # grid_length = area[1][0] - area[0][0]
+            # tx_level0 = (output[0][0] * grid_length, output[0][1] * grid_length)
             # error = Utility.distance(tx_level0, tx_truth, self.cell_length)
             # print('level-0 tx', tx_level0)
             # return False, error, tx_level0
             #################
             
             area = set_['area']
-            grid_dimension = area[1][0] - area[0][0]
+            area_length = area[1][0] - area[0][0]
             self.limit_output(output)
-            tx_level0 = (output[0][0] * grid_dimension, output[0][1] * grid_dimension)
+            tx_level0 = (output[0][0] * area_length, output[0][1] * area_length)
             block_cell_ratio = set_['block_cell_ratio']
             block = (int(tx_level0[0] / block_cell_ratio), int(tx_level0[1] / block_cell_ratio))
             grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
@@ -883,9 +885,11 @@ class QuantumLocalization:
             return level1_correct, tx_level1
         else:
             area = set_['area']
-            grid_dimension = area[1][0] - area[0][0]
-            tx_relative = (output[0][0] * grid_dimension, output[0][1] * grid_dimension)
-            tx_level1 = (area[0][0] + tx_relative[0], area[0][1] + tx_relative[1])
+            area_length = area[1][0] - area[0][0]
+            # tx_relative = (output[0][0] * area_length, output[0][1] * area_length)
+            # base = (area[0][0], area[0][1])
+            # tx_level1 = (base[0] + tx_relative[0], base[1] + tx_relative[1])
+            tx_level1 = (output[0][0] * area_length, output[0][1] * area_length)
             level1_error = Utility.distance(tx_level1, tx_truth, self.cell_length)
             print('level-1 tx', tx_level1, level1_error)
         return level0_correct, level1_error, tx_level1

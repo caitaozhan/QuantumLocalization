@@ -501,8 +501,6 @@ def train_save_twolevel_continuous(folder: str):
                 model_dir = dataset_dir.replace('qml-data', 'qml-model')
                 if not os.path.exists(model_dir):
                     os.makedirs(model_dir)
-                with open(os.path.join(model_dir, f'model-{e}.pt'), 'wb') as f:
-                    pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
                 with open(os.path.join(model_dir, 'model.pt'), 'wb') as f:
                     pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
 

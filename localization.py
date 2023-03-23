@@ -689,7 +689,7 @@ class QuantumLocalization:
                 for tx in tx_list:
                     for _ in range(repeat):
                         tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
-                        tx_continuous_target = (tx_continuous[0] / area_length, tx_continuous[1] / area_length)  # normalize values to [0, 1]
+                        tx_continuous_target = ((tx_continuous[0] - a[0]) / area_length, (tx_continuous[1] - a[1]) / area_length)  # elrative location inside the block, normalize values to [0, 1]
                         thetas = []
                         for rx_i in sensors:
                             rx = self.sensordata['sensors'][f'{rx_i}']
@@ -886,10 +886,9 @@ class QuantumLocalization:
         else:
             area = set_['area']
             area_length = area[1][0] - area[0][0]
-            # tx_relative = (output[0][0] * area_length, output[0][1] * area_length)
-            # base = (area[0][0], area[0][1])
-            # tx_level1 = (base[0] + tx_relative[0], base[1] + tx_relative[1])
-            tx_level1 = (output[0][0] * area_length, output[0][1] * area_length)
+            tx_relative = (output[0][0] * area_length, output[0][1] * area_length)
+            base = (area[0][0], area[0][1])
+            tx_level1 = (base[0] + tx_relative[0], base[1] + tx_relative[1])
             level1_error = Utility.distance(tx_level1, tx_truth, self.cell_length)
             print('level-1 tx', tx_level1, level1_error)
         return level0_correct, level1_error, tx_level1

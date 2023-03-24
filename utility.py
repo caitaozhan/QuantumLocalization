@@ -23,6 +23,7 @@ class Utility:
         '''
         return abs(alpha)**2
 
+
     @staticmethod
     def print_matrix(describe: str, matrix: np.array):
         '''print a matrix with complex values elegantly
@@ -37,11 +38,13 @@ class Utility:
                 print(f'({real:>8}{imag:>8}i)', end=' ')
             print()
 
+
     @staticmethod
     def distance(loc1: Union[list, tuple], loc2: Union[list, tuple], length: float) -> float:
         '''return the distance between loc1 and loc2
         '''
         return length * np.sqrt((loc1[0] - loc2[0]) ** 2 + (loc1[1] - loc2[1]) ** 2)
+
 
     @staticmethod
     def check_zero(matrix) -> bool:
@@ -57,6 +60,7 @@ class Utility:
             return True
         else:
             return False
+
 
     @staticmethod
     def check_optimal(quantum_states: list, priors: list, povms: list) -> bool:
@@ -85,6 +89,7 @@ class Utility:
                     return False
         return True
 
+
     @staticmethod
     def read_logs(logs: List[str]) -> List:
         '''
@@ -110,6 +115,7 @@ class Utility:
                 data.append((myinput, output_by_method))
         return data
 
+
     @staticmethod
     def remove_make(root_dir: str):
         '''if root_dir exists, remove all the content
@@ -118,3 +124,18 @@ class Utility:
         if os.path.exists(root_dir):
             shutil.rmtree(root_dir)
         os.makedirs(root_dir)
+
+
+    @staticmethod
+    def generate_tx(description: str, grid_length: int):
+        '''generate some tx locations
+        '''
+        tx_list = []
+        if description == 'test-5meter':
+            # for a 4x4 grid, put some tx in the (0.5, 0.5) grid
+            for x in np.linspace(0, grid_length, 401):
+                y = 0
+                tx_list.append((x, y))
+        else:
+            raise Exception(f'{description} not implemented...')
+        return tx_list

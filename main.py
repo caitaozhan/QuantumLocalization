@@ -10,6 +10,7 @@ from default import Default
 from my_logger import MyLogger
 from unitary_operator import UnitaryOperator
 from input_output import Input, Output
+from utility import Utility
 
 
 
@@ -71,6 +72,7 @@ if __name__ == '__main__':
                 ql.train_quantum_ml_two(root_dir)
         qls['qml-two'] = ql
     
+
     ## testing phase ##
     mylogger = MyLogger(output_dir, output_file)
     if continuous == False:
@@ -114,11 +116,8 @@ if __name__ == '__main__':
     else:
         # testing: continuous
         np.random.seed(0)
-        tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
-        # tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(16) for y in range(16)]
-        # tx_list = [(0.5, 0.5)]
-        
-        # tx_list = [(0 + np.random.uniform(0, 0.2), 0 + np.random.uniform(0, 0.2)) for _ in range(1)]
+        # tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
+        tx_list = Utility.generate_tx('test-5meter', grid_length)
         for i, tx in enumerate(tx_list):
             # if i not in [4]:
             #     continue

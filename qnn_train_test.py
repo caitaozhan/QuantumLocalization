@@ -310,7 +310,7 @@ def train_save_onelevel_continuous(dataset_dir: str):
     area = info['area']
     area_length = area[1][0] - area[0][0]
     model = QuantumMLregression(n_wires=n_qubits).to(device)
-    n_epochs = 80
+    n_epochs = 100
     optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
     scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
 
@@ -356,8 +356,6 @@ def train_save_onelevel_continuous(dataset_dir: str):
             model_dir = dataset_dir.replace('qml-data', 'qml-model')
             if not os.path.exists(model_dir):
                 os.makedirs(model_dir)
-            with open(os.path.join(model_dir, f'model-{e}.pt'), 'wb') as f:
-                pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
             with open(os.path.join(model_dir, f'model.pt'), 'wb') as f:
                 pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
 
@@ -649,8 +647,8 @@ def test_savemodel_continuous():
 
 if __name__ == '__main__':
     # main()
-    # main1level(continuous=True)
-    main2level(continuous=True)
+    main1level(continuous=True)
+    # main2level(continuous=True)
     # test_savemodel()
     # test_savemodel_continuous()
 

@@ -570,9 +570,8 @@ class QuantumLocalization:
             with open(info_file, 'w') as f:
                 json.dump(info, f)
                 print(info)
-            repeat = 75
+            repeat = 100
             counter = 0
-            np.random.seed(0)  ##
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
                     tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
@@ -796,7 +795,7 @@ class QuantumLocalization:
             grid_dimension = area[1][0] - area[0][0]
             tx_level0 = (output[0][0] * grid_dimension, output[0][1] * grid_dimension)
             error = Utility.distance(tx_level0, tx_truth, self.cell_length)
-            print('level-0 tx', tx_level0)
+            print('level-0 tx', tx_level0, 'error', error)
             return error, tx_level0
 
     

@@ -71,7 +71,7 @@ if __name__ == '__main__':
             else:
                 ql.train_quantum_ml_two(root_dir)
         qls['qml-two'] = ql
-    
+
 
     ## testing phase ##
     mylogger = MyLogger(output_dir, output_file)
@@ -117,9 +117,12 @@ if __name__ == '__main__':
         # testing: continuous
         np.random.seed(0)
         # tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
-        tx_list = Utility.generate_tx('test-5meter', grid_length)
+        # tx_list = Utility.generate_tx_list('test-5meter', grid_length, sensordata)
+        tx_list = []
+        for _ in range(20):
+            tx_list.extend(Utility.generate_tx_list('filter-5meter', grid_length, sensordata))
         for i, tx in enumerate(tx_list):
-            # if i not in [4]:
+            # if i not in [0]:
             #     continue
             myinput = Input((round(tx[0], 3), round(tx[1], 3)), grid_length, sensor_num, noise, continuous)
             outputs = []

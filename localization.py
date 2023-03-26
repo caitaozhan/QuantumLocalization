@@ -574,7 +574,8 @@ class QuantumLocalization:
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
-                    tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
+                    # tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
+                    tx_continuous = self.generate_tx(tx, threshold=5)
                     tx_continuous_target = (tx_continuous[0] / self.grid_length, tx_continuous[1] / self.grid_length)  # normalize values to [0, 1]
                     thetas = []
                     for rx_i in sensors:  # rx_i is in str
@@ -589,7 +590,8 @@ class QuantumLocalization:
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
-                    tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
+                    # tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
+                    tx_continuous = self.generate_tx(tx, threshold=5)
                     tx_continuous_target = (tx_continuous[0] / self.grid_length, tx_continuous[1] / self.grid_length)  # normalize values to [0, 1]
                     thetas = []
                     for rx_i in sensors:  # rx_i is in str
@@ -653,6 +655,37 @@ class QuantumLocalization:
         print('Generating data done!')
 
 
+    def generate_tx(self, cell: tuple, threshold: float) -> tuple:
+        '''generate a tx location
+        Args:
+            cell -- the center of grid cell (x, y)
+            threshold -- minimum distance between a tx and all sensors
+        Return:
+            a tuple (x, y)
+        '''
+        def is_outside(tx: tuple, sensor_list: list, threshold: float = 5) -> bool:
+            '''
+            Args:
+                tx -- transmitter location (x, y)
+                sensor_list -- a list of sensor location (x, y)
+                threshold -- the minimum distance between the tx and all sensors
+            Return:
+                if True the tx is threshold distance outside ALL sensors
+            '''
+            for sen in sensor_list:
+                if Utility.distance(tx, sen, Default.cell_length) < threshold:
+                    return False
+            return True
+
+        sensor_list = list(self.sensordata['sensors'].values())
+        outside_5m = False
+        while outside_5m is False:                    
+            x = cell[0] + np.random.uniform(-0.5, 0.5)
+            y = cell[1] + np.random.uniform(-0.5, 0.5)
+            outside_5m = is_outside((x, y), sensor_list, threshold)
+        return (x, y)
+
+
     def train_quantum_ml_two_continuous(self, root_dir: str):
         '''train the two level quantum machine learning model
            continuous version
@@ -662,8 +695,8 @@ class QuantumLocalization:
         Utility.remove_make(root_dir)
         levels = self.sensordata['levels']
         for level_, sets in levels.items():
-            if level_ == 'level-0':
-                continue
+            # if level_ == 'level-0':
+            #     continue
             for set_, set_data in sets.items():
                 key = f'{level_}-{set_}'
                 train_phase_dir = os.path.join(root_dir, key, 'train', 'phase')
@@ -687,7 +720,8 @@ class QuantumLocalization:
                 counter = 0
                 for tx in tx_list:
                     for _ in range(repeat):
-                        tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
+                        # tx_continuous = (tx[0] + np.random.uniform(-0.5, 0.5), tx[1] + np.random.uniform(-0.5, 0.5))
+                        tx_continuous = self.generate_tx(tx, threshold=5)
                         tx_continuous_target = ((tx_continuous[0] - a[0]) / area_length, (tx_continuous[1] - a[1]) / area_length)  # elrative location inside the block, normalize values to [0, 1]
                         thetas = []
                         for rx_i in sensors:

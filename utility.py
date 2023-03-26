@@ -5,6 +5,7 @@ some utility tools
 import os
 import shutil
 import numpy as np
+import json
 from typing import Union
 from default import Default
 from typing import List
@@ -127,15 +128,61 @@ class Utility:
 
 
     @staticmethod
-    def generate_tx(description: str, grid_length: int):
+    def generate_tx_list(description: str, grid_length: int, sensordata_file: str = None) -> list:
         '''generate some tx locations
+        Args:
+            description -- some pattern to generate the tx locations during the testing phase
+            grid_length -- the grid length
+            sensordata_file -- the sensor information filename
+        Return:
+            a list of tuple (x, y)
         '''
+        def is_outside(tx: tuple, sensor_list: list, threshold: float = 5) -> bool:
+            '''
+            Args:
+                tx -- transmitter location (x, y)
+                sensor_list -- a list of sensor location (x, y)
+                threshold -- the minimum distance between the tx and all sensors
+            Return:
+                if True the tx is threshold distance outside ALL sensors
+            '''
+            for sen in sensor_list:
+                if Utility.distance(tx, sen, Default.cell_length) < threshold:
+                    return False
+            return True
+
         tx_list = []
         if description == 'test-5meter':
             # for a 4x4 grid, put some tx in the (0.5, 0.5) grid
             for x in np.linspace(0, grid_length, 401):
                 y = 0
                 tx_list.append((x, y))
+        elif description == 'filter-5meter':
+            with open(sensordata_file, 'r') as f:
+                sensordata = json.load(f)
+                sensor_list = list(sensordata['sensors'].values())
+            for i in range(grid_length):
+                for j in range(grid_length):
+                    outside_5m = False
+                    while outside_5m is False:                    
+                        x = i + np.random.uniform(0, 1)
+                        y = j + np.random.uniform(0, 1)
+                        outside_5m = is_outside((x, y), sensor_list)
+                    tx_list.append((x, y))
+        elif description == 'filter-5meter-onelevel':
+            with open(sensordata_file, 'r') as f:
+                sensordata = json.load(f)
+                sensor_list = list(sensordata['level-0'].values())
+            for i in range(grid_length):
+                for j in range(grid_length):
+                    outside_5m = False
+                    while outside_5m is False:                    
+                        x = i + np.random.uniform(0, 1)
+                        y = j + np.random.uniform(0, 1)
+                        outside_5m = is_outside((x, y), sensor_list)
+                    tx_list.append((x, y))
         else:
             raise Exception(f'{description} not implemented...')
         return tx_list
+
+

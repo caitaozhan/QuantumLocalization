@@ -166,12 +166,17 @@ class UnitaryOperator:
         T = 1 / self._frequency  # time period of a cycle
         E = np.sqrt(30 * Default.tx_power) / (dist_modify(distance))  # electric field
         if noise:
+            # percentage noise
             rand = np.random.uniform(100 - Default.E_noise_perc, 100 + Default.E_noise_perc) / 100
             E *= rand
+            
+            # absolute noise
+            # E = max(10**-4, E + np.random.normal(0, self.std))
+
         sensing_time = 0.1  # seconds
         n = self._sensing_time / T
         # to make 5 meters distance have a phase shift of 2pi
-        E_5 = np.sqrt(30 * Default.tx_power) / (dist_modify(5))
+        E_5 = np.sqrt(30 * Default.tx_power) / 5
         gamma = (np.pi**2 * constants.h) / (E_5 * sensing_time)
         phi_T = 2 / (np.pi * constants.h) * gamma * E * T
         phase_shift = n * phi_T
@@ -201,7 +206,7 @@ def main1():
         # distance = i               # m
         # Utility.print_matrix('unitary operator', uo.compute(distance))
         # displacement, operator = uo.compute(distance)
-        displacement, operator = uo.compute(distance)
+        displacement, operator = uo.compute_H(distance, noise=False)
         op = Operator(operator)
         X.append(distance)
         y.append(displacement)
@@ -220,7 +225,7 @@ def main1():
     ax.set_title('Quantum Sensing Model')
     ax.set_xlabel('Distance (m)')
     ax.set_ylabel('Phase Shift')
-    fig.savefig(f'tmp-3.5.old.png')
+    fig.savefig(f'tmp.png')
 
 
 if __name__ == '__main__':

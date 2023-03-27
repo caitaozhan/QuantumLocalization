@@ -117,7 +117,7 @@ def onelevel_4x4grid_5sen(filename, fig_filename):
     # one levels
     levels = {}
     sets = {}
-    sets['set-0'] = {'sensors': [0, 1, 2, 3], 'area': [[0, 0], [grid_length, grid_length]]}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3, 4], 'area': [[0, 0], [grid_length, grid_length]], 'block_cell_ratio': 1}
     levels['level-0'] = sets
     sensor_data['levels'] = levels
     Plot.visualize_sensors(grid_length, sensors, sensors, fig_filename)
@@ -1206,10 +1206,10 @@ if __name__ == '__main__':
     # ONE level 4 sensor
     # filename = 'sensordata/onelevel.2x2.4.json'
     # onelevel_2x2grid_4sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.4x4.4.json'
-    onelevel_4x4grid_4sen(filename, fig_filename)
-    # filename = 'sensordata/onelevel.4x4.5.json'
-    # onelevel_4x4grid_5sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.4x4.4.json'
+    # onelevel_4x4grid_4sen(filename, fig_filename)
+    filename = 'sensordata/onelevel.4x4.5.json'
+    onelevel_4x4grid_5sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.6x6.4.json'
     # onelevel_6x6grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.6x6.4.json'

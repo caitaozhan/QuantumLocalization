@@ -167,19 +167,20 @@ class Utility:
                     while outside_5m is False:                    
                         x = i + np.random.uniform(0, 1)
                         y = j + np.random.uniform(0, 1)
-                        outside_5m = is_outside((x, y), sensor_list)
+                        outside_5m = is_outside((x, y), sensor_list, threshold=5)
                     tx_list.append((x, y))
         elif description == 'filter-5meter-onelevel':
             with open(sensordata_file, 'r') as f:
                 sensordata = json.load(f)
-                sensor_list = list(sensordata['level-0'].values())
+                sensor_list_all = list(sensordata['sensors'].values())
+                sensor_list = sensor_list_all[0:5] + sensor_list_all[7:9] + sensor_list_all[11:16]
             for i in range(grid_length):
                 for j in range(grid_length):
                     outside_5m = False
                     while outside_5m is False:                    
                         x = i + np.random.uniform(0, 1)
                         y = j + np.random.uniform(0, 1)
-                        outside_5m = is_outside((x, y), sensor_list)
+                        outside_5m = is_outside((x, y), sensor_list, threshold=5)
                     tx_list.append((x, y))
         else:
             raise Exception(f'{description} not implemented...')

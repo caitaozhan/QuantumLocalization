@@ -90,7 +90,7 @@ class QuantumLocalization:
         return QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state))
 
 
-    def get_sensor_data_qml(self, tx: tuple, sensors: list, noise: bool = False, Hamiltonian: bool = False) -> Tuple:
+    def get_sensor_data_qml(self, tx: tuple, sensors: list, noise: bool = False, Hamiltonian: bool = False) -> tq.QuantumDevice:
         '''Given the Tx and sensors, return the sensing data of the sensors, i.e., a quantum state of sensors
            Assuming a simple initial state
         Args:
@@ -98,7 +98,7 @@ class QuantumLocalization:
             sensors -- a list of sensor index
             noise -- noise or no noise
         Return:
-            tq.QuantumDevice, tq.QuantumState
+            tq.QuantumDevice
         '''
         # step 1: get the phases
         thetas = []
@@ -110,17 +110,13 @@ class QuantumLocalization:
             else:
                 phase_shift, _ = self.unitary_operator.compute(distance, noise=noise)
             thetas.append(phase_shift)
-        bsz = 1
         thetas = torch.Tensor([thetas])  # add a batch dimension
         n_qubits = len(sensors)
-        qstate = tq.QuantumState(n_wires=n_qubits, bsz=bsz)
         use_cuda = torch.cuda.is_available()
         device = torch.device('cuda' if use_cuda else 'cpu')
-        qsensing = QuantumSensing(n_qubits=n_qubits, list_of_thetas=thetas, device=device)
-        qsensing(qstate)
-        q_device = tq.QuantumDevice(n_wires=n_qubits)
-        q_device.reset_states(bsz=bsz)
-        return q_device, qstate
+        qsensing = QuantumSensing(n_qubits=n_qubits, device=device)
+        q_device = qsensing(thetas)
+        return q_device
 
 
     def measure_maxprob_index(self, qstate: QuantumState, povm: list) -> Tuple[int, list]:
@@ -812,9 +808,9 @@ class QuantumLocalization:
         model_file = os.path.join(os.getcwd(), root_dir.replace('data', 'model'), 'model.pt')
         model = self.load_qml_model_filename(model_file)
         # prepare sensing data
-        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True, Hamiltonian=True)
+        q_device = self.get_sensor_data_qml(tx_truth, sensors, noise=True, Hamiltonian=True)
         # feed the data into the model
-        output = model(q_device, qstate.states)
+        output = model(q_device)
         output = output.cpu().detach().numpy()
         if continuous is False:
             max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
@@ -862,9 +858,9 @@ class QuantumLocalization:
         sensors = set_['sensors']
         model = self.load_qml_model(level_i, set_i, root_dir)
         # prepare sensing data
-        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True, Hamiltonian=True) # forgot the damn Hamiltonian!!!
+        q_device = self.get_sensor_data_qml(tx_truth, sensors, noise=True, Hamiltonian=True) # forgot the damn Hamiltonian!!!
         # feed the data into the model
-        output = model(q_device, qstate.states)
+        output = model(q_device)
         output = output.cpu().detach().numpy()
         if continuous is False:
             max_i = int(np.argmax(output[0]))  # numpy.int64 --> int
@@ -902,9 +898,9 @@ class QuantumLocalization:
         sensors = set_['sensors']
         model = self.load_qml_model(level_i, set_i, root_dir)
         # prepare sensing data
-        q_device, qstate = self.get_sensor_data_qml(tx_truth, sensors, noise=True, Hamiltonian=True) # forgot the damn Hamiltonian!!!
+        q_device = self.get_sensor_data_qml(tx_truth, sensors, noise=True, Hamiltonian=True) # forgot the damn Hamiltonian!!!
         # feed the data into the model
-        output = model(q_device, qstate.states)
+        output = model(q_device)
         output = output.cpu().detach().numpy()
         if continuous is False:
             max_i = int(np.argmax(output[0]))  # numpy.int64 --> int

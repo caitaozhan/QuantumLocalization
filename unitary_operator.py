@@ -169,19 +169,15 @@ class UnitaryOperator:
             # percentage noise
             rand = np.random.uniform(100 - Default.E_noise_perc, 100 + Default.E_noise_perc) / 100
             E *= rand
-            
-            # absolute noise
-            # E = max(10**-4, E + np.random.normal(0, self.std))
 
-        sensing_time = 0.1  # seconds
         n = self._sensing_time / T
         # to make 5 meters distance have a phase shift of 2pi
         E_5 = np.sqrt(30 * Default.tx_power) / 5
-        gamma = (np.pi**2 * constants.h) / (E_5 * sensing_time)
+        gamma = (np.pi**2 * constants.h) / (E_5 * self._sensing_time)
         phi_T = 2 / (np.pi * constants.h) * gamma * E * T
         phase_shift = n * phi_T
-        generator = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
-        exponent = -complex(0, 1) * generator * phase_shift
+        pauliz_half = np.array([[0.5, 0], [0, -0.5]])            # half of Pauli z matrix
+        exponent = -complex(0, 1) * pauliz_half * phase_shift
         unitary_operator = expm(exponent)
         return phase_shift, unitary_operator
 

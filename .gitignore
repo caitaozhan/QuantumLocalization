@@ -1,7 +1,7 @@
 __pycache__
 *tmp*
 .vscode
-qml-data/
-qml-model/
+qml-data*/
+qml-model*/
 .ipynb_checkpoints
 .virtual_documents

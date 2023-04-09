@@ -11,11 +11,11 @@ class Default:
     grid_length: int     = 4            # 4 x 4 grid
     cell_length: int     = 10           # in meters
     frequency: int       = 10**9        # 1 GHz
-    sensing_time: float  = 0.1          # the sensing period in seconds
+    sensing_time: float  = 0.001        # the sensing period in seconds
     E_noise_perc: float  = 3            # the electric field noise in percentage (%)
     amplitude_ref: float = 0.01         # V/m, amplitude reference, the amplitude at 1 meters away from the TX
     power_ref: float     = -10          # dBm, power reference, the power at 1 meters away from the TX
-    tx_power: float      = 0.1          # the power of the TX is 0.1 watt (approximately a WiFi AP)
+    tx_power: float      = 10**-7       # the power of the TX is 10^-7 watt (WiFi AP power is over 0.1 W)
     noise_floor: int     = -90          # dBm
     noise_floor_q: int   = -110         # dBm
     pathloss_expo: float = 3.5          # the path loss exponent for propagation model

@@ -19,7 +19,7 @@ from unitary_operator import UnitaryOperator
 from povm import Povm
 from quantum_state import QuantumState
 from default import Default
-from qnn import QuantumSensing, QuantumML0
+from qnn import QuantumSensing, QuantumMLclassification
 from dataset import QuantumSensingDataset
 
 
@@ -493,7 +493,7 @@ class QuantumLocalization:
             with open(info_file, 'w') as f:
                 json.dump(info, f)
                 print(info)
-            repeat = 75
+            repeat = 100
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
@@ -506,7 +506,7 @@ class QuantumLocalization:
                     np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
                     np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
                     counter += 1
-            repeat = 25
+            repeat = 10
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):

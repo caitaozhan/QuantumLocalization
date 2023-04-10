@@ -5,3 +5,4 @@ qml-data*/
 qml-model*/
 .ipynb_checkpoints
 .virtual_documents
+logs*

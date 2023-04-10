@@ -51,7 +51,7 @@ class QuantumSensing(tq.QuantumModule):
 
 
 # quantum-classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer
-class QuantumML0(tq.QuantumModule):
+class QuantumMLclassification(tq.QuantumModule):
     ''' the quantum layer part is tq.layers.U3CU3Layer0 (4 blocks)
     '''
     def __init__(self, n_wires, n_locations):
@@ -226,7 +226,7 @@ def test():
                       [np.pi/0.9, np.pi/2.1, np.pi/2.9, np.pi/3.9]]
     use_cuda = torch.cuda.is_available()
     device = torch.device('cuda' if use_cuda else 'cpu')
-    qlocalize = QuantumML0(n_wires=n_qubits, n_locations=n_locations)
+    qlocalize = QuantumMLclassification(n_wires=n_qubits, n_locations=n_locations)
     qsensing = QuantumSensing(n_qubits=n_qubits, device=device)
     q_device = qsensing(list_of_thetas)
     outputs = qlocalize(q_device)
@@ -236,7 +236,7 @@ def test():
 def test2():
     use_cuda = torch.cuda.is_available()
     device = torch.device('cuda' if use_cuda else 'cpu')
-    qlocalize = QuantumML0(n_wires=4, n_locations=4).to(device)
+    qlocalize = QuantumMLclassification(n_wires=4, n_locations=4).to(device)
     root_dir = 'qml-data/toy/train'
     train_dataset = QuantumSensingDataset(root_dir)
     train_dataloader = DataLoader(train_dataset, batch_size=3, shuffle=False, num_workers=2)

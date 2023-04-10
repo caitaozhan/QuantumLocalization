@@ -15,7 +15,7 @@ from torchquantum.plugins.qiskit_plugin import tq2qiskit
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.utils.data import DataLoader
 from dataset import QuantumSensingDataset
-from qnn import QuantumSensing, QuantumML0, QuantumMLregression
+from qnn import QuantumSensing, QuantumMLclassification, QuantumMLregression
 from utility import Utility
 from default import Default
 
@@ -55,7 +55,7 @@ def train_test(grid_length: int, num_sensor: int):
     device = torch.device('cuda' if use_cuda else 'cpu')
     n_qubits = num_sensor
     n_locations = grid_length ** 2
-    model = QuantumML0(n_wires=n_qubits, n_locations=n_locations).to(device)
+    model = QuantumMLclassification(n_wires=n_qubits, n_locations=n_locations).to(device)
     n_epochs = 100
     optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
     scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
@@ -222,11 +222,11 @@ def train_save_onelevel(dataset_dir: str):
     block_cell_ratio = info['block_cell_ratio']
     grid_length = (area[1][0] - area[0][0]) // block_cell_ratio
     n_locations = grid_length ** 2
-    model = QuantumML0(n_wires=n_qubits, n_locations=n_locations).to(device)
+    model = QuantumMLclassification(n_wires=n_qubits, n_locations=n_locations).to(device)
     n_epochs = 80
     optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
     scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
-        
+
     model.train()
     train_loss = []
     train_acc = []
@@ -354,7 +354,7 @@ def train_save_twolevel(folder: str):
         block_cell_ratio = info['block_cell_ratio']
         grid_length = (area[1][0] - area[0][0]) // block_cell_ratio
         n_locations = grid_length ** 2
-        model = QuantumML0(n_wires=n_qubits, n_locations=n_locations).to(device)
+        model = QuantumMLclassification(n_wires=n_qubits, n_locations=n_locations).to(device)
         n_epochs = 80
         optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
         scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
@@ -484,14 +484,16 @@ def main1level(continuous: bool):
         # folder = os.path.join(os.getcwd(), 'qml-data', '16x16.16.H.cont')
         # train_save_onelevel_continuous(folder)
     else:
-        folder = os.path.join(os.getcwd(), 'qml-data', '4x4.8.H')
-        train_save_onelevel(folder)
+        sen = 16
+        for length in [4, 6, 8, 10, 12, 14, 16]:
+            folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}')
+            train_save_onelevel(folder)
         
-        folder = os.path.join(os.getcwd(), 'qml-data', '10x10.16.H')
-        train_save_onelevel(folder)
+        # folder = os.path.join(os.getcwd(), 'qml-data', '10x10.16.H')
+        # train_save_onelevel(folder)
         
-        folder = os.path.join(os.getcwd(), 'qml-data', '16x16.16.H')
-        train_save_onelevel(folder)
+        # folder = os.path.join(os.getcwd(), 'qml-data', '16x16.16.H')
+        # train_save_onelevel(folder)
 
 
 '''for training qml two level'''
@@ -507,7 +509,7 @@ def main2level(continuous: bool):
 
 if __name__ == '__main__':
     # main()
-    main1level(continuous=True)
+    main1level(continuous=False)
     # main2level(continuous=True)
 
 

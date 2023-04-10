@@ -123,6 +123,18 @@ def table():
         p.wait()
 
 
+def generate_data():
+    template = "python main.py -m qml -l {} -s 16 -rd  qml-data/{}x{}.16 -gd"
+    grid_length = [4, 6, 8, 10, 12, 14, 16]
+    ps = []
+    for gl in grid_length:
+        command = template.format(gl, gl, gl)
+        print(command)
+        ps.append(Popen(command, shell=True))
+    for p in ps:
+        p.wait()
+
+
 
 
 if  __name__ == '__main__':
@@ -131,5 +143,7 @@ if  __name__ == '__main__':
     # plot2()
     # plot3()
 
-    table()
+    # table()
+
+    generate_data()
     

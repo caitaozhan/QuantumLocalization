@@ -130,9 +130,12 @@ def generate_data():
     for gl in grid_length:
         command = template.format(gl, gl, gl)
         print(command)
-        ps.append(Popen(command, shell=True))
-    for p in ps:
+        p = Popen(command, shell=True)
         p.wait()
+        # ps.append(Popen(command, shell=True))
+
+    # for p in ps:
+    #     p.wait()
 
 
 

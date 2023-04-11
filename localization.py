@@ -818,7 +818,7 @@ class QuantumLocalization:
             block_cell_ratio = set_['block_cell_ratio']
             grid_length_block = (area[1][0] - area[0][0]) // block_cell_ratio  # grid length in terms of blocks
             level0_correct, tx_level0 = self.check_block_correct_qml(tx_truth, max_i, block_cell_ratio, grid_length_block)
-            print('level-0 tx', tx_level0, level0_correct, end='; ')
+            print('level-0 tx', tx_level0, level0_correct)
             return level0_correct, tx_level0
         else:
             area = set_['area']

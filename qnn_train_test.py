@@ -485,8 +485,8 @@ def main1level(continuous: bool):
         # train_save_onelevel_continuous(folder)
     else:
         # time.sleep(2400)
-        sen = 8
-        for length in [2,4,6,8,10,12,14,16]:
+        sen = 16
+        for length in [2]:
             folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}')
             train_save_onelevel(folder)
         

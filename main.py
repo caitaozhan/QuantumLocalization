@@ -101,6 +101,14 @@ if __name__ == '__main__':
                 correct, pred = ql.povmloc_pro(tx)
                 elapse = round(time.time() - start, 2)
                 outputs.append(Output('povmloc-pro', correct, localization_error=-1, pred=pred, elapse=elapse))
+            if 'qml' in methods:
+                if not args.generate_data:
+                    ql = qls['qml']
+                    root_dir = args.root_dir[0]
+                    start = time.time()
+                    correct, pred = ql.qml(tx, root_dir, continuous=False)
+                    elapse = round(time.time() - start, 2)
+                    outputs.append(Output('qml', correct, -1, pred, elapse))   
             if 'qml-two' in methods:
                 generate_data = args.generate_data  # in POVM-Loc, the training and testing are all together
                 if not generate_data:                   # in QML, training and testing are separate (training takes too much time)
@@ -157,9 +165,9 @@ if __name__ == '__main__':
                     ql = qls['qml-two']
                     root_dir = args.root_dir[0]
                     start = time.time()
-                    level0_correct, error, pred = ql.qml_two(tx, root_dir, continuous=True)
+                    correct, error, pred = ql.qml_two(tx, root_dir, continuous=True)
                     elapse = round(time.time() - start, 2)
-                    outputs.append(Output('qml-two', level0_correct, error, pred, elapse))
+                    outputs.append(Output('qml-two', correct, error, pred, elapse))
             mylogger.log(myinput, outputs)
             # time.sleep(0.5)
 

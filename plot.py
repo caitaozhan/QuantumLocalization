@@ -71,10 +71,10 @@ class Plot:
             for method, output in output_by_method.items():
                 if method == 'povmloc-one':
                     table_qsd_onelevel[myinput.grid_length].append({myinput.sensor_num: output.correct})
-                if method == 'pqc-one':
+                if method == 'qml':
                     table_pqc_onelevel[myinput.grid_length].append({myinput.sensor_num: output.correct})
         
-        print('QSD-Onelevel')
+        print('\nQSD-Onelevel')
         print_table = []
         sensornum = [4, 8]
         for x, list_of_y_by_sensornum in sorted(table_qsd_onelevel.items()):
@@ -83,14 +83,14 @@ class Plot:
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
         arr = np.array(print_table)
 
-        # print('PQC-Onelevel')
-        # print_table = []
-        # sensornum = [8, 16]
-        # for x, list_of_y_by_sensornum in sorted(table_pqc_onelevel.items()):
-        #     tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
-        #     print_table.append([x] + tmp_list)
-        # print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
-        # arr = np.array(print_table)
+        print('PQC-Onelevel')
+        print_table = []
+        sensornum = [4, 8, 16]
+        for x, list_of_y_by_sensornum in sorted(table_pqc_onelevel.items()):
+            tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
+        arr = np.array(print_table)
 
 
         # X      = arr[:, 0]
@@ -270,7 +270,8 @@ class Plot:
 def discrete_onelevel_varygrid():
     '''evaluate the performance of the single level POVM-Loc One
     '''
-    logs = ['results/discrete.onelevel.varygrid', 'results/discrete.onelevel.varygrid.8sen']
+    logs = ['results/discrete.onelevel.varygrid', 'results/discrete.onelevel.varygrid.8sen', \
+            'results/discrete.onelevel.varygrid.qml']
     data = Utility.read_logs(logs)
     figname = 'results/discrete.onelevel.varygrid.png'
     Plot.discrete_onelevel_varygrid(data, figname)

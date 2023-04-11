@@ -2,6 +2,7 @@
 '''
 
 from subprocess import Popen, PIPE
+import sys
 
 
 def plot1():
@@ -9,34 +10,42 @@ def plot1():
     
                                   # length, size, noise, continuous
     template = 'python main.py -m {} -l {} -s {} -of {}'
-    # 4 sensors
+    # povmloc-one
     # config = [
-    #     ['povmloc-one', 2,  4, 'discrete.onelevel.varygrid'],
-    #     ['povmloc-one', 4,  4, 'discrete.onelevel.varygrid'],
-    #     ['povmloc-one', 6,  4, 'discrete.onelevel.varygrid'],
-    #     ['povmloc-one', 8,  4, 'discrete.onelevel.varygrid'],
-    #     ['povmloc-one', 10, 4, 'discrete.onelevel.varygrid'],
-    #     ['povmloc-one', 12, 4, 'discrete.onelevel.varygrid'],
-    #     ['povmloc-one', 14, 4, 'discrete.onelevel.varygrid'],
-    #     ['povmloc-one', 16, 4, 'discrete.onelevel.varygrid']
+        # ['povmloc-one', 2,  4, 'discrete.onelevel.varygrid'],
+        # ['povmloc-one', 4,  4, 'discrete.onelevel.varygrid'],
+        # ['povmloc-one', 6,  4, 'discrete.onelevel.varygrid'],
+        # ['povmloc-one', 8,  4, 'discrete.onelevel.varygrid'],
+        # ['povmloc-one', 10, 4, 'discrete.onelevel.varygrid'],
+        # ['povmloc-one', 12, 4, 'discrete.onelevel.varygrid'],
+        # ['povmloc-one', 14, 4, 'discrete.onelevel.varygrid'],
+        # ['povmloc-one', 16, 4, 'discrete.onelevel.varygrid']
     # ]
-    # 8 sensors
+    # for i, c in enumerate(config):
+    #     command = template.format(c[0], c[1], c[2], c[3])
+    #     print(command)
+    #     p = Popen(command, shell=True)
+    #     p.wait()
+
+    # qml
+    template = 'python main.py -m {} -l {} -s {} -of {} -rd {}'
+
     config = [
-        ['povmloc-one', 2,  8, 'discrete.onelevel.varygrid.8sen'],
-        ['povmloc-one', 4,  8, 'discrete.onelevel.varygrid.8sen'],
-        ['povmloc-one', 6,  8, 'discrete.onelevel.varygrid.8sen'],
-        ['povmloc-one', 8,  8, 'discrete.onelevel.varygrid.8sen'],
-        ['povmloc-one', 10, 8, 'discrete.onelevel.varygrid.8sen'],
-        ['povmloc-one', 12, 8, 'discrete.onelevel.varygrid.8sen'],
-        ['povmloc-one', 14, 8, 'discrete.onelevel.varygrid.8sen'],
-        ['povmloc-one', 16, 8, 'discrete.onelevel.varygrid.8sen']
+        ['qml', 2,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 4,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 6,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 8,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 10, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 12, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 14, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 16, 16, 'discrete.onelevel.varygrid.qml.16sen']
     ]
 
     for i, c in enumerate(config):
-        # if c[1] != 16:
-        #     continue
-        command = template.format(c[0], c[1], c[2], c[3])
+        rood_dir = f'qml-data/{c[1]}x{c[1]}.{c[2]}'
+        command = template.format(c[0], c[1], c[2], c[3], rood_dir)
         print(command)
+        sys.stdout.flush()
         p = Popen(command, shell=True)
         p.wait()
 
@@ -124,8 +133,8 @@ def table():
 
 
 def generate_data():
-    template = "python main.py -m qml -l {} -s 8 -rd  qml-data/{}x{}.8 -gd"
-    grid_length = [2, 4, 6, 8, 10, 12, 14, 16]
+    template = "python main.py -m qml -l {} -s 16 -rd  qml-data/{}x{}.16 -gd"
+    grid_length = [2]
     ps = []
     for gl in grid_length:
         command = template.format(gl, gl, gl)

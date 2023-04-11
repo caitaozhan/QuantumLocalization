@@ -40,12 +40,12 @@ if __name__ == '__main__':
     ## training phase ##
     qls = {}
     if 'povmloc-one' in methods:
-        sensordata = f'sensordata/onelevel.{grid_length}x{grid_length}.{sensor_num}.json'
+        sensordata = f'sensordata_qsd/onelevel.{grid_length}x{grid_length}.{sensor_num}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         ql.train_povmloc_one()
         qls['povmloc-one'] = ql
     if 'povmloc' in methods or 'povmloc-pro' in methods:
-        sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.json'
+        sensordata = f'sensordata_qsd/twolevel.{grid_length}x{grid_length}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         ql.train_povmloc()
         qls['povmloc'] = ql
@@ -129,7 +129,7 @@ if __name__ == '__main__':
             if 'povmloc-one' in methods:
                 ql = qls['povmloc-one']
                 start = time.time()
-                correct, error, pred = ql.povmloc_one(tx, continuous=True)
+                correct, error, pred = ql.povmloc_one(tx, continuous=False)
                 elapse = round(time.time() - start, 2)
                 outputs.append(Output('povmloc-one', correct, localization_error=round(error, 3), pred=pred, elapse=elapse))
             if 'povmloc' in methods:

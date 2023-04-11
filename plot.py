@@ -62,71 +62,88 @@ class Plot:
 
 
     @staticmethod
-    def povmloc_one_vary_gridsize(data: list, figname: str):
-        # step 1.1: prepare accuracy data
+    def discrete_onelevel_varygrid(data: list, figname: str):
+        # step 1.1: prepare accuracy data for QSD-One and PQC-One
         reduce = Plot.reduce_accuracy
-        table = defaultdict(list)
+        table_qsd_onelevel = defaultdict(list)
+        table_pqc_onelevel = defaultdict(list)
         for myinput, output_by_method in data:
-            table[myinput.grid_length].append({myinput.sensor_num: output.correct for output in output_by_method.values()})
+            for method, output in output_by_method.items():
+                if method == 'povmloc-one':
+                    table_qsd_onelevel[myinput.grid_length].append({myinput.sensor_num: output.correct})
+                if method == 'pqc-one':
+                    table_pqc_onelevel[myinput.grid_length].append({myinput.sensor_num: output.correct})
         
+        print('QSD-Onelevel')
         print_table = []
         sensornum = [4, 8]
-        for x, list_of_y_by_sensornum in sorted(table.items()):
+        for x, list_of_y_by_sensornum in sorted(table_qsd_onelevel.items()):
             tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
             print_table.append([x] + tmp_list)
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
         arr = np.array(print_table)
-        X      = arr[:, 0]
-        y_4sen = arr[:, 1] * 100  # percentage
-        y_8sen = arr[:, 2] * 100
 
-        # step 1.2: prepare error data
-        reduce = Plot.reduce_average
-        table = defaultdict(list)
-        for myinput, output_by_method in data:
-            table[myinput.grid_length].append({myinput.sensor_num: output.localization_error for output in output_by_method.values()})
+        # print('PQC-Onelevel')
+        # print_table = []
+        # sensornum = [8, 16]
+        # for x, list_of_y_by_sensornum in sorted(table_pqc_onelevel.items()):
+        #     tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
+        #     print_table.append([x] + tmp_list)
+        # print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
+        # arr = np.array(print_table)
+
+
+        # X      = arr[:, 0]
+        # y_4sen = arr[:, 1] * 100  # percentage
+        # y_8sen = arr[:, 2] * 100
+
+        # # step 1.2: prepare error data
+        # reduce = Plot.reduce_average
+        # table = defaultdict(list)
+        # for myinput, output_by_method in data:
+        #     table[myinput.grid_length].append({myinput.sensor_num: output.localization_error for output in output_by_method.values()})
         
-        print_table = []
-        sensornum = [4, 8]
-        for x, list_of_y_by_sensornum in sorted(table.items()):
-            tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
-            print_table.append([x] + tmp_list)
-        print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
-        arr = np.array(print_table)
-        X      = arr[:, 0]
-        y_4sen_error = arr[:, 1]     # error
-        y_8sen_error = arr[:, 2]
+        # print_table = []
+        # sensornum = [4, 8]
+        # for x, list_of_y_by_sensornum in sorted(table.items()):
+        #     tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
+        #     print_table.append([x] + tmp_list)
+        # print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
+        # arr = np.array(print_table)
+        # X      = arr[:, 0]
+        # y_4sen_error = arr[:, 1]     # error
+        # y_8sen_error = arr[:, 2]
 
-        # step 2: plotting
-        cc_acc = "$CC_{acc}$"
-        l_err  = "$L_{err}$"
-        povmloc_one_color2 = 'black'
-        fig, ax1 = plt.subplots(1, 1, figsize=(23, 22))
-        fig.subplots_adjust(left=0.13, right=0.895, top=0.81, bottom=0.16)
-        ax2 = ax1.twinx()
-        ax1.plot(X, y_8sen,       linestyle='-',  marker='^', label=f"{cc_acc} 8 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
-        ax1.plot(X, y_4sen,       linestyle='--', marker='^', label=f"{cc_acc} 4 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
-        # ax2.plot(X, y_8sen_error, linestyle='-',  marker='o', label=f"{l_err} 8 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
-        # ax2.plot(X, y_4sen_error, linestyle='--', marker='o', label=f"{l_err} 4 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
-        # ax1
-        fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
-        ax1.set_xlabel('Grid Size', labelpad=20)
-        ax1.grid(True)
-        ax1.set_xticks(X)
-        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=50, rotation=12)
-        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=povmloc_one_color2)
-        ax1.set_ylabel(f'{cc_acc} (%)', fontsize=55, color=povmloc_one_color2)
-        ax1.set_ylim([0, 102])
-        method = Plot.LEGEND['povmloc-one']
-        ax1.set_title(f'Performance of {method}', pad=30, fontsize=60, fontweight='bold')
-        # ax2
-        ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc-one'])
-        ax2.set_ylabel(f'{l_err} (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc-one'])
-        ax2.set_ylim([0, 20.4])
-        ax2.set_yticks(range(0, 21, 4))
-        plt.figtext(0.485, 0.01, '(a)')
-        fig.savefig(figname)
+        # # step 2: plotting
+        # cc_acc = "$CC_{acc}$"
+        # l_err  = "$L_{err}$"
+        # povmloc_one_color2 = 'black'
+        # fig, ax1 = plt.subplots(1, 1, figsize=(23, 22))
+        # fig.subplots_adjust(left=0.13, right=0.895, top=0.81, bottom=0.16)
+        # ax2 = ax1.twinx()
+        # ax1.plot(X, y_8sen,       linestyle='-',  marker='^', label=f"{cc_acc} 8 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
+        # ax1.plot(X, y_4sen,       linestyle='--', marker='^', label=f"{cc_acc} 4 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
+        # # ax2.plot(X, y_8sen_error, linestyle='-',  marker='o', label=f"{l_err} 8 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
+        # # ax2.plot(X, y_4sen_error, linestyle='--', marker='o', label=f"{l_err} 4 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
+        # # ax1
+        # fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
+        # ax1.set_xlabel('Grid Size', labelpad=20)
+        # ax1.grid(True)
+        # ax1.set_xticks(X)
+        # ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        # ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=50, rotation=12)
+        # ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=povmloc_one_color2)
+        # ax1.set_ylabel(f'{cc_acc} (%)', fontsize=55, color=povmloc_one_color2)
+        # ax1.set_ylim([0, 102])
+        # method = Plot.LEGEND['povmloc-one']
+        # ax1.set_title(f'Performance of {method}', pad=30, fontsize=60, fontweight='bold')
+        # # ax2
+        # ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc-one'])
+        # ax2.set_ylabel(f'{l_err} (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc-one'])
+        # ax2.set_ylim([0, 20.4])
+        # ax2.set_yticks(range(0, 21, 4))
+        # plt.figtext(0.485, 0.01, '(a)')
+        # fig.savefig(figname)
 
 
     @staticmethod
@@ -250,15 +267,13 @@ class Plot:
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + methods))
 
 
-def povmloc_one_varygridsize():
+def discrete_onelevel_varygrid():
     '''evaluate the performance of the single level POVM-Loc One
     '''
-    # logs = ['results/onelevel.4sen.varygrid', 'results/onelevel.8sen.varygrid']
-    logs = ['results/onelevel.varygrid']
+    logs = ['results/discrete.onelevel.varygrid', 'results/discrete.onelevel.varygrid.8sen']
     data = Utility.read_logs(logs)
-    # figname = 'results/onelevel-varygrid.2.png'
-    figname = 'results2/onelevel-varygrid.2.png'
-    Plot.povmloc_one_vary_gridsize(data, figname)
+    figname = 'results/discrete.onelevel.varygrid.png'
+    Plot.discrete_onelevel_varygrid(data, figname)
 
 
 def povmloc_varynoise():
@@ -291,7 +306,7 @@ def runtime():
 
 if __name__ == '__main__':
 
-    povmloc_one_varygridsize()
+    discrete_onelevel_varygrid()
 
     # povmloc_varynoise()
 

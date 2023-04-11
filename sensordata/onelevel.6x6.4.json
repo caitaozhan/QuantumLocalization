@@ -10,7 +10,8 @@
         "level-0": {
             "set-0": {
                 "sensors": [0,1,2,3],
-                "area": [[0,0],[6,6]]
+                "area": [[0,0],[6,6]],
+                "block_cell_ratio": 1
             }
         }
     }

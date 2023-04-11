@@ -84,7 +84,7 @@ class QuantumLocalization:
         for rx_i in sensors:
             rx = self.sensordata['sensors'][f'{rx_i}']
             distance = Utility.distance(tx, rx, self.cell_length)
-            _, uo = self.unitary_operator.compute(distance, noise)
+            _, uo = self.unitary_operator.compute_H(distance, noise)
             evolve = np.kron(evolve, uo)
         init_state = self.get_simple_initial_state(num=len(sensors))
         return QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state))
@@ -200,7 +200,7 @@ class QuantumLocalization:
             for rx_i in sensors:  # rx_i is in str
                 rx = self.sensordata['sensors'][f'{rx_i}']
                 distance = Utility.distance(tx, rx, self.cell_length)
-                _, uo = self.unitary_operator.compute(distance, noise=False)  # assume noise is zero during training
+                _, uo = self.unitary_operator.compute_H(distance, noise=False)  # assume noise is zero during training
                 evolve = np.kron(evolve, uo)
             initial_state = self.get_simple_initial_state(len(sensors))
             qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, initial_state)))

@@ -9,17 +9,17 @@ from utility import Utility
 
 class Plot:
 
-    plt.rcParams['font.size'] = 65
+    plt.rcParams['font.size'] = 45
     plt.rcParams['lines.linewidth'] = 10
-    plt.rcParams['lines.markersize'] = 30
+    plt.rcParams['lines.markersize'] = 20
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one', 'povmloc',  'povmloc-pro']
-    _LEGEND = ['OneLevel',    'TwoLevel', 'TwoLevel-Pro']
+    METHOD  = ['povmloc-one',  'povmloc',  'qml']
+    _LEGEND = ['QSD-One',      'TwoLevel', 'PQC-One-C']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
-    _COLOR  = ['b',  'r',        'r']
+    _COLOR  = ['r',  'r',        'b']
     COLOR   = dict(zip(METHOD, _COLOR))
 
     _LINE   = ['-',           '--',       '-']
@@ -82,6 +82,8 @@ class Plot:
             print_table.append([x] + tmp_list)
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
         arr = np.array(print_table)
+        povm_one_4sen = arr[:, 1] * 100  # percentage
+        povm_one_8sen = arr[:, 2] * 100
 
         print('PQC-Onelevel')
         print_table = []
@@ -91,59 +93,46 @@ class Plot:
             print_table.append([x] + tmp_list)
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
         arr = np.array(print_table)
+        pqc_one_4sen  = arr[:, 1]  * 100
+        pqc_one_8sen  = arr[:, 2]  * 100
+        pqc_one_16sen = arr[:, 3] * 100
+        X      = arr[:, 0]
 
-
-        # X      = arr[:, 0]
-        # y_4sen = arr[:, 1] * 100  # percentage
-        # y_8sen = arr[:, 2] * 100
-
-        # # step 1.2: prepare error data
-        # reduce = Plot.reduce_average
-        # table = defaultdict(list)
-        # for myinput, output_by_method in data:
-        #     table[myinput.grid_length].append({myinput.sensor_num: output.localization_error for output in output_by_method.values()})
-        
-        # print_table = []
-        # sensornum = [4, 8]
-        # for x, list_of_y_by_sensornum in sorted(table.items()):
-        #     tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
-        #     print_table.append([x] + tmp_list)
-        # print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
-        # arr = np.array(print_table)
-        # X      = arr[:, 0]
-        # y_4sen_error = arr[:, 1]     # error
-        # y_8sen_error = arr[:, 2]
-
-        # # step 2: plotting
-        # cc_acc = "$CC_{acc}$"
-        # l_err  = "$L_{err}$"
-        # povmloc_one_color2 = 'black'
-        # fig, ax1 = plt.subplots(1, 1, figsize=(23, 22))
-        # fig.subplots_adjust(left=0.13, right=0.895, top=0.81, bottom=0.16)
-        # ax2 = ax1.twinx()
-        # ax1.plot(X, y_8sen,       linestyle='-',  marker='^', label=f"{cc_acc} 8 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
-        # ax1.plot(X, y_4sen,       linestyle='--', marker='^', label=f"{cc_acc} 4 Sensors", mfc='black',                   mec='b', color=povmloc_one_color2)
-        # # ax2.plot(X, y_8sen_error, linestyle='-',  marker='o', label=f"{l_err} 8 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
-        # # ax2.plot(X, y_4sen_error, linestyle='--', marker='o', label=f"{l_err} 4 Sensors",  mfc=Plot.COLOR['povmloc-one'], mec='b', color=Plot.COLOR['povmloc-one'])
-        # # ax1
-        # fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
-        # ax1.set_xlabel('Grid Size', labelpad=20)
-        # ax1.grid(True)
-        # ax1.set_xticks(X)
-        # ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        # ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=50, rotation=12)
-        # ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=povmloc_one_color2)
-        # ax1.set_ylabel(f'{cc_acc} (%)', fontsize=55, color=povmloc_one_color2)
-        # ax1.set_ylim([0, 102])
-        # method = Plot.LEGEND['povmloc-one']
-        # ax1.set_title(f'Performance of {method}', pad=30, fontsize=60, fontweight='bold')
-        # # ax2
-        # ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc-one'])
-        # ax2.set_ylabel(f'{l_err} (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc-one'])
-        # ax2.set_ylim([0, 20.4])
-        # ax2.set_yticks(range(0, 21, 4))
-        # plt.figtext(0.485, 0.01, '(a)')
-        # fig.savefig(figname)
+        # step 2: plotting
+        cc_acc = "$CC_{acc}$"
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(28, 14))
+        fig.subplots_adjust(left=0.085, right=0.99, top=0.91, bottom=0.18, wspace=0.13)
+        ax1.plot(X, povm_one_8sen, linestyle='--', marker='o', label="8 Sensors", mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X, povm_one_4sen, linestyle=':',  marker='o', label="4 Sensors", mec='black', color=Plot.COLOR['povmloc-one'])
+        ax2.plot(X, pqc_one_16sen, linestyle='-',  marker='o', label="16 Sensors",  mec='black', color=Plot.COLOR['qml'])
+        ax2.plot(X, pqc_one_8sen,  linestyle='--', marker='o', label="8 Sensors",  mec='black', color=Plot.COLOR['qml'])
+        ax2.plot(X, pqc_one_4sen,  linestyle=':',  marker='o', label="4 Sensors",  mec='black', color=Plot.COLOR['qml'])
+        # ax1
+        ax1.legend(ncol=1, handlelength=4, loc='lower left')
+        ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
+        ax1.grid(True)
+        ax1.set_xticks(X)
+        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=35, rotation=14)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax1.set_ylabel(f'{cc_acc} (%)')
+        ax1.set_ylim([0, 102])
+        method = Plot.LEGEND['povmloc-one']
+        ax1.set_title(f'Performance of {method}', pad=30, fontsize=45, fontweight='bold')
+        # ax2
+        ax2.legend(ncol=1, handlelength=4, loc='lower left')
+        ax2.grid(True)
+        ax2.set_xlabel('Grid Size', labelpad=10, fontsize=40)
+        ax2.set_xticks(X)
+        ax2.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        ax2.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=35, rotation=14)
+        ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax2.set_ylim([0, 102])
+        method = Plot.LEGEND['qml']
+        ax2.set_title(f'Performance of {method}', pad=30, fontsize=45, fontweight='bold')
+        plt.figtext(0.275, 0.01, '(a)', fontsize=40)
+        plt.figtext(0.76,  0.01, '(b)', fontsize=40)
+        fig.savefig(figname)
 
 
     @staticmethod
@@ -270,8 +259,7 @@ class Plot:
 def discrete_onelevel_varygrid():
     '''evaluate the performance of the single level POVM-Loc One
     '''
-    logs = ['results/discrete.onelevel.varygrid', 'results/discrete.onelevel.varygrid.8sen', \
-            'results/discrete.onelevel.varygrid.qml']
+    logs = ['results/discrete.onelevel.varygrid.qsd', 'results/discrete.onelevel.varygrid.qml']
     data = Utility.read_logs(logs)
     figname = 'results/discrete.onelevel.varygrid.png'
     Plot.discrete_onelevel_varygrid(data, figname)

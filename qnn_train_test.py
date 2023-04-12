@@ -261,7 +261,7 @@ def train_save_onelevel(dataset_dir: str):
         
         print(f'epoch={e}, time = {epoch_time:.2f}, train loss={train_loss[-1]:.4f}, train accuracy={train_acc[-1]:.4f}')
 
-        if e % 5 == 4: # save a model every 5 epochs
+        if e % 10 == 9: # save a model every 10 epochs
             model_dir = dataset_dir.replace('qml-data', 'qml-model')
             if not os.path.exists(model_dir):
                 os.makedirs(model_dir)
@@ -485,8 +485,8 @@ def main1level(continuous: bool):
         # train_save_onelevel_continuous(folder)
     else:
         # time.sleep(2400)
-        sen = 16
-        for length in [2]:
+        sen = 4
+        for length in [10]:
             folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}')
             train_save_onelevel(folder)
         

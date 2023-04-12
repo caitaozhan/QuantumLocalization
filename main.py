@@ -40,12 +40,12 @@ if __name__ == '__main__':
     ## training phase ##
     qls = {}
     if 'povmloc-one' in methods:
-        sensordata = f'sensordata_qsd/onelevel.{grid_length}x{grid_length}.{sensor_num}.json'
+        sensordata = f'sensordata/onelevel.{grid_length}x{grid_length}.{sensor_num}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         ql.train_povmloc_one()
         qls['povmloc-one'] = ql
     if 'povmloc' in methods or 'povmloc-pro' in methods:
-        sensordata = f'sensordata_qsd/twolevel.{grid_length}x{grid_length}.json'
+        sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         ql.train_povmloc()
         qls['povmloc'] = ql
@@ -79,7 +79,7 @@ if __name__ == '__main__':
         # testing discrete
         tx_list = [(x + 0.5, y + 0.5) for x in range(grid_length) for y in range(grid_length)]
         for i, tx in enumerate(tx_list):
-            # if i not in [1, 4, 16, 64]:
+            # if i <= 225:
             #     continue
             myinput = Input(tx, grid_length, sensor_num, noise, continuous)
             outputs = []

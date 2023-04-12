@@ -19,7 +19,7 @@ def plot1():
         # ['povmloc-one', 10, 4, 'discrete.onelevel.varygrid'],
         # ['povmloc-one', 12, 4, 'discrete.onelevel.varygrid'],
         # ['povmloc-one', 14, 4, 'discrete.onelevel.varygrid'],
-        # ['povmloc-one', 16, 4, 'discrete.onelevel.varygrid']
+        # ['povmloc-one', 16, 8, 'discrete.onelevel.varygrid.8sen']
     # ]
     # for i, c in enumerate(config):
     #     command = template.format(c[0], c[1], c[2], c[3])
@@ -27,15 +27,16 @@ def plot1():
     #     p = Popen(command, shell=True)
     #     p.wait()
 
+    
     # qml
-    template = 'python main.py -m {} -l {} -s {} -of {} -rd {}'
 
+    template = 'python main.py -m {} -l {} -s {} -of {} -rd {}'
     config = [
-        ['qml', 2,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 2,  16, 'discrete.onelevel.varygrid.qml'],
         # ['qml', 4,  16, 'discrete.onelevel.varygrid.qml.16sen'],
         # ['qml', 6,  16, 'discrete.onelevel.varygrid.qml.16sen'],
         # ['qml', 8,  16, 'discrete.onelevel.varygrid.qml.16sen'],
-        # ['qml', 10, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        ['qml', 10, 4, 'discrete.onelevel.varygrid.qml.tmp'],
         # ['qml', 12, 16, 'discrete.onelevel.varygrid.qml.16sen'],
         # ['qml', 14, 16, 'discrete.onelevel.varygrid.qml.16sen'],
         # ['qml', 16, 16, 'discrete.onelevel.varygrid.qml.16sen']
@@ -133,8 +134,8 @@ def table():
 
 
 def generate_data():
-    template = "python main.py -m qml -l {} -s 16 -rd  qml-data/{}x{}.16 -gd"
-    grid_length = [2]
+    template = "python main.py -m qml -l {} -s 4 -rd  qml-data/{}x{}.4 -gd"
+    grid_length = [10]
     ps = []
     for gl in grid_length:
         command = template.format(gl, gl, gl)
@@ -151,11 +152,11 @@ def generate_data():
 
 if  __name__ == '__main__':
     
-    # plot1()
+    plot1()
     # plot2()
     # plot3()
 
     # table()
 
-    generate_data()
+    # generate_data()
     

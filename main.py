@@ -137,7 +137,7 @@ if __name__ == '__main__':
             if 'povmloc-one' in methods:
                 ql = qls['povmloc-one']
                 start = time.time()
-                correct, error, pred = ql.povmloc_one(tx, continuous=False)
+                correct, error, pred = ql.povmloc_one(tx, continuous=True)
                 elapse = round(time.time() - start, 2)
                 outputs.append(Output('povmloc-one', correct, localization_error=round(error, 3), pred=pred, elapse=elapse))
             if 'povmloc' in methods:

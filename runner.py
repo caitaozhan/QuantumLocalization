@@ -32,14 +32,14 @@ def plot1():
 
     template = 'python main.py -m {} -l {} -s {} -of {} -rd {}'
     config = [
-        # ['qml', 2,  16, 'discrete.onelevel.varygrid.qml'],
-        # ['qml', 4,  16, 'discrete.onelevel.varygrid.qml.16sen'],
-        # ['qml', 6,  16, 'discrete.onelevel.varygrid.qml.16sen'],
-        # ['qml', 8,  16, 'discrete.onelevel.varygrid.qml.16sen'],
-        ['qml', 10, 4, 'discrete.onelevel.varygrid.qml.tmp'],
-        # ['qml', 12, 16, 'discrete.onelevel.varygrid.qml.16sen'],
-        # ['qml', 14, 16, 'discrete.onelevel.varygrid.qml.16sen'],
-        # ['qml', 16, 16, 'discrete.onelevel.varygrid.qml.16sen']
+        ['qml', 2,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        ['qml', 4,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        ['qml', 6,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        ['qml', 8,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        ['qml', 10, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        ['qml', 12, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        ['qml', 14, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        ['qml', 16, 16, 'discrete.onelevel.varygrid.qml.16sen']
     ]
 
     for i, c in enumerate(config):
@@ -134,11 +134,12 @@ def table():
 
 
 def generate_data():
-    template = "python main.py -m qml -l {} -s 4 -rd  qml-data/{}x{}.4 -gd"
-    grid_length = [10]
+    sen = 16
+    template = "python main.py -m qml -l {} -s {} -rd  qml-data/c.{}x{}.{} -gd -c"
+    grid_length = [2,4,6,8,10,12,14,16]
     ps = []
     for gl in grid_length:
-        command = template.format(gl, gl, gl)
+        command = template.format(gl, sen, gl, gl, sen)
         print(command)
         p = Popen(command, shell=True)
         p.wait()
@@ -152,11 +153,11 @@ def generate_data():
 
 if  __name__ == '__main__':
     
-    plot1()
+    # plot1()
     # plot2()
     # plot3()
 
     # table()
 
-    # generate_data()
+    generate_data()
     

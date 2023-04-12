@@ -279,14 +279,13 @@ def train_save_onelevel_continuous(dataset_dir: str):
     root_dir = os.path.join(dataset_dir, 'train')
     train_dataset = QuantumSensingDataset(root_dir)
     train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
-    # train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
     use_cuda = torch.cuda.is_available()
     device = torch.device('cuda' if use_cuda else 'cpu')
     n_qubits = info['sensor_num']
     area = info['area']
     area_length = area[1][0] - area[0][0]
     model = QuantumMLregression(n_wires=n_qubits).to(device)
-    n_epochs = 100
+    n_epochs = 80
     optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
     scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
 
@@ -324,7 +323,7 @@ def train_save_onelevel_continuous(dataset_dir: str):
         
         print(f'epoch={e}, time = {epoch_time:.2f}, train loss={train_loss[-1]:.4f}, train accuracy={train_error[-1]:.4f}')
 
-        if e % 10 == 9: # save a model every 5 epochs
+        if e % 10 == 9: # save a model every 10 epochs
             model_dir = dataset_dir.replace('qml-data', 'qml-model')
             if not os.path.exists(model_dir):
                 os.makedirs(model_dir)
@@ -479,10 +478,10 @@ def main():
 '''for training qml one level'''
 def main1level(continuous: bool):
     if continuous:
-        folder = os.path.join(os.getcwd(), 'qml-data', '4x4.4.H.cont')
-        train_save_onelevel_continuous(folder)
-        # folder = os.path.join(os.getcwd(), 'qml-data', '16x16.16.H.cont')
-        # train_save_onelevel_continuous(folder)
+        sen = 16
+        for length in [2,4,6,8,10,12,14,16]:
+            folder = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}')
+            train_save_onelevel_continuous(folder)
     else:
         # time.sleep(2400)
         sen = 4
@@ -490,11 +489,6 @@ def main1level(continuous: bool):
             folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}')
             train_save_onelevel(folder)
         
-        # folder = os.path.join(os.getcwd(), 'qml-data', '10x10.16.H')
-        # train_save_onelevel(folder)
-        
-        # folder = os.path.join(os.getcwd(), 'qml-data', '16x16.16.H')
-        # train_save_onelevel(folder)
 
 
 '''for training qml two level'''
@@ -510,7 +504,7 @@ def main2level(continuous: bool):
 
 if __name__ == '__main__':
     # main()
-    main1level(continuous=False)
+    main1level(continuous=True)
     # main2level(continuous=True)
 
 

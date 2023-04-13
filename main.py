@@ -127,8 +127,10 @@ if __name__ == '__main__':
         # tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
         # tx_list = Utility.generate_tx_list('test-5meter', grid_length, sensordata)
         tx_list = []
-        for _ in range(20):
+        for _ in range(25):
             tx_list.extend(Utility.generate_tx_list('filter-5meter', grid_length, sensordata))
+            if grid_length <= 10 and len(tx_list) > 100:
+                break
         for i, tx in enumerate(tx_list):
             # if i not in [0]:
             #     continue

@@ -60,14 +60,14 @@ def plot2():
     template = 'python main.py -m {} -l {} -s {} -of {} -c'
     # povmloc-one
     config = [
-        ['povmloc-one', 2,  8, 'continuous.onelevel.varygrid.8sen.1'],
-        ['povmloc-one', 4,  8, 'continuous.onelevel.varygrid.8sen.1'],
-        ['povmloc-one', 6,  8, 'continuous.onelevel.varygrid.8sen.1'],
-        ['povmloc-one', 8,  8, 'continuous.onelevel.varygrid.8sen.1'],
-        ['povmloc-one', 10, 8, 'continuous.onelevel.varygrid.8sen.1'],
-        ['povmloc-one', 12, 8, 'continuous.onelevel.varygrid.8sen.2'],
-        ['povmloc-one', 14, 8, 'continuous.onelevel.varygrid.8sen.2'],
-        ['povmloc-one', 16, 8, 'continuous.onelevel.varygrid.8sen.2']
+        # ['povmloc-one', 2,  8, 'continuous.onelevel.varygrid.8sen.1'],
+        # ['povmloc-one', 4,  8, 'continuous.onelevel.varygrid.8sen.1'],
+        # ['povmloc-one', 6,  8, 'continuous.onelevel.varygrid.8sen.1'],
+        # ['povmloc-one', 8,  8, 'continuous.onelevel.varygrid.8sen.1'],
+        # ['povmloc-one', 10, 8, 'continuous.onelevel.varygrid.8sen.1'],
+        # ['povmloc-one', 12, 8, 'continuous.onelevel.varygrid.8sen.2'],
+        # ['povmloc-one', 14, 8, 'continuous.onelevel.varygrid.8sen.2'],
+        ['povmloc-one', 16, 8, 'continuous.onelevel.varygrid.8sen.1']
     ]
     for i, c in enumerate(config):
         command = template.format(c[0], c[1], c[2], c[3])

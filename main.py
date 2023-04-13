@@ -129,11 +129,11 @@ if __name__ == '__main__':
         tx_list = []
         for _ in range(25):
             tx_list.extend(Utility.generate_tx_list('filter-5meter', grid_length, sensordata))
-            if grid_length <= 10 and len(tx_list) > 100:
+            if (grid_length <= 10 and len(tx_list) > 100) or grid_length > 10:
                 break
         for i, tx in enumerate(tx_list):
-            # if i not in [0]:
-            #     continue
+            if i >= len(tx_list):
+                continue
             myinput = Input((round(tx[0], 3), round(tx[1], 3)), grid_length, sensor_num, noise, continuous)
             outputs = []
             if 'povmloc-one' in methods:

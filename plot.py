@@ -259,7 +259,7 @@ class Plot:
 def discrete_onelevel_varygrid():
     '''evaluate the performance of the single level POVM-Loc One
     '''
-    logs = ['results/discrete.onelevel.varygrid.qsd', 'results/discrete.onelevel.varygrid.qml']
+    logs = ['results/discrete.onelevel.varygrid.qsd', 'results/discrete.onelevel.varygrid.pqc']
     data = Utility.read_logs(logs)
     figname = 'results/discrete.onelevel.varygrid.png'
     Plot.discrete_onelevel_varygrid(data, figname)

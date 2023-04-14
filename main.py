@@ -161,7 +161,7 @@ if __name__ == '__main__':
                     start = time.time()
                     error, pred = ql.qml(tx, root_dir, continuous=True)
                     elapse = round(time.time() - start, 2)
-                    outputs.append(Output('qml', False, error, pred, elapse))
+                    outputs.append(Output('qml-r', False, error, pred, elapse))
             if 'qml-two' in methods:
                 if not args.generate_data:
                     ql = qls['qml-two']

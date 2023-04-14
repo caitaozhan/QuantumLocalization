@@ -15,11 +15,11 @@ class Plot:
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one',  'povmloc',  'qml']
-    _LEGEND = ['QSD-One',      'TwoLevel', 'PQC-One-C']
+    METHOD  = ['povmloc-one',  'povmloc',  'qml',       'qml-r']
+    _LEGEND = ['QSD-One',      'TwoLevel', 'PQC-One-C', 'PQC-One-R']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
-    _COLOR  = ['r',  'r',        'b']
+    _COLOR  = ['r',            'r',        'b',         'deepskyblue']
     COLOR   = dict(zip(METHOD, _COLOR))
 
     _LINE   = ['-',           '--',       '-']
@@ -136,70 +136,76 @@ class Plot:
 
 
     @staticmethod
-    def povmloc_vary_noise(data: list, figname: str):
-        # step 1.1: prepare accuracy
-        reduce = Plot.reduce_accuracy
-        table = defaultdict(list)
-        for myinput, output_by_method in data:
-            table[int(myinput.noise)].append({method: output.correct for method, output in output_by_method.items()})
-        
-        print_table = []
-        methods = ['povmloc', 'povmloc-pro']
-        for x, list_of_y_by_method in sorted(table.items()):
-            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in methods]
-            print_table.append([x] + tmp_list)
-        print(tabulate.tabulate(print_table, headers=['Noise'] + methods))
-        arr = np.array(print_table)
-        X             = arr[:, 0]
-        y_povmloc     = arr[:, 1] * 100  # percentage
-        y_povmloc_pro = arr[:, 2] * 100
-
-        # step 1.2: prepare localization error
+    def continuous_onelevel_varygrid(data: list, figname: str):
+        # step 1.1: prepare accuracy data for QSD-One and PQC-One
         reduce = Plot.reduce_average
-        table = defaultdict(list)
+        table_qsd_onelevel = defaultdict(list)
+        table_pqc_onelevel = defaultdict(list)
         for myinput, output_by_method in data:
-            table[int(myinput.noise)].append({method: output.localization_error for method, output in output_by_method.items()})
+            for method, output in output_by_method.items():
+                if method == 'povmloc-one':
+                    table_qsd_onelevel[myinput.grid_length].append({myinput.sensor_num: output.localization_error})
+                if method == 'qml-r':
+                    table_pqc_onelevel[myinput.grid_length].append({myinput.sensor_num: output.localization_error})
         
+        print('\nQSD-Onelevel')
         print_table = []
-        methods = ['povmloc', 'povmloc-pro']
-        for x, list_of_y_by_method in sorted(table.items()):
-            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in methods]
+        sensornum = [4, 8]
+        for x, list_of_y_by_sensornum in sorted(table_qsd_onelevel.items()):
+            tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
             print_table.append([x] + tmp_list)
-        print(tabulate.tabulate(print_table, headers=['Noise'] + methods))
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
         arr = np.array(print_table)
-        X                   = arr[:, 0]
-        y_povmloc_error     = arr[:, 1]  # error
-        y_povmloc_pro_error = arr[:, 2]
-        
+        povm_one_4sen = arr[:, 1]
+        povm_one_8sen = arr[:, 2]
+
+        print('PQC-Onelevel')
+        print_table = []
+        sensornum = [4, 8, 16]
+        for x, list_of_y_by_sensornum in sorted(table_pqc_onelevel.items()):
+            tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
+        arr = np.array(print_table)
+        pqc_one_r_4sen  = arr[:, 1]
+        pqc_one_r_8sen  = arr[:, 2]
+        pqc_one_r_16sen = arr[:, 3]
+        X               = arr[:, 0]
+
         # step 2: plotting
-        povmloc_one_color2 = 'black'
-        fig, ax1 = plt.subplots(1, 1, figsize=(23, 22))
-        fig.subplots_adjust(left=0.13, right=0.88, top=0.81, bottom=0.16)
-        ax2 = ax1.twinx()
-        cc_acc = "$CC_{acc}$"
-        l_err  = "$L_{err}$"
-        ourpro_label = Plot.LEGEND['povmloc-pro']
-        our_label    = Plot.LEGEND['povmloc']
-        ax1.plot(X, y_povmloc_pro,       linestyle=Plot.LINE['povmloc-pro'],  marker='^', label=f"{cc_acc} {ourpro_label}", mfc='black',                   mec='b', color=povmloc_one_color2)
-        ax1.plot(X, y_povmloc,           linestyle=Plot.LINE['povmloc'],      marker='^', label=f"{cc_acc} {our_label}",    mfc='black',                   mec='b', color=povmloc_one_color2)
-        ax2.plot(X, y_povmloc_pro_error, linestyle=Plot.LINE['povmloc-pro'],  marker='o', label=f"{l_err} {ourpro_label}",  mfc=Plot.COLOR['povmloc-pro'], mec='b', color=Plot.COLOR['povmloc-pro'])
-        ax2.plot(X, y_povmloc_error,     linestyle=Plot.LINE['povmloc'],      marker='o', label=f"{l_err} {our_label}",     mfc=Plot.COLOR['povmloc-pro'], mec='b', color=Plot.COLOR['povmloc'])
-        fig.legend(ncol=2, loc='upper center', bbox_to_anchor=(0.5, 1), fontsize=52, handlelength=3.5)
+        l_err = "$L_{err}$"
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(28, 14))
+        fig.subplots_adjust(left=0.085, right=0.99, top=0.91, bottom=0.18, wspace=0.13)
+        ax1.plot(X, povm_one_4sen, linestyle=':',  marker='o', label="4 Sensors", mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X, povm_one_8sen, linestyle='--', marker='o', label="8 Sensors", mec='black', color=Plot.COLOR['povmloc-one'])
+        ax2.plot(X, pqc_one_r_4sen,  linestyle=':',  marker='o', label="4 Sensors",   mec='black', color=Plot.COLOR['qml-r'])
+        ax2.plot(X, pqc_one_r_8sen,  linestyle='--', marker='o', label="8 Sensors",   mec='black', color=Plot.COLOR['qml-r'])
+        ax2.plot(X, pqc_one_r_16sen, linestyle='-',  marker='o', label="16 Sensors",  mec='black', color=Plot.COLOR['qml-r'])
         # ax1
+        ax1.legend(ncol=1, handlelength=4, loc='upper left')
+        ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
         ax1.grid(True)
-        ax1.set_xlabel('Noise', labelpad=50)
         ax1.set_xticks(X)
-        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
-        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelsize=60)
-        ax1.set_ylabel(f'{cc_acc} (%)', fontsize=55)
-        ax1.set_ylim([90, 100.2])
-        ax1.set_title(f'Performance of TwoLevel, TwoLevel-Pro', pad=30, fontsize=60, fontweight='bold')
+        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=35, rotation=14)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax1.set_ylabel(f'{l_err} (m)')
+        ax1.set_ylim([0, 40])
+        method = Plot.LEGEND['povmloc-one']
+        ax1.set_title(f'Performance of {method}', pad=30, fontsize=45, fontweight='bold')
         # ax2
-        ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelcolor=Plot.COLOR['povmloc'])
-        ax2.set_ylabel(f'{l_err} (m)', labelpad=10, fontsize=55, color=Plot.COLOR['povmloc'])
-        ax2.set_ylim([0, 1.2])
-        ax2.set_yticks(np.linspace(0, 1.2, 4))
-        plt.figtext(0.475, 0.01, '(b)')
+        ax2.legend(ncol=1, handlelength=4, loc='upper left')
+        ax2.grid(True)
+        ax2.set_xlabel('Grid Size', labelpad=10, fontsize=40)
+        ax2.set_xticks(X)
+        ax2.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        ax2.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=35, rotation=14)
+        ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax2.set_ylim([0, 40])
+        method = Plot.LEGEND['qml-r']
+        ax2.set_title(f'Performance of {method}', pad=30, fontsize=45, fontweight='bold')
+        plt.figtext(0.275, 0.01, '(a)', fontsize=40)
+        plt.figtext(0.76,  0.01, '(b)', fontsize=40)
         fig.savefig(figname)
 
 
@@ -265,14 +271,13 @@ def discrete_onelevel_varygrid():
     Plot.discrete_onelevel_varygrid(data, figname)
 
 
-def povmloc_varynoise():
-    '''evaluate the performance of povmloc and povmloc-pro against varying noise
+def continuous_onelevel_varygrid():
+    '''evaluate the performance of the single level POVM-Loc One
     '''
-    # logs = ['results/twolevel.noise0', 'results/twolevel.noise1', 'results/twolevel.noise2', 'results/twolevel.noise3', 'results/twolevel.noise4']
-    logs = ['results/twolevel.noise']
+    logs = ['results/continuous.onelevel.varygrid.qsd', 'results/continuous.onelevel.varygrid.pqc']
     data = Utility.read_logs(logs)
-    figname = 'results/twolevel-varynoise.2.png'
-    Plot.povmloc_vary_noise(data, figname)
+    figname = 'results/continuous.onelevel.varygrid.png'
+    Plot.continuous_onelevel_varygrid(data, figname)
 
 
 def localization_error_cdf():
@@ -295,7 +300,9 @@ def runtime():
 
 if __name__ == '__main__':
 
-    discrete_onelevel_varygrid()
+    # discrete_onelevel_varygrid()
+
+    continuous_onelevel_varygrid()
 
     # povmloc_varynoise()
 
@@ -306,53 +313,30 @@ if __name__ == '__main__':
 
 '''
 
-POVM-Loc (one level)
+Plot 1 -- discrete onelevel
 
-  Grid Length         4         8
--------------  --------  --------
-            2  1         1
-            4  1         1
-            6  0.861111  1
-            8  0.5625    0.984375
-           10  0.25      0.83
-           12  0.236111  0.611111
-           14  0.173469  0.433673
-           16  0.117188  0.296875
+QSD-Onelevel
+  Grid Length          4         8
+-------------  ---------  --------
+            2  1          1
+            4  1          1
+            6  0.888889   1
+            8  0.578125   0.9375
+           10  0.33       0.68
+           12  0.166667   0.451389
+           14  0.0867347  0.244898
+           16  0.078125   0.12549
+PQC-Onelevel
+  Grid Length         4         8        16
+-------------  --------  --------  --------
+            2  1         1         1
+            4  1         1         1
+            6  0.944444  1         1
+            8  0.890625  1         1
+           10  0.82      1         1
+           12  0.75      0.993056  1
+           14  0.607143  0.928571  1
+           16  0.523438  0.800781  0.949219
 
-
-POVM-Loc and POVM-Loc Pro
-
-  Noise    povmloc    povmloc-pro
--------  ---------  -------------
-      0   0.925781       0.996094
-      1   0.925781       0.992188
-      2   0.929688       0.996094
-      3   0.921875       0.996094
-      4   0.914062       0.992188
-
-
-Runtime
-
-Grid Length    povmloc-one    povmloc    povmloc-pro
--------------  -------------  ---------  -------------
-            2        4.77333    nan            nan
-            4        9.0775     nan            nan
-            6       27.4        nan            nan
-            8       53.06       nan            nan
-           10       80.565      nan            nan
-           12      113.365      nan            nan
-           14      149.387      nan            nan
-           16      193.818       10.256         11.252
-
-Grid Length    povmloc-one    povmloc    povmloc-pro
--------------  -------------  ---------  -------------
-            2         1.04          nan            nan
-            4         1.0675        nan            nan
-            6         1.222         nan            nan
-            8         1.424         nan            nan
-           10         1.626         nan            nan
-           12         1.996         nan            nan
-           14         2.314         nan            nan
-           16         2.666         nan            nan
 
 '''

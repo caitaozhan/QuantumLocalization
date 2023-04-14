@@ -759,20 +759,20 @@ def onelevel_2x2grid_16sen(filename, fig_filename):
     grid_length = 2
     sensors = {
         0:  (0,   0), 
-        1:  (0,   2/3), 
-        2:  (0,   4/3), 
-        3:  (0,   2),
-        4:  (2/3, 0), 
-        5:  (2/3, 2/3), 
-        6:  (2/3, 4/3), 
-        7:  (2/3, 2),
-        8:  (4/3, 0), 
-        9:  (4/3, 2/3), 
-        10: (4/3, 4/3), 
-        11: (4/3, 2),
-        12: (2,   0), 
-        13: (2,   2/3), 
-        14: (2,   4/3), 
+        1:  (0,   2/4), 
+        2:  (0,   4/4), 
+        3:  (0,   6/4),
+        4:  (0,   2), 
+        5:  (2/4, 0), 
+        6:  (2/4, 2), 
+        7:  (1,   0),
+        8:  (1,   2), 
+        9:  (3/2, 0), 
+        10: (3/2, 2), 
+        11: (2,   0),
+        12: (2,   2/4), 
+        13: (2,   4/4), 
+        14: (2,   6/4), 
         15: (2,   2),
     }
 
@@ -1155,8 +1155,8 @@ if __name__ == '__main__':
     # onelevel_4x4grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.6x6.4.json'
     # onelevel_6x6grid_4sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.8x8.4.json'
-    onelevel_8x8grid_4sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.8x8.4.json'
+    # onelevel_8x8grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.10x10.4.json'
     # onelevel_10x10grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.12x12.4.json'
@@ -1187,8 +1187,8 @@ if __name__ == '__main__':
     # onelevel_16x16grid_8sen(filename, fig_filename)
 
     # ONE level 16 sensor
-    # filename = 'sensordata/onelevel.2x2.16.json'
-    # onelevel_2x2grid_16sen(filename, fig_filename)
+    filename = 'sensordata/onelevel.2x2.16.json'
+    onelevel_2x2grid_16sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.4x4.16.json'
     # onelevel_4x4grid_16sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.6x6.16.json'

@@ -479,7 +479,7 @@ def main():
 def main1level(continuous: bool):
     if continuous:
         sen = 16
-        for length in [2,4,6,8,10,12,14,16]:
+        for length in [2]:#,4,6,8,10,12,14,16]:
             folder = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}')
             train_save_onelevel_continuous(folder)
     else:

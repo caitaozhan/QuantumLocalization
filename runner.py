@@ -224,8 +224,8 @@ def generate_data():
 
 if  __name__ == '__main__':
     
-    obsolete_plot1()
-    plot1_part1()
+    # obsolete_plot1()
+    # plot1_part1()
     plot1_part2()
     # plot3()
 

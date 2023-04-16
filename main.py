@@ -132,8 +132,8 @@ if __name__ == '__main__':
             if (grid_length <= 10 and len(tx_list) > 100) or grid_length > 10:
                 break
         for i, tx in enumerate(tx_list):
-            if i > 3:
-                continue
+            # if i > 3:
+            #     continue
             myinput = Input((round(tx[0], 3), round(tx[1], 3)), grid_length, sensor_num, noise, continuous)
             outputs = []
             if 'povmloc-one' in methods:

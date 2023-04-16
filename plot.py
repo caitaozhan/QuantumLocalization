@@ -85,7 +85,7 @@ class Plot:
         povm_one_4sen = arr[:, 1] * 100  # percentage
         povm_one_8sen = arr[:, 2] * 100
 
-        print('PQC-Onelevel')
+        print('PQC-Onelevel-C')
         print_table = []
         sensornum = [4, 8, 16]
         for x, list_of_y_by_sensornum in sorted(table_pqc_onelevel.items()):
@@ -159,7 +159,7 @@ class Plot:
         povm_one_4sen = arr[:, 1]
         povm_one_8sen = arr[:, 2]
 
-        print('PQC-Onelevel')
+        print('PQC-Onelevel-R')
         print_table = []
         sensornum = [4, 8, 16]
         for x, list_of_y_by_sensornum in sorted(table_pqc_onelevel.items()):
@@ -326,7 +326,7 @@ QSD-Onelevel
            12  0.166667   0.451389
            14  0.0867347  0.244898
            16  0.078125   0.12549
-PQC-Onelevel
+PQC-Onelevel-C
   Grid Length         4         8        16
 -------------  --------  --------  --------
             2  1         1         1
@@ -338,5 +338,30 @@ PQC-Onelevel
            14  0.607143  0.928571  1
            16  0.523438  0.800781  0.949219
 
+
+Plot 2 -- continuous one level
+           
+QSD-Onelevel
+  Grid Length         4         8
+-------------  --------  --------
+            2   4.48754   6.89975
+            4   3.92177   4.08887
+            6   5.52066   3.78698
+            8   8.71404   4.36634
+           10  12.6864    5.67271
+           12  19.818     9.14297
+           14  30.9472   12.279
+           16  35.5007   18.3714
+PQC-Onelevel-R
+  Grid Length         4         8       16
+-------------  --------  --------  -------
+            2   1.28724  0.864072  0.64478
+            4   3.60149  1.6246    1.0055
+            6   7.43288  2.55323   1.7387
+            8  12.5013   3.57102   2.15625
+           10  15.5509   5.1482    3.00706
+           12  20.6928   5.72974   4.06911
+           14  24.6972   8.55924   5.05789
+           16  28.8596   8.52706   6.25085
 
 '''

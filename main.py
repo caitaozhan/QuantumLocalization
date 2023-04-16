@@ -45,7 +45,7 @@ if __name__ == '__main__':
         ql.train_povmloc_one()
         qls['povmloc-one'] = ql
     if 'povmloc' in methods or 'povmloc-pro' in methods:
-        sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.json'
+        sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.{sensor_num}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         ql.train_povmloc()
         qls['povmloc'] = ql
@@ -132,7 +132,7 @@ if __name__ == '__main__':
             if (grid_length <= 10 and len(tx_list) > 100) or grid_length > 10:
                 break
         for i, tx in enumerate(tx_list):
-            if i >= len(tx_list):
+            if i > 3:
                 continue
             myinput = Input((round(tx[0], 3), round(tx[1], 3)), grid_length, sensor_num, noise, continuous)
             outputs = []

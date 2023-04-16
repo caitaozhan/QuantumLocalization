@@ -303,7 +303,7 @@ class QuantumLocalization:
                     for rx_i in sensors:          # each evolve operator is a product state of some unitary operators
                         rx = self.sensordata['sensors'][f'{rx_i}']
                         distance = Utility.distance(tx, rx, self.cell_length)
-                        disp, uo = self.unitary_operator.compute(distance, noise=False)  # training has no noise
+                        _, uo = self.unitary_operator.compute_H(distance, noise=False)  # training has no noise
                         evolve = np.kron(evolve, uo)
                     evolve_operators.append(evolve)
                     qstates.append(QuantumState(num_sensor=len(sensors), state_vector=np.dot(evolve, init_state)))

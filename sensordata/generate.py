@@ -1217,20 +1217,20 @@ if __name__ == '__main__':
 
     fig_filename = 'sensordata/tmp.twolevel.png'
     # TWO level 4 sensor
-    filename = 'sensordata/twolevel.16x16.4.json'
-    two_level_16by16grid_4sen(filename, fig_filename)
+    # filename = 'sensordata/twolevel.16x16.4.json'
+    # two_level_16by16grid_4sen(filename, fig_filename)
     
     # TWO level 8 sensor
     # filename = 'sensordata/twolevel.4x4.8.json'
     # two_level_4by4grid_8sen(filename, fig_filename)
     # filename = 'sensordata/twolevel.9x9.8.json'
     # two_level_9by9grid_8sen(filename, fig_filename)
-    # filename = 'sensordata/twolevel.12x12.8.json'
-    # two_level_12by12grid_8sen(filename, fig_filename)
+    filename = 'sensordata/twolevel.12x12.8.json'
+    two_level_12by12grid_8sen(filename, fig_filename)
     # filename = 'sensordata/twolevel.16x16.8.json'
     # two_level_16by16grid_8sen(filename, fig_filename)
 
     # TWO level 16 sensor
-    filename = 'sensordata/twolevel.16x16.16.json'
-    two_level_16by16grid_16sen(filename, fig_filename)
+    # filename = 'sensordata/twolevel.16x16.16.json'
+    # two_level_16by16grid_16sen(filename, fig_filename)
 

@@ -15,14 +15,14 @@ class Plot:
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one',  'povmloc',  'qml-r',   'qml-c',   'qml-r-two']
-    _LEGEND = ['QSD-One',      'QSD-Two',  'PQC-One', 'PQC-One', 'PQC-Two']
+    METHOD  = ['povmloc-one', 'povmloc',  'qml-r',   'qml-r-two', 'qml-c']
+    _LEGEND = ['QSD-One',     'QSD-Two',  'PQC-One', 'PQC-Two',   'PQC-One']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
-    _COLOR  = ['r',            'r',        'b',         'deepskyblue']
+    _COLOR  = ['r',           'lightcoral', 'b',     'cornflowerblue', 'royalblue']
     COLOR   = dict(zip(METHOD, _COLOR))
 
-    _LINE   = ['-',           '--',       '-']
+    _LINE   = ['-',           '--',       '-',        '--',        '-']
     LINE    = dict(zip(METHOD, _LINE))
 
 
@@ -278,7 +278,6 @@ class Plot:
         # step 1.1: prepare accuracy data for QSD-One and PQC-One
         reduce = Plot.reduce_average
         grid_length = 16
-        onelevel_methods = ['povmloc-one', 'qml-r']
         table = defaultdict(list)
         for myinput, output_by_method in data:
             if myinput.grid_length != grid_length:
@@ -286,7 +285,7 @@ class Plot:
             for method, output in output_by_method.items():
                 table[myinput.sensor_num].append({method: output.localization_error})
         
-        print('\nOnelevel')
+        print('\nVarying Sensor #')
         print_table = []
         methods = ['povmloc-one', 'povmloc', 'qml-r', 'qml-r-two']
         for x, list_of_y_by_method in sorted(table.items()):
@@ -295,8 +294,121 @@ class Plot:
         print(tabulate.tabulate(print_table, headers=['Sensor Number'] + methods))
         arr = np.array(print_table)
         povmloc_one = arr[:, 1]
+        povmloc_two = arr[:, 2]
+        qml_r_one   = arr[:, 3]
+        qml_r_two   = arr[:, 4]
+        X_one       = arr[:, 0]
+
+        # return
+
+        # step 2: plotting
+        l_err = "$L_{err}$"
+        fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
+        fig.subplots_adjust(left=0.14, right=0.98, top=0.91, bottom=0.11, wspace=0.13)
+        ind = np.arange(len(X_one))
+        width = 0.15
+        pos1 = ind - 1.5*width
+        pos2 = ind - 0.5*width
+        pos3 = ind + 0.5*width
+        pos4 = ind + 1.5*width
+        ax1.bar(pos1, povmloc_one, width=width, edgecolor='black', label=Plot.LEGEND['povmloc-one'], color=Plot.COLOR['povmloc-one'])
+        ax1.bar(pos2, povmloc_two, width=width, edgecolor='black', label=Plot.LEGEND['povmloc'],     color=Plot.COLOR['povmloc'])
+        ax1.bar(pos3, qml_r_one,   width=width, edgecolor='black', label=Plot.LEGEND['qml-r'],       color=Plot.COLOR['qml-r'])
+        ax1.bar(pos4, qml_r_two,   width=width, edgecolor='black', label=Plot.LEGEND['qml-r-two'],   color=Plot.COLOR['qml-r-two'])
+        ax1.grid(True)
+        ax1.legend(ncol=1, handlelength=4, loc='upper right', fontsize=40)
+        ax1.set_xlabel('Sensor Number', labelpad=10, fontsize=40)
+        X = list(X_one)
+        ax1.set_xticks(ind)
+        ax1.set_xticklabels([f'{int(x)}' for x in X])
+        ax1.tick_params(axis='x', pad=15, length=10, width=5)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax1.set_ylabel(f'{l_err} (m)', labelpad=20)
+        ax1.set_title(f'Localization Performance in a 16x16 Grid', pad=30, fontsize=45, fontweight='bold')
+        fig.savefig(figname)
+
+
+    @staticmethod
+    def error_cdf(data: list, figname: str, sensor_num: int):
+        # fix grid length at 16
+        grid_length = 16
+        table = defaultdict(list)
+        for myinput, output_by_method in data:
+            if myinput.grid_length != grid_length or myinput.sensor_num != sensor_num:
+                continue
+            for method, output in output_by_method.items():
+                if output.localization_error > 90:
+                    print(myinput, '\n', output, '\n')
+                    continue
+                table[method].append(output.localization_error)
+
+        n_bins = 200
+        method_n_bins = []
+        for method, error_list in table.items():
+            print(f'method={method}, avg. error = {np.average(error_list)}, error std. = {np.std(error_list)}')
+            Y, bins, _ = plt.hist(error_list, n_bins, density=True, histtype='step', cumulative=True, label=method)
+            method_n_bins.append((method, Y, bins))
+        # method_n_bins[0], method_n_bins[1] = method_n_bins[1], method_n_bins[0]  # switch ...
+        plt.close()
+        fig, ax = plt.subplots(figsize=(18, 16))
+        fig.subplots_adjust(left=0.15, right=0.96, top=0.9, bottom=0.12)
+        for method, Y, bins in method_n_bins:
+            ax.plot(bins[1:], Y, label=Plot.LEGEND[method], color=Plot.COLOR[method], linestyle=Plot.LINE[method])
+        
+        ax.grid(True)
+        ax.legend(loc='lower right', fontsize=40)
+        ax.set_xlabel('$L_{err}$ (m)', labelpad=20)
+        ax.set_ylabel('Percentage (%)', labelpad=20)
+        Y = np.linspace(0, 1, 6)
+        ax.set_yticks(Y)
+        ax.set_yticklabels([int(y*100) for y in Y])
+        ax.set_ylim([0, 1.003])
+        ax.set_xlim([0, 40])
+        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5)
+        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax.set_title('Cumulative Distribution Function of $L_{err}$', pad=30, fontsize=45, fontweight='bold')
+        fig.savefig(figname)
+        
+
+    @staticmethod
+    def discrete_varygrid(data: list, figname: str):
+        # step 1.1: prepare accuracy data for QSD-One and PQC-One
+        reduce = Plot.reduce_average
+        sensor_num = 8
+        onelevel_methods = ['povmloc-one', 'qml-r']
+        twolevel_methods = ['povmloc', 'qml-r-two']
+        table_onelevel = defaultdict(list)
+        table_twolevel = defaultdict(list)
+        for myinput, output_by_method in data:
+            if myinput.sensor_num != sensor_num:
+                continue
+            for method, output in output_by_method.items():
+                if method in onelevel_methods:
+                    table_onelevel[myinput.grid_length].append({output.method: output.correct})
+                if method in twolevel_methods:
+                    table_twolevel[myinput.grid_length].append({output.method: output.correct})
+        
+        print('\nOnelevel')
+        print_table = []
+        for x, list_of_y_by_method in sorted(table_onelevel.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in onelevel_methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + onelevel_methods))
+        arr = np.array(print_table)
+        povmloc_one = arr[:, 1]
         qml_r_one   = arr[:, 2]
         X_one       = arr[:, 0]
+
+        print('\nTwolevel')
+        print_table = []
+        for x, list_of_y_by_method in sorted(table_twolevel.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in twolevel_methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + twolevel_methods))
+        arr = np.array(print_table)
+        povmloc   = arr[:, 1]
+        qml_r_two = arr[:, 2]
+        X_two     = arr[:, 0]
 
         return
 
@@ -325,43 +437,6 @@ class Plot:
 
 
     @staticmethod
-    def error_cdf(data: list, figname: str):
-        table = defaultdict(list)
-        for myinput, output_by_method in data:
-            for method, output in output_by_method.items():
-                table[method].append(output.localization_error)
-                if output.localization_error > 50:
-                    print(myinput)
-        
-        n_bins = 200
-        method_n_bins = []
-        for method, error_list in table.items():
-            print(f'method={method}, avg. error = {np.average(error_list)}, error std. = {np.std(error_list)}')
-            Y, bins, _ = plt.hist(error_list, n_bins, density=True, histtype='step', cumulative=True, label=method)
-            method_n_bins.append((method, Y, bins))
-        method_n_bins[0], method_n_bins[1] = method_n_bins[1], method_n_bins[0]  # switch ...
-        plt.close()
-        fig, ax = plt.subplots(figsize=(25, 18))
-        fig.subplots_adjust(left=0.15, right=0.97, top=0.9, bottom=0.15)
-        for method, Y, bins in method_n_bins:
-            ax.plot(bins[1:], Y, label=Plot.LEGEND[method], color=Plot.COLOR[method], linestyle=Plot.LINE[method])
-        
-        ax.grid(True)
-        ax.legend(loc='lower right')
-        ax.set_xlabel('$L_{err}$ (m)', labelpad=40)
-        ax.set_ylabel('Percentage (%)', labelpad=40)
-        Y = np.linspace(0, 1, 6)
-        ax.set_yticks(Y)
-        ax.set_yticklabels([int(y*100) for y in Y])
-        ax.set_ylim([0, 1.003])
-        ax.set_xlim([0, 30])
-        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=60)
-        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5, labelsize=60)
-        ax.set_title('CDF of $L_{err}$', pad=30, fontsize=63, fontweight='bold')
-        fig.savefig(figname)
-        
-
-    @staticmethod
     def print_runtime(data: list):
         reduce = Plot.reduce_average
         methods = ['povmloc-one', 'povmloc', 'povmloc-pro']
@@ -380,7 +455,7 @@ class Plot:
 def discrete_onelevel_varygrid():
     '''evaluate the performance of the single level POVM-Loc One
     '''
-    logs = ['results/discrete.onelevel.varygrid.qsd', 'results/discrete.onelevel.varygrid.pqc']
+    logs = ['results/discrete.onelevel.qsd', 'results/discrete.onelevel.pqc']
     data = Utility.read_logs(logs)
     figname = 'results/discrete.onelevel.varygrid.png'
     Plot.discrete_onelevel_varygrid(data, figname)
@@ -389,40 +464,45 @@ def discrete_onelevel_varygrid():
 def continuous_onelevel_varygrid():
     '''evaluate the performance of the single level POVM-Loc One
     '''
-    logs = ['results/continuous.onelevel.varygrid.qsd', 'results/continuous.onelevel.varygrid.pqc']
+    logs = ['results/continuous.onelevel.qsd', 'results/continuous.onelevel.pqc']
     data = Utility.read_logs(logs)
     figname = 'results/continuous.onelevel.varygrid.png'
     Plot.continuous_onelevel_varygrid(data, figname)
 
 
 def continuous_varygrid():
-    '''evaluate the performance of the single level POVM-Loc One
-    '''
-    logs = ['results/continuous.onelevel.varygrid.qsd', 'results/continuous.onelevel.varygrid.pqc',\
-            'results/continuous.twolevel.varygrid.qsd', 'results/continuous.twolevel.varygrid.pqc']
+    logs = ['results/continuous.onelevel.qsd', 'results/continuous.onelevel.pqc',\
+            'results/continuous.twolevel.qsd', 'results/continuous.twolevel.pqc']
     data = Utility.read_logs(logs)
     figname = 'results/continuous.varygrid.png'
     Plot.continuous_varygrid(data, figname)
 
 
 def continuous_varysensornum():
-    '''evaluate the performance of the single level POVM-Loc One
-    '''
-    logs = ['results/continuous.onelevel.varygrid.qsd', 'results/continuous.onelevel.varygrid.pqc',\
-            'results/continuous.twolevel.varygrid.qsd', 'results/continuous.twolevel.varygrid.pqc']
+    logs = ['results/continuous.onelevel.qsd', 'results/continuous.onelevel.pqc',\
+            'results/continuous.twolevel.qsd', 'results/continuous.twolevel.pqc']
     data = Utility.read_logs(logs)
     figname = 'results/continuous.varysensornum.png'
     Plot.continuous_varysensornum(data, figname)
 
 
-
 def localization_error_cdf():
     '''the classic error CDF plot
     '''
-    logs = ['results/twolevel.errorcdf', 'results/onelevel.errorcdf']
+    logs = ['results/continuous.onelevel.qsd', 'results/continuous.onelevel.pqc',\
+            'results/continuous.twolevel.qsd', 'results/continuous.twolevel.pqc']
     data = Utility.read_logs(logs)
-    figname = 'results/error_cdf.png'
-    Plot.error_cdf(data, figname)
+    sensor_num = 8
+    figname = f'results/error_cdf_{sensor_num}.png'
+    Plot.error_cdf(data, figname, sensor_num=8)
+
+
+def discrete_varygrid():
+    logs = ['results/discrete.onelevel.qsd', 'results/discrete.onelevel.pqc',\
+            'results/discrete.twolevel.qsd']#, 'results/discrete.twolevel.pqc']
+    data = Utility.read_logs(logs)
+    figname = 'results/continuous.varygrid.png'
+    Plot.discrete_varygrid(data, figname)
 
 
 def runtime():
@@ -436,24 +516,60 @@ def runtime():
 
 if __name__ == '__main__':
 
+    # obsolete
     # discrete_onelevel_varygrid()
-
     # continuous_onelevel_varygrid()
 
     # continuous_varygrid()
 
-    continuous_varysensornum()
-
-    # povmloc_varynoise()
+    # continuous_varysensornum()
 
     # localization_error_cdf()
+
+    discrete_varygrid()
 
     # runtime()
 
 
 '''
 
-Plot 1 -- discrete onelevel
+Plot 1 -- continuous, fix sensors (8), all four methods, vary grid 
+
+Onelevel
+  Grid Length    povmloc-one     qml-r
+-------------  -------------  --------
+            2        6.89975  0.864072
+            4        4.08887  1.6246
+            6        3.78698  2.55323
+            8        4.36634  3.57102
+            9        5.97415  3.71973
+           10        5.67271  5.1482
+           12        9.14297  5.72974
+           14       12.279    8.55924
+           16       18.3714   8.52706
+
+Twolevel
+  Grid Length    povmloc    qml-r-two
+-------------  ---------  -----------
+            4   12.173        1.26742
+            9   12.8727       3.03796
+           12    9.39258      3.02974
+           16    9.67841      4.86637
+
+
+           
+Plot 2 -- continuous, fix grid size (16x16), all four methods, vary sensor
+
+
+
+
+           
+'''
+
+
+'''
+
+discrete onelevel
 
 QSD-Onelevel
   Grid Length          4         8
@@ -478,8 +594,7 @@ PQC-Onelevel-C
            14  0.607143  0.928571  1
            16  0.523438  0.800781  0.949219
 
-
-Plot 2 -- continuous one level
+continuous one level
            
 QSD-Onelevel
   Grid Length         4         8

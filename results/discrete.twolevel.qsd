@@ -1,0 +1,1491 @@
+{"ground_truth": [0.5, 0.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 0.5], "elapse": 3.65}
+
+{"ground_truth": [0.5, 1.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [2.5, 3.5], "elapse": 3.55}
+
+{"ground_truth": [0.5, 2.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [0.5, 0.5], "elapse": 3.62}
+
+{"ground_truth": [0.5, 3.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 3.5], "elapse": 3.64}
+
+{"ground_truth": [1.5, 0.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [2.5, 3.5], "elapse": 3.51}
+
+{"ground_truth": [1.5, 1.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 1.5], "elapse": 3.62}
+
+{"ground_truth": [1.5, 2.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [2.5, 1.5], "elapse": 6.07}
+
+{"ground_truth": [1.5, 3.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 3.5], "elapse": 4.15}
+
+{"ground_truth": [2.5, 0.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [1.5, 1.5], "elapse": 3.59}
+
+{"ground_truth": [2.5, 1.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 1.5], "elapse": 3.65}
+
+{"ground_truth": [2.5, 2.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 2.5], "elapse": 3.64}
+
+{"ground_truth": [2.5, 3.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 3.5], "elapse": 6.3}
+
+{"ground_truth": [3.5, 0.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [0.5, 2.5], "elapse": 6.14}
+
+{"ground_truth": [3.5, 1.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [0.5, 1.5], "elapse": 3.55}
+
+{"ground_truth": [3.5, 2.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 2.5], "elapse": 6.28}
+
+{"ground_truth": [3.5, 3.5], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 3.5], "elapse": 3.67}
+
+{"ground_truth": [0.5, 0.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 5.5], "elapse": 4.89}
+
+{"ground_truth": [0.5, 1.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 4.5], "elapse": 4.92}
+
+{"ground_truth": [0.5, 2.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [0.5, 3.5], "elapse": 4.88}
+
+{"ground_truth": [0.5, 3.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 3.5], "elapse": 4.88}
+
+{"ground_truth": [0.5, 4.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 4.5], "elapse": 5.02}
+
+{"ground_truth": [0.5, 5.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 5.5], "elapse": 4.87}
+
+{"ground_truth": [0.5, 6.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [0.5, 5.5], "elapse": 4.88}
+
+{"ground_truth": [0.5, 7.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 3.5], "elapse": 8.86}
+
+{"ground_truth": [0.5, 8.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 3.5], "elapse": 4.83}
+
+{"ground_truth": [1.5, 0.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 5.5], "elapse": 4.91}
+
+{"ground_truth": [1.5, 1.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 1.5], "elapse": 4.94}
+
+{"ground_truth": [1.5, 2.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 2.5], "elapse": 4.97}
+
+{"ground_truth": [1.5, 3.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 3.5], "elapse": 4.98}
+
+{"ground_truth": [1.5, 4.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 4.5], "elapse": 4.99}
+
+{"ground_truth": [1.5, 5.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 5.5], "elapse": 5.0}
+
+{"ground_truth": [1.5, 6.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 6.5], "elapse": 5.02}
+
+{"ground_truth": [1.5, 7.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 7.5], "elapse": 4.97}
+
+{"ground_truth": [1.5, 8.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 3.5], "elapse": 4.87}
+
+{"ground_truth": [2.5, 0.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 0.5], "elapse": 7.35}
+
+{"ground_truth": [2.5, 1.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 1.5], "elapse": 4.99}
+
+{"ground_truth": [2.5, 2.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 2.5], "elapse": 5.01}
+
+{"ground_truth": [2.5, 3.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 3.5], "elapse": 9.04}
+
+{"ground_truth": [2.5, 4.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 4.5], "elapse": 9.09}
+
+{"ground_truth": [2.5, 5.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 5.5], "elapse": 9.07}
+
+{"ground_truth": [2.5, 6.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 6.5], "elapse": 4.94}
+
+{"ground_truth": [2.5, 7.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 7.5], "elapse": 5.05}
+
+{"ground_truth": [2.5, 8.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 8.5], "elapse": 5.78}
+
+{"ground_truth": [3.5, 0.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 0.5], "elapse": 4.89}
+
+{"ground_truth": [3.5, 1.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 1.5], "elapse": 4.98}
+
+{"ground_truth": [3.5, 2.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 2.5], "elapse": 4.89}
+
+{"ground_truth": [3.5, 3.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 3.5], "elapse": 4.94}
+
+{"ground_truth": [3.5, 4.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 4.5], "elapse": 5.0}
+
+{"ground_truth": [3.5, 5.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 5.5], "elapse": 4.93}
+
+{"ground_truth": [3.5, 6.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 3.5], "elapse": 9.08}
+
+{"ground_truth": [3.5, 7.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 7.5], "elapse": 4.98}
+
+{"ground_truth": [3.5, 8.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 8.5], "elapse": 4.92}
+
+{"ground_truth": [4.5, 0.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 5.5], "elapse": 5.03}
+
+{"ground_truth": [4.5, 1.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 1.5], "elapse": 4.95}
+
+{"ground_truth": [4.5, 2.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 2.5], "elapse": 9.14}
+
+{"ground_truth": [4.5, 3.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 3.5], "elapse": 5.06}
+
+{"ground_truth": [4.5, 4.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 4.5], "elapse": 5.1}
+
+{"ground_truth": [4.5, 5.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 5.5], "elapse": 5.36}
+
+{"ground_truth": [4.5, 6.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 5.5], "elapse": 9.31}
+
+{"ground_truth": [4.5, 7.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 7.5], "elapse": 5.1}
+
+{"ground_truth": [4.5, 8.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 3.5], "elapse": 5.16}
+
+{"ground_truth": [5.5, 0.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 0.5], "elapse": 5.04}
+
+{"ground_truth": [5.5, 1.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 1.5], "elapse": 5.1}
+
+{"ground_truth": [5.5, 2.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 2.5], "elapse": 9.29}
+
+{"ground_truth": [5.5, 3.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 3.5], "elapse": 5.03}
+
+{"ground_truth": [5.5, 4.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 4.5], "elapse": 5.12}
+
+{"ground_truth": [5.5, 5.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 5.5], "elapse": 5.1}
+
+{"ground_truth": [5.5, 6.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 6.5], "elapse": 9.12}
+
+{"ground_truth": [5.5, 7.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 7.5], "elapse": 5.04}
+
+{"ground_truth": [5.5, 8.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 8.5], "elapse": 4.98}
+
+{"ground_truth": [6.5, 0.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 0.5], "elapse": 5.01}
+
+{"ground_truth": [6.5, 1.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 1.5], "elapse": 5.07}
+
+{"ground_truth": [6.5, 2.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 2.5], "elapse": 5.03}
+
+{"ground_truth": [6.5, 3.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 3.5], "elapse": 9.18}
+
+{"ground_truth": [6.5, 4.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 4.5], "elapse": 9.25}
+
+{"ground_truth": [6.5, 5.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 5.5], "elapse": 9.2}
+
+{"ground_truth": [6.5, 6.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 6.5], "elapse": 5.06}
+
+{"ground_truth": [6.5, 7.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 7.5], "elapse": 5.1}
+
+{"ground_truth": [6.5, 8.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 8.5], "elapse": 5.02}
+
+{"ground_truth": [7.5, 0.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 5.5], "elapse": 9.12}
+
+{"ground_truth": [7.5, 1.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 1.5], "elapse": 5.15}
+
+{"ground_truth": [7.5, 2.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 2.5], "elapse": 5.2}
+
+{"ground_truth": [7.5, 3.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 3.5], "elapse": 5.04}
+
+{"ground_truth": [7.5, 4.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 4.5], "elapse": 5.02}
+
+{"ground_truth": [7.5, 5.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 5.5], "elapse": 5.13}
+
+{"ground_truth": [7.5, 6.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 6.5], "elapse": 5.17}
+
+{"ground_truth": [7.5, 7.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 7.5], "elapse": 5.07}
+
+{"ground_truth": [7.5, 8.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 7.5], "elapse": 9.17}
+
+{"ground_truth": [8.5, 0.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 4.5], "elapse": 5.03}
+
+{"ground_truth": [8.5, 1.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 4.5], "elapse": 4.94}
+
+{"ground_truth": [8.5, 2.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 3.5], "elapse": 4.95}
+
+{"ground_truth": [8.5, 3.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 3.5], "elapse": 4.96}
+
+{"ground_truth": [8.5, 4.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 4.5], "elapse": 5.04}
+
+{"ground_truth": [8.5, 5.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 5.5], "elapse": 4.93}
+
+{"ground_truth": [8.5, 6.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 5.5], "elapse": 5.38}
+
+{"ground_truth": [8.5, 7.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 7.5], "elapse": 11.44}
+
+{"ground_truth": [8.5, 8.5], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 3.5], "elapse": 5.07}
+
+{"ground_truth": [0.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 0.5], "elapse": 6.93}
+
+{"ground_truth": [0.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 1.5], "elapse": 7.04}
+
+{"ground_truth": [0.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 2.5], "elapse": 9.55}
+
+{"ground_truth": [0.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 3.5], "elapse": 7.0}
+
+{"ground_truth": [0.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 4.5], "elapse": 7.04}
+
+{"ground_truth": [0.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 5.5], "elapse": 13.22}
+
+{"ground_truth": [0.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 6.5], "elapse": 13.18}
+
+{"ground_truth": [0.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 7.5], "elapse": 7.09}
+
+{"ground_truth": [0.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 8.5], "elapse": 13.11}
+
+{"ground_truth": [0.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 9.5], "elapse": 7.06}
+
+{"ground_truth": [0.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 10.5], "elapse": 7.01}
+
+{"ground_truth": [0.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 11.5], "elapse": 6.98}
+
+{"ground_truth": [1.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 0.5], "elapse": 7.06}
+
+{"ground_truth": [1.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 1.5], "elapse": 6.98}
+
+{"ground_truth": [1.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 4.5], "elapse": 13.14}
+
+{"ground_truth": [1.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 3.5], "elapse": 14.4}
+
+{"ground_truth": [1.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 4.5], "elapse": 8.14}
+
+{"ground_truth": [1.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 5.5], "elapse": 8.2}
+
+{"ground_truth": [1.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 6.5], "elapse": 15.0}
+
+{"ground_truth": [1.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 7.5], "elapse": 7.52}
+
+{"ground_truth": [1.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 8.5], "elapse": 7.51}
+
+{"ground_truth": [1.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 9.5], "elapse": 14.37}
+
+{"ground_truth": [1.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 10.5], "elapse": 6.96}
+
+{"ground_truth": [1.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 11.5], "elapse": 6.96}
+
+{"ground_truth": [2.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 0.5], "elapse": 6.89}
+
+{"ground_truth": [2.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 1.5], "elapse": 13.11}
+
+{"ground_truth": [2.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [10.5, 0.5], "elapse": 13.1}
+
+{"ground_truth": [2.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 3.5], "elapse": 13.19}
+
+{"ground_truth": [2.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 4.5], "elapse": 13.43}
+
+{"ground_truth": [2.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 5.5], "elapse": 9.65}
+
+{"ground_truth": [2.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 6.5], "elapse": 6.94}
+
+{"ground_truth": [2.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 7.5], "elapse": 13.15}
+
+{"ground_truth": [2.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [1.5, 0.5], "elapse": 13.19}
+
+{"ground_truth": [2.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [1.5, 0.5], "elapse": 13.08}
+
+{"ground_truth": [2.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 10.5], "elapse": 6.98}
+
+{"ground_truth": [2.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 11.5], "elapse": 13.07}
+
+{"ground_truth": [3.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 0.5], "elapse": 6.95}
+
+{"ground_truth": [3.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 1.5], "elapse": 13.16}
+
+{"ground_truth": [3.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 3.5], "elapse": 13.16}
+
+{"ground_truth": [3.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [10.5, 0.5], "elapse": 13.11}
+
+{"ground_truth": [3.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 4.5], "elapse": 7.0}
+
+{"ground_truth": [3.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 5.5], "elapse": 13.11}
+
+{"ground_truth": [3.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [2.5, 6.5], "elapse": 13.11}
+
+{"ground_truth": [3.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 7.5], "elapse": 13.25}
+
+{"ground_truth": [3.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 8.5], "elapse": 13.22}
+
+{"ground_truth": [3.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 8.5], "elapse": 13.23}
+
+{"ground_truth": [3.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 10.5], "elapse": 13.22}
+
+{"ground_truth": [3.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 11.5], "elapse": 13.11}
+
+{"ground_truth": [4.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 0.5], "elapse": 7.0}
+
+{"ground_truth": [4.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 1.5], "elapse": 6.95}
+
+{"ground_truth": [4.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 2.5], "elapse": 13.14}
+
+{"ground_truth": [4.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 3.5], "elapse": 7.01}
+
+{"ground_truth": [4.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 4.5], "elapse": 13.14}
+
+{"ground_truth": [4.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 5.5], "elapse": 13.17}
+
+{"ground_truth": [4.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 6.5], "elapse": 11.95}
+
+{"ground_truth": [4.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 7.5], "elapse": 13.11}
+
+{"ground_truth": [4.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 8.5], "elapse": 8.3}
+
+{"ground_truth": [4.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 9.5], "elapse": 13.15}
+
+{"ground_truth": [4.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 10.5], "elapse": 7.01}
+
+{"ground_truth": [4.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 11.5], "elapse": 6.99}
+
+{"ground_truth": [5.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [6.5, 0.5], "elapse": 13.21}
+
+{"ground_truth": [5.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 1.5], "elapse": 8.29}
+
+{"ground_truth": [5.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 2.5], "elapse": 6.92}
+
+{"ground_truth": [5.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 2.5], "elapse": 13.08}
+
+{"ground_truth": [5.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 4.5], "elapse": 13.17}
+
+{"ground_truth": [5.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [6.5, 5.5], "elapse": 13.1}
+
+{"ground_truth": [5.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 6.5], "elapse": 13.11}
+
+{"ground_truth": [5.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 7.5], "elapse": 13.17}
+
+{"ground_truth": [5.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 9.5], "elapse": 13.03}
+
+{"ground_truth": [5.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 9.5], "elapse": 6.99}
+
+{"ground_truth": [5.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 10.5], "elapse": 13.12}
+
+{"ground_truth": [5.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 11.5], "elapse": 13.11}
+
+{"ground_truth": [6.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 0.5], "elapse": 6.86}
+
+{"ground_truth": [6.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 1.5], "elapse": 6.98}
+
+{"ground_truth": [6.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 2.5], "elapse": 6.92}
+
+{"ground_truth": [6.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 3.5], "elapse": 8.17}
+
+{"ground_truth": [6.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 4.5], "elapse": 13.18}
+
+{"ground_truth": [6.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 5.5], "elapse": 11.87}
+
+{"ground_truth": [6.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 6.5], "elapse": 13.1}
+
+{"ground_truth": [6.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [10.5, 11.5], "elapse": 13.12}
+
+{"ground_truth": [6.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [6.5, 9.5], "elapse": 13.15}
+
+{"ground_truth": [6.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 9.5], "elapse": 6.85}
+
+{"ground_truth": [6.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 10.5], "elapse": 9.52}
+
+{"ground_truth": [6.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 11.5], "elapse": 8.3}
+
+{"ground_truth": [7.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 0.5], "elapse": 6.99}
+
+{"ground_truth": [7.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 1.5], "elapse": 6.94}
+
+{"ground_truth": [7.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 2.5], "elapse": 13.15}
+
+{"ground_truth": [7.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 3.5], "elapse": 7.01}
+
+{"ground_truth": [7.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 4.5], "elapse": 13.12}
+
+{"ground_truth": [7.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 5.5], "elapse": 7.0}
+
+{"ground_truth": [7.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 6.5], "elapse": 7.01}
+
+{"ground_truth": [7.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 7.5], "elapse": 13.13}
+
+{"ground_truth": [7.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 8.5], "elapse": 7.07}
+
+{"ground_truth": [7.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 9.5], "elapse": 13.15}
+
+{"ground_truth": [7.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 10.5], "elapse": 6.93}
+
+{"ground_truth": [7.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 11.5], "elapse": 7.09}
+
+{"ground_truth": [8.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 0.5], "elapse": 8.25}
+
+{"ground_truth": [8.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 1.5], "elapse": 13.24}
+
+{"ground_truth": [8.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 3.5], "elapse": 7.01}
+
+{"ground_truth": [8.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 3.5], "elapse": 7.06}
+
+{"ground_truth": [8.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 4.5], "elapse": 7.03}
+
+{"ground_truth": [8.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 5.5], "elapse": 13.14}
+
+{"ground_truth": [8.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 6.5], "elapse": 13.15}
+
+{"ground_truth": [8.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 7.5], "elapse": 7.02}
+
+{"ground_truth": [8.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 8.5], "elapse": 7.02}
+
+{"ground_truth": [8.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 8.5], "elapse": 6.99}
+
+{"ground_truth": [8.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 10.5], "elapse": 13.15}
+
+{"ground_truth": [8.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 11.5], "elapse": 6.95}
+
+{"ground_truth": [9.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 0.5], "elapse": 13.15}
+
+{"ground_truth": [9.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 1.5], "elapse": 13.13}
+
+{"ground_truth": [9.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [7.5, 5.5], "elapse": 7.05}
+
+{"ground_truth": [9.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 3.5], "elapse": 13.19}
+
+{"ground_truth": [9.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 4.5], "elapse": 13.28}
+
+{"ground_truth": [9.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 5.5], "elapse": 8.28}
+
+{"ground_truth": [9.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 6.5], "elapse": 7.0}
+
+{"ground_truth": [9.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 7.5], "elapse": 13.21}
+
+{"ground_truth": [9.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 8.5], "elapse": 7.0}
+
+{"ground_truth": [9.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [6.5, 7.5], "elapse": 6.99}
+
+{"ground_truth": [9.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 10.5], "elapse": 13.15}
+
+{"ground_truth": [9.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 11.5], "elapse": 6.99}
+
+{"ground_truth": [10.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 0.5], "elapse": 7.01}
+
+{"ground_truth": [10.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 1.5], "elapse": 6.96}
+
+{"ground_truth": [10.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 2.5], "elapse": 13.21}
+
+{"ground_truth": [10.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 3.5], "elapse": 13.19}
+
+{"ground_truth": [10.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 4.5], "elapse": 6.99}
+
+{"ground_truth": [10.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 5.5], "elapse": 6.99}
+
+{"ground_truth": [10.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 6.5], "elapse": 13.18}
+
+{"ground_truth": [10.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 7.5], "elapse": 7.01}
+
+{"ground_truth": [10.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 8.5], "elapse": 13.23}
+
+{"ground_truth": [10.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 9.5], "elapse": 13.15}
+
+{"ground_truth": [10.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 10.5], "elapse": 6.97}
+
+{"ground_truth": [10.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 11.5], "elapse": 7.0}
+
+{"ground_truth": [11.5, 0.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 0.5], "elapse": 7.02}
+
+{"ground_truth": [11.5, 1.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 1.5], "elapse": 7.1}
+
+{"ground_truth": [11.5, 2.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 2.5], "elapse": 13.1}
+
+{"ground_truth": [11.5, 3.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 3.5], "elapse": 6.95}
+
+{"ground_truth": [11.5, 4.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 4.5], "elapse": 6.99}
+
+{"ground_truth": [11.5, 5.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 5.5], "elapse": 13.24}
+
+{"ground_truth": [11.5, 6.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 6.5], "elapse": 7.01}
+
+{"ground_truth": [11.5, 7.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 7.5], "elapse": 7.01}
+
+{"ground_truth": [11.5, 8.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 8.5], "elapse": 7.01}
+
+{"ground_truth": [11.5, 9.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 9.5], "elapse": 10.64}
+
+{"ground_truth": [11.5, 10.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 10.5], "elapse": 6.99}
+
+{"ground_truth": [11.5, 11.5], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 11.5], "elapse": 6.95}
+
+{"ground_truth": [0.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 0.5], "elapse": 7.03}
+
+{"ground_truth": [0.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 1.5], "elapse": 6.99}
+
+{"ground_truth": [0.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 2.5], "elapse": 13.21}
+
+{"ground_truth": [0.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [0.5, 4.5], "elapse": 13.15}
+
+{"ground_truth": [0.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 4.5], "elapse": 13.13}
+
+{"ground_truth": [0.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 5.5], "elapse": 7.06}
+
+{"ground_truth": [0.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 6.5], "elapse": 13.17}
+
+{"ground_truth": [0.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 7.5], "elapse": 13.32}
+
+{"ground_truth": [0.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 8.5], "elapse": 13.32}
+
+{"ground_truth": [0.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 9.5], "elapse": 7.05}
+
+{"ground_truth": [0.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 10.5], "elapse": 7.07}
+
+{"ground_truth": [0.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 11.5], "elapse": 13.18}
+
+{"ground_truth": [0.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 12.5], "elapse": 13.15}
+
+{"ground_truth": [0.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 13.5], "elapse": 7.07}
+
+{"ground_truth": [0.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 14.5], "elapse": 7.06}
+
+{"ground_truth": [0.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [0.5, 15.5], "elapse": 7.02}
+
+{"ground_truth": [1.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 0.5], "elapse": 7.06}
+
+{"ground_truth": [1.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 1.5], "elapse": 7.0}
+
+{"ground_truth": [1.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 2.5], "elapse": 9.45}
+
+{"ground_truth": [1.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 3.5], "elapse": 13.17}
+
+{"ground_truth": [1.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 4.5], "elapse": 13.22}
+
+{"ground_truth": [1.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 5.5], "elapse": 7.07}
+
+{"ground_truth": [1.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 6.5], "elapse": 7.01}
+
+{"ground_truth": [1.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 7.5], "elapse": 13.27}
+
+{"ground_truth": [1.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 8.5], "elapse": 13.22}
+
+{"ground_truth": [1.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 9.5], "elapse": 7.01}
+
+{"ground_truth": [1.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 10.5], "elapse": 7.02}
+
+{"ground_truth": [1.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 11.5], "elapse": 13.38}
+
+{"ground_truth": [1.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 12.5], "elapse": 13.23}
+
+{"ground_truth": [1.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 13.5], "elapse": 13.18}
+
+{"ground_truth": [1.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 14.5], "elapse": 7.05}
+
+{"ground_truth": [1.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [1.5, 15.5], "elapse": 10.78}
+
+{"ground_truth": [2.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 0.5], "elapse": 13.38}
+
+{"ground_truth": [2.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 1.5], "elapse": 7.04}
+
+{"ground_truth": [2.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 2.5], "elapse": 13.3}
+
+{"ground_truth": [2.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 4.5], "elapse": 13.27}
+
+{"ground_truth": [2.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 4.5], "elapse": 13.19}
+
+{"ground_truth": [2.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 5.5], "elapse": 13.13}
+
+{"ground_truth": [2.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 6.5], "elapse": 7.03}
+
+{"ground_truth": [2.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 7.5], "elapse": 13.28}
+
+{"ground_truth": [2.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 8.5], "elapse": 13.26}
+
+{"ground_truth": [2.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 9.5], "elapse": 7.03}
+
+{"ground_truth": [2.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 10.5], "elapse": 7.06}
+
+{"ground_truth": [2.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 11.5], "elapse": 13.27}
+
+{"ground_truth": [2.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 11.5], "elapse": 13.17}
+
+{"ground_truth": [2.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 13.5], "elapse": 13.13}
+
+{"ground_truth": [2.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 14.5], "elapse": 7.01}
+
+{"ground_truth": [2.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [2.5, 15.5], "elapse": 7.06}
+
+{"ground_truth": [3.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 0.5], "elapse": 13.13}
+
+{"ground_truth": [3.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 1.5], "elapse": 13.25}
+
+{"ground_truth": [3.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 4.5], "elapse": 13.18}
+
+{"ground_truth": [3.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 4.5], "elapse": 13.37}
+
+{"ground_truth": [3.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 4.5], "elapse": 13.28}
+
+{"ground_truth": [3.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 5.5], "elapse": 7.04}
+
+{"ground_truth": [3.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 6.5], "elapse": 13.29}
+
+{"ground_truth": [3.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 7.5], "elapse": 7.14}
+
+{"ground_truth": [3.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 8.5], "elapse": 7.04}
+
+{"ground_truth": [3.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 9.5], "elapse": 13.27}
+
+{"ground_truth": [3.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 10.5], "elapse": 13.25}
+
+{"ground_truth": [3.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 2.5], "elapse": 13.38}
+
+{"ground_truth": [3.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 11.5], "elapse": 13.23}
+
+{"ground_truth": [3.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 11.5], "elapse": 13.12}
+
+{"ground_truth": [3.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 14.5], "elapse": 7.06}
+
+{"ground_truth": [3.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [3.5, 15.5], "elapse": 7.05}
+
+{"ground_truth": [4.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 0.5], "elapse": 7.09}
+
+{"ground_truth": [4.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 1.5], "elapse": 13.2}
+
+{"ground_truth": [4.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 4.5], "elapse": 13.12}
+
+{"ground_truth": [4.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [15.5, 1.5], "elapse": 13.14}
+
+{"ground_truth": [4.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 4.5], "elapse": 13.31}
+
+{"ground_truth": [4.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 5.5], "elapse": 9.51}
+
+{"ground_truth": [4.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 6.5], "elapse": 13.2}
+
+{"ground_truth": [4.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [0.5, 2.5], "elapse": 13.06}
+
+{"ground_truth": [4.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 8.5], "elapse": 13.13}
+
+{"ground_truth": [4.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 9.5], "elapse": 13.24}
+
+{"ground_truth": [4.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 10.5], "elapse": 7.03}
+
+{"ground_truth": [4.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [2.5, 0.5], "elapse": 13.16}
+
+{"ground_truth": [4.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [2.5, 0.5], "elapse": 13.12}
+
+{"ground_truth": [4.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [4.5, 11.5], "elapse": 13.11}
+
+{"ground_truth": [4.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 14.5], "elapse": 13.25}
+
+{"ground_truth": [4.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [4.5, 15.5], "elapse": 13.2}
+
+{"ground_truth": [5.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 0.5], "elapse": 7.07}
+
+{"ground_truth": [5.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 1.5], "elapse": 7.08}
+
+{"ground_truth": [5.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 2.5], "elapse": 13.18}
+
+{"ground_truth": [5.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 4.5], "elapse": 7.14}
+
+{"ground_truth": [5.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 4.5], "elapse": 7.05}
+
+{"ground_truth": [5.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 5.5], "elapse": 6.99}
+
+{"ground_truth": [5.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 6.5], "elapse": 13.18}
+
+{"ground_truth": [5.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 7.5], "elapse": 13.26}
+
+{"ground_truth": [5.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [3.5, 8.5], "elapse": 13.15}
+
+{"ground_truth": [5.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 9.5], "elapse": 13.11}
+
+{"ground_truth": [5.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 10.5], "elapse": 7.07}
+
+{"ground_truth": [5.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 11.5], "elapse": 7.1}
+
+{"ground_truth": [5.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [5.5, 11.5], "elapse": 13.14}
+
+{"ground_truth": [5.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 13.5], "elapse": 13.21}
+
+{"ground_truth": [5.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 14.5], "elapse": 7.03}
+
+{"ground_truth": [5.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [5.5, 15.5], "elapse": 7.05}
+
+{"ground_truth": [6.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 0.5], "elapse": 13.2}
+
+{"ground_truth": [6.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 1.5], "elapse": 6.97}
+
+{"ground_truth": [6.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 2.5], "elapse": 6.98}
+
+{"ground_truth": [6.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 3.5], "elapse": 13.14}
+
+{"ground_truth": [6.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 4.5], "elapse": 13.14}
+
+{"ground_truth": [6.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 5.5], "elapse": 13.17}
+
+{"ground_truth": [6.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 6.5], "elapse": 13.13}
+
+{"ground_truth": [6.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [0.5, 2.5], "elapse": 13.11}
+
+{"ground_truth": [6.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 8.5], "elapse": 13.17}
+
+{"ground_truth": [6.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 9.5], "elapse": 13.17}
+
+{"ground_truth": [6.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 10.5], "elapse": 13.15}
+
+{"ground_truth": [6.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 11.5], "elapse": 13.29}
+
+{"ground_truth": [6.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 12.5], "elapse": 13.22}
+
+{"ground_truth": [6.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 13.5], "elapse": 7.05}
+
+{"ground_truth": [6.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 14.5], "elapse": 7.01}
+
+{"ground_truth": [6.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [6.5, 15.5], "elapse": 13.19}
+
+{"ground_truth": [7.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 0.5], "elapse": 13.27}
+
+{"ground_truth": [7.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 1.5], "elapse": 13.32}
+
+{"ground_truth": [7.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 2.5], "elapse": 13.22}
+
+{"ground_truth": [7.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 3.5], "elapse": 13.12}
+
+{"ground_truth": [7.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [7.5, 3.5], "elapse": 13.1}
+
+{"ground_truth": [7.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 5.5], "elapse": 13.16}
+
+{"ground_truth": [7.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 6.5], "elapse": 13.18}
+
+{"ground_truth": [7.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 7.5], "elapse": 13.22}
+
+{"ground_truth": [7.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 7.5], "elapse": 13.19}
+
+{"ground_truth": [7.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [0.5, 13.5], "elapse": 13.14}
+
+{"ground_truth": [7.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 10.5], "elapse": 13.35}
+
+{"ground_truth": [7.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [7.5, 12.5], "elapse": 13.18}
+
+{"ground_truth": [7.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 12.5], "elapse": 13.23}
+
+{"ground_truth": [7.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 13.5], "elapse": 13.27}
+
+{"ground_truth": [7.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [7.5, 14.5], "elapse": 13.27}
+
+{"ground_truth": [7.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 15.5], "elapse": 13.27}
+
+{"ground_truth": [8.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 0.5], "elapse": 13.28}
+
+{"ground_truth": [8.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 1.5], "elapse": 13.27}
+
+{"ground_truth": [8.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 2.5], "elapse": 13.33}
+
+{"ground_truth": [8.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 3.5], "elapse": 13.22}
+
+{"ground_truth": [8.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 4.5], "elapse": 13.22}
+
+{"ground_truth": [8.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [15.5, 1.5], "elapse": 13.16}
+
+{"ground_truth": [8.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 6.5], "elapse": 13.16}
+
+{"ground_truth": [8.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [15.5, 2.5], "elapse": 13.13}
+
+{"ground_truth": [8.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [2.5, 15.5], "elapse": 13.06}
+
+{"ground_truth": [8.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 9.5], "elapse": 6.98}
+
+{"ground_truth": [8.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 10.5], "elapse": 13.12}
+
+{"ground_truth": [8.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [8.5, 12.5], "elapse": 13.1}
+
+{"ground_truth": [8.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 12.5], "elapse": 6.97}
+
+{"ground_truth": [8.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 13.5], "elapse": 13.14}
+
+{"ground_truth": [8.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 14.5], "elapse": 13.15}
+
+{"ground_truth": [8.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [8.5, 15.5], "elapse": 13.16}
+
+{"ground_truth": [9.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 0.5], "elapse": 13.19}
+
+{"ground_truth": [9.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 1.5], "elapse": 7.0}
+
+{"ground_truth": [9.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 2.5], "elapse": 7.01}
+
+{"ground_truth": [9.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 3.5], "elapse": 7.06}
+
+{"ground_truth": [9.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 4.5], "elapse": 13.15}
+
+{"ground_truth": [9.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 5.5], "elapse": 13.09}
+
+{"ground_truth": [9.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 6.5], "elapse": 13.06}
+
+{"ground_truth": [9.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 7.5], "elapse": 13.2}
+
+{"ground_truth": [9.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [15.5, 13.5], "elapse": 13.04}
+
+{"ground_truth": [9.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 9.5], "elapse": 13.06}
+
+{"ground_truth": [9.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 10.5], "elapse": 13.07}
+
+{"ground_truth": [9.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 11.5], "elapse": 13.18}
+
+{"ground_truth": [9.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 12.5], "elapse": 13.13}
+
+{"ground_truth": [9.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 13.5], "elapse": 7.0}
+
+{"ground_truth": [9.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 14.5], "elapse": 7.02}
+
+{"ground_truth": [9.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [9.5, 15.5], "elapse": 7.04}
+
+{"ground_truth": [10.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 0.5], "elapse": 7.09}
+
+{"ground_truth": [10.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 1.5], "elapse": 7.02}
+
+{"ground_truth": [10.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 2.5], "elapse": 13.06}
+
+{"ground_truth": [10.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [10.5, 4.5], "elapse": 13.15}
+
+{"ground_truth": [10.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 4.5], "elapse": 7.13}
+
+{"ground_truth": [10.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 5.5], "elapse": 11.87}
+
+{"ground_truth": [10.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 6.5], "elapse": 13.08}
+
+{"ground_truth": [10.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 7.5], "elapse": 13.13}
+
+{"ground_truth": [10.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 8.5], "elapse": 13.22}
+
+{"ground_truth": [10.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 9.5], "elapse": 13.08}
+
+{"ground_truth": [10.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 10.5], "elapse": 7.01}
+
+{"ground_truth": [10.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 11.5], "elapse": 7.05}
+
+{"ground_truth": [10.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [10.5, 11.5], "elapse": 13.13}
+
+{"ground_truth": [10.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 13.5], "elapse": 13.07}
+
+{"ground_truth": [10.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 14.5], "elapse": 7.0}
+
+{"ground_truth": [10.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [10.5, 15.5], "elapse": 7.04}
+
+{"ground_truth": [11.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 0.5], "elapse": 13.07}
+
+{"ground_truth": [11.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 1.5], "elapse": 13.12}
+
+{"ground_truth": [11.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 4.5], "elapse": 13.06}
+
+{"ground_truth": [11.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 4.5], "elapse": 7.02}
+
+{"ground_truth": [11.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 4.5], "elapse": 7.03}
+
+{"ground_truth": [11.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 5.5], "elapse": 7.04}
+
+{"ground_truth": [11.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 6.5], "elapse": 13.12}
+
+{"ground_truth": [11.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [12.5, 7.5], "elapse": 13.1}
+
+{"ground_truth": [11.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [12.5, 8.5], "elapse": 13.06}
+
+{"ground_truth": [11.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 9.5], "elapse": 13.23}
+
+{"ground_truth": [11.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 10.5], "elapse": 7.04}
+
+{"ground_truth": [11.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 11.5], "elapse": 10.67}
+
+{"ground_truth": [11.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 11.5], "elapse": 9.49}
+
+{"ground_truth": [11.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 11.5], "elapse": 13.08}
+
+{"ground_truth": [11.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 14.5], "elapse": 10.68}
+
+{"ground_truth": [11.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [11.5, 15.5], "elapse": 13.11}
+
+{"ground_truth": [12.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 0.5], "elapse": 13.17}
+
+{"ground_truth": [12.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [12.5, 1.5], "elapse": 13.13}
+
+{"ground_truth": [12.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 4.5], "elapse": 13.06}
+
+{"ground_truth": [12.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 4.5], "elapse": 8.25}
+
+{"ground_truth": [12.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 4.5], "elapse": 9.51}
+
+{"ground_truth": [12.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 5.5], "elapse": 13.14}
+
+{"ground_truth": [12.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [12.5, 6.5], "elapse": 13.14}
+
+{"ground_truth": [12.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [12.5, 7.5], "elapse": 7.02}
+
+{"ground_truth": [12.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [12.5, 8.5], "elapse": 7.02}
+
+{"ground_truth": [12.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [12.5, 9.5], "elapse": 13.3}
+
+{"ground_truth": [12.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 10.5], "elapse": 13.23}
+
+{"ground_truth": [12.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 11.5], "elapse": 13.27}
+
+{"ground_truth": [12.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 11.5], "elapse": 13.25}
+
+{"ground_truth": [12.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 11.5], "elapse": 13.13}
+
+{"ground_truth": [12.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 14.5], "elapse": 13.21}
+
+{"ground_truth": [12.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [12.5, 15.5], "elapse": 13.13}
+
+{"ground_truth": [13.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 0.5], "elapse": 13.22}
+
+{"ground_truth": [13.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 1.5], "elapse": 9.51}
+
+{"ground_truth": [13.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 2.5], "elapse": 13.18}
+
+{"ground_truth": [13.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 4.5], "elapse": 13.14}
+
+{"ground_truth": [13.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 4.5], "elapse": 13.13}
+
+{"ground_truth": [13.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 5.5], "elapse": 13.2}
+
+{"ground_truth": [13.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 6.5], "elapse": 7.08}
+
+{"ground_truth": [13.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 7.5], "elapse": 13.18}
+
+{"ground_truth": [13.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 8.5], "elapse": 13.35}
+
+{"ground_truth": [13.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 9.5], "elapse": 7.14}
+
+{"ground_truth": [13.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 10.5], "elapse": 13.15}
+
+{"ground_truth": [13.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 11.5], "elapse": 13.11}
+
+{"ground_truth": [13.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [11.5, 11.5], "elapse": 7.06}
+
+{"ground_truth": [13.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 13.5], "elapse": 13.15}
+
+{"ground_truth": [13.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 14.5], "elapse": 7.04}
+
+{"ground_truth": [13.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [13.5, 15.5], "elapse": 9.53}
+
+{"ground_truth": [14.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 0.5], "elapse": 7.11}
+
+{"ground_truth": [14.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 1.5], "elapse": 7.06}
+
+{"ground_truth": [14.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 2.5], "elapse": 7.05}
+
+{"ground_truth": [14.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 3.5], "elapse": 13.2}
+
+{"ground_truth": [14.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 4.5], "elapse": 13.2}
+
+{"ground_truth": [14.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 5.5], "elapse": 7.07}
+
+{"ground_truth": [14.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 6.5], "elapse": 7.08}
+
+{"ground_truth": [14.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 7.5], "elapse": 13.24}
+
+{"ground_truth": [14.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 8.5], "elapse": 13.25}
+
+{"ground_truth": [14.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 9.5], "elapse": 7.04}
+
+{"ground_truth": [14.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 10.5], "elapse": 7.14}
+
+{"ground_truth": [14.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 11.5], "elapse": 7.11}
+
+{"ground_truth": [14.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [14.5, 11.5], "elapse": 13.19}
+
+{"ground_truth": [14.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 13.5], "elapse": 13.17}
+
+{"ground_truth": [14.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 14.5], "elapse": 7.05}
+
+{"ground_truth": [14.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [14.5, 15.5], "elapse": 7.09}
+
+{"ground_truth": [15.5, 0.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 0.5], "elapse": 7.05}
+
+{"ground_truth": [15.5, 1.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 1.5], "elapse": 7.11}
+
+{"ground_truth": [15.5, 2.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 2.5], "elapse": 7.12}
+
+{"ground_truth": [15.5, 3.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 3.5], "elapse": 13.13}
+
+{"ground_truth": [15.5, 4.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 4.5], "elapse": 13.2}
+
+{"ground_truth": [15.5, 5.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 5.5], "elapse": 7.11}
+
+{"ground_truth": [15.5, 6.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 6.5], "elapse": 13.2}
+
+{"ground_truth": [15.5, 7.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": false, "localization_error": -1, "pred": [15.5, 8.5], "elapse": 13.26}
+
+{"ground_truth": [15.5, 8.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 8.5], "elapse": 7.11}
+
+{"ground_truth": [15.5, 9.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 9.5], "elapse": 13.23}
+
+{"ground_truth": [15.5, 10.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 10.5], "elapse": 7.11}
+
+{"ground_truth": [15.5, 11.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 11.5], "elapse": 13.12}
+
+{"ground_truth": [15.5, 12.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 12.5], "elapse": 7.11}
+
+{"ground_truth": [15.5, 13.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 13.5], "elapse": 7.11}
+
+{"ground_truth": [15.5, 14.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 14.5], "elapse": 7.1}
+
+{"ground_truth": [15.5, 15.5], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": false}
+{"method": "povmloc", "correct": true, "localization_error": -1, "pred": [15.5, 15.5], "elapse": 7.07}
+

@@ -420,7 +420,7 @@ def train_save_twolevel_continuous(folder: str):
         area = info['area']
         area_length = area[1][0] - area[0][0]   # area is either the whole grid (level0) or a block (level1)
         model = QuantumMLregression(n_wires=n_qubits).to(device)
-        n_epochs = 100
+        n_epochs = 80
         optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
         scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
         
@@ -494,8 +494,12 @@ def main1level(continuous: bool):
 '''for training qml two level'''
 def main2level(continuous: bool):
     if continuous:
-        folder = os.path.join(os.getcwd(), 'qml-data', '16x16.two.H.cont')
-        train_save_twolevel_continuous(folder)        
+        # sen = 8
+        # for length in [4,9,12,16]:
+        length = 16
+        for sen in [4,16]:
+            folder = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}.two')
+            train_save_twolevel_continuous(folder)        
     else:
         folder = os.path.join(os.getcwd(), 'qml-data', '40x40.two')
         train_save_twolevel(folder)
@@ -504,8 +508,8 @@ def main2level(continuous: bool):
 
 if __name__ == '__main__':
     # main()
-    main1level(continuous=True)
-    # main2level(continuous=True)
+    # main1level(continuous=True)
+    main2level(continuous=True)
 
 
 

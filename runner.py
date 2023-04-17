@@ -57,63 +57,65 @@ def plot1_part1():
     #         Y: CC_accuracy,  X: varying grid size
     
                                # length, size, noise, continuous
-    template = 'python main.py -m {} -l {} -s {} -of {} -c'
+    # template = 'python main.py -m {} -l {} -s {} -of {} -c'
     # povmloc-one
-    config = [
+    # config = [
         # ['povmloc-one', 2,  8, 'continuous.onelevel.varygrid.8sen.1'],
         # ['povmloc-one', 4,  8, 'continuous.onelevel.varygrid.8sen.1'],
         # ['povmloc-one', 6,  8, 'continuous.onelevel.varygrid.8sen.1'],
         # ['povmloc-one', 8,  8, 'continuous.onelevel.varygrid.8sen.1'],
-        ['povmloc-one', 9,  8, 'continuous.onelevel.varygrid.8sen'],
+        # ['povmloc-one', 9,  8, 'continuous.onelevel.varygrid.8sen'],
         # ['povmloc-one', 10, 8, 'continuous.onelevel.varygrid.8sen.1'],
         # ['povmloc-one', 12, 8, 'continuous.onelevel.varygrid.8sen.2'],
         # ['povmloc-one', 14, 8, 'continuous.onelevel.varygrid.8sen.2'],
     #     ['povmloc-one', 16, 8, 'continuous.onelevel.varygrid.8sen.1']
-    ]
-    for i, c in enumerate(config):
-        command = template.format(c[0], c[1], c[2], c[3])
-        print(command)
-        p = Popen(command, shell=True)
-        p.wait()
+    # ]
+    # for i, c in enumerate(config):
+    #     command = template.format(c[0], c[1], c[2], c[3])
+    #     print(command)
+    #     p = Popen(command, shell=True)
+    #     p.wait()
 
     
     # qml
 
-    # template = 'python main.py -m {} -l {} -s {} -of {} -rd {} -c'
-    # config = [
+    template = 'python main.py -m {} -l {} -s {} -of {} -rd {} -c'
+    config = [
         # ['qml', 2,  16, 'discrete.onelevel.varygrid.pqc.4sen'],
         # ['qml', 4,  16, 'discrete.onelevel.varygrid.pqc.16sen'],
         # ['qml', 6,  16, 'discrete.onelevel.varygrid.pqc.16sen'],
         # ['qml', 8,  16, 'discrete.onelevel.varygrid.pqc.16sen'],
+        ['qml', 9, 8, 'discrete.onelevel.varygrid.pqc.8sen'],
         # ['qml', 10, 16, 'discrete.onelevel.varygrid.pqc.16sen'],
         # ['qml', 12, 16, 'discrete.onelevel.varygrid.pqc.16sen'],
         # ['qml', 14, 16, 'discrete.onelevel.varygrid.pqc.16sen'],
         # ['qml', 16, 16, 'discrete.onelevel.varygrid.pqc.16sen']
-    # ]
+    ]
 
-    # for i, c in enumerate(config):
-    #     rood_dir = f'qml-data/c.{c[1]}x{c[1]}.{c[2]}'
-    #     command = template.format(c[0], c[1], c[2], c[3], rood_dir)
-    #     print(command)
-    #     sys.stdout.flush()
-    #     p = Popen(command, shell=True)
-    #     p.wait()
+    for i, c in enumerate(config):
+        root_dir = f'qml-data/c.{c[1]}x{c[1]}.{c[2]}'
+        command = template.format(c[0], c[1], c[2], c[3], root_dir)
+        print(command)
+        sys.stdout.flush()
+        p = Popen(command, shell=True)
+        p.wait()
 
 def plot1_part2():
     # plot 1: Continuous case. Methods: QSD-One, PQC-One, QSD-Two, and PQC-Two. 
     #         Y: CC_accuracy,  X: varying grid size
     
                                # length, size, noise, continuous
-    template = 'python main.py -m {} -l {} -s {} -of {} -c'
+    template = 'python main.py -m {} -l {} -s {} -of {} -rd {} -c'
     # povmloc
     config = [
-        ['povmloc', 4,  8, 'continuous.twolevel.varygrid.qsd'],
-        ['povmloc', 9,  8, 'continuous.twolevel.varygrid.qsd'],
-        ['povmloc', 12, 8, 'continuous.twolevel.varygrid.qsd'],
-        ['povmloc', 16, 8, 'continuous.twolevel.varygrid.qsd']
+        ['qml-two', 4,  8, 'continuous.twolevel.varygrid.pqc'],
+        ['qml-two', 9,  8, 'continuous.twolevel.varygrid.pqc'],
+        ['qml-two', 12, 8, 'continuous.twolevel.varygrid.pqc'],
+        ['qml-two', 16, 8, 'continuous.twolevel.varygrid.pqc']
     ]
     for i, c in enumerate(config):
-        command = template.format(c[0], c[1], c[2], c[3])
+        root_dir = f'qml-data/c.{c[1]}x{c[1]}.{c[2]}.two'
+        command = template.format(c[0], c[1], c[2], c[3], root_dir)
         print(command)
         p = Popen(command, shell=True)
         p.wait()
@@ -205,11 +207,13 @@ def table():
 
 
 def generate_data():
-    sen = 8
-    template = "python main.py -m qml -l {} -s {} -rd  qml-data/c.{}x{}.{} -gd -c"
-    grid_length = [9]#,4,6,8,10,12,14,16]
-    ps = []
-    for gl in grid_length:
+    template = "python main.py -m qml-two -l {} -s {} -rd  qml-data/c.{}x{}.{}.two -gd -c"
+    # sen = 16
+    # grid_length = [4,16]
+    gl = 16
+    sensornum = [4, 16]
+    # ps = []
+    for sen in sensornum:
         command = template.format(gl, sen, gl, gl, sen)
         print(command)
         p = Popen(command, shell=True)
@@ -226,10 +230,10 @@ if  __name__ == '__main__':
     
     # obsolete_plot1()
     # plot1_part1()
-    plot1_part2()
+    # plot1_part2()
     # plot3()
 
     # table()
 
-    # generate_data()
+    generate_data()
     

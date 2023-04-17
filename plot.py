@@ -15,8 +15,8 @@ class Plot:
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one',  'povmloc',  'qml',       'qml-r']
-    _LEGEND = ['QSD-One',      'TwoLevel', 'PQC-One-C', 'PQC-One-R']
+    METHOD  = ['povmloc-one',  'povmloc',  'qml-r',   'qml-c',   'qml-r-two']
+    _LEGEND = ['QSD-One',      'QSD-Two',  'PQC-One', 'PQC-One', 'PQC-Two']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
     _COLOR  = ['r',            'r',        'b',         'deepskyblue']
@@ -210,6 +210,121 @@ class Plot:
 
 
     @staticmethod
+    def continuous_varygrid(data: list, figname: str):
+        # step 1.1: prepare accuracy data for QSD-One and PQC-One
+        reduce = Plot.reduce_average
+        sensor_num = 8
+        onelevel_methods = ['povmloc-one', 'qml-r']
+        twolevel_methods = ['povmloc', 'qml-r-two']
+        table_onelevel = defaultdict(list)
+        table_twolevel = defaultdict(list)
+        for myinput, output_by_method in data:
+            if myinput.sensor_num != sensor_num:
+                continue
+            for method, output in output_by_method.items():
+                if method in onelevel_methods:
+                    table_onelevel[myinput.grid_length].append({output.method: output.localization_error})
+                if method in twolevel_methods:
+                    table_twolevel[myinput.grid_length].append({output.method: output.localization_error})
+        
+        print('\nOnelevel')
+        print_table = []
+        for x, list_of_y_by_method in sorted(table_onelevel.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in onelevel_methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + onelevel_methods))
+        arr = np.array(print_table)
+        povmloc_one = arr[:, 1]
+        qml_r_one   = arr[:, 2]
+        X_one       = arr[:, 0]
+
+        print('\nTwolevel')
+        print_table = []
+        for x, list_of_y_by_method in sorted(table_twolevel.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in twolevel_methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + twolevel_methods))
+        arr = np.array(print_table)
+        povmloc   = arr[:, 1]
+        qml_r_two = arr[:, 2]
+        X_two     = arr[:, 0]
+
+        # step 2: plotting
+        l_err = "$L_{err}$"
+        fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
+        fig.subplots_adjust(left=0.15, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
+        ax1.plot(X_one, povmloc_one, linestyle=':', marker='o', label=Plot.LEGEND['povmloc-one'], mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X_two, povmloc,     linestyle='-', marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X_one, qml_r_one,   linestyle=':', marker='o', label=Plot.LEGEND['qml-r'],       mec='black', color=Plot.COLOR['qml-r'])
+        ax1.plot(X_two, qml_r_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-r-two'],   mec='black', color=Plot.COLOR['qml-r'])
+        # ax1
+        ax1.legend(ncol=1, handlelength=4, loc='upper left')
+        ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
+        ax1.grid(True)
+        X = list(X_one)
+        X.remove(9)
+        ax1.set_xticks(X)
+        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=38, rotation=10)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax1.set_ylabel(f'{l_err} (m)')
+        # ax1.set_ylim([0, 40])
+        ax1.set_title(f'Performance of Localization Algorithms', pad=30, fontsize=45, fontweight='bold')
+        fig.savefig(figname)
+
+
+    @staticmethod
+    def continuous_varysensornum(data: list, figname: str):
+        # step 1.1: prepare accuracy data for QSD-One and PQC-One
+        reduce = Plot.reduce_average
+        grid_length = 16
+        onelevel_methods = ['povmloc-one', 'qml-r']
+        table = defaultdict(list)
+        for myinput, output_by_method in data:
+            if myinput.grid_length != grid_length:
+                continue
+            for method, output in output_by_method.items():
+                table[myinput.sensor_num].append({method: output.localization_error})
+        
+        print('\nOnelevel')
+        print_table = []
+        methods = ['povmloc-one', 'povmloc', 'qml-r', 'qml-r-two']
+        for x, list_of_y_by_method in sorted(table.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Sensor Number'] + methods))
+        arr = np.array(print_table)
+        povmloc_one = arr[:, 1]
+        qml_r_one   = arr[:, 2]
+        X_one       = arr[:, 0]
+
+        return
+
+        # step 2: plotting
+        l_err = "$L_{err}$"
+        fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
+        fig.subplots_adjust(left=0.15, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
+        ax1.plot(X_one, povmloc_one, linestyle=':', marker='o', label=Plot.LEGEND['povmloc-one'], mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X_two, povmloc,     linestyle='-', marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X_one, qml_r_one,   linestyle=':', marker='o', label=Plot.LEGEND['qml-r'],       mec='black', color=Plot.COLOR['qml-r'])
+        ax1.plot(X_two, qml_r_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-r-two'],   mec='black', color=Plot.COLOR['qml-r'])
+        # ax1
+        ax1.legend(ncol=1, handlelength=4, loc='upper left')
+        ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
+        ax1.grid(True)
+        X = list(X_one)
+        X.remove(9)
+        ax1.set_xticks(X)
+        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=38, rotation=10)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax1.set_ylabel(f'{l_err} (m)')
+        # ax1.set_ylim([0, 40])
+        ax1.set_title(f'Performance of Localization Algorithms', pad=30, fontsize=45, fontweight='bold')
+        fig.savefig(figname)
+
+
+    @staticmethod
     def error_cdf(data: list, figname: str):
         table = defaultdict(list)
         for myinput, output_by_method in data:
@@ -280,6 +395,27 @@ def continuous_onelevel_varygrid():
     Plot.continuous_onelevel_varygrid(data, figname)
 
 
+def continuous_varygrid():
+    '''evaluate the performance of the single level POVM-Loc One
+    '''
+    logs = ['results/continuous.onelevel.varygrid.qsd', 'results/continuous.onelevel.varygrid.pqc',\
+            'results/continuous.twolevel.varygrid.qsd', 'results/continuous.twolevel.varygrid.pqc']
+    data = Utility.read_logs(logs)
+    figname = 'results/continuous.varygrid.png'
+    Plot.continuous_varygrid(data, figname)
+
+
+def continuous_varysensornum():
+    '''evaluate the performance of the single level POVM-Loc One
+    '''
+    logs = ['results/continuous.onelevel.varygrid.qsd', 'results/continuous.onelevel.varygrid.pqc',\
+            'results/continuous.twolevel.varygrid.qsd', 'results/continuous.twolevel.varygrid.pqc']
+    data = Utility.read_logs(logs)
+    figname = 'results/continuous.varysensornum.png'
+    Plot.continuous_varysensornum(data, figname)
+
+
+
 def localization_error_cdf():
     '''the classic error CDF plot
     '''
@@ -302,7 +438,11 @@ if __name__ == '__main__':
 
     # discrete_onelevel_varygrid()
 
-    continuous_onelevel_varygrid()
+    # continuous_onelevel_varygrid()
+
+    # continuous_varygrid()
+
+    continuous_varysensornum()
 
     # povmloc_varynoise()
 

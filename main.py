@@ -61,7 +61,7 @@ if __name__ == '__main__':
                 ql.train_quantum_ml(root_dir, generate_data)
         qls['qml'] = ql
     if 'qml-two' in methods:
-        sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.json'
+        sensordata = f'sensordata/twolevel.{grid_length}x{grid_length}.{sensor_num}.json'
         ql = QuantumLocalization(grid_length=grid_length, cell_length=Default.cell_length, sensordata=sensordata, unitary_operator=unitary_operator)
         root_dir = args.root_dir[0]
         generate_data = args.generate_data  # in POVM-Loc, the training and testing are all together
@@ -169,7 +169,7 @@ if __name__ == '__main__':
                     start = time.time()
                     correct, error, pred = ql.qml_two(tx, root_dir, continuous=True)
                     elapse = round(time.time() - start, 2)
-                    outputs.append(Output('qml-two', correct, error, pred, elapse))
+                    outputs.append(Output('qml-r-two', correct, error, pred, elapse))
             mylogger.log(myinput, outputs)
             # time.sleep(0.5)
 

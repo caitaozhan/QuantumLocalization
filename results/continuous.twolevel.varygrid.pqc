@@ -1,0 +1,2022 @@
+{"ground_truth": [0.549, 0.715], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1546871027541061, "pred": [0.4484635591506958, 0.6580674648284912], "elapse": 1.33}
+
+{"ground_truth": [0.603, 1.545], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5186341838663372, "pred": [0.5525437593460083, 1.5319292545318604], "elapse": 0.07}
+
+{"ground_truth": [0.424, 2.646], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7680389245539719, "pred": [0.4347148537635803, 2.5698907375335693], "elapse": 0.07}
+
+{"ground_truth": [0.964, 3.383], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0020742058908865, "pred": [0.9843937158584595, 3.4814810752868652], "elapse": 0.07}
+
+{"ground_truth": [1.792, 0.529], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.366662318167075, "pred": [1.6709270477294922, 0.8431432247161865], "elapse": 0.07}
+
+{"ground_truth": [1.568, 1.926], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6906805692372677, "pred": [1.5430313348770142, 1.8612170219421387], "elapse": 0.07}
+
+{"ground_truth": [1.02, 2.833], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4786644881499511, "pred": [1.0666804313659668, 2.8441296815872192], "elapse": 0.06}
+
+{"ground_truth": [1.461, 3.781], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.129713971046472, "pred": [1.3112809658050537, 3.3958399295806885], "elapse": 0.07}
+
+{"ground_truth": [2.522, 0.415], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8133442981966377, "pred": [2.6031782031059265, 0.41552209854125977], "elapse": 0.07}
+
+{"ground_truth": [2.265, 1.774], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5804569285596645, "pred": [2.2934677600860596, 1.8245664834976196], "elapse": 0.07}
+
+{"ground_truth": [2.456, 2.568], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.08385265381753923, "pred": [2.4493868947029114, 2.5634772777557373], "elapse": 0.06}
+
+{"ground_truth": [2.612, 3.617], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2703359431767014, "pred": [2.4876318275928497, 3.4270577430725098], "elapse": 0.07}
+
+{"ground_truth": [3.36, 0.437], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4155558700717296, "pred": [3.3814709186553955, 0.47230932116508484], "elapse": 0.07}
+
+{"ground_truth": [3.21, 1.129], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7413057322777519, "pred": [3.1242475509643555, 0.9775915145874023], "elapse": 0.07}
+
+{"ground_truth": [3.57, 2.439], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1155776015500745, "pred": [3.535845398902893, 2.54473876953125], "elapse": 0.07}
+
+{"ground_truth": [3.209, 3.161], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.3679384590402326, "pred": [3.2186105251312256, 3.196792483329773], "elapse": 0.07}
+
+{"ground_truth": [0.466, 0.244], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1165117339024786, "pred": [0.5388325452804565, 0.3293171525001526], "elapse": 0.11}
+
+{"ground_truth": [0.656, 1.138], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5908660817093707, "pred": [0.6083744168281555, 1.1727014780044556], "elapse": 0.07}
+
+{"ground_truth": [0.977, 2.605], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7130731859391854, "pred": [1.0202043056488037, 2.661391258239746], "elapse": 0.06}
+
+{"ground_truth": [0.739, 3.039], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2681602378511783, "pred": [0.8585628271102905, 2.996176242828369], "elapse": 0.06}
+
+{"ground_truth": [1.318, 0.414], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.6212008622949905, "pred": [1.4795620441436768, 0.6206587553024292], "elapse": 0.06}
+
+{"ground_truth": [1.567, 1.265], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7811984838408754, "pred": [1.420050859451294, 1.1641491651535034], "elapse": 0.06}
+
+{"ground_truth": [1.523, 2.094], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.796762995562027, "pred": [1.1539876461029053, 2.182262897491455], "elapse": 0.07}
+
+{"ground_truth": [1.289, 3.183], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.105175827801062, "pred": [1.3930169343948364, 3.2216482162475586], "elapse": 0.07}
+
+{"ground_truth": [2.735, 0.962], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.3014013977479569, "pred": [2.752214729785919, 0.9373143911361694], "elapse": 0.06}
+
+{"ground_truth": [2.249, 1.576], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6813247291238272, "pred": [2.3106284141540527, 1.604678988456726], "elapse": 0.07}
+
+{"ground_truth": [2.592, 2.572], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7559553819248587, "pred": [2.630192518234253, 2.637514591217041], "elapse": 0.07}
+
+{"ground_truth": [2.699, 3.297], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.5349597749398682, "pred": [2.6498449444770813, 3.4426865577697754], "elapse": 0.07}
+
+{"ground_truth": [3.725, 0.501], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.5385199569791688, "pred": [3.571426272392273, 0.4986076354980469], "elapse": 0.06}
+
+{"ground_truth": [3.424, 1.606], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8684451141301246, "pred": [3.4044145345687866, 1.6910338401794434], "elapse": 0.06}
+
+{"ground_truth": [3.618, 2.429], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6203656753746323, "pred": [3.578796625137329, 2.5859874486923218], "elapse": 0.07}
+
+{"ground_truth": [3.135, 3.298], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5234695461340967, "pred": [3.139529228210449, 3.3504719734191895], "elapse": 0.07}
+
+{"ground_truth": [0.57, 0.591], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.75836452268718, "pred": [0.44660329818725586, 0.46557164192199707], "elapse": 0.07}
+
+{"ground_truth": [0.574, 1.653], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.38291023128658075, "pred": [0.5403622388839722, 1.670884609222412], "elapse": 0.07}
+
+{"ground_truth": [0.652, 2.431], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6924088047004253, "pred": [0.7209670543670654, 2.424201875925064], "elapse": 0.07}
+
+{"ground_truth": [0.897, 3.368], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6283486403765172, "pred": [0.8871623873710632, 3.429692029953003], "elapse": 0.07}
+
+{"ground_truth": [1.436, 0.892], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.3653292436556383, "pred": [1.6723941564559937, 0.8906015753746033], "elapse": 0.06}
+
+{"ground_truth": [1.806, 1.704], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7734024060265674, "pred": [1.9767861366271973, 1.6554336547851562], "elapse": 0.07}
+
+{"ground_truth": [1.1, 2.919], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.15703046313450847, "pred": [1.0951058864593506, 2.9046380519866943], "elapse": 0.07}
+
+{"ground_truth": [1.407, 3.069], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1403388132916747, "pred": [1.6075985431671143, 3.1442950963974], "elapse": 0.07}
+
+{"ground_truth": [2.697, 0.454], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4586481321686886, "pred": [2.551596999168396, 0.4504382610321045], "elapse": 0.06}
+
+{"ground_truth": [2.73, 1.172], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.331871747264188, "pred": [2.7095970511436462, 1.1978116035461426], "elapse": 0.07}
+
+{"ground_truth": [2.2, 2.019], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 2.4340392789085072, "pred": [2.200057253241539, 1.7751178741455078], "elapse": 0.07}
+
+{"ground_truth": [2.794, 3.224], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5477635383612258, "pred": [2.7636415362358093, 3.2697185277938843], "elapse": 0.06}
+
+{"ground_truth": [3.345, 0.928], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7640504336348036, "pred": [3.348732590675354, 0.8517510890960693], "elapse": 0.06}
+
+{"ground_truth": [3.536, 1.59], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7657799346373904, "pred": [3.3739583492279053, 1.5189088582992554], "elapse": 0.06}
+
+{"ground_truth": [3.186, 2.944], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.2948328596533673, "pred": [3.185233473777771, 2.973840057849884], "elapse": 0.07}
+
+{"ground_truth": [3.74, 3.49], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7177964841216262, "pred": [3.6215660572052, 3.365607500076294], "elapse": 0.07}
+
+{"ground_truth": [0.679, 0.454], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9850322316658104, "pred": [0.48415976762771606, 0.41781365871429443], "elapse": 0.07}
+
+{"ground_truth": [0.99, 1.217], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.30268057619895455, "pred": [1.0145220756530762, 1.1986944675445557], "elapse": 0.06}
+
+{"ground_truth": [0.588, 2.831], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1144262516829173, "pred": [0.5309149026870728, 2.926570415496826], "elapse": 0.07}
+
+{"ground_truth": [0.687, 3.216], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7998404607951699, "pred": [0.7647892236709595, 3.1949647665023804], "elapse": 0.07}
+
+{"ground_truth": [1.374, 0.464], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5699299403510226, "pred": [1.4309762716293335, 0.4589660167694092], "elapse": 0.06}
+
+{"ground_truth": [1.517, 1.132], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9269705870350692, "pred": [1.5011858940124512, 1.0407963991165161], "elapse": 0.07}
+
+{"ground_truth": [1.717, 2.396], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6594744956006255, "pred": [1.717863917350769, 2.4619995057582855], "elapse": 0.07}
+
+{"ground_truth": [1.145, 3.488], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.407127919377622, "pred": [1.3482670783996582, 3.359358072280884], "elapse": 0.07}
+
+{"ground_truth": [2.765, 0.749], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.40186019068692724, "pred": [2.7629154920578003, 0.7085499167442322], "elapse": 0.07}
+
+{"ground_truth": [2.904, 1.083], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5776299696699664, "pred": [2.9022634029388428, 1.0256778001785278], "elapse": 0.07}
+
+{"ground_truth": [2.552, 2.584], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5185378371244054, "pred": [2.5782968997955322, 2.6292797923088074], "elapse": 0.06}
+
+{"ground_truth": [2.962, 3.292], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9177036778608705, "pred": [2.897727370262146, 3.2265807390213013], "elapse": 0.07}
+
+{"ground_truth": [3.016, 0.93], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4874251520899366, "pred": [2.922614336013794, 0.814103901386261], "elapse": 0.07}
+
+{"ground_truth": [3.282, 1.586], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.040171111740014, "pred": [3.285431981086731, 1.4824589490890503], "elapse": 0.06}
+
+{"ground_truth": [3.338, 2.962], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0039724718153256, "pred": [3.4257547855377197, 3.010627031326294], "elapse": 0.07}
+
+{"ground_truth": [3.347, 3.148], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1255314696993801, "pred": [3.414701461791992, 3.2382313013076782], "elapse": 0.07}
+
+{"ground_truth": [0.497, 0.639], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3905540244703656, "pred": [0.3819617033004761, 0.5619328618049622], "elapse": 0.07}
+
+{"ground_truth": [0.822, 1.19], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9696223467358096, "pred": [0.812125563621521, 1.0934019088745117], "elapse": 0.07}
+
+{"ground_truth": [0.511, 2.224], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.780341681100663, "pred": [0.8860607147216797, 2.2741012275218964], "elapse": 0.07}
+
+{"ground_truth": [0.726, 3.011], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1574504137713264, "pred": [0.839111328125, 2.988826274871826], "elapse": 0.06}
+
+{"ground_truth": [1.421, 0.557], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.256416256050322, "pred": [1.38850998878479, 0.43587833642959595], "elapse": 0.06}
+
+{"ground_truth": [1.861, 1.727], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.333069577865027, "pred": [1.9808553457260132, 1.669619083404541], "elapse": 0.07}
+
+{"ground_truth": [1.262, 2.456], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3691900789776321, "pred": [1.1776071786880493, 2.3484154045581818], "elapse": 0.06}
+
+{"ground_truth": [1.284, 3.38], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4841341788311602, "pred": [1.3943829536437988, 3.478596568107605], "elapse": 0.07}
+
+{"ground_truth": [2.779, 0.777], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4017699025386171, "pred": [2.785851538181305, 0.7378730177879333], "elapse": 0.06}
+
+{"ground_truth": [2.588, 1.273], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9487944663215582, "pred": [2.5097160935401917, 1.3270092010498047], "elapse": 0.06}
+
+{"ground_truth": [2.371, 2.197], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0140928395285407, "pred": [2.360738307237625, 2.2979578971862793], "elapse": 0.07}
+
+{"ground_truth": [2.8, 3.077], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.1757497302838289, "pred": [2.806980609893799, 3.0609171390533447], "elapse": 0.07}
+
+{"ground_truth": [3.519, 0.307], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0309618882858083, "pred": [3.4917739629745483, 0.40629133582115173], "elapse": 0.07}
+
+{"ground_truth": [3.43, 1.51], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4834355444069254, "pred": [3.3820600509643555, 1.5096811056137085], "elapse": 0.07}
+
+{"ground_truth": [3.536, 2.681], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.19279174251856518, "pred": [3.5321335792541504, 2.662542223930359], "elapse": 0.07}
+
+{"ground_truth": [3.278, 3.129], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7972829990982288, "pred": [3.319551467895508, 3.1966569423675537], "elapse": 0.07}
+
+{"ground_truth": [0.544, 0.457], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1069428383452573, "pred": [0.3794071674346924, 0.32513463497161865], "elapse": 0.07}
+
+{"ground_truth": [0.882, 1.459], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.739442480825262, "pred": [1.006265640258789, 1.702763319015503], "elapse": 0.06}
+
+{"ground_truth": [0.904, 2.69], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.003435984482686, "pred": [0.9839421510696411, 2.7507307529449463], "elapse": 0.06}
+
+{"ground_truth": [0.7, 3.328], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.2285149598202703, "pred": [0.7035267949104309, 3.30520498752594], "elapse": 0.06}
+
+{"ground_truth": [1.458, 0.591], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2554580562978264, "pred": [1.454477071762085, 0.46549177169799805], "elapse": 0.06}
+
+{"ground_truth": [1.952, 1.576], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 4.080284517136289, "pred": [2.1606411039829254, 1.225174903869629], "elapse": 0.06}
+
+{"ground_truth": [1.816, 2.159], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8754065773863938, "pred": [1.7630220651626587, 2.229463964700699], "elapse": 0.07}
+
+{"ground_truth": [1.629, 3.398], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3072038617273454, "pred": [1.5915741920471191, 3.273155689239502], "elapse": 0.07}
+
+{"ground_truth": [2.355, 0.357], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.6391317807058225, "pred": [2.477234125137329, 0.5907987952232361], "elapse": 0.07}
+
+{"ground_truth": [2.401, 1.929], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.0141412579502127, "pred": [2.688904643058777, 1.8392317295074463], "elapse": 0.07}
+
+{"ground_truth": [2.327, 2.233], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2069944333082359, "pred": [2.3200846016407013, 2.353262096643448], "elapse": 0.07}
+
+{"ground_truth": [2.614, 3.033], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.3484391064087424, "pred": [2.5815279483795166, 3.04444420337677], "elapse": 0.06}
+
+{"ground_truth": [3.115, 0.618], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.18714705923240416, "pred": [3.1206566095352173, 0.6004945039749146], "elapse": 0.07}
+
+{"ground_truth": [3.409, 1.163], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3953469412622304, "pred": [3.5390785932540894, 1.1123228073120117], "elapse": 0.06}
+
+{"ground_truth": [3.639, 2.49], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0219375811655749, "pred": [3.6639037132263184, 2.58935809135437], "elapse": 0.07}
+
+{"ground_truth": [3.517, 3.424], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6361956896366336, "pred": [3.375777006149292, 3.506187677383423], "elapse": 0.07}
+
+{"ground_truth": [0.555, 0.287], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9602234590043504, "pred": [0.5743475556373596, 0.38103973865509033], "elapse": 0.07}
+
+{"ground_truth": [0.707, 1.415], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4607732476632317, "pred": [0.6634433269500732, 1.3986456394195557], "elapse": 0.07}
+
+{"ground_truth": [0.815, 2.985], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7831106230772877, "pred": [0.8849188089370728, 2.9502878189086914], "elapse": 0.11}
+
+{"ground_truth": [0.951, 3.233], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2761633374866257, "pred": [0.9255914092063904, 3.108349323272705], "elapse": 0.06}
+
+{"ground_truth": [1.374, 0.749], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7049024721906733, "pred": [1.4068398475646973, 0.6862599849700928], "elapse": 0.07}
+
+{"ground_truth": [1.238, 1.172], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3508269002039996, "pred": [1.2673730850219727, 1.30366051197052], "elapse": 0.07}
+
+{"ground_truth": [1.449, 2.304], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4430926112038485, "pred": [1.3056563138961792, 2.3183987140655518], "elapse": 0.07}
+
+{"ground_truth": [1.502, 3.943], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.9248853853334165, "pred": [1.170083999633789, 3.335036516189575], "elapse": 0.07}
+
+{"ground_truth": [2.634, 0.867], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4547342961345301, "pred": [2.6127317547798157, 0.8270949721336365], "elapse": 0.07}
+
+{"ground_truth": [2.994, 1.452], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.149823924565543, "pred": [3.19441819190979, 1.5306282043457031], "elapse": 0.07}
+
+{"ground_truth": [2.071, 2.293], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.36391565660284475, "pred": [2.107135057449341, 2.2897649109363556], "elapse": 0.06}
+
+{"ground_truth": [2.897, 3.407], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.581363864377332, "pred": [2.7396217584609985, 3.389004111289978], "elapse": 0.07}
+
+{"ground_truth": [3.552, 0.272], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3121626825486212, "pred": [3.499485969543457, 0.3918682336807251], "elapse": 0.07}
+
+{"ground_truth": [3.455, 1.402], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1164110583408509, "pred": [3.4617773294448853, 1.2902522087097168], "elapse": 0.06}
+
+{"ground_truth": [3.248, 2.506], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.510559254526917, "pred": [3.3993113040924072, 2.512775421142578], "elapse": 0.07}
+
+{"ground_truth": [3.31, 3.373], "grid_length": 4, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3598000684819176, "pred": [3.299232244491577, 3.508557081222534], "elapse": 0.07}
+
+{"ground_truth": [0.549, 0.715], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.500984452187648, "pred": [0.4084680676460266, 0.6619662344455719], "elapse": 1.31}
+
+{"ground_truth": [0.603, 1.545], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8052816797682644, "pred": [0.5243721306324005, 1.5264549851417542], "elapse": 0.07}
+
+{"ground_truth": [0.424, 2.646], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.5495849911418738, "pred": [0.5680531114339828, 2.70211923122406], "elapse": 0.07}
+
+{"ground_truth": [0.438, 3.892], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.6180717464909926, "pred": [0.24745845794677734, 3.711789518594742], "elapse": 0.07}
+
+{"ground_truth": [0.964, 4.383], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.961315783610417, "pred": [0.9560205638408661, 4.479268848896027], "elapse": 0.07}
+
+{"ground_truth": [0.792, 5.529], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.5916883187397557, "pred": [0.7534768581390381, 5.68339991569519], "elapse": 0.07}
+
+{"ground_truth": [0.568, 6.926], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1517029492750075, "pred": [0.5259692072868347, 6.81838721036911], "elapse": 0.07}
+
+{"ground_truth": [0.778, 7.87], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8788341280839169, "pred": [0.8546318113803864, 7.9133141040802], "elapse": 0.07}
+
+{"ground_truth": [0.979, 8.799], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 5.551964793037358, "pred": [1.0432260632514954, 8.247734069824219], "elapse": 0.07}
+
+{"ground_truth": [1.461, 0.781], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.021788252101747, "pred": [1.5160785913467407, 0.6941611468791962], "elapse": 0.07}
+
+{"ground_truth": [1.118, 1.64], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8588337079396688, "pred": [1.2750803232192993, 1.540098488330841], "elapse": 0.07}
+
+{"ground_truth": [1.522, 2.415], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5256481720937833, "pred": [1.5460149049758911, 2.367981791496277], "elapse": 0.07}
+
+{"ground_truth": [1.265, 3.774], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8499182000849645, "pred": [1.2086697220802307, 3.7101995050907135], "elapse": 0.07}
+
+{"ground_truth": [1.456, 4.568], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7143260495735677, "pred": [1.3848960399627686, 4.573478043079376], "elapse": 0.07}
+
+{"ground_truth": [1.019, 5.618], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6627425830947211, "pred": [1.0160115659236908, 5.551419496536255], "elapse": 0.06}
+
+{"ground_truth": [1.612, 6.617], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2842871763964825, "pred": [1.74050635099411, 6.6190894693136215], "elapse": 0.07}
+
+{"ground_truth": [1.944, 7.682], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4775972943771052, "pred": [1.8050347566604614, 7.732727587223053], "elapse": 0.11}
+
+{"ground_truth": [1.36, 8.437], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6866439222107643, "pred": [1.318386197090149, 8.382042825222015], "elapse": 0.07}
+
+{"ground_truth": [2.698, 0.06], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 12.366885596776747, "pred": [3.6582645177841187, 0.8390593528747559], "elapse": 0.07}
+
+{"ground_truth": [2.21, 1.129], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.128409869558879, "pred": [2.1373443603515625, 1.04291170835495], "elapse": 0.07}
+
+{"ground_truth": [2.57, 2.439], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4665719302738172, "pred": [2.7147358059883118, 2.4634369611740112], "elapse": 0.07}
+
+{"ground_truth": [2.988, 3.102], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 13.393173084290948, "pred": [1.9938077330589294, 2.205044746398926], "elapse": 0.06}
+
+{"ground_truth": [2.209, 4.161], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4813163876824418, "pred": [2.2858275175094604, 4.034733206033707], "elapse": 0.07}
+
+{"ground_truth": [2.653, 5.253], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.785532759342685, "pred": [2.818539261817932, 5.186106204986572], "elapse": 0.06}
+
+{"ground_truth": [2.466, 6.244], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9638567665253075, "pred": [2.4009679555892944, 6.059229344129562], "elapse": 0.06}
+
+{"ground_truth": [2.739, 7.039], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.025531051423304, "pred": [2.336836338043213, 7.0291221141815186], "elapse": 0.06}
+
+{"ground_truth": [2.283, 8.12], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7738436742011339, "pred": [2.2677615880966187, 8.044288873672485], "elapse": 0.07}
+
+{"ground_truth": [3.296, 0.119], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.175986538515718, "pred": [3.6283886432647705, 0.3717091530561447], "elapse": 0.07}
+
+{"ground_truth": [3.567, 1.265], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.225763411251908, "pred": [3.8500733077526093, 0.9519976079463959], "elapse": 0.07}
+
+{"ground_truth": [3.523, 2.094], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.728887575897794, "pred": [3.451368659734726, 2.10602867603302], "elapse": 0.06}
+
+{"ground_truth": [3.576, 3.929], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.517348518612149, "pred": [3.360532969236374, 3.7990370392799377], "elapse": 0.07}
+
+{"ground_truth": [3.587, 4.02], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.462026886516859, "pred": [3.387807235121727, 3.874739706516266], "elapse": 0.07}
+
+{"ground_truth": [3.829, 5.005], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2940495721644598, "pred": [3.6997544020414352, 4.9971644282341], "elapse": 0.07}
+
+{"ground_truth": [3.678, 6.27], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9773439387292646, "pred": [3.6037991791963577, 6.206184446811676], "elapse": 0.07}
+
+{"ground_truth": [3.735, 7.962], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3815002039867144, "pred": [3.733831152319908, 8.100331842899323], "elapse": 0.07}
+
+{"ground_truth": [3.249, 8.576], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.4114576071289267, "pred": [3.4409046471118927, 8.294273972511292], "elapse": 0.07}
+
+{"ground_truth": [4.592, 0.572], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6693094469713741, "pred": [4.530487418174744, 0.5985348522663116], "elapse": 0.06}
+
+{"ground_truth": [4.223, 1.953], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6492239450611976, "pred": [4.312885165214539, 1.8144207000732422], "elapse": 0.07}
+
+{"ground_truth": [4.699, 2.297], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.705354227835784, "pred": [4.839151203632355, 2.746764600276947], "elapse": 0.07}
+
+{"ground_truth": [4.814, 3.397], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 7.395842327587781, "pred": [4.922953248023987, 4.127990484237671], "elapse": 0.07}
+
+{"ground_truth": [4.881, 4.581], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.0894251413321805, "pred": [4.575117766857147, 4.538630247116089], "elapse": 0.07}
+
+{"ground_truth": [4.725, 5.501], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.467820263356263, "pred": [4.792105615139008, 5.059572100639343], "elapse": 0.06}
+
+{"ground_truth": [4.956, 6.644], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 5.047986491018631, "pred": [5.062470853328705, 6.1505295261740685], "elapse": 0.07}
+
+{"ground_truth": [4.424, 7.606], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5746094891524116, "pred": [4.37684690952301, 7.639438569545746], "elapse": 0.07}
+
+{"ground_truth": [4.019, 8.302], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7485654939398936, "pred": [3.8548896610736847, 8.36140090227127], "elapse": 0.07}
+
+{"ground_truth": [5.66, 0.29], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.2768397006373062, "pred": [5.4260255098342896, 0.5193187147378922], "elapse": 0.07}
+
+{"ground_truth": [5.135, 1.298], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5828525231548375, "pred": [5.109349966049194, 1.3503851294517517], "elapse": 0.07}
+
+{"ground_truth": [5.57, 2.591], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9923970046293737, "pred": [5.39392876625061, 2.497557520866394], "elapse": 0.06}
+
+{"ground_truth": [5.574, 3.653], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.244285304051923, "pred": [5.688319087028503, 3.6033223271369934], "elapse": 0.07}
+
+{"ground_truth": [5.436, 4.892], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.434078243003862, "pred": [5.442819535732269, 4.849076271057129], "elapse": 0.06}
+
+{"ground_truth": [5.806, 5.704], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 13.025486320993998, "pred": [4.939833462238312, 6.676540821790695], "elapse": 0.07}
+
+{"ground_truth": [5.1, 6.919], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.3359563037890188, "pred": [5.162509739398956, 6.69434317946434], "elapse": 0.07}
+
+{"ground_truth": [5.714, 7.999], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.361612220380483, "pred": [5.1660913825035095, 7.675996005535126], "elapse": 0.07}
+
+{"ground_truth": [5.149, 8.868], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 23.164623842765792, "pred": [6.917436718940735, 7.371391296386719], "elapse": 0.07}
+
+{"ground_truth": [6.162, 0.616], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6822125257825609, "pred": [6.0483754724264145, 0.739154040813446], "elapse": 0.07}
+
+{"ground_truth": [6.407, 1.069], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.8178499362021343, "pred": [6.536597281694412, 0.8188575804233551], "elapse": 0.06}
+
+{"ground_truth": [6.697, 2.454], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.2000406287904766, "pred": [6.438823163509369, 2.642025411128998], "elapse": 0.07}
+
+{"ground_truth": [6.722, 3.866], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9252643245113095, "pred": [6.681211441755295, 3.949405789375305], "elapse": 0.07}
+
+{"ground_truth": [6.976, 4.856], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1781115759423604, "pred": [7.185807824134827, 4.799046277999878], "elapse": 0.07}
+
+{"ground_truth": [6.012, 5.36], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.201263361222547, "pred": [5.747221022844315, 5.179633140563965], "elapse": 0.06}
+
+{"ground_truth": [6.73, 6.172], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.242840422138804, "pred": [6.807392477989197, 5.961124867200851], "elapse": 0.07}
+
+{"ground_truth": [6.2, 7.019], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.769733860428799, "pred": [6.876931607723236, 7.011320471763611], "elapse": 0.06}
+
+{"ground_truth": [6.794, 8.224], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.850501255507172, "pred": [6.874065846204758, 8.1960951089859], "elapse": 0.07}
+
+{"ground_truth": [7.345, 0.928], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5173862249640181, "pred": [7.387748658657074, 0.9577356576919556], "elapse": 0.07}
+
+{"ground_truth": [7.704, 1.032], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9017867475294128, "pred": [7.594452381134033, 1.187004268169403], "elapse": 0.07}
+
+{"ground_truth": [7.165, 2.621], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 5.162409057160447, "pred": [7.103484034538269, 2.1088791489601135], "elapse": 0.07}
+
+{"ground_truth": [7.934, 3.614], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1994605752812006, "pred": [8.053865790367126, 3.605569213628769], "elapse": 0.07}
+
+{"ground_truth": [7.536, 4.59], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2544952497554454, "pred": [7.417445719242096, 4.547845780849457], "elapse": 0.08}
+
+{"ground_truth": [7.73, 5.312], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1980166803497874, "pred": [7.849875032901764, 5.315359354019165], "elapse": 0.08}
+
+{"ground_truth": [7.74, 6.49], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.77590207136046, "pred": [7.824396193027496, 6.85839307308197], "elapse": 0.07}
+
+{"ground_truth": [7.312, 7.696], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.845897412670311, "pred": [7.45888352394104, 7.58481502532959], "elapse": 0.07}
+
+{"ground_truth": [7.378, 8.18], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3790592503748946, "pred": [7.348255008459091, 8.314318120479584], "elapse": 0.07}
+
+{"ground_truth": [8.025, 0.067], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 7.411237386054653, "pred": [7.835180103778839, 0.7837373614311218], "elapse": 0.06}
+
+{"ground_truth": [8.537, 1.897], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.866827970515101, "pred": [8.357760429382324, 1.9502838850021362], "elapse": 0.07}
+
+{"ground_truth": [8.99, 2.217], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.71314314667273, "pred": [9.35587728023529, 2.151658594608307], "elapse": 0.08}
+
+{"ground_truth": [8.663, 3.263], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7314157837880843, "pred": [8.604272961616516, 3.3068152964115143], "elapse": 0.07}
+
+{"ground_truth": [8.021, 4.758], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.50437859354478, "pred": [7.772924780845642, 4.721624851226807], "elapse": 0.07}
+
+{"ground_truth": [8.32, 5.383], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8789451648228352, "pred": [8.433796763420105, 5.532991647720337], "elapse": 0.07}
+
+{"ground_truth": [8.588, 6.831], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8783661232294815, "pred": [8.755751967430115, 6.745912313461304], "elapse": 0.07}
+
+{"ground_truth": [8.629, 7.873], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 7.092010346514338, "pred": [7.920254588127136, 7.8467318415641785], "elapse": 0.07}
+
+{"ground_truth": [8.274, 8.798], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.4667115304501515, "pred": [8.325418531894684, 9.241695284843445], "elapse": 0.07}
+
+{"ground_truth": [0.186, 0.953], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.049155119867486, "pred": [0.7835458517074585, 1.0445877313613892], "elapse": 0.07}
+
+{"ground_truth": [0.687, 1.216], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.5864239343042397, "pred": [0.5832837224006653, 1.0958881974220276], "elapse": 0.07}
+
+{"ground_truth": [0.947, 2.731], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6549192351094536, "pred": [1.0057492554187775, 2.7605395317077637], "elapse": 0.07}
+
+{"ground_truth": [0.254, 3.213], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.471177051508401, "pred": [0.6350781619548798, 3.4470836520195007], "elapse": 0.07}
+
+{"ground_truth": [0.518, 4.026], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.015197366417923, "pred": [0.2585677206516266, 3.8723497688770294], "elapse": 0.07}
+
+{"ground_truth": [0.207, 5.425], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.4288845466670206, "pred": [-0.034597188234329224, 5.40472948551178], "elapse": 0.08}
+
+{"ground_truth": [0.374, 6.464], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8799852508818553, "pred": [0.49553999304771423, 6.607146888971329], "elapse": 0.08}
+
+{"ground_truth": [0.864, 7.118], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7337820845571039, "pred": [0.8683363795280457, 7.190773129463196], "elapse": 0.07}
+
+{"ground_truth": [0.517, 8.132], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2198901103856938, "pred": [0.3985934257507324, 8.159840047359467], "elapse": 0.08}
+
+{"ground_truth": [1.145, 0.488], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.7679486972001, "pred": [1.2237429320812225, 0.7533692121505737], "elapse": 0.07}
+
+{"ground_truth": [1.356, 1.94], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2118223935551846, "pred": [1.261268824338913, 1.7403799295425415], "elapse": 0.07}
+
+{"ground_truth": [1.241, 2.1], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.518756930370401, "pred": [1.163059562444687, 1.860724925994873], "elapse": 0.07}
+
+{"ground_truth": [1.016, 3.93], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1698771426038779, "pred": [1.0169060826301575, 4.046516060829163], "elapse": 0.08}
+
+{"ground_truth": [1.67, 4.785], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.035979601080852, "pred": [1.4976051449775696, 4.676705181598663], "elapse": 0.08}
+
+{"ground_truth": [1.064, 5.486], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.332532647783526, "pred": [0.9857799410820007, 5.593539834022522], "elapse": 0.07}
+
+{"ground_truth": [1.338, 6.962], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2597916399509421, "pred": [1.3633278608322144, 7.085009515285492], "elapse": 0.07}
+
+{"ground_truth": [1.232, 7.949], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6601300027805873, "pred": [1.2888315618038177, 7.916244864463806], "elapse": 0.07}
+
+{"ground_truth": [1.618, 8.013], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3555018062469153, "pred": [1.5465034246444702, 8.128474473953247], "elapse": 0.11}
+
+{"ground_truth": [2.347, 0.148], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.155897441898254, "pred": [2.4244936108589172, -0.053129643201828], "elapse": 0.06}
+
+{"ground_truth": [2.497, 1.639], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 11.249566972813481, "pred": [3.6110469102859497, 1.798528790473938], "elapse": 0.07}
+
+{"ground_truth": [2.822, 2.19], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.590444654546763, "pred": [3.180413246154785, 2.2130266427993774], "elapse": 0.07}
+
+{"ground_truth": [2.511, 3.224], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.626640657439575, "pred": [2.429157257080078, 3.3647059500217438], "elapse": 0.07}
+
+{"ground_truth": [2.098, 4.862], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5001869328281994, "pred": [2.083789050579071, 4.814188241958618], "elapse": 0.07}
+
+{"ground_truth": [2.973, 5.961], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 9.434715740509873, "pred": [2.352825164794922, 6.671905428171158], "elapse": 0.07}
+
+{"ground_truth": [2.907, 6.774], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 6.595611484972677, "pred": [2.32755871117115, 7.089932799339294], "elapse": 0.07}
+
+{"ground_truth": [2.726, 7.011], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.149206641404214, "pred": [2.5212210416793823, 6.944926053285599], "elapse": 0.06}
+
+{"ground_truth": [2.771, 8.147], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 5.607795438802443, "pred": [2.742584466934204, 7.58686637878418], "elapse": 0.07}
+
+{"ground_truth": [3.08, 0.09], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.523678289216606, "pred": [3.5484316796064377, 0.5431530028581619], "elapse": 0.06}
+
+{"ground_truth": [3.672, 1.245], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.047865188092205, "pred": [3.5957305133342743, 0.9502901136875153], "elapse": 0.06}
+
+{"ground_truth": [3.421, 2.557], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.0871418768321073, "pred": [3.5749382972717285, 2.4169315695762634], "elapse": 0.07}
+
+{"ground_truth": [3.861, 3.727], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.8110932480111965, "pred": [3.621735602617264, 3.5787554383277893], "elapse": 0.07}
+
+{"ground_truth": [3.683, 4.696], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.0583341791042473, "pred": [3.4952617585659027, 4.611863672733307], "elapse": 0.07}
+
+{"ground_truth": [3.284, 5.38], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8985789445873424, "pred": [3.3102735355496407, 5.294144511222839], "elapse": 0.07}
+
+{"ground_truth": [3.181, 6.789], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.169257622367065, "pred": [2.838906403630972, 7.026654213666916], "elapse": 0.06}
+
+{"ground_truth": [3.779, 7.777], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2999559652914725, "pred": [3.6811202466487885, 7.863302528858185], "elapse": 0.07}
+
+{"ground_truth": [3.259, 8.374], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6868227661112675, "pred": [3.232346624135971, 8.31069302558899], "elapse": 0.07}
+
+{"ground_truth": [4.578, 0.959], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7348732109907694, "pred": [4.6845492124557495, 1.0959892272949219], "elapse": 0.06}
+
+{"ground_truth": [4.646, 1.035], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2246747999285503, "pred": [4.762797474861145, 1.0708033740520477], "elapse": 0.06}
+
+{"ground_truth": [4.278, 2.129], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1932175818701585, "pred": [4.255861848592758, 2.3471027612686157], "elapse": 0.06}
+
+{"ground_truth": [4.393, 3.956], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7772326365103066, "pred": [4.528241515159607, 4.071329444646835], "elapse": 0.07}
+
+{"ground_truth": [4.187, 4.904], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0164093629197741, "pred": [4.146003305912018, 4.811035573482513], "elapse": 0.07}
+
+{"ground_truth": [4.544, 5.457], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.728334816202764, "pred": [4.632002592086792, 4.992376327514648], "elapse": 0.06}
+
+{"ground_truth": [4.882, 6.459], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.40515265428893077, "pred": [4.850577414035797, 6.433079391717911], "elapse": 0.07}
+
+{"ground_truth": [4.724, 7.399], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.3742736023789035, "pred": [4.758786857128143, 7.413249135017395], "elapse": 0.07}
+
+{"ground_truth": [4.904, 8.69], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 12.22325646756088, "pred": [4.910744547843933, 7.467717736959457], "elapse": 0.06}
+
+{"ground_truth": [5.7, 0.328], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.3363015963900873, "pred": [5.467928409576416, 0.5677769333124161], "elapse": 0.07}
+
+{"ground_truth": [5.24, 1.161], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.485832857225525, "pred": [5.287721872329712, 1.1513250768184662], "elapse": 0.06}
+
+{"ground_truth": [5.796, 2.959], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 13.720836979744082, "pred": [6.760443806648254, 1.9828383922576904], "elapse": 0.07}
+
+{"ground_truth": [5.458, 3.591], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9750171673572378, "pred": [5.504260182380676, 3.5050806999206543], "elapse": 0.06}
+
+{"ground_truth": [5.063, 4.424], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.035541319484001, "pred": [4.8687198758125305, 4.362380236387253], "elapse": 0.07}
+
+{"ground_truth": [5.259, 5.849], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 3.09302244294442, "pred": [5.099762678146362, 6.1143906600773335], "elapse": 0.06}
+
+{"ground_truth": [5.033, 6.959], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1914954206949897, "pred": [5.126546323299408, 6.760658472776413], "elapse": 0.06}
+
+{"ground_truth": [5.355, 7.357], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9344719212991115, "pred": [5.2668086886405945, 7.3268828094005585], "elapse": 0.06}
+
+{"ground_truth": [5.016, 8.185], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7554376009696068, "pred": [4.97579151391983, 8.248978793621063], "elapse": 0.07}
+
+{"ground_truth": [6.401, 0.929], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9140830620530735, "pred": [6.270074263215065, 0.7899085879325867], "elapse": 0.06}
+
+{"ground_truth": [6.869, 1.454], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 6.723264711766465, "pred": [6.21447479724884, 1.6057536005973816], "elapse": 0.07}
+
+{"ground_truth": [6.327, 2.233], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.9746856825152572, "pred": [6.076003342866898, 2.3928637504577637], "elapse": 0.06}
+
+{"ground_truth": [6.614, 3.033], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 1.8881286795663386, "pred": [6.802209377288818, 3.0130187273025513], "elapse": 0.07}
+
+{"ground_truth": [6.131, 4.012], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 11.80078220139491, "pred": [7.295675218105316, 4.2024171352386475], "elapse": 0.07}
+
+{"ground_truth": [6.115, 5.618], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 15.181078413172083, "pred": [7.125378996133804, 6.751954615116119], "elapse": 0.07}
+
+{"ground_truth": [6.409, 6.163], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.34822660357291, "pred": [6.758675247430801, 6.421480625867844], "elapse": 0.07}
+
+{"ground_truth": [6.639, 7.49], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 4.446453958166509, "pred": [6.373794794082642, 7.133231073617935], "elapse": 0.07}
+
+{"ground_truth": [6.989, 8.065], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2648435645812728, "pred": [7.10258361697197, 8.008824348449707], "elapse": 0.07}
+
+{"ground_truth": [7.241, 0.663], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1444300279724149, "pred": [7.226603329181671, 0.5490245819091797], "elapse": 0.07}
+
+{"ground_truth": [7.517, 1.424], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9348388671990683, "pred": [7.4554091691970825, 1.4941440224647522], "elapse": 0.07}
+
+{"ground_truth": [7.555, 2.287], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8076486440216, "pred": [7.676586270332336, 2.4205307364463806], "elapse": 0.07}
+
+{"ground_truth": [7.361, 3.829], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4494259178960407, "pred": [7.463520705699921, 3.726654589176178], "elapse": 0.07}
+
+{"ground_truth": [7.925, 4.046], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8684331940292491, "pred": [7.918279767036438, 4.23273092508316], "elapse": 0.07}
+
+{"ground_truth": [7.233, 5.349], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.09109773841046229, "pred": [7.238034725189209, 5.341188311576843], "elapse": 0.07}
+
+{"ground_truth": [7.815, 6.985], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8331442358633157, "pred": [7.731837630271912, 7.148873716592789], "elapse": 0.07}
+
+{"ground_truth": [7.969, 7.905], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6640982577919852, "pred": [7.860104084014893, 7.779091000556946], "elapse": 0.07}
+
+{"ground_truth": [7.249, 8.106], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.19459035561050292, "pred": [7.237298011779785, 8.090684115886688], "elapse": 0.07}
+
+{"ground_truth": [8.951, 0.233], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.6736467683024046, "pred": [8.634958505630493, 0.8212325870990753], "elapse": 0.06}
+
+{"ground_truth": [8.69, 1.058], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 8.00797015875437, "pred": [7.928627371788025, 1.3072346448898315], "elapse": 0.06}
+
+{"ground_truth": [8.731, 2.882], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 8.05623460677706, "pred": [8.301232695579529, 3.56332066655159], "elapse": 0.07}
+
+{"ground_truth": [8.272, 3.379], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.084036908562596, "pred": [8.23829698562622, 3.2761694490909576], "elapse": 0.06}
+
+{"ground_truth": [8.374, 4.749], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8202189471440446, "pred": [8.521545767784119, 4.855790734291077], "elapse": 0.07}
+
+{"ground_truth": [8.238, 5.172], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9695775808532269, "pred": [8.246797442436218, 5.268393158912659], "elapse": 0.07}
+
+{"ground_truth": [8.449, 6.304], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8843980778900884, "pred": [8.627736389636993, 6.2439123541116714], "elapse": 0.07}
+
+{"ground_truth": [8.502, 7.943], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.0291165253224963, "pred": [8.565030813217163, 8.135584115982056], "elapse": 0.07}
+
+{"ground_truth": [8.634, 8.867], "grid_length": 9, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.383269937074316, "pred": [8.408741533756256, 8.945131659507751], "elapse": 0.07}
+
+{"ground_truth": [0.549, 0.715], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0983332654420515, "pred": [0.5257118046283722, 0.6078130602836609], "elapse": 1.36}
+
+{"ground_truth": [0.603, 1.545], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1221576284765313, "pred": [0.4907449185848236, 1.5382316708564758], "elapse": 0.07}
+
+{"ground_truth": [0.424, 2.646], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.439857950618276, "pred": [0.4613376259803772, 2.668582320213318], "elapse": 0.07}
+
+{"ground_truth": [0.438, 3.892], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.628088131504872, "pred": [0.2763454020023346, 3.6842409521341324], "elapse": 0.07}
+
+{"ground_truth": [0.964, 4.383], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.684088843339825, "pred": [1.109965056180954, 4.46685129404068], "elapse": 0.07}
+
+{"ground_truth": [0.792, 5.529], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5276998806502443, "pred": [0.8303723037242889, 5.564826250076294], "elapse": 0.07}
+
+{"ground_truth": [0.568, 6.926], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.332693753420274, "pred": [0.4401233196258545, 6.730530604720116], "elapse": 0.07}
+
+{"ground_truth": [0.778, 7.87], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6456256374947311, "pred": [0.8324242830276489, 7.904988706111908], "elapse": 0.07}
+
+{"ground_truth": [0.979, 8.799], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 5.654377820375097, "pred": [1.1386231184005737, 8.256831765174866], "elapse": 0.06}
+
+{"ground_truth": [0.461, 9.781], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6486971794849374, "pred": [0.3033215403556824, 9.733966022729874], "elapse": 0.07}
+
+{"ground_truth": [0.522, 10.415], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.9617816174343177, "pred": [0.7936161160469055, 10.532406449317932], "elapse": 0.07}
+
+{"ground_truth": [0.265, 11.774], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.730214511942962, "pred": [0.41261520981788635, 11.544845223426819], "elapse": 0.07}
+
+{"ground_truth": [1.456, 0.568], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5202322323881335, "pred": [1.4935080707073212, 0.5322287678718567], "elapse": 0.07}
+
+{"ground_truth": [1.019, 1.618], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.09708454400396692, "pred": [1.0284939408302307, 1.6173461079597473], "elapse": 0.06}
+
+{"ground_truth": [1.944, 2.682], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 8.660247680698163, "pred": [1.8104358315467834, 1.8261178135871887], "elapse": 0.07}
+
+{"ground_truth": [1.667, 3.671], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.760471835599607, "pred": [1.773794710636139, 3.416183441877365], "elapse": 0.07}
+
+{"ground_truth": [1.21, 4.129], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.826986474171739, "pred": [1.3893140852451324, 4.092016875743866], "elapse": 0.11}
+
+{"ground_truth": [1.315, 5.364], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.6123234865594043, "pred": [1.2744773626327515, 5.621713399887085], "elapse": 0.07}
+
+{"ground_truth": [1.976, 6.469], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9897696438004575, "pred": [2.175090730190277, 6.480375230312347], "elapse": 0.07}
+
+{"ground_truth": [1.977, 7.605], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0896081638046282, "pred": [1.8739219307899475, 7.568837642669678], "elapse": 0.06}
+
+{"ground_truth": [1.739, 8.039], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.203654680368856, "pred": [1.834385097026825, 7.965433180332184], "elapse": 0.07}
+
+{"ground_truth": [1.064, 9.692], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1407592612492508, "pred": [0.9738636910915375, 9.498365610837936], "elapse": 0.07}
+
+{"ground_truth": [1.567, 10.265], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7650992210276409, "pred": [1.5891602039337158, 10.33849811553955], "elapse": 0.06}
+
+{"ground_truth": [1.523, 11.094], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9004382375845041, "pred": [1.5625169277191162, 11.012910604476929], "elapse": 0.06}
+
+{"ground_truth": [2.576, 0.929], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.8476489669478773, "pred": [2.8538008332252502, 0.9916501343250275], "elapse": 0.07}
+
+{"ground_truth": [2.319, 1.667], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.3138458899874195, "pred": [2.6421552300453186, 1.5959424376487732], "elapse": 0.07}
+
+{"ground_truth": [2.132, 2.716], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 5.133306487950825, "pred": [1.62876695394516, 2.614012688398361], "elapse": 0.07}
+
+{"ground_truth": [2.289, 3.183], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.3276743001778764, "pred": [2.1277427673339844, 3.015723019838333], "elapse": 0.07}
+
+{"ground_truth": [2.587, 4.02], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.498139411901753, "pred": [2.3916335105895996, 3.8638097047805786], "elapse": 0.06}
+
+{"ground_truth": [2.829, 5.005], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 10.297162110554481, "pred": [3.7479362189769745, 4.540194153785706], "elapse": 0.07}
+
+{"ground_truth": [2.678, 6.27], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 14.421563038053842, "pred": [4.0219332575798035, 6.792659908533096], "elapse": 0.06}
+
+{"ground_truth": [2.735, 7.962], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.4875720715696525, "pred": [2.0959412455558777, 7.851545870304108], "elapse": 0.07}
+
+{"ground_truth": [2.249, 8.576], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9535678083431653, "pred": [2.055212438106537, 8.54958164691925], "elapse": 0.07}
+
+{"ground_truth": [2.592, 9.572], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 33.48544094522808, "pred": [4.474516153335571, 6.802949041128159], "elapse": 0.07}
+
+{"ground_truth": [2.223, 10.953], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.41483295938262, "pred": [2.336613893508911, 11.037176191806793], "elapse": 0.07}
+
+{"ground_truth": [2.447, 11.846], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.375776779927332, "pred": [2.2880001068115234, 12.022823810577393], "elapse": 0.07}
+
+{"ground_truth": [3.699, 0.297], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1706699507421081, "pred": [3.8136885166168213, 0.27172838151454926], "elapse": 0.07}
+
+{"ground_truth": [3.814, 1.397], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5678438677121621, "pred": [3.870582193136215, 1.3964668214321136], "elapse": 0.07}
+
+{"ground_truth": [3.881, 2.581], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.6303832933820344, "pred": [3.8465999364852905, 2.8420384526252747], "elapse": 0.07}
+
+{"ground_truth": [3.882, 3.693], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6541507620435136, "pred": [3.8549208641052246, 3.5293043553829193], "elapse": 0.06}
+
+{"ground_truth": [3.725, 4.501], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9810468717967717, "pred": [3.794822931289673, 4.570496141910553], "elapse": 0.07}
+
+{"ground_truth": [3.956, 5.644], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.3593746058570115, "pred": [4.108610451221466, 5.463984489440918], "elapse": 0.07}
+
+{"ground_truth": [3.424, 6.606], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4967276500893012, "pred": [3.3129482567310333, 6.706900030374527], "elapse": 0.07}
+
+{"ground_truth": [3.66, 7.29], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.670381862749452, "pred": [3.446814090013504, 7.129493862390518], "elapse": 0.06}
+
+{"ground_truth": [3.618, 8.429], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2613260489703886, "pred": [3.6527988016605377, 8.205327272415161], "elapse": 0.07}
+
+{"ground_truth": [3.57, 9.591], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1775138908819451, "pred": [3.6807585954666138, 9.630749434232712], "elapse": 0.07}
+
+{"ground_truth": [3.574, 10.653], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9949600166850496, "pred": [3.7606329023838043, 10.724531829357147], "elapse": 0.06}
+
+{"ground_truth": [3.652, 11.431], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.928480979155742, "pred": [3.461145892739296, 11.45835667848587], "elapse": 0.06}
+
+{"ground_truth": [4.897, 0.368], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2544781013108848, "pred": [4.859165668487549, 0.5898890644311905], "elapse": 0.07}
+
+{"ground_truth": [4.436, 1.892], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9862232962844881, "pred": [4.5216368436813354, 1.7127753496170044], "elapse": 0.07}
+
+{"ground_truth": [4.162, 2.616], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.769375693406854, "pred": [4.08392608165741, 1.9431967735290527], "elapse": 0.07}
+
+{"ground_truth": [4.124, 3.848], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1296869716240736, "pred": [4.103671073913574, 3.736850917339325], "elapse": 0.07}
+
+{"ground_truth": [4.807, 4.569], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.3891897743581447, "pred": [4.609083831310272, 4.435739904642105], "elapse": 0.07}
+
+{"ground_truth": [4.407, 5.069], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9126502603987126, "pred": [4.383605986833572, 5.157333970069885], "elapse": 0.07}
+
+{"ground_truth": [4.722, 6.866], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6226563574357913, "pred": [4.767681956291199, 6.710663437843323], "elapse": 0.06}
+
+{"ground_truth": [4.976, 7.856], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.12212714871665975, "pred": [4.975844979286194, 7.868011772632599], "elapse": 0.07}
+
+{"ground_truth": [4.012, 8.36], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.278820738539648, "pred": [3.80614972114563, 8.458332180976868], "elapse": 0.07}
+
+{"ground_truth": [4.345, 9.928], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9075111975638884, "pred": [4.2806136310100555, 9.864482939243317], "elapse": 0.07}
+
+{"ground_truth": [4.704, 10.032], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.214305021799035, "pred": [4.58365523815155, 10.044590055942535], "elapse": 0.07}
+
+{"ground_truth": [4.165, 11.621], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 7.999584479912688, "pred": [4.458008676767349, 10.877233743667603], "elapse": 0.06}
+
+{"ground_truth": [5.934, 0.614], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 42.59155108257473, "pred": [4.370747745037079, 4.575780630111694], "elapse": 0.07}
+
+{"ground_truth": [5.398, 1.21], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.953481414927494, "pred": [5.585765540599823, 1.1551814675331116], "elapse": 0.07}
+
+{"ground_truth": [5.186, 2.944], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 0.7093678998234516, "pred": [5.234999299049377, 2.9958502873778343], "elapse": 0.06}
+
+{"ground_truth": [5.74, 3.49], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2623493162859303, "pred": [5.952958703041077, 3.565554141998291], "elapse": 0.07}
+
+{"ground_truth": [5.227, 4.254], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2917941114318134, "pred": [5.319436311721802, 4.163695961236954], "elapse": 0.07}
+
+{"ground_truth": [5.058, 5.434], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.539914016859025, "pred": [5.1918938755989075, 5.510532259941101], "elapse": 0.07}
+
+{"ground_truth": [5.312, 6.696], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.969156937025175, "pred": [5.464335680007935, 6.571814775466919], "elapse": 0.07}
+
+{"ground_truth": [5.378, 7.18], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6863966471984456, "pred": [5.439061760902405, 7.148741126060486], "elapse": 0.07}
+
+{"ground_truth": [5.025, 8.067], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.366111228620521, "pred": [4.72126579284668, 7.921483933925629], "elapse": 0.06}
+
+{"ground_truth": [5.679, 9.454], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.2613814073813644, "pred": [5.705522060394287, 9.454377114772797], "elapse": 0.07}
+
+{"ground_truth": [5.537, 10.897], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.5626732579807001, "pred": [5.606890082359314, 11.036227226257324], "elapse": 0.07}
+
+{"ground_truth": [5.99, 11.217], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 3.3277981838552573, "pred": [5.825405403971672, 10.927865266799927], "elapse": 0.06}
+
+{"ground_truth": [6.663, 0.263], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.5079723532124034, "pred": [6.9288636445999146, 0.49226953089237213], "elapse": 0.07}
+
+{"ground_truth": [6.588, 1.831], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0525787169670635, "pred": [6.525632679462433, 1.9156054258346558], "elapse": 0.07}
+
+{"ground_truth": [6.629, 2.873], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 0.9693105367035428, "pred": [6.724879682064056, 2.8867656737565994], "elapse": 0.07}
+
+{"ground_truth": [6.274, 3.798], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2420518057994334, "pred": [6.126335620880127, 3.6289367079734802], "elapse": 0.07}
+
+{"ground_truth": [6.687, 4.216], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9988581449959166, "pred": [6.524969011545181, 4.09913831949234], "elapse": 0.07}
+
+{"ground_truth": [6.947, 5.731], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0984664813803817, "pred": [6.949316561222076, 5.621026396751404], "elapse": 0.07}
+
+{"ground_truth": [6.254, 6.213], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 5.580529506611489, "pred": [6.7018944919109344, 6.54612024128437], "elapse": 0.07}
+
+{"ground_truth": [6.518, 7.026], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.75125991397818, "pred": [6.443101644515991, 7.023651659488678], "elapse": 0.07}
+
+{"ground_truth": [6.207, 8.425], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8803264617568138, "pred": [6.020668677985668, 8.403202593326569], "elapse": 0.07}
+
+{"ground_truth": [6.374, 9.464], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1672454476238094, "pred": [6.49015648663044, 9.476680755615234], "elapse": 0.07}
+
+{"ground_truth": [6.864, 10.118], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9713649656039258, "pred": [6.935995280742645, 10.052482903003693], "elapse": 0.07}
+
+{"ground_truth": [6.517, 11.132], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8414228525609944, "pred": [6.336039036512375, 11.16407060623169], "elapse": 0.07}
+
+{"ground_truth": [7.145, 0.488], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.110721210394847, "pred": [7.0388699769973755, 0.5213087350130081], "elapse": 0.06}
+
+{"ground_truth": [7.356, 1.94], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.079670085257887, "pred": [7.2818503975868225, 1.7459855675697327], "elapse": 0.07}
+
+{"ground_truth": [7.904, 2.083], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1377677808889413, "pred": [8.006572723388672, 1.896014392375946], "elapse": 0.07}
+
+{"ground_truth": [7.552, 3.584], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5569545676141676, "pred": [7.497107595205307, 3.5762516856193542], "elapse": 0.07}
+
+{"ground_truth": [7.962, 4.292], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3072451047467506, "pred": [7.8318668603897095, 4.305217266082764], "elapse": 0.07}
+
+{"ground_truth": [7.241, 5.1], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0238139819239573, "pred": [7.221402525901794, 5.200815439224243], "elapse": 0.07}
+
+{"ground_truth": [7.016, 6.93], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8501783703779098, "pred": [6.9402177929878235, 6.9672093987464905], "elapse": 0.07}
+
+{"ground_truth": [7.67, 7.785], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.425975120189211, "pred": [7.539550423622131, 7.7273712158203125], "elapse": 0.07}
+
+{"ground_truth": [7.064, 8.486], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6763520536680754, "pred": [7.204112738370895, 8.393663227558136], "elapse": 0.06}
+
+{"ground_truth": [7.977, 9.877], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.351815653792965, "pred": [8.09691971540451, 9.673901841044426], "elapse": 0.07}
+
+{"ground_truth": [7.338, 10.962], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.72597866287164, "pred": [7.244766354560852, 11.106717824935913], "elapse": 0.06}
+
+{"ground_truth": [7.618, 11.013], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8187114188612878, "pred": [7.610344648361206, 10.83152174949646], "elapse": 0.06}
+
+{"ground_truth": [8.347, 0.148], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.638469631497182, "pred": [8.10800975561142, 0.5455399006605148], "elapse": 0.06}
+
+{"ground_truth": [8.497, 1.639], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.028752065893768, "pred": [8.094630718231201, 1.62986558675766], "elapse": 0.07}
+
+{"ground_truth": [8.369, 2.137], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0251577280703807, "pred": [8.394294619560242, 2.2361397743225098], "elapse": 0.11}
+
+{"ground_truth": [8.511, 3.224], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.478052343958943, "pred": [8.053463459014893, 3.682596355676651], "elapse": 0.07}
+
+{"ground_truth": [8.098, 4.862], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.2807478598228875, "pred": [8.072098016738892, 4.873385846614838], "elapse": 0.07}
+
+{"ground_truth": [8.973, 5.961], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 8.88281508211984, "pred": [8.250495851039886, 5.4439709186553955], "elapse": 0.07}
+
+{"ground_truth": [8.907, 6.774], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.2525612765707335, "pred": [9.100781321525574, 7.034945547580719], "elapse": 0.07}
+
+{"ground_truth": [8.333, 7.081], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.6640061593377657, "pred": [8.486125409603119, 6.8630043268203735], "elapse": 0.07}
+
+{"ground_truth": [8.407, 8.232], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1787955776300287, "pred": [8.433078467845917, 8.015891969203949], "elapse": 0.06}
+
+{"ground_truth": [8.132, 9.053], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.638983388452987, "pred": [7.722913026809692, 9.271258100867271], "elapse": 0.07}
+
+{"ground_truth": [8.726, 10.011], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.671248901145873, "pred": [8.558479249477386, 10.013235032558441], "elapse": 0.07}
+
+{"ground_truth": [8.771, 11.147], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 6.4181246873342035, "pred": [9.05110551416874, 10.569686651229858], "elapse": 0.07}
+
+{"ground_truth": [9.08, 0.09], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 7.158717559648554, "pred": [9.66182067990303, 0.5060171484947205], "elapse": 0.07}
+
+{"ground_truth": [9.672, 1.245], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.234957158455395, "pred": [9.441529512405396, 1.0184073150157928], "elapse": 0.07}
+
+{"ground_truth": [9.421, 2.557], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 27.696530024345503, "pred": [7.619887590408325, 4.661799967288971], "elapse": 0.07}
+
+{"ground_truth": [9.861, 3.727], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0381709710200313, "pred": [9.828090012073517, 3.628432586789131], "elapse": 0.06}
+
+{"ground_truth": [9.683, 4.696], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.187712071438378, "pred": [9.466291800141335, 4.66776180267334], "elapse": 0.06}
+
+{"ground_truth": [9.284, 5.38], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 1.7949539171913373, "pred": [9.375639081001282, 5.225873529911041], "elapse": 0.07}
+
+{"ground_truth": [9.181, 6.789], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.738779559417601, "pred": [8.950860321521759, 7.0830806493759155], "elapse": 0.06}
+
+{"ground_truth": [9.779, 7.777], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6085374647999842, "pred": [9.686395078897476, 7.909144341945648], "elapse": 0.07}
+
+{"ground_truth": [9.259, 8.374], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.978470403860339, "pred": [9.495687425136566, 8.05371755361557], "elapse": 0.07}
+
+{"ground_truth": [9.588, 9.273], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 5.600144693444223, "pred": [10.138643324375153, 9.17298674583435], "elapse": 0.07}
+
+{"ground_truth": [9.46, 10.045], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8019147805351319, "pred": [9.438998758792877, 9.865631997585297], "elapse": 0.06}
+
+{"ground_truth": [9.8, 11.077], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7661477668368509, "pred": [9.725485414266586, 11.095605254173279], "elapse": 0.07}
+
+{"ground_truth": [10.578, 0.959], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6542092931500347, "pred": [10.513036608695984, 0.9703342616558075], "elapse": 0.06}
+
+{"ground_truth": [10.646, 1.035], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2803512507015569, "pred": [10.600305676460266, 1.1551293432712555], "elapse": 0.07}
+
+{"ground_truth": [10.278, 2.129], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9603278111922433, "pred": [10.30216160416603, 2.221698224544525], "elapse": 0.07}
+
+{"ground_truth": [10.393, 3.956], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9132875066499769, "pred": [10.475601017475128, 3.994672268629074], "elapse": 0.07}
+
+{"ground_truth": [10.187, 4.904], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2331022094672828, "pred": [10.259992897510529, 4.804502606391907], "elapse": 0.06}
+
+{"ground_truth": [10.544, 5.457], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4839963488671954, "pred": [10.458192944526672, 5.335697293281555], "elapse": 0.06}
+
+{"ground_truth": [10.882, 6.459], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.3524662639847067, "pred": [11.071015477180481, 6.598710268735886], "elapse": 0.07}
+
+{"ground_truth": [10.724, 7.399], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2705199424647278, "pred": [10.603458523750305, 7.438667714595795], "elapse": 0.07}
+
+{"ground_truth": [10.904, 8.69], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 5.5133013915075395, "pred": [10.762947678565979, 8.157055377960205], "elapse": 0.07}
+
+{"ground_truth": [10.757, 9.636], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.717502361550079, "pred": [10.857505023479462, 9.38366773724556], "elapse": 0.07}
+
+{"ground_truth": [10.24, 10.161], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.783428812397053, "pred": [10.20925185084343, 10.232586801052094], "elapse": 0.06}
+
+{"ground_truth": [10.858, 11.457], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1341744688623316, "pred": [10.780507385730743, 11.37414926290512], "elapse": 0.06}
+
+{"ground_truth": [11.952, 0.576], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.616578581156336, "pred": [12.18229079246521, 0.6997396945953369], "elapse": 0.07}
+
+{"ground_truth": [11.063, 1.424], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.34751173363383564, "pred": [11.040307939052582, 1.3974680006504059], "elapse": 0.07}
+
+{"ground_truth": [11.259, 2.849], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.7615459895044374, "pred": [11.188459575176239, 3.218579649925232], "elapse": 0.06}
+
+{"ground_truth": [11.033, 3.959], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8392581433717281, "pred": [11.092693448066711, 3.8996825516223907], "elapse": 0.07}
+
+{"ground_truth": [11.355, 4.357], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.6781434278926, "pred": [11.67686265707016, 4.178019672632217], "elapse": 0.07}
+
+{"ground_truth": [11.016, 5.185], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5222604569652569, "pred": [11.061467170715332, 5.158963322639465], "elapse": 0.07}
+
+{"ground_truth": [11.401, 6.929], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4281837169209086, "pred": [11.423517107963562, 6.788218080997467], "elapse": 0.07}
+
+{"ground_truth": [11.1, 7.945], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8915596707739516, "pred": [11.175588190555573, 7.991958260536194], "elapse": 0.06}
+
+{"ground_truth": [11.869, 8.454], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2810670649756424, "pred": [11.996445536613464, 8.437037944793701], "elapse": 0.06}
+
+{"ground_truth": [11.327, 9.233], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.43837245186936036, "pred": [11.309874773025513, 9.192264676094055], "elapse": 0.07}
+
+{"ground_truth": [11.614, 10.033], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.777039050853035, "pred": [11.62141478061676, 9.755457669496536], "elapse": 0.07}
+
+{"ground_truth": [11.016, 11.429], "grid_length": 12, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.9168622475306467, "pred": [10.922334372997284, 11.705167293548584], "elapse": 0.06}
+
+{"ground_truth": [0.549, 0.715], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6401409028862244, "pred": [0.6026633977890015, 0.7498013973236084], "elapse": 1.31}
+
+{"ground_truth": [0.603, 1.545], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6687512113329985, "pred": [0.43692970275878906, 1.5634976625442505], "elapse": 0.06}
+
+{"ground_truth": [0.424, 2.646], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.405257491731969, "pred": [0.19483470916748047, 2.571772575378418], "elapse": 0.06}
+
+{"ground_truth": [0.438, 3.892], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 10.87647969840232, "pred": [1.2603328227996826, 4.6031574010849], "elapse": 0.07}
+
+{"ground_truth": [0.964, 4.383], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1135007493610096, "pred": [0.874558687210083, 4.316663503646851], "elapse": 0.07}
+
+{"ground_truth": [0.792, 5.529], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6533169501515335, "pred": [0.6701245903968811, 5.416877508163452], "elapse": 0.07}
+
+{"ground_truth": [0.568, 6.926], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6592954684778312, "pred": [0.5101009607315063, 6.9570488929748535], "elapse": 0.07}
+
+{"ground_truth": [0.071, 7.087], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8274733542181565, "pred": [0.08609879016876221, 6.905003786087036], "elapse": 0.06}
+
+{"ground_truth": [0.02, 8.833], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.1435816238843146, "pred": [0.17413070797920227, 9.106722116470337], "elapse": 0.06}
+
+{"ground_truth": [0.778, 9.87], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.764186228620088, "pred": [0.5261750221252441, 9.756379127502441], "elapse": 0.06}
+
+{"ground_truth": [0.979, 10.799], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4381553061346405, "pred": [0.9497794508934021, 10.83214521408081], "elapse": 0.06}
+
+{"ground_truth": [0.461, 11.781], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.473262495188546, "pred": [0.9981755018234253, 11.41860580444336], "elapse": 0.06}
+
+{"ground_truth": [0.118, 12.64], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.9615740262589165, "pred": [0.4572412967681885, 13.2479807138443], "elapse": 0.07}
+
+{"ground_truth": [0.522, 13.415], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.671081879224179, "pred": [0.07829141616821289, 12.916374266147614], "elapse": 0.07}
+
+{"ground_truth": [0.265, 14.774], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.231673002099922, "pred": [0.04266762733459473, 15.009186506271362], "elapse": 0.07}
+
+{"ground_truth": [0.456, 15.568], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.1349020129553096, "pred": [0.625664472579956, 15.304727554321289], "elapse": 0.07}
+
+{"ground_truth": [1.019, 0.618], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.904107378279773, "pred": [1.0223547220230103, 0.42725813388824463], "elapse": 0.11}
+
+{"ground_truth": [1.612, 1.617], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.558801174065443, "pred": [1.8133552074432373, 1.774950623512268], "elapse": 0.06}
+
+{"ground_truth": [1.944, 2.682], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3615124591981063, "pred": [1.9471862316131592, 2.545712471008301], "elapse": 0.07}
+
+{"ground_truth": [1.36, 3.437], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.870892902861176, "pred": [1.1741498708724976, 3.4116389751434326], "elapse": 0.06}
+
+{"ground_truth": [1.667, 4.671], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.215531392241692, "pred": [1.6675820350646973, 4.549087464809418], "elapse": 0.07}
+
+{"ground_truth": [1.21, 5.129], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8284027445735769, "pred": [1.2348010540008545, 5.049766659736633], "elapse": 0.07}
+
+{"ground_truth": [1.315, 6.364], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8437842073191475, "pred": [1.490600347518921, 6.306176662445068], "elapse": 0.07}
+
+{"ground_truth": [1.57, 7.439], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.200134488500994, "pred": [1.5071333646774292, 7.54071044921875], "elapse": 0.06}
+
+{"ground_truth": [1.209, 8.161], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 6.081520848192711, "pred": [1.5021414756774902, 8.694080352783203], "elapse": 0.06}
+
+{"ground_truth": [1.653, 9.253], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5676482473769633, "pred": [1.6711516380310059, 9.307112455368042], "elapse": 0.06}
+
+{"ground_truth": [1.466, 10.244], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.3067953787539017, "pred": [1.4426145553588867, 10.115912437438965], "elapse": 0.06}
+
+{"ground_truth": [1.159, 11.11], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.584965187098131, "pred": [1.060889482498169, 10.985870361328125], "elapse": 0.07}
+
+{"ground_truth": [1.197, 12.369], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.1655467197280873, "pred": [0.8811948299407959, 12.395883321762085], "elapse": 0.07}
+
+{"ground_truth": [1.821, 13.097], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.5127496571079468, "pred": [1.7343897819519043, 12.973069190979004], "elapse": 0.07}
+
+{"ground_truth": [1.838, 14.096], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6215255452106817, "pred": [1.7983410358428955, 14.048197746276855], "elapse": 0.07}
+
+{"ground_truth": [1.976, 15.469], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 7.45917981669519, "pred": [1.9574496746063232, 14.722975492477417], "elapse": 0.07}
+
+{"ground_truth": [2.977, 0.605], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.335021524439791, "pred": [3.0932860374450684, 0.402496337890625], "elapse": 0.06}
+
+{"ground_truth": [2.739, 1.039], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.7647647713438745, "pred": [2.5994396209716797, 1.2777009010314941], "elapse": 0.06}
+
+{"ground_truth": [2.283, 2.12], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9703801666817027, "pred": [2.307506561279297, 1.9247127771377563], "elapse": 0.06}
+
+{"ground_truth": [2.296, 3.119], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.3884065361638327, "pred": [2.2004966735839844, 3.4437897205352783], "elapse": 0.07}
+
+{"ground_truth": [2.318, 4.414], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 17.109078566352487, "pred": [1.7143340110778809, 2.8133840560913086], "elapse": 0.07}
+
+{"ground_truth": [2.064, 5.692], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9288081954344047, "pred": [1.9918570518493652, 5.871293544769287], "elapse": 0.07}
+
+{"ground_truth": [2.567, 6.265], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.349460794988436, "pred": [2.458043336868286, 6.185229778289795], "elapse": 0.07}
+
+{"ground_truth": [2.523, 7.094], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.5043913906529993, "pred": [2.6379709243774414, 6.996623516082764], "elapse": 0.06}
+
+{"ground_truth": [2.576, 8.929], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4670163238698133, "pred": [2.5553441047668457, 9.074543952941895], "elapse": 0.06}
+
+{"ground_truth": [2.319, 9.667], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.617550900319703, "pred": [2.116501569747925, 9.833796977996826], "elapse": 0.07}
+
+{"ground_truth": [2.132, 10.716], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.4385348338916413, "pred": [2.1866347789764404, 10.478719472885132], "elapse": 0.06}
+
+{"ground_truth": [2.289, 11.183], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.436943063129558, "pred": [2.672255516052246, 11.407447814941406], "elapse": 0.06}
+
+{"ground_truth": [2.587, 12.02], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 11.468783080792056, "pred": [2.3548383712768555, 13.1433424949646], "elapse": 0.06}
+
+{"ground_truth": [2.829, 13.005], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.995813649795989, "pred": [3.0284695625305176, 13.009243726730347], "elapse": 0.07}
+
+{"ground_truth": [2.678, 14.27], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1180534302804106, "pred": [2.4672045707702637, 14.24755573272705], "elapse": 0.07}
+
+{"ground_truth": [2.735, 15.962], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 33.470099710391594, "pred": [5.567786693572998, 14.179243087768555], "elapse": 0.06}
+
+{"ground_truth": [3.249, 0.576], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0037955032935584, "pred": [3.170320510864258, 0.5135124921798706], "elapse": 0.07}
+
+{"ground_truth": [3.592, 1.572], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 9.561139569136511, "pred": [2.645521879196167, 1.7073581218719482], "elapse": 0.06}
+
+{"ground_truth": [3.223, 2.953], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6597329654983366, "pred": [3.2315351963043213, 3.0181784629821777], "elapse": 0.07}
+
+{"ground_truth": [3.447, 3.846], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 31.357162759198253, "pred": [5.63720166683197, 6.0905749797821045], "elapse": 0.06}
+
+{"ground_truth": [3.881, 4.581], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 12.266425603467113, "pred": [4.433960318565369, 5.676261901855469], "elapse": 0.06}
+
+{"ground_truth": [3.725, 5.501], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 16.58566200748776, "pred": [5.369380831718445, 5.7197041511535645], "elapse": 0.06}
+
+{"ground_truth": [3.956, 6.644], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 7.486928347827293, "pred": [4.679273724555969, 6.450245380401611], "elapse": 0.07}
+
+{"ground_truth": [3.424, 7.606], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.551608440343165, "pred": [3.1109020709991455, 7.275890827178955], "elapse": 0.06}
+
+{"ground_truth": [3.019, 8.302], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 1.5098363585239105, "pred": [2.8751184940338135, 8.34672498703003], "elapse": 0.07}
+
+{"ground_truth": [3.66, 9.29], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 5.778256343073446, "pred": [3.493813991546631, 9.843437314033508], "elapse": 0.07}
+
+{"ground_truth": [3.618, 10.429], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 15.511164736696799, "pred": [5.1650882959365845, 10.540696620941162], "elapse": 0.06}
+
+{"ground_truth": [3.135, 11.298], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.22078118463967766, "pred": [3.1134033203125, 11.298852920532227], "elapse": 0.06}
+
+{"ground_truth": [3.57, 12.591], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 37.62583738362871, "pred": [6.067846775054932, 9.777045726776123], "elapse": 0.06}
+
+{"ground_truth": [3.574, 13.653], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 11.082393266343288, "pred": [2.469883918762207, 13.744872808456421], "elapse": 0.06}
+
+{"ground_truth": [3.652, 14.431], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 9.146572396434136, "pred": [2.737605571746826, 14.448501348495483], "elapse": 0.07}
+
+{"ground_truth": [3.897, 15.368], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 8.400021573202668, "pred": [4.624905347824097, 14.949115753173828], "elapse": 0.06}
+
+{"ground_truth": [4.436, 0.892], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2616908335224237, "pred": [4.548280835151672, 0.9492059946060181], "elapse": 0.06}
+
+{"ground_truth": [4.806, 1.704], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.042613692893819, "pred": [4.549466133117676, 1.5405919551849365], "elapse": 0.07}
+
+{"ground_truth": [4.1, 2.919], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 4.735604331842084, "pred": [4.5618157386779785, 2.8136751651763916], "elapse": 0.06}
+
+{"ground_truth": [4.714, 3.999], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.183204817045602, "pred": [5.02054762840271, 3.912219285964966], "elapse": 0.06}
+
+{"ground_truth": [4.149, 4.868], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 4.530226932526521, "pred": [3.9840519428253174, 5.289876699447632], "elapse": 0.06}
+
+{"ground_truth": [4.807, 5.569], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.199821058911578, "pred": [4.537222266197205, 5.247491121292114], "elapse": 0.06}
+
+{"ground_truth": [4.697, 6.454], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.309141309538461, "pred": [4.3568984270095825, 6.717599630355835], "elapse": 0.07}
+
+{"ground_truth": [4.722, 7.866], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 5.058655728348166, "pred": [5.011937379837036, 7.451812028884888], "elapse": 0.07}
+
+{"ground_truth": [4.976, 8.856], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.3929285798191361, "pred": [4.997654438018799, 8.888269662857056], "elapse": 0.07}
+
+{"ground_truth": [4.012, 9.36], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.6769759274214024, "pred": [4.392057180404663, 9.90875780582428], "elapse": 0.07}
+
+{"ground_truth": [4.73, 10.172], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9582220346741506, "pred": [4.580986022949219, 10.298688650131226], "elapse": 0.06}
+
+{"ground_truth": [4.521, 11.054], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9707652807711326, "pred": [4.56963849067688, 10.970304012298584], "elapse": 0.07}
+
+{"ground_truth": [4.794, 12.224], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.96667802723665, "pred": [5.281458854675293, 12.317562103271484], "elapse": 0.06}
+
+{"ground_truth": [4.704, 13.032], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 11.251542580389849, "pred": [3.919981002807617, 13.838459253311157], "elapse": 0.06}
+
+{"ground_truth": [4.165, 14.621], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 7.38970145162963, "pred": [3.447148084640503, 14.444830417633057], "elapse": 0.07}
+
+{"ground_truth": [4.577, 15.238], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4895740295161541, "pred": [4.719284415245056, 15.193077087402344], "elapse": 0.07}
+
+{"ground_truth": [5.934, 0.614], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.8561605197458455, "pred": [5.991481304168701, 0.9953059554100037], "elapse": 0.06}
+
+{"ground_truth": [5.536, 1.59], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8802043258234757, "pred": [5.639692068099976, 1.746509313583374], "elapse": 0.06}
+
+{"ground_truth": [5.73, 2.312], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2849169878238922, "pred": [5.846456527709961, 2.2573885917663574], "elapse": 0.06}
+
+{"ground_truth": [5.398, 3.21], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.054336063525734, "pred": [5.233929634094238, 3.580498218536377], "elapse": 0.06}
+
+{"ground_truth": [5.186, 4.944], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4481807675647222, "pred": [5.18358314037323, 4.799577832221985], "elapse": 0.06}
+
+{"ground_truth": [5.74, 5.49], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5480749439536343, "pred": [5.7877665758132935, 5.5165183544158936], "elapse": 0.07}
+
+{"ground_truth": [5.227, 6.254], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2428691878114444, "pred": [5.434196710586548, 6.3412230014801025], "elapse": 0.07}
+
+{"ground_truth": [5.058, 7.434], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6176702203712194, "pred": [4.909659326076508, 7.498875617980957], "elapse": 0.07}
+
+{"ground_truth": [5.312, 8.696], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.678475694417964, "pred": [5.159709692001343, 8.361408233642578], "elapse": 0.06}
+
+{"ground_truth": [5.378, 9.18], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8476751280702035, "pred": [5.557701110839844, 9.221523761749268], "elapse": 0.06}
+
+{"ground_truth": [5.025, 10.067], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2717715752852183, "pred": [4.980184078216553, 9.948109984397888], "elapse": 0.06}
+
+{"ground_truth": [5.679, 11.454], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 7.834416595927603, "pred": [5.613616228103638, 10.67302131652832], "elapse": 0.06}
+
+{"ground_truth": [5.537, 12.897], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 34.284070148550974, "pred": [2.4706201553344727, 14.430903911590576], "elapse": 0.06}
+
+{"ground_truth": [5.99, 13.217], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 18.911860918617286, "pred": [6.452358722686768, 11.383015155792236], "elapse": 0.07}
+
+{"ground_truth": [5.663, 14.263], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.744143843439616, "pred": [5.777001142501831, 14.131254434585571], "elapse": 0.07}
+
+{"ground_truth": [5.021, 15.758], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4848555824615242, "pred": [4.9834595918655396, 15.902131080627441], "elapse": 0.07}
+
+{"ground_truth": [6.588, 0.831], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2020439129467833, "pred": [6.744946241378784, 0.6762670278549194], "elapse": 0.06}
+
+{"ground_truth": [6.629, 1.873], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5602783155248978, "pred": [6.577555418014526, 1.8504146337509155], "elapse": 0.07}
+
+{"ground_truth": [6.274, 2.798], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6004943525716455, "pred": [6.403003931045532, 2.7039434909820557], "elapse": 0.11}
+
+{"ground_truth": [6.687, 3.216], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.252112786444246, "pred": [6.9094319343566895, 3.253732442855835], "elapse": 0.06}
+
+{"ground_truth": [6.947, 4.731], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7389165637400708, "pred": [6.816512107849121, 4.616337835788727], "elapse": 0.06}
+
+{"ground_truth": [6.254, 5.213], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.11798512643515457, "pred": [6.247412919998169, 5.223139524459839], "elapse": 0.07}
+
+{"ground_truth": [6.518, 6.026], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.717844988409203, "pred": [6.346619367599487, 6.034014701843262], "elapse": 0.07}
+
+{"ground_truth": [6.207, 7.425], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 8.203515138545526, "pred": [6.601275682449341, 6.7050371170043945], "elapse": 0.06}
+
+{"ground_truth": [6.374, 8.464], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 8.80437021731483, "pred": [6.225539684295654, 9.331376314163208], "elapse": 0.06}
+
+{"ground_truth": [6.278, 9.587], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2092162387765093, "pred": [6.192286729812622, 9.79055655002594], "elapse": 0.06}
+
+{"ground_truth": [6.864, 10.118], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.803957736670145, "pred": [6.693140029907227, 10.175831317901611], "elapse": 0.06}
+
+{"ground_truth": [6.517, 11.132], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8249347490296608, "pred": [6.675239086151123, 11.2236328125], "elapse": 0.07}
+
+{"ground_truth": [6.717, 12.396], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 5.158635714362588, "pred": [6.475137710571289, 12.85178518295288], "elapse": 0.06}
+
+{"ground_truth": [6.565, 13.183], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2191791416487836, "pred": [6.637965679168701, 13.085293650627136], "elapse": 0.06}
+
+{"ground_truth": [6.145, 14.488], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.800085603226952, "pred": [6.067412376403809, 14.467928409576416], "elapse": 0.07}
+
+{"ground_truth": [6.765, 15.749], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 35.76880086129454, "pred": [9.867809534072876, 13.968589901924133], "elapse": 0.07}
+
+{"ground_truth": [7.552, 0.584], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 58.24910370045367, "pred": [5.922577261924744, 6.176786422729492], "elapse": 0.06}
+
+{"ground_truth": [7.962, 1.292], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2937309044865857, "pred": [7.867439031600952, 1.3805084228515625], "elapse": 0.06}
+
+{"ground_truth": [7.241, 2.1], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.69563916394008, "pred": [7.606895685195923, 2.1510138511657715], "elapse": 0.06}
+
+{"ground_truth": [7.016, 3.93], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.597760525684909, "pred": [6.9402546882629395, 4.069977760314941], "elapse": 0.06}
+
+{"ground_truth": [7.67, 4.785], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 24.816128272572904, "pred": [6.170073509216309, 2.808065891265869], "elapse": 0.06}
+
+{"ground_truth": [7.282, 5.586], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.3861688717259115, "pred": [7.712320327758789, 5.502882719039917], "elapse": 0.06}
+
+{"ground_truth": [7.064, 6.486], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.40913273995900146, "pred": [7.101977348327637, 6.470520734786987], "elapse": 0.07}
+
+{"ground_truth": [7.977, 7.877], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 17.74992988858039, "pred": [6.623906373977661, 9.024720191955566], "elapse": 0.07}
+
+{"ground_truth": [7.338, 8.962], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6612229918368153, "pred": [7.5030951499938965, 8.941754281520844], "elapse": 0.07}
+
+{"ground_truth": [7.232, 9.949], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0201265104674115, "pred": [7.307435512542725, 10.01766324043274], "elapse": 0.06}
+
+{"ground_truth": [7.941, 10.799], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 2.0660726871223187, "pred": [7.8080350160598755, 10.641385316848755], "elapse": 0.06}
+
+{"ground_truth": [7.63, 11.874], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 10.29930581958898, "pred": [7.1019206047058105, 10.990310668945312], "elapse": 0.06}
+
+{"ground_truth": [7.293, 12.849], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2601063454729269, "pred": [7.334109783172607, 12.729820370674133], "elapse": 0.07}
+
+{"ground_truth": [7.618, 13.013], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0390175890293383, "pred": [7.72175931930542, 13.015230655670166], "elapse": 0.06}
+
+{"ground_truth": [7.347, 14.148], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 5.625064286921869, "pred": [7.410874843597412, 14.707035541534424], "elapse": 0.07}
+
+{"ground_truth": [7.982, 15.478], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 53.1051203007387, "pred": [9.308936715126038, 10.336354732513428], "elapse": 0.07}
+
+{"ground_truth": [8.497, 0.639], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.996311862784135, "pred": [8.724928617477417, 0.8344228863716125], "elapse": 0.06}
+
+{"ground_truth": [8.369, 1.137], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 7.367517254987085, "pred": [8.512203216552734, 1.85951828956604], "elapse": 0.07}
+
+{"ground_truth": [8.822, 2.19], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1947241777178261, "pred": [8.720863461494446, 2.253261089324951], "elapse": 0.06}
+
+{"ground_truth": [8.511, 3.224], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6755141711059163, "pred": [8.659685373306274, 3.146465301513672], "elapse": 0.06}
+
+{"ground_truth": [8.098, 4.862], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 4.166575998113865, "pred": [7.821863174438477, 5.174341917037964], "elapse": 0.06}
+
+{"ground_truth": [8.973, 5.961], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0756235937333225, "pred": [9.03395926952362, 5.87226939201355], "elapse": 0.06}
+
+{"ground_truth": [8.907, 6.774], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.0976235773458907, "pred": [8.747878909111023, 6.911240577697754], "elapse": 0.06}
+
+{"ground_truth": [8.333, 7.081], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7457133412779535, "pred": [8.417954802513123, 6.928515434265137], "elapse": 0.07}
+
+{"ground_truth": [8.407, 8.232], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 7.111603388073473, "pred": [8.877269744873047, 8.765921473503113], "elapse": 0.06}
+
+{"ground_truth": [8.132, 9.053], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.059012605747818, "pred": [8.08933675289154, 9.254756093025208], "elapse": 0.06}
+
+{"ground_truth": [8.726, 10.011], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8094167438171107, "pred": [8.679317116737366, 9.836503744125366], "elapse": 0.06}
+
+{"ground_truth": [8.771, 11.147], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0395866660788131, "pred": [8.682836771011353, 11.202699661254883], "elapse": 0.06}
+
+{"ground_truth": [8.08, 12.09], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 14.234123389255302, "pred": [9.049763679504395, 13.13110864162445], "elapse": 0.07}
+
+{"ground_truth": [8.672, 13.245], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.541545372476884, "pred": [8.30550467967987, 12.977220833301544], "elapse": 0.06}
+
+{"ground_truth": [8.421, 14.557], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 4.999273577705307, "pred": [8.694253921508789, 14.139029502868652], "elapse": 0.06}
+
+{"ground_truth": [8.861, 15.727], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.3759853949771474, "pred": [8.988290309906006, 15.927383422851562], "elapse": 0.07}
+
+{"ground_truth": [9.27, 0.131], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.9705540790104754, "pred": [9.152479887008667, -0.24768054485321045], "elapse": 0.07}
+
+{"ground_truth": [9.055, 1.302], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.855242380212636, "pred": [9.240437150001526, 1.2885222434997559], "elapse": 0.07}
+
+{"ground_truth": [9.262, 2.456], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.604969802173823, "pred": [9.288479924201965, 2.401689291000366], "elapse": 0.06}
+
+{"ground_truth": [9.284, 3.38], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.347241744595733, "pred": [9.25072193145752, 3.6123485565185547], "elapse": 0.06}
+
+{"ground_truth": [9.181, 4.789], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.2398337906139267, "pred": [8.957437217235565, 4.799532532691956], "elapse": 0.06}
+
+{"ground_truth": [9.057, 5.697], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6104179893937838, "pred": [9.079941630363464, 5.753502011299133], "elapse": 0.06}
+
+{"ground_truth": [9.779, 6.777], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.647051983383452, "pred": [9.91141128540039, 6.679866313934326], "elapse": 0.06}
+
+{"ground_truth": [9.259, 7.374], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.05879606763329, "pred": [9.065844058990479, 7.610645771026611], "elapse": 0.07}
+
+{"ground_truth": [9.371, 8.197], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6466829991243979, "pred": [9.433058977127075, 8.349520802497864], "elapse": 0.06}
+
+{"ground_truth": [9.46, 9.045], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.116295452014094, "pred": [9.451510310173035, 9.155929446220398], "elapse": 0.06}
+
+{"ground_truth": [9.8, 10.077], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.13588531474622, "pred": [9.856065273284912, 9.97828471660614], "elapse": 0.06}
+
+{"ground_truth": [9.519, 11.307], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.7328743958923707, "pred": [9.454285979270935, 11.572365045547485], "elapse": 0.06}
+
+{"ground_truth": [9.578, 12.959], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.3499515291213773, "pred": [9.457178235054016, 12.75760406255722], "elapse": 0.06}
+
+{"ground_truth": [9.646, 13.035], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.40329669008121355, "pred": [9.605327606201172, 13.032714366912842], "elapse": 0.06}
+
+{"ground_truth": [9.43, 14.51], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.956267993003392, "pred": [9.566239356994629, 14.369239807128906], "elapse": 0.07}
+
+{"ground_truth": [9.536, 15.681], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 14.986225560882218, "pred": [9.787366032600403, 14.203971147537231], "elapse": 0.07}
+
+{"ground_truth": [10.393, 0.956], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1420046301621536, "pred": [10.571751594543457, 0.8388742208480835], "elapse": 0.06}
+
+{"ground_truth": [10.187, 1.904], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.4650718450457045, "pred": [9.989015817642212, 2.0506680011749268], "elapse": 0.07}
+
+{"ground_truth": [10.544, 2.457], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.755213168338667, "pred": [10.460403680801392, 2.302471160888672], "elapse": 0.07}
+
+{"ground_truth": [10.882, 3.459], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.1010653882170285, "pred": [10.972986459732056, 3.755074977874756], "elapse": 0.06}
+
+{"ground_truth": [10.724, 4.399], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 10.310020067195715, "pred": [9.703201055526733, 4.542525768280029], "elapse": 0.07}
+
+{"ground_truth": [10.904, 5.69], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.8510599398404586, "pred": [10.819088459014893, 5.6950767040252686], "elapse": 0.07}
+
+{"ground_truth": [10.7, 6.328], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9489907561951725, "pred": [10.531209468841553, 6.229624271392822], "elapse": 0.07}
+
+{"ground_truth": [10.757, 7.636], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.4853689949067443, "pred": [10.892645597457886, 7.844173431396484], "elapse": 0.07}
+
+{"ground_truth": [10.796, 8.959], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.44105807758721, "pred": [10.562992334365845, 9.030668258666992], "elapse": 0.07}
+
+{"ground_truth": [10.458, 9.591], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4289436676064679, "pred": [10.42359209060669, 9.616409540176392], "elapse": 0.07}
+
+{"ground_truth": [10.858, 10.457], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 11.831943903172448, "pred": [12.028307795524597, 10.28494644165039], "elapse": 0.06}
+
+{"ground_truth": [10.952, 11.576], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.4844436693907606, "pred": [10.886448860168457, 11.708999872207642], "elapse": 0.06}
+
+{"ground_truth": [10.821, 12.909], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6025886705162296, "pred": [10.972875118255615, 12.85838520526886], "elapse": 0.07}
+
+{"ground_truth": [10.816, 13.159], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.257648168193531, "pred": [10.836920261383057, 13.145061135292053], "elapse": 0.07}
+
+{"ground_truth": [10.629, 14.398], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1117076713520406, "pred": [10.537715196609497, 14.334837436676025], "elapse": 0.07}
+
+{"ground_truth": [10.063, 15.424], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.467511595048534, "pred": [9.854529857635498, 14.811703205108643], "elapse": 0.07}
+
+{"ground_truth": [11.259, 0.849], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.8393631245315505, "pred": [11.525388479232788, 0.7516289353370667], "elapse": 0.07}
+
+{"ground_truth": [11.033, 1.959], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2180928027349784, "pred": [11.143332481384277, 2.0112452507019043], "elapse": 0.06}
+
+{"ground_truth": [11.355, 2.357], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.735906564914166, "pred": [11.685695171356201, 2.696077823638916], "elapse": 0.11}
+
+{"ground_truth": [11.016, 3.185], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6742999789088318, "pred": [11.167078018188477, 3.1123805046081543], "elapse": 0.06}
+
+{"ground_truth": [11.401, 4.929], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7694465411481444, "pred": [11.467214107513428, 4.889662265777588], "elapse": 0.06}
+
+{"ground_truth": [11.1, 5.945], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.2950943387663627, "pred": [11.382649660110474, 5.776577472686768], "elapse": 0.06}
+
+{"ground_truth": [11.327, 6.233], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6868140030299491, "pred": [11.370471954345703, 6.285670757293701], "elapse": 0.06}
+
+{"ground_truth": [11.614, 7.033], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7500256461927101, "pred": [11.679681777954102, 6.996032476425171], "elapse": 0.07}
+
+{"ground_truth": [11.016, 8.429], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9799953492630764, "pred": [10.98981237411499, 8.334251582622528], "elapse": 0.06}
+
+{"ground_truth": [11.068, 9.252], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.6337634569056334, "pred": [10.906611680984497, 9.227006554603577], "elapse": 0.06}
+
+{"ground_truth": [11.221, 10.253], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 0.8153991538673777, "pred": [11.139913618564606, 10.260092973709106], "elapse": 0.06}
+
+{"ground_truth": [11.131, 11.012], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 15.922395604290232, "pred": [12.608015179634094, 10.417211771011353], "elapse": 0.06}
+
+{"ground_truth": [11.115, 12.618], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.350506816924979, "pred": [11.312624216079712, 12.490477621555328], "elapse": 0.07}
+
+{"ground_truth": [11.409, 13.163], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.2094423308711306, "pred": [11.621091365814209, 12.922028303146362], "elapse": 0.06}
+
+{"ground_truth": [11.639, 14.49], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.160377435583506, "pred": [11.107359886169434, 14.178673267364502], "elapse": 0.06}
+
+{"ground_truth": [11.989, 15.065], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.8613490347213673, "pred": [12.271922588348389, 15.019920349121094], "elapse": 0.07}
+
+{"ground_truth": [12.783, 0.288], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8837630249769268, "pred": [12.942225813865662, 0.38943004608154297], "elapse": 0.06}
+
+{"ground_truth": [12.517, 1.424], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9801097200457507, "pred": [12.31930387020111, 1.422506332397461], "elapse": 0.06}
+
+{"ground_truth": [12.555, 2.287], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 5.761494951100211, "pred": [13.12380588054657, 2.1973137855529785], "elapse": 0.06}
+
+{"ground_truth": [12.707, 3.415], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 15.672904036661695, "pred": [13.740462303161621, 4.592768430709839], "elapse": 0.06}
+
+{"ground_truth": [12.361, 4.829], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.202468471912302, "pred": [12.344407796859741, 4.947815954685211], "elapse": 0.06}
+
+{"ground_truth": [12.925, 5.046], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.07890707225918492, "pred": [12.917505145072937, 5.0485734939575195], "elapse": 0.06}
+
+{"ground_truth": [12.815, 6.985], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9863110529712888, "pred": [12.771702229976654, 7.074127197265625], "elapse": 0.06}
+
+{"ground_truth": [12.969, 7.905], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.90835136969704, "pred": [12.787079453468323, 7.962682723999023], "elapse": 0.07}
+
+{"ground_truth": [12.297, 8.992], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 4.709785929898434, "pred": [12.756792545318604, 8.89199423789978], "elapse": 0.07}
+
+{"ground_truth": [12.249, 9.106], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 6.7290357651281525, "pred": [12.907169818878174, 8.963904559612274], "elapse": 0.06}
+
+{"ground_truth": [12.951, 10.233], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.662300619111538, "pred": [12.742196917533875, 10.398645877838135], "elapse": 0.06}
+
+{"ground_truth": [12.69, 11.058], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7963177404866596, "pred": [12.698046267032623, 10.979156017303467], "elapse": 0.07}
+
+{"ground_truth": [12.731, 12.882], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.6530536830796974, "pred": [12.726685225963593, 12.81653892993927], "elapse": 0.06}
+
+{"ground_truth": [12.272, 13.379], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.9928790865401543, "pred": [12.322859406471252, 13.464588522911072], "elapse": 0.07}
+
+{"ground_truth": [12.374, 14.749], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.8966806103911005, "pred": [12.324589371681213, 14.931827068328857], "elapse": 0.06}
+
+{"ground_truth": [12.238, 15.172], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 2.68766384649179, "pred": [12.107589721679688, 14.936738729476929], "elapse": 0.06}
+
+{"ground_truth": [13.449, 0.304], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 6.154835297183915, "pred": [13.788067936897278, 0.8183269500732422], "elapse": 0.07}
+
+{"ground_truth": [13.839, 1.238], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.234878071811157, "pred": [13.842679023742676, 1.4612023830413818], "elapse": 0.07}
+
+{"ground_truth": [13.502, 2.943], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.2611136266164171, "pred": [13.500881314277649, 2.916515827178955], "elapse": 0.06}
+
+{"ground_truth": [13.994, 3.452], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 9.123690535004386, "pred": [13.9400155544281, 2.5410749912261963], "elapse": 0.06}
+
+{"ground_truth": [13.071, 4.293], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 7.1968746365201755, "pred": [13.513782262802124, 3.725538730621338], "elapse": 0.07}
+
+{"ground_truth": [13.152, 5.417], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7966442526490001, "pred": [13.07310438156128, 5.409374237060547], "elapse": 0.07}
+
+{"ground_truth": [13.131, 6.604], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5885420064878454, "pred": [13.184504985809326, 6.578979969024658], "elapse": 0.07}
+
+{"ground_truth": [13.383, 7.895], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 5.383661819098226, "pred": [13.727353692054749, 8.309060215950012], "elapse": 0.07}
+
+{"ground_truth": [13.968, 8.547], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 9.798242857574742, "pred": [14.259711742401123, 7.611556053161621], "elapse": 0.07}
+
+{"ground_truth": [13.275, 9.592], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.22888698685934, "pred": [13.491716623306274, 9.643579959869385], "elapse": 0.07}
+
+{"ground_truth": [13.897, 10.407], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.1338948503218775, "pred": [13.971879005432129, 10.321795225143433], "elapse": 0.06}
+
+{"ground_truth": [13.552, 11.272], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.823657634345193, "pred": [13.213536500930786, 11.449397087097168], "elapse": 0.06}
+
+{"ground_truth": [13.455, 12.402], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4145657674908792, "pred": [13.421743869781494, 12.425857663154602], "elapse": 0.07}
+
+{"ground_truth": [13.248, 13.506], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.4525780228463974, "pred": [13.290553212165833, 13.522374272346497], "elapse": 0.07}
+
+{"ground_truth": [13.31, 14.373], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.5378592758820036, "pred": [13.354589700698853, 14.403669834136963], "elapse": 0.07}
+
+{"ground_truth": [13.525, 15.751], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 12.508330595486877, "pred": [13.936097621917725, 14.569257736206055], "elapse": 0.06}
+
+{"ground_truth": [14.334, 0.924], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1504008128605974, "pred": [14.342751026153564, 0.7093174457550049], "elapse": 0.07}
+
+{"ground_truth": [14.862, 1.049], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.5730815258148385, "pred": [15.13631296157837, 0.8193517327308655], "elapse": 0.07}
+
+{"ground_truth": [14.254, 2.446], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9712544274474, "pred": [14.167100667953491, 2.2690227031707764], "elapse": 0.06}
+
+{"ground_truth": [14.105, 3.348], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0975528392571392, "pred": [14.011659860610962, 3.4068126678466797], "elapse": 0.07}
+
+{"ground_truth": [14.74, 4.681], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.206917227130419, "pred": [14.942374229431152, 4.311643689870834], "elapse": 0.06}
+
+{"ground_truth": [14.622, 5.711], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.7066312545384581, "pred": [14.552314758300781, 5.70138955116272], "elapse": 0.06}
+
+{"ground_truth": [14.205, 6.342], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9946059199944197, "pred": [14.03392219543457, 6.23901891708374], "elapse": 0.06}
+
+{"ground_truth": [14.676, 7.879], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.5824306324417456, "pred": [14.546376705169678, 8.213110446929932], "elapse": 0.06}
+
+{"ground_truth": [14.544, 8.283], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 3.157032101729438, "pred": [14.292927742004395, 8.090885162353516], "elapse": 0.07}
+
+{"ground_truth": [14.03, 9.71], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.1716003186431947, "pred": [14.01808500289917, 9.927156686782837], "elapse": 0.06}
+
+{"ground_truth": [14.008, 10.373], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.0230509485954953, "pred": [13.9713876247406, 10.277105331420898], "elapse": 0.07}
+
+{"ground_truth": [14.531, 11.922], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 20.554959553798284, "pred": [13.762657403945923, 13.828790307044983], "elapse": 0.07}
+
+{"ground_truth": [14.622, 12.279], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.985471963357602, "pred": [14.52433705329895, 12.561109066009521], "elapse": 0.06}
+
+{"ground_truth": [14.21, 13.116], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.31577395392086216, "pred": [14.196113348007202, 13.0872220993042], "elapse": 0.06}
+
+{"ground_truth": [14.577, 14.695], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.9614790951088352, "pred": [14.443342685699463, 14.551839828491211], "elapse": 0.06}
+
+{"ground_truth": [14.672, 15.949], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.8253146369187707, "pred": [14.391769886016846, 15.985180854797363], "elapse": 0.06}
+
+{"ground_truth": [15.003, 0.647], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 0.21591252416727577, "pred": [14.981605052947998, 0.6517846584320068], "elapse": 0.07}
+
+{"ground_truth": [15.6, 1.589], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 10.179673696696057, "pred": [14.601006031036377, 1.7823494672775269], "elapse": 0.06}
+
+{"ground_truth": [15.696, 2.814], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.700851565950443, "pred": [16.082488536834717, 3.081968307495117], "elapse": 0.06}
+
+{"ground_truth": [15.51, 3.334], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2830073225498448, "pred": [15.384721279144287, 3.3625059127807617], "elapse": 0.07}
+
+{"ground_truth": [15.791, 4.097], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 14.893866374071628, "pred": [14.720055103302002, 5.1324684619903564], "elapse": 0.06}
+
+{"ground_truth": [15.442, 5.52], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 2.156025120418104, "pred": [15.468134880065918, 5.305935382843018], "elapse": 0.07}
+
+{"ground_truth": [15.228, 6.41], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 3.583538485068914, "pred": [15.51591444015503, 6.623337268829346], "elapse": 0.06}
+
+{"ground_truth": [15.619, 7.133], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2500996713176205, "pred": [15.544936180114746, 7.032626152038574], "elapse": 0.06}
+
+{"ground_truth": [15.981, 8.872], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 4.667969105260278, "pred": [15.853152751922607, 9.320853233337402], "elapse": 0.07}
+
+{"ground_truth": [15.503, 9.922], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 13.682864342904198, "pred": [14.134634017944336, 9.898972153663635], "elapse": 0.07}
+
+{"ground_truth": [15.541, 10.923], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.2171129713018505, "pred": [15.646869897842407, 10.984015941619873], "elapse": 0.07}
+
+{"ground_truth": [15.83, 11.968], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 14.08673068644739, "pred": [14.78022289276123, 11.028848648071289], "elapse": 0.07}
+
+{"ground_truth": [15.92, 12.036], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": false, "localization_error": 20.01420704094036, "pred": [14.484629154205322, 10.641036033630371], "elapse": 0.06}
+
+{"ground_truth": [15.175, 13.389], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.674135273395162, "pred": [15.289944648742676, 13.267633438110352], "elapse": 0.06}
+
+{"ground_truth": [15.16, 14.886], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 1.7080726166787779, "pred": [15.14924955368042, 15.056743144989014], "elapse": 0.06}
+
+{"ground_truth": [15.446, 15.908], "grid_length": 16, "sensor_num": 8, "noise": 0, "continuous": true}
+{"method": "qml-r-two", "correct": true, "localization_error": 7.700890705777212, "pred": [15.085649967193604, 15.227507591247559], "elapse": 0.11}
+

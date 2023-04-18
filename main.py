@@ -108,7 +108,7 @@ if __name__ == '__main__':
                     start = time.time()
                     correct, pred = ql.qml(tx, root_dir, continuous=False)
                     elapse = round(time.time() - start, 2)
-                    outputs.append(Output('qml', correct, -1, pred, elapse))   
+                    outputs.append(Output('qml-c', correct, -1, pred, elapse))   
             if 'qml-two' in methods:
                 generate_data = args.generate_data  # in POVM-Loc, the training and testing are all together
                 if not generate_data:                   # in QML, training and testing are separate (training takes too much time)
@@ -117,13 +117,13 @@ if __name__ == '__main__':
                     start = time.time()
                     correct, pred = ql.qml_two(tx, root_dir)
                     elapse = round(time.time() - start, 2)
-                    outputs.append(Output('qml-two', correct, localization_error=-1, pred=pred, elapse=elapse))
+                    outputs.append(Output('qml-c-two', correct, localization_error=-1, pred=pred, elapse=elapse))
 
             mylogger.log(myinput, outputs)
             # time.sleep(0.5)
     else:
         # testing: continuous
-        np.random.seed(0)
+        np.random.seed(1)
         # tx_list = [(x + 0.5 + np.random.uniform(-0.5, 0.5), y + 0.5 + np.random.uniform(-0.5, 0.5)) for x in range(grid_length) for y in range(grid_length)]
         # tx_list = Utility.generate_tx_list('test-5meter', grid_length, sensordata)
         tx_list = []

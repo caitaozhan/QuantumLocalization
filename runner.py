@@ -5,7 +5,7 @@ from subprocess import Popen, PIPE
 import sys
 
 
-def discrete_plot1():
+def discrete():
     # plot 1: Discrete case. Methods: QSD-One and PQC-One-C. 
     #         Y: CC_accuracy, X: varying grid size
     
@@ -30,14 +30,16 @@ def discrete_plot1():
     #     p = Popen(command, shell=True)
     #     p.wait()
 
+
     # povmloc (twolevel)
 
     # template = 'python main.py -m {} -l {} -s {} -of {}'
     # config = [
-    #     ['povmloc', 4,  8, 'discrete.twolevel.varygrid'],
-    #     ['povmloc', 9,  8, 'discrete.twolevel.varygrid'],
-    #     ['povmloc', 12, 8, 'discrete.twolevel.varygrid'],
-    #     ['povmloc', 16, 8, 'discrete.twolevel.varygrid'],
+        # ['povmloc', 4,  8, 'discrete.twolevel.varygrid'],
+        # ['povmloc', 9,  8, 'discrete.twolevel.varygrid'],
+        # ['povmloc', 12, 8, 'discrete.twolevel.varygrid'],
+        # ['povmloc', 16, 8, 'discrete.twolevel.varygrid'],
+    #     ['povmloc', 16, 4, 'discrete.twolevel.qsd'],
     # ]
     # for i, c in enumerate(config):
     #     command = template.format(c[0], c[1], c[2], c[3])
@@ -46,20 +48,19 @@ def discrete_plot1():
     #     p.wait()
 
 
-
     # qml onelevel
 
     # template = 'python main.py -m {} -l {} -s {} -of {} -rd {}'
     # config = [
-    #     ['qml', 2,  16, 'discrete.onelevel.varygrid.qml.16sen'],
-    #     ['qml', 4,  16, 'discrete.onelevel.varygrid.qml.16sen'],
-    #     ['qml', 6,  16, 'discrete.onelevel.varygrid.qml.16sen'],
-    #     ['qml', 8,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 2,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 4,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 6,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 8,  16, 'discrete.onelevel.varygrid.qml.16sen'],
         # ['qml', 9,  8, 'discrete.onelevel.pqc'],
-    #     ['qml', 10, 16, 'discrete.onelevel.varygrid.qml.16sen'],
-    #     ['qml', 12, 16, 'discrete.onelevel.varygrid.qml.16sen'],
-    #     ['qml', 14, 16, 'discrete.onelevel.varygrid.qml.16sen'],
-    #     ['qml', 16, 16, 'discrete.onelevel.varygrid.qml.16sen']
+        # ['qml', 10, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 12, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 14, 16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 16, 16, 'discrete.onelevel.varygrid.qml.16sen']
     # ]
 
     # for i, c in enumerate(config):
@@ -71,18 +72,20 @@ def discrete_plot1():
     #     p.wait()
 
 
-    # qml onelevel
+    # qml-two
 
     template = 'python main.py -m {} -l {} -s {} -of {} -rd {}'
     config = [
-        ['qml-two', 4,  8, 'discrete.twolevel.pqc'],
-        ['qml-two', 9,  8, 'discrete.twolevel.pqc'],
-        ['qml-two', 12, 8, 'discrete.twolevel.pqc'],
-        ['qml-two', 16, 8, 'discrete.twolevel.pqc'],
+        # ['qml-two', 4,  8, 'discrete.twolevel.pqc'],
+        # ['qml-two', 9,  8, 'discrete.twolevel.pqc'],
+        # ['qml-two', 12, 8, 'discrete.twolevel.pqc'],
+        # ['qml-two', 16, 8, 'discrete.twolevel.pqc'],
+        # ['qml-two', 16, 4, 'discrete.twolevel.pqc'],
+        ['qml-two', 16, 16, 'discrete.twolevel.pqc'],
     ]
 
     for i, c in enumerate(config):
-        rood_dir = f'qml-data/{c[1]}x{c[1]}.{c[2]}'
+        rood_dir = f'qml-data/{c[1]}x{c[1]}.{c[2]}.two'
         command = template.format(c[0], c[1], c[2], c[3], rood_dir)
         print(command)
         sys.stdout.flush()
@@ -187,8 +190,6 @@ def plot2():
         p.wait()
 
 
-
-
 def plot3():
     # plot 3: POVMLoc (one level), POVMLoc and POVMLoc-Pro. The localization error CDF plot. Y: percentage, X: error
     
@@ -207,6 +208,7 @@ def plot3():
         print(command)
         p = Popen(command, shell=True)
         p.wait()
+
 
 def table():
     '''a table for run time. the experiment data for plots 1,2,3 are collected on different machines
@@ -268,9 +270,7 @@ def generate_data():
 
 if  __name__ == '__main__':
     
-    # discrete_plot1()
-    
-    # discrete_plot2()
+    discrete()
     
     # plot1_part1()
     # plot1_part2()
@@ -281,5 +281,5 @@ if  __name__ == '__main__':
 
     # table()
 
-    generate_data()
+    # generate_data()
     

@@ -329,9 +329,10 @@ class Plot:
 
 
     @staticmethod
-    def error_cdf(data: list, figname: str, sensor_num: int):
-        # fix grid length at 16
+    def error_cdf(data: list, figname: str):
+        # fix grid length at 16 and sensor number at 8
         grid_length = 16
+        sensor_num = 8
         table = defaultdict(list)
         for myinput, output_by_method in data:
             if myinput.grid_length != grid_length or myinput.sensor_num != sensor_num:
@@ -348,7 +349,6 @@ class Plot:
             print(f'method={method}, avg. error = {np.average(error_list)}, error std. = {np.std(error_list)}')
             Y, bins, _ = plt.hist(error_list, n_bins, density=True, histtype='step', cumulative=True, label=method)
             method_n_bins.append((method, Y, bins))
-        # method_n_bins[0], method_n_bins[1] = method_n_bins[1], method_n_bins[0]  # switch ...
         plt.close()
         fig, ax = plt.subplots(figsize=(18, 16))
         fig.subplots_adjust(left=0.15, right=0.96, top=0.9, bottom=0.12)
@@ -356,6 +356,9 @@ class Plot:
             ax.plot(bins[1:], Y, label=Plot.LEGEND[method], color=Plot.COLOR[method], linestyle=Plot.LINE[method])
         
         ax.grid(True)
+        X = list(range(0, 41, 5))
+        ax.set_xticks(X)
+        ax.set_xticklabels([f'{int(x)}' for x in X])
         ax.legend(loc='lower right', fontsize=40)
         ax.set_xlabel('$L_{err}$ (m)', labelpad=20)
         ax.set_ylabel('Percentage (%)', labelpad=20)
@@ -492,16 +495,15 @@ def localization_error_cdf():
     logs = ['results/continuous.onelevel.qsd', 'results/continuous.onelevel.pqc',\
             'results/continuous.twolevel.qsd', 'results/continuous.twolevel.pqc']
     data = Utility.read_logs(logs)
-    sensor_num = 8
-    figname = f'results/error_cdf_{sensor_num}.png'
-    Plot.error_cdf(data, figname, sensor_num=8)
+    figname = f'results/error_cdf.png'
+    Plot.error_cdf(data, figname)
 
 
 def discrete_varygrid():
     logs = ['results/discrete.onelevel.qsd', 'results/discrete.onelevel.pqc',\
             'results/discrete.twolevel.qsd']#, 'results/discrete.twolevel.pqc']
     data = Utility.read_logs(logs)
-    figname = 'results/continuous.varygrid.png'
+    figname = 'results/discrete.varygrid.png'
     Plot.discrete_varygrid(data, figname)
 
 

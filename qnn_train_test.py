@@ -484,8 +484,8 @@ def main1level(continuous: bool):
             train_save_onelevel_continuous(folder)
     else:
         # time.sleep(2400)
-        sen = 4
-        for length in [10]:
+        sen = 8
+        for length in [9]:
             folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}')
             train_save_onelevel(folder)
         
@@ -501,15 +501,18 @@ def main2level(continuous: bool):
             folder = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}.two')
             train_save_twolevel_continuous(folder)        
     else:
-        folder = os.path.join(os.getcwd(), 'qml-data', '40x40.two')
-        train_save_twolevel(folder)
+        length = 16
+        sennum = [4, 16]
+        for sen in sennum:
+            folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}.two')
+            train_save_twolevel(folder)
 
 
 
 if __name__ == '__main__':
     # main()
-    # main1level(continuous=True)
-    main2level(continuous=True)
+    # main1level(continuous=False)
+    main2level(continuous=False)
 
 
 

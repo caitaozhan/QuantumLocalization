@@ -457,7 +457,7 @@ class QuantumLocalization:
 
 
     def train_quantum_ml(self, root_dir: str, generate_data: bool):
-        '''train the one level quantum machine learning model
+        '''train the one level quantum machine learning model, discrete case
         Args:
             root_dir -- the root directory of the training data
             generate -- True is generate new training data; False if use existing training data
@@ -608,7 +608,7 @@ class QuantumLocalization:
 
 
     def train_quantum_ml_two(self, root_dir: str):
-        '''train the two level quantum machine learning model
+        '''train the two level quantum machine learning model, discrete case
         Args:
             root_dir -- the root directory of the training data
         '''
@@ -633,7 +633,7 @@ class QuantumLocalization:
                     print(info)
                 a, b = area[0], area[1]  # a is top left, b is bottom right
                 tx_list = self.get_txloc(a, b, block_cell_ratio)
-                repeat = 25
+                repeat = 100
                 counter = 0
                 for i, tx in enumerate(tx_list):
                     for _ in range(repeat):

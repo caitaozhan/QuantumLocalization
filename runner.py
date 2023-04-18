@@ -5,31 +5,33 @@ from subprocess import Popen, PIPE
 import sys
 
 
-def discrete_case():
+def discrete_plot1():
     # plot 1: Discrete case. Methods: QSD-One and PQC-One-C. 
     #         Y: CC_accuracy, X: varying grid size
     
                                   # length, size, noise, continuous
     # povmloc-one
-    template = 'python main.py -m {} -l {} -s {} -of {}'
-    config = [
-        # ['povmloc-one', 2,  4, 'discrete.onelevel.varygrid'],
-        # ['povmloc-one', 4,  4, 'discrete.onelevel.varygrid'],
-        # ['povmloc-one', 6,  4, 'discrete.onelevel.varygrid'],
-        # ['povmloc-one', 8,  4, 'discrete.onelevel.varygrid'],
-        ['povmloc-one', 9,  4, 'discrete.onelevel.varygrid'],
-        # ['povmloc-one', 10, 4, 'discrete.onelevel.varygrid'],
-        # ['povmloc-one', 12, 4, 'discrete.onelevel.varygrid'],
-        # ['povmloc-one', 14, 4, 'discrete.onelevel.varygrid'],
-        # ['povmloc-one', 16, 8, 'discrete.onelevel.varygrid.8sen']
-    ]
-    for i, c in enumerate(config):
-        command = template.format(c[0], c[1], c[2], c[3])
-        print(command)
-        p = Popen(command, shell=True)
-        p.wait()
+
+    # template = 'python main.py -m {} -l {} -s {} -of {}'
+    # config = [
+    #     ['povmloc-one', 2,  4, 'discrete.onelevel.varygrid'],
+    #     ['povmloc-one', 4,  4, 'discrete.onelevel.varygrid'],
+    #     ['povmloc-one', 6,  4, 'discrete.onelevel.varygrid'],
+    #     ['povmloc-one', 8,  4, 'discrete.onelevel.varygrid'],
+    #     ['povmloc-one', 9,  8, 'discrete.onelevel.varygrid'],
+    #     ['povmloc-one', 10, 4, 'discrete.onelevel.varygrid'],
+    #     ['povmloc-one', 12, 4, 'discrete.onelevel.varygrid'],
+    #     ['povmloc-one', 14, 4, 'discrete.onelevel.varygrid'],
+    #     ['povmloc-one', 16, 8, 'discrete.onelevel.varygrid.8sen']
+    # ]
+    # for i, c in enumerate(config):
+    #     command = template.format(c[0], c[1], c[2], c[3])
+    #     print(command)
+    #     p = Popen(command, shell=True)
+    #     p.wait()
 
     # povmloc (twolevel)
+
     # template = 'python main.py -m {} -l {} -s {} -of {}'
     # config = [
     #     ['povmloc', 4,  8, 'discrete.twolevel.varygrid'],
@@ -53,6 +55,7 @@ def discrete_case():
     #     ['qml', 4,  16, 'discrete.onelevel.varygrid.qml.16sen'],
     #     ['qml', 6,  16, 'discrete.onelevel.varygrid.qml.16sen'],
     #     ['qml', 8,  16, 'discrete.onelevel.varygrid.qml.16sen'],
+        # ['qml', 9,  8, 'discrete.onelevel.pqc'],
     #     ['qml', 10, 16, 'discrete.onelevel.varygrid.qml.16sen'],
     #     ['qml', 12, 16, 'discrete.onelevel.varygrid.qml.16sen'],
     #     ['qml', 14, 16, 'discrete.onelevel.varygrid.qml.16sen'],
@@ -66,6 +69,25 @@ def discrete_case():
     #     sys.stdout.flush()
     #     p = Popen(command, shell=True)
     #     p.wait()
+
+
+    # qml onelevel
+
+    template = 'python main.py -m {} -l {} -s {} -of {} -rd {}'
+    config = [
+        ['qml-two', 4,  8, 'discrete.twolevel.pqc'],
+        ['qml-two', 9,  8, 'discrete.twolevel.pqc'],
+        ['qml-two', 12, 8, 'discrete.twolevel.pqc'],
+        ['qml-two', 16, 8, 'discrete.twolevel.pqc'],
+    ]
+
+    for i, c in enumerate(config):
+        rood_dir = f'qml-data/{c[1]}x{c[1]}.{c[2]}'
+        command = template.format(c[0], c[1], c[2], c[3], rood_dir)
+        print(command)
+        sys.stdout.flush()
+        p = Popen(command, shell=True)
+        p.wait()
 
 
 def plot1_part1():
@@ -121,32 +143,33 @@ def plot1_part2():
     #         Y: CC_accuracy,  X: varying grid size
     
                                # length, size, noise, continuous
-    # template = 'python main.py -m {} -l {} -s {} -of {} -rd {} -c'
-    # qml
+    # qml-two
+    template = 'python main.py -m {} -l {} -s {} -of {} -rd {} -c'
+    config = [
+        # ['qml-two', 4,  8, 'continuous.twolevel.varygrid.pqc'],
+        # ['qml-two', 9,  8, 'continuous.twolevel.varygrid.pqc'],
+        # ['qml-two', 12, 8, 'continuous.twolevel.varygrid.pqc'],
+        ['qml-two', 16, 16, 'continuous.twolevel.pqc']
+    ]
+    for i, c in enumerate(config):
+        root_dir = f'qml-data/c.{c[1]}x{c[1]}.{c[2]}.two'
+        command = template.format(c[0], c[1], c[2], c[3], root_dir)
+        print(command)
+        p = Popen(command, shell=True)
+        p.wait()
+
+    
+    # povmloc
+    # template = 'python main.py -m {} -l {} -s {} -of {} -c'
     # config = [
-    #     ['qml-two', 4,  8, 'continuous.twolevel.varygrid.pqc'],
-    #     ['qml-two', 9,  8, 'continuous.twolevel.varygrid.pqc'],
-    #     ['qml-two', 12, 8, 'continuous.twolevel.varygrid.pqc'],
-    #     ['qml-two', 16, 8, 'continuous.twolevel.varygrid.pqc']
+    #     ['povmloc', 16,  4, 'continuous.twolevel.varysen'],
     # ]
     # for i, c in enumerate(config):
-    #     root_dir = f'qml-data/c.{c[1]}x{c[1]}.{c[2]}.two'
-    #     command = template.format(c[0], c[1], c[2], c[3], root_dir)
+    #     command = template.format(c[0], c[1], c[2], c[3])
     #     print(command)
     #     p = Popen(command, shell=True)
     #     p.wait()
 
-    
-    template = 'python main.py -m {} -l {} -s {} -of {} -c'
-    # povmloc
-    config = [
-        ['povmloc', 16,  4, 'continuous.twolevel.varysen'],
-    ]
-    for i, c in enumerate(config):
-        command = template.format(c[0], c[1], c[2], c[3])
-        print(command)
-        p = Popen(command, shell=True)
-        p.wait()
 
 def plot2():
     # part of the data needed for plot 2 is already done by plot 1
@@ -228,29 +251,26 @@ def table():
 
 def generate_data():
     # template = "python main.py -m qml-two -l {} -s {} -rd  qml-data/c.{}x{}.{}.two -gd -c"
-    template = "python main.py -m qml-two -l {} -s {} -rd  qml-data/c.{}x{}.{}.two -gd"
-    # sen = 16
-    # grid_length = [4,16]
+    template = "python main.py -m qml-two -l {} -s {} -rd  qml-data/{}x{}.{}.two -gd"
+    # sen = 8
+    # grid_length = [4,9,12,16]
     gl = 16
-    sensornum = [8]
-    # ps = []
-    for sen in sensornum:
+    sennum = [4, 16]
+    for sen in sennum:
         command = template.format(gl, sen, gl, gl, sen)
         print(command)
         p = Popen(command, shell=True)
         p.wait()
-        # ps.append(Popen(command, shell=True))
 
-    # for p in ps:
-    #     p.wait()
 
 
 
 
 if  __name__ == '__main__':
     
-    discrete_case()
+    # discrete_plot1()
     
+    # discrete_plot2()
     
     # plot1_part1()
     # plot1_part2()
@@ -261,5 +281,5 @@ if  __name__ == '__main__':
 
     # table()
 
-    # generate_data()
+    generate_data()
     

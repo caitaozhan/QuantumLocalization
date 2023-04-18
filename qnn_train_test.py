@@ -338,8 +338,8 @@ def train_save_onelevel_continuous(dataset_dir: str):
 '''two level + discrete, save model'''
 def train_save_twolevel(folder: str):
     for i, dataset_dir in enumerate(sorted(glob.glob(folder + '/*'))):   # dataset_dir: ../40x40.two/level-0-set-0
-        if not ('16x16.4.two/level-1-set-1' in dataset_dir or '16x16.4.two/level-1-set-12' in dataset_dir or '16x16.4.two/level-1-set-14' in dataset_dir or \
-                '16x16.16.two/level-1-set-14' in dataset_dir or '16x16.16.two/level-1-set-15' in dataset_dir):
+        if not (dataset_dir.endswith('16x16.4.two/level-1-set-12') or dataset_dir.endswith('16x16.4.two/level-1-set-14') or \
+                dataset_dir.endswith('16x16.16.two/level-1-set-14') or dataset_dir.endswith('16x16.16.two/level-1-set-15')):
             continue
         info = json.load(open(os.path.join(dataset_dir, 'info')))
         print(info)
@@ -507,7 +507,8 @@ def main2level(continuous: bool):
         # for length in grid_length:
         length = 16
         for sen in [4,16]:
-            folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}.two')
+            # folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}.two')
+            folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.8.two')
             train_save_twolevel(folder)
 
 

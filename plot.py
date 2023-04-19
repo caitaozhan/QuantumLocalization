@@ -62,154 +62,6 @@ class Plot:
 
 
     @staticmethod
-    def discrete_onelevel_varygrid(data: list, figname: str):
-        # step 1.1: prepare accuracy data for QSD-One and PQC-One
-        reduce = Plot.reduce_accuracy
-        table_qsd_onelevel = defaultdict(list)
-        table_pqc_onelevel = defaultdict(list)
-        for myinput, output_by_method in data:
-            for method, output in output_by_method.items():
-                if method == 'povmloc-one':
-                    table_qsd_onelevel[myinput.grid_length].append({myinput.sensor_num: output.correct})
-                if method == 'qml':
-                    table_pqc_onelevel[myinput.grid_length].append({myinput.sensor_num: output.correct})
-        
-        print('\nQSD-Onelevel')
-        print_table = []
-        sensornum = [4, 8]
-        for x, list_of_y_by_sensornum in sorted(table_qsd_onelevel.items()):
-            tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
-            print_table.append([x] + tmp_list)
-        print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
-        arr = np.array(print_table)
-        povm_one_4sen = arr[:, 1] * 100  # percentage
-        povm_one_8sen = arr[:, 2] * 100
-
-        print('PQC-Onelevel-C')
-        print_table = []
-        sensornum = [4, 8, 16]
-        for x, list_of_y_by_sensornum in sorted(table_pqc_onelevel.items()):
-            tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
-            print_table.append([x] + tmp_list)
-        print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
-        arr = np.array(print_table)
-        pqc_one_4sen  = arr[:, 1]  * 100
-        pqc_one_8sen  = arr[:, 2]  * 100
-        pqc_one_16sen = arr[:, 3] * 100
-        X      = arr[:, 0]
-
-        # step 2: plotting
-        cc_acc = "$CC_{acc}$"
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(28, 14))
-        fig.subplots_adjust(left=0.085, right=0.99, top=0.91, bottom=0.18, wspace=0.13)
-        ax1.plot(X, povm_one_8sen, linestyle='--', marker='o', label="8 Sensors", mec='black', color=Plot.COLOR['povmloc-one'])
-        ax1.plot(X, povm_one_4sen, linestyle=':',  marker='o', label="4 Sensors", mec='black', color=Plot.COLOR['povmloc-one'])
-        ax2.plot(X, pqc_one_16sen, linestyle='-',  marker='o', label="16 Sensors",  mec='black', color=Plot.COLOR['qml'])
-        ax2.plot(X, pqc_one_8sen,  linestyle='--', marker='o', label="8 Sensors",  mec='black', color=Plot.COLOR['qml'])
-        ax2.plot(X, pqc_one_4sen,  linestyle=':',  marker='o', label="4 Sensors",  mec='black', color=Plot.COLOR['qml'])
-        # ax1
-        ax1.legend(ncol=1, handlelength=4, loc='lower left')
-        ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
-        ax1.grid(True)
-        ax1.set_xticks(X)
-        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=35, rotation=14)
-        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax1.set_ylabel(f'{cc_acc} (%)')
-        ax1.set_ylim([0, 102])
-        method = Plot.LEGEND['povmloc-one']
-        ax1.set_title(f'Performance of {method}', pad=30, fontsize=45, fontweight='bold')
-        # ax2
-        ax2.legend(ncol=1, handlelength=4, loc='lower left')
-        ax2.grid(True)
-        ax2.set_xlabel('Grid Size', labelpad=10, fontsize=40)
-        ax2.set_xticks(X)
-        ax2.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        ax2.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=35, rotation=14)
-        ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax2.set_ylim([0, 102])
-        method = Plot.LEGEND['qml']
-        ax2.set_title(f'Performance of {method}', pad=30, fontsize=45, fontweight='bold')
-        plt.figtext(0.275, 0.01, '(a)', fontsize=40)
-        plt.figtext(0.76,  0.01, '(b)', fontsize=40)
-        fig.savefig(figname)
-
-
-    @staticmethod
-    def continuous_onelevel_varygrid(data: list, figname: str):
-        # step 1.1: prepare accuracy data for QSD-One and PQC-One
-        reduce = Plot.reduce_average
-        table_qsd_onelevel = defaultdict(list)
-        table_pqc_onelevel = defaultdict(list)
-        for myinput, output_by_method in data:
-            for method, output in output_by_method.items():
-                if method == 'povmloc-one':
-                    table_qsd_onelevel[myinput.grid_length].append({myinput.sensor_num: output.localization_error})
-                if method == 'qml-r':
-                    table_pqc_onelevel[myinput.grid_length].append({myinput.sensor_num: output.localization_error})
-        
-        print('\nQSD-Onelevel')
-        print_table = []
-        sensornum = [4, 8]
-        for x, list_of_y_by_sensornum in sorted(table_qsd_onelevel.items()):
-            tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
-            print_table.append([x] + tmp_list)
-        print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
-        arr = np.array(print_table)
-        povm_one_4sen = arr[:, 1]
-        povm_one_8sen = arr[:, 2]
-
-        print('PQC-Onelevel-R')
-        print_table = []
-        sensornum = [4, 8, 16]
-        for x, list_of_y_by_sensornum in sorted(table_pqc_onelevel.items()):
-            tmp_list = [reduce([(y_by_sensornum[sensor] if sensor in y_by_sensornum else None) for y_by_sensornum in list_of_y_by_sensornum]) for sensor in sensornum]
-            print_table.append([x] + tmp_list)
-        print(tabulate.tabulate(print_table, headers=['Grid Length'] + sensornum))
-        arr = np.array(print_table)
-        pqc_one_r_4sen  = arr[:, 1]
-        pqc_one_r_8sen  = arr[:, 2]
-        pqc_one_r_16sen = arr[:, 3]
-        X               = arr[:, 0]
-
-        # step 2: plotting
-        l_err = "$L_{err}$"
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(28, 14))
-        fig.subplots_adjust(left=0.085, right=0.99, top=0.91, bottom=0.18, wspace=0.13)
-        ax1.plot(X, povm_one_4sen, linestyle=':',  marker='o', label="4 Sensors", mec='black', color=Plot.COLOR['povmloc-one'])
-        ax1.plot(X, povm_one_8sen, linestyle='--', marker='o', label="8 Sensors", mec='black', color=Plot.COLOR['povmloc-one'])
-        ax2.plot(X, pqc_one_r_4sen,  linestyle=':',  marker='o', label="4 Sensors",   mec='black', color=Plot.COLOR['qml-r'])
-        ax2.plot(X, pqc_one_r_8sen,  linestyle='--', marker='o', label="8 Sensors",   mec='black', color=Plot.COLOR['qml-r'])
-        ax2.plot(X, pqc_one_r_16sen, linestyle='-',  marker='o', label="16 Sensors",  mec='black', color=Plot.COLOR['qml-r'])
-        # ax1
-        ax1.legend(ncol=1, handlelength=4, loc='upper left')
-        ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
-        ax1.grid(True)
-        ax1.set_xticks(X)
-        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=35, rotation=14)
-        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax1.set_ylabel(f'{l_err} (m)')
-        ax1.set_ylim([0, 40])
-        method = Plot.LEGEND['povmloc-one']
-        ax1.set_title(f'Performance of {method}', pad=30, fontsize=45, fontweight='bold')
-        # ax2
-        ax2.legend(ncol=1, handlelength=4, loc='upper left')
-        ax2.grid(True)
-        ax2.set_xlabel('Grid Size', labelpad=10, fontsize=40)
-        ax2.set_xticks(X)
-        ax2.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        ax2.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=35, rotation=14)
-        ax2.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax2.set_ylim([0, 40])
-        method = Plot.LEGEND['qml-r']
-        ax2.set_title(f'Performance of {method}', pad=30, fontsize=45, fontweight='bold')
-        plt.figtext(0.275, 0.01, '(a)', fontsize=40)
-        plt.figtext(0.76,  0.01, '(b)', fontsize=40)
-        fig.savefig(figname)
-
-
-    @staticmethod
     def continuous_varygrid(data: list, figname: str):
         # step 1.1: prepare accuracy data for QSD-One and PQC-One
         reduce = Plot.reduce_average
@@ -509,23 +361,6 @@ class Plot:
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + methods))
 
 
-def discrete_onelevel_varygrid():
-    '''evaluate the performance of the single level POVM-Loc One
-    '''
-    logs = ['results/discrete.onelevel.qsd', 'results/discrete.onelevel.pqc']
-    data = Utility.read_logs(logs)
-    figname = 'results/discrete.onelevel.varygrid.png'
-    Plot.discrete_onelevel_varygrid(data, figname)
-
-
-def continuous_onelevel_varygrid():
-    '''evaluate the performance of the single level POVM-Loc One
-    '''
-    logs = ['results/continuous.onelevel.qsd', 'results/continuous.onelevel.pqc']
-    data = Utility.read_logs(logs)
-    figname = 'results/continuous.onelevel.varygrid.png'
-    Plot.continuous_onelevel_varygrid(data, figname)
-
 
 def continuous_varygrid():
     logs = ['results/continuous.onelevel.qsd', 'results/continuous.onelevel.pqc',\
@@ -580,15 +415,11 @@ def runtime():
 
 if __name__ == '__main__':
 
-    # obsolete
-    # discrete_onelevel_varygrid()
-    # continuous_onelevel_varygrid()
-
-    # continuous_varygrid()
+    continuous_varygrid()
     # continuous_varysensornum()
     # localization_error_cdf()
 
-    discrete_varygrid()
+    # discrete_varygrid()
     # discrete_varysensornum()
 
 
@@ -624,6 +455,15 @@ Twolevel
            
 Plot 2 -- continuous, fix grid size (16x16), all four methods, vary sensor
 
+  Sensor Number    povmloc-one    povmloc     qml-r    qml-r-two
+---------------  -------------  ---------  --------  -----------
+              4        35.5007   19.7004   28.8596      20.2361
+              8        18.3714    9.67841   8.52706      4.86637
+             16       nan       nan         6.25085      4.6921
+
+
+
+Plot 3 -- continuous, error cdf
 
 
 
@@ -646,79 +486,20 @@ Twolevel
   Grid Length    povmloc    qml-c-two
 -------------  ---------  -----------
             4   0.5625       1
-            9   0.654321     0.604938
-           12   0.847222     0.805556
-           16   0.765625     0.808594
+            9   0.654321     1
+           12   0.847222     1
+           16   0.765625     0.972656
 
 
 
 Plot 5 -- discrete, grid length = 16, vary sensor, all four methods
 
-Sensor Number    povmloc-one     povmloc     qml-c    qml-c-two
+  Sensor Number    povmloc-one     povmloc     qml-c    qml-c-two
 ---------------  -------------  ----------  --------  -----------
-              4       0.078125    0.582031  0.523438     0.648438
-              8       0.12549     0.765625  0.800781     0.808594
-             16     nan         nan         0.949219     0.789062
+              4       0.078125    0.582031  0.523438     0.949219
+              8       0.12549     0.765625  0.800781     0.972656
+             16     nan         nan         0.949219     0.984375
 
 
-'''
-
-
-
-
-
-
-
-'''
-
-discrete onelevel
-
-QSD-Onelevel
-  Grid Length          4         8
--------------  ---------  --------
-            2  1          1
-            4  1          1
-            6  0.888889   1
-            8  0.578125   0.9375
-           10  0.33       0.68
-           12  0.166667   0.451389
-           14  0.0867347  0.244898
-           16  0.078125   0.12549
-PQC-Onelevel-C
-  Grid Length         4         8        16
--------------  --------  --------  --------
-            2  1         1         1
-            4  1         1         1
-            6  0.944444  1         1
-            8  0.890625  1         1
-           10  0.82      1         1
-           12  0.75      0.993056  1
-           14  0.607143  0.928571  1
-           16  0.523438  0.800781  0.949219
-
-continuous one level
-           
-QSD-Onelevel
-  Grid Length         4         8
--------------  --------  --------
-            2   4.48754   6.89975
-            4   3.92177   4.08887
-            6   5.52066   3.78698
-            8   8.71404   4.36634
-           10  12.6864    5.67271
-           12  19.818     9.14297
-           14  30.9472   12.279
-           16  35.5007   18.3714
-PQC-Onelevel-R
-  Grid Length         4         8       16
--------------  --------  --------  -------
-            2   1.28724  0.864072  0.64478
-            4   3.60149  1.6246    1.0055
-            6   7.43288  2.55323   1.7387
-            8  12.5013   3.57102   2.15625
-           10  15.5509   5.1482    3.00706
-           12  20.6928   5.72974   4.06911
-           14  24.6972   8.55924   5.05789
-           16  28.8596   8.52706   6.25085
 
 '''

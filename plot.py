@@ -15,11 +15,11 @@ class Plot:
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one', 'povmloc',  'qml-r',   'qml-r-two', 'qml-c',   'qml-c-two']
-    _LEGEND = ['QSD-One',     'QSD-Two',  'PQC-One', 'PQC-Two',   'PQC-One', 'PQC-Two']
+    METHOD  = ['povmloc-one', 'povmloc',  'qml-r',   'qml-r-two',      'qml-c',   'qml-c-two']
+    _LEGEND = ['QSD-One',     'QSD-Two',  'PQC-One', 'PQC-Two',        'PQC-One', 'PQC-Two']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
-    _COLOR  = ['r',           'lightcoral', 'b',     'cornflowerblue', 'royalblue']
+    _COLOR  = ['r',           'lightcoral', 'b',     'cornflowerblue', 'b',       'cornflowerblue']
     COLOR   = dict(zip(METHOD, _COLOR))
 
     _LINE   = ['-',           '--',       '-',        '--',        '-']
@@ -348,18 +348,15 @@ class Plot:
             print_table.append([x] + tmp_list)
         print(tabulate.tabulate(print_table, headers=['Sensor Number'] + methods))
         arr = np.array(print_table)
-        povmloc_one = arr[:, 1]
-        povmloc_two = arr[:, 2]
-        qml_r_one   = arr[:, 3]
-        qml_r_two   = arr[:, 4]
+        povmloc_one = arr[:, 1] * 100
+        povmloc_two = arr[:, 2] * 100
+        qml_r_one   = arr[:, 3] * 100
+        qml_r_two   = arr[:, 4] * 100
         X_one       = arr[:, 0]
 
-        return
-
         # step 2: plotting
-        l_err = "$L_{err}$"
-        fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
-        fig.subplots_adjust(left=0.14, right=0.98, top=0.91, bottom=0.11, wspace=0.13)
+        fig, ax1 = plt.subplots(1, 1, figsize=(18, 18))
+        fig.subplots_adjust(left=0.14, right=0.98, top=0.8, bottom=0.11, wspace=0.13)
         ind = np.arange(len(X_one))
         width = 0.15
         pos1 = ind - 1.5*width
@@ -368,17 +365,19 @@ class Plot:
         pos4 = ind + 1.5*width
         ax1.bar(pos1, povmloc_one, width=width, edgecolor='black', label=Plot.LEGEND['povmloc-one'], color=Plot.COLOR['povmloc-one'])
         ax1.bar(pos2, povmloc_two, width=width, edgecolor='black', label=Plot.LEGEND['povmloc'],     color=Plot.COLOR['povmloc'])
-        ax1.bar(pos3, qml_r_one,   width=width, edgecolor='black', label=Plot.LEGEND['qml-r'],       color=Plot.COLOR['qml-r'])
-        ax1.bar(pos4, qml_r_two,   width=width, edgecolor='black', label=Plot.LEGEND['qml-r-two'],   color=Plot.COLOR['qml-r-two'])
+        ax1.bar(pos3, qml_r_one,   width=width, edgecolor='black', label=Plot.LEGEND['qml-c'],       color=Plot.COLOR['qml-c'])
+        ax1.bar(pos4, qml_r_two,   width=width, edgecolor='black', label=Plot.LEGEND['qml-c-two'],   color=Plot.COLOR['qml-c-two'])
         ax1.grid(True)
-        ax1.legend(ncol=1, handlelength=4, loc='upper right', fontsize=40)
+        ax1.legend(ncol=2, handlelength=4, loc='upper center', fontsize=40, bbox_to_anchor=(0.5, 1.28))
         ax1.set_xlabel('Sensor Number', labelpad=10, fontsize=40)
         X = list(X_one)
         ax1.set_xticks(ind)
         ax1.set_xticklabels([f'{int(x)}' for x in X])
         ax1.tick_params(axis='x', pad=15, length=10, width=5)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax1.set_ylabel(f'{l_err} (m)', labelpad=20)
+        CC_acc = "$CC_{acc}$"
+        ax1.set_ylim([0, 100])
+        ax1.set_ylabel(f'{CC_acc} (%)', labelpad=10)
         ax1.set_title(f'Localization Performance in a 16x16 Grid', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
 
@@ -454,7 +453,7 @@ class Plot:
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + onelevel_methods))
         arr = np.array(print_table)
         povmloc_one = arr[:, 1]
-        qml_r_one   = arr[:, 2]
+        qml_c_one   = arr[:, 2]
         X_one       = arr[:, 0]
 
         print('\nTwolevel')
@@ -465,21 +464,19 @@ class Plot:
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + twolevel_methods))
         arr = np.array(print_table)
         povmloc   = arr[:, 1]
-        qml_r_two = arr[:, 2]
+        qml_c_two = arr[:, 2]
         X_two     = arr[:, 0]
 
-        return
 
         # step 2: plotting
-        l_err = "$L_{err}$"
         fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
         fig.subplots_adjust(left=0.15, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
         ax1.plot(X_one, povmloc_one, linestyle=':', marker='o', label=Plot.LEGEND['povmloc-one'], mec='black', color=Plot.COLOR['povmloc-one'])
         ax1.plot(X_two, povmloc,     linestyle='-', marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc-one'])
-        ax1.plot(X_one, qml_r_one,   linestyle=':', marker='o', label=Plot.LEGEND['qml-r'],       mec='black', color=Plot.COLOR['qml-r'])
-        ax1.plot(X_two, qml_r_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-r-two'],   mec='black', color=Plot.COLOR['qml-r'])
+        ax1.plot(X_one, qml_c_one,   linestyle=':', marker='o', label=Plot.LEGEND['qml-c'],       mec='black', color=Plot.COLOR['qml-c'])
+        ax1.plot(X_two, qml_c_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-c-two'],   mec='black', color=Plot.COLOR['qml-c'])
         # ax1
-        ax1.legend(ncol=1, handlelength=4, loc='upper left')
+        ax1.legend(ncol=1, handlelength=4, loc='lower left')
         ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
         ax1.grid(True)
         X = list(X_one)
@@ -488,7 +485,8 @@ class Plot:
         ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
         ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=38, rotation=10)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax1.set_ylabel(f'{l_err} (m)')
+        CC_acc = "$CC_{acc}$"
+        ax1.set_ylabel(f'{CC_acc} (%)')
         # ax1.set_ylim([0, 40])
         ax1.set_title(f'Performance of Localization Algorithms', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
@@ -589,7 +587,7 @@ if __name__ == '__main__':
     # continuous_varysensornum()
     # localization_error_cdf()
 
-    # discrete_varygrid()
+    discrete_varygrid()
     discrete_varysensornum()
 
 
@@ -651,8 +649,8 @@ Twolevel
            12   0.847222     0.805556
            16   0.765625     0.808594
 
-           
-           
+
+
 Plot 5 -- discrete, grid length = 16, vary sensor, all four methods
 
 Sensor Number    povmloc-one     povmloc     qml-c    qml-c-two
@@ -663,6 +661,11 @@ Sensor Number    povmloc-one     povmloc     qml-c    qml-c-two
 
 
 '''
+
+
+
+
+
 
 
 '''

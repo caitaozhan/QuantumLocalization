@@ -115,7 +115,7 @@ if __name__ == '__main__':
                     ql = qls['qml-two']
                     root_dir = args.root_dir[0]
                     start = time.time()
-                    correct, pred = ql.qml_two(tx, root_dir)
+                    correct, pred = ql.qml_two(tx, root_dir, continuous=False)
                     elapse = round(time.time() - start, 2)
                     outputs.append(Output('qml-c-two', correct, localization_error=-1, pred=pred, elapse=elapse))
 

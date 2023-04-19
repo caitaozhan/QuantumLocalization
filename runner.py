@@ -76,11 +76,11 @@ def discrete():
 
     template = 'python main.py -m {} -l {} -s {} -of {} -rd {}'
     config = [
-        # ['qml-two', 4,  8, 'discrete.twolevel.pqc'],
-        # ['qml-two', 9,  8, 'discrete.twolevel.pqc'],
-        # ['qml-two', 12, 8, 'discrete.twolevel.pqc'],
-        # ['qml-two', 16, 8, 'discrete.twolevel.pqc'],
-        # ['qml-two', 16, 4, 'discrete.twolevel.pqc'],
+        ['qml-two', 4,  8, 'discrete.twolevel.pqc'],
+        ['qml-two', 9,  8, 'discrete.twolevel.pqc'],
+        ['qml-two', 12, 8, 'discrete.twolevel.pqc'],
+        ['qml-two', 16, 8, 'discrete.twolevel.pqc'],
+        ['qml-two', 16, 4, 'discrete.twolevel.pqc'],
         ['qml-two', 16, 16, 'discrete.twolevel.pqc'],
     ]
 
@@ -271,7 +271,7 @@ def generate_data():
 
 if  __name__ == '__main__':
     
-    # discrete()
+    discrete()
     
     # plot1_part1()
     # plot1_part2()
@@ -282,5 +282,5 @@ if  __name__ == '__main__':
 
     # table()
 
-    generate_data()
+    # generate_data()
     

@@ -22,7 +22,7 @@ class Plot:
     _COLOR  = ['r',           'lightcoral', 'b',     'cornflowerblue', 'b',       'cornflowerblue']
     COLOR   = dict(zip(METHOD, _COLOR))
 
-    _LINE   = ['-',           '--',       '-',        '--',        '-']
+    _LINE   = ['-',           '--',       '-',        '--',             '-',      '--']
     LINE    = dict(zip(METHOD, _LINE))
 
 
@@ -252,22 +252,24 @@ class Plot:
         # step 2: plotting
         l_err = "$L_{err}$"
         fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
-        fig.subplots_adjust(left=0.15, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
+        fig.subplots_adjust(left=0.13, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
         ax1.plot(X_one, povmloc_one, linestyle=':', marker='o', label=Plot.LEGEND['povmloc-one'], mec='black', color=Plot.COLOR['povmloc-one'])
-        ax1.plot(X_two, povmloc,     linestyle='-', marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X_two, povmloc,     linestyle='-', marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc'])
         ax1.plot(X_one, qml_r_one,   linestyle=':', marker='o', label=Plot.LEGEND['qml-r'],       mec='black', color=Plot.COLOR['qml-r'])
-        ax1.plot(X_two, qml_r_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-r-two'],   mec='black', color=Plot.COLOR['qml-r'])
+        ax1.plot(X_two, qml_r_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-r-two'],   mec='black', color=Plot.COLOR['qml-r-two'])
         # ax1
-        ax1.legend(ncol=1, handlelength=4, loc='upper left')
+        ax1.legend(ncol=1, handlelength=4, loc='upper left', fontsize=40)
         ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
         ax1.grid(True)
         X = list(X_one)
         X.remove(9)
         ax1.set_xticks(X)
         ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        Y = list(range(0, 19, 3))
+        ax1.set_yticks(Y)
         ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=38, rotation=10)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax1.set_ylabel(f'{l_err} (m)')
+        ax1.set_ylabel(f'{l_err} (m)', labelpad=12)
         # ax1.set_ylim([0, 40])
         ax1.set_title(f'Performance of Localization Algorithms', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
@@ -324,60 +326,6 @@ class Plot:
         ax1.tick_params(axis='x', pad=15, length=10, width=5)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
         ax1.set_ylabel(f'{l_err} (m)', labelpad=20)
-        ax1.set_title(f'Localization Performance in a 16x16 Grid', pad=30, fontsize=45, fontweight='bold')
-        fig.savefig(figname)
-
-
-    @staticmethod
-    def discrete_varysensornum(data: list, figname: str):
-        # step 1.1: prepare accuracy data for QSD-One and PQC-One
-        reduce = Plot.reduce_average
-        grid_length = 16
-        table = defaultdict(list)
-        for myinput, output_by_method in data:
-            if myinput.grid_length != grid_length:
-                continue
-            for method, output in output_by_method.items():
-                table[myinput.sensor_num].append({method: output.correct})
-        
-        print('\nVarying Sensor #')
-        print_table = []
-        methods = ['povmloc-one', 'povmloc', 'qml-c', 'qml-c-two']
-        for x, list_of_y_by_method in sorted(table.items()):
-            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in methods]
-            print_table.append([x] + tmp_list)
-        print(tabulate.tabulate(print_table, headers=['Sensor Number'] + methods))
-        arr = np.array(print_table)
-        povmloc_one = arr[:, 1] * 100
-        povmloc_two = arr[:, 2] * 100
-        qml_r_one   = arr[:, 3] * 100
-        qml_r_two   = arr[:, 4] * 100
-        X_one       = arr[:, 0]
-
-        # step 2: plotting
-        fig, ax1 = plt.subplots(1, 1, figsize=(18, 18))
-        fig.subplots_adjust(left=0.14, right=0.98, top=0.8, bottom=0.11, wspace=0.13)
-        ind = np.arange(len(X_one))
-        width = 0.15
-        pos1 = ind - 1.5*width
-        pos2 = ind - 0.5*width
-        pos3 = ind + 0.5*width
-        pos4 = ind + 1.5*width
-        ax1.bar(pos1, povmloc_one, width=width, edgecolor='black', label=Plot.LEGEND['povmloc-one'], color=Plot.COLOR['povmloc-one'])
-        ax1.bar(pos2, povmloc_two, width=width, edgecolor='black', label=Plot.LEGEND['povmloc'],     color=Plot.COLOR['povmloc'])
-        ax1.bar(pos3, qml_r_one,   width=width, edgecolor='black', label=Plot.LEGEND['qml-c'],       color=Plot.COLOR['qml-c'])
-        ax1.bar(pos4, qml_r_two,   width=width, edgecolor='black', label=Plot.LEGEND['qml-c-two'],   color=Plot.COLOR['qml-c-two'])
-        ax1.grid(True)
-        ax1.legend(ncol=2, handlelength=4, loc='upper center', fontsize=40, bbox_to_anchor=(0.5, 1.28))
-        ax1.set_xlabel('Sensor Number', labelpad=10, fontsize=40)
-        X = list(X_one)
-        ax1.set_xticks(ind)
-        ax1.set_xticklabels([f'{int(x)}' for x in X])
-        ax1.tick_params(axis='x', pad=15, length=10, width=5)
-        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        CC_acc = "$CC_{acc}$"
-        ax1.set_ylim([0, 100])
-        ax1.set_ylabel(f'{CC_acc} (%)', labelpad=10)
         ax1.set_title(f'Localization Performance in a 16x16 Grid', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
 
@@ -467,16 +415,15 @@ class Plot:
         qml_c_two = arr[:, 2]
         X_two     = arr[:, 0]
 
-
         # step 2: plotting
         fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
         fig.subplots_adjust(left=0.15, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
         ax1.plot(X_one, povmloc_one, linestyle=':', marker='o', label=Plot.LEGEND['povmloc-one'], mec='black', color=Plot.COLOR['povmloc-one'])
-        ax1.plot(X_two, povmloc,     linestyle='-', marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X_two, povmloc,     linestyle='-', marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc'])
         ax1.plot(X_one, qml_c_one,   linestyle=':', marker='o', label=Plot.LEGEND['qml-c'],       mec='black', color=Plot.COLOR['qml-c'])
-        ax1.plot(X_two, qml_c_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-c-two'],   mec='black', color=Plot.COLOR['qml-c'])
+        ax1.plot(X_two, qml_c_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-c-two'],   mec='black', color=Plot.COLOR['qml-c-two'])
         # ax1
-        ax1.legend(ncol=1, handlelength=4, loc='lower left')
+        ax1.legend(ncol=1, handlelength=4, loc='lower left', fontsize=40)
         ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
         ax1.grid(True)
         X = list(X_one)
@@ -489,6 +436,60 @@ class Plot:
         ax1.set_ylabel(f'{CC_acc} (%)')
         # ax1.set_ylim([0, 40])
         ax1.set_title(f'Performance of Localization Algorithms', pad=30, fontsize=45, fontweight='bold')
+        fig.savefig(figname)
+
+
+    @staticmethod
+    def discrete_varysensornum(data: list, figname: str):
+        # step 1.1: prepare accuracy data for QSD-One and PQC-One
+        reduce = Plot.reduce_average
+        grid_length = 16
+        table = defaultdict(list)
+        for myinput, output_by_method in data:
+            if myinput.grid_length != grid_length:
+                continue
+            for method, output in output_by_method.items():
+                table[myinput.sensor_num].append({method: output.correct})
+        
+        print('\nVarying Sensor #')
+        print_table = []
+        methods = ['povmloc-one', 'povmloc', 'qml-c', 'qml-c-two']
+        for x, list_of_y_by_method in sorted(table.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Sensor Number'] + methods))
+        arr = np.array(print_table)
+        povmloc_one = arr[:, 1] * 100
+        povmloc_two = arr[:, 2] * 100
+        qml_r_one   = arr[:, 3] * 100
+        qml_r_two   = arr[:, 4] * 100
+        X_one       = arr[:, 0]
+
+        # step 2: plotting
+        fig, ax1 = plt.subplots(1, 1, figsize=(18, 18))
+        fig.subplots_adjust(left=0.14, right=0.98, top=0.8, bottom=0.11, wspace=0.13)
+        ind = np.arange(len(X_one))
+        width = 0.15
+        pos1 = ind - 1.5*width
+        pos2 = ind - 0.5*width
+        pos3 = ind + 0.5*width
+        pos4 = ind + 1.5*width
+        ax1.bar(pos1, povmloc_one, width=width, edgecolor='black', label=Plot.LEGEND['povmloc-one'], color=Plot.COLOR['povmloc-one'])
+        ax1.bar(pos2, povmloc_two, width=width, edgecolor='black', label=Plot.LEGEND['povmloc'],     color=Plot.COLOR['povmloc'])
+        ax1.bar(pos3, qml_r_one,   width=width, edgecolor='black', label=Plot.LEGEND['qml-c'],       color=Plot.COLOR['qml-c'])
+        ax1.bar(pos4, qml_r_two,   width=width, edgecolor='black', label=Plot.LEGEND['qml-c-two'],   color=Plot.COLOR['qml-c-two'])
+        ax1.grid(True)
+        ax1.legend(ncol=2, handlelength=4, loc='upper center', fontsize=40, bbox_to_anchor=(0.5, 1.28))
+        ax1.set_xlabel('Sensor Number', labelpad=10, fontsize=40)
+        X = list(X_one)
+        ax1.set_xticks(ind)
+        ax1.set_xticklabels([f'{int(x)}' for x in X])
+        ax1.tick_params(axis='x', pad=15, length=10, width=5)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        CC_acc = "$CC_{acc}$"
+        ax1.set_ylim([0, 100])
+        ax1.set_ylabel(f'{CC_acc} (%)', labelpad=10)
+        ax1.set_title(f'Localization Performance in a 16x16 Grid', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
 
 
@@ -588,7 +589,7 @@ if __name__ == '__main__':
     # localization_error_cdf()
 
     discrete_varygrid()
-    discrete_varysensornum()
+    # discrete_varysensornum()
 
 
     # runtime()

@@ -501,11 +501,12 @@ def main2level(continuous: bool):
             folder = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}.two')
             train_save_twolevel_continuous(folder)        
     else:
-        # grid_length = [4,9,12,16]
         # sen = 8
+        # grid_length = [4,9,12,16]
         # for length in grid_length:
         length = 16
-        for sen in [8]:
+        sennum = [4, 16]
+        for sen in sennum:
             folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}.two')
             train_save_twolevel(folder)
 

@@ -635,18 +635,38 @@ class QuantumLocalization:
                 tx_list = self.get_txloc(a, b, block_cell_ratio)
                 repeat = 100
                 counter = 0
-                for i, tx in enumerate(tx_list):
-                    for _ in range(repeat):
-                        thetas = []
-                        for rx_i in sensors:
-                            rx = self.sensordata['sensors'][f'{rx_i}']
-                            distance = Utility.distance(tx, rx, self.cell_length)
-                            phase_shift, _ = self.unitary_operator.compute_H(distance, noise=True)
-                            thetas.append(phase_shift)
-                        np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
-                        np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
-                        counter += 1
+                for i, block_center in enumerate(tx_list):
+                    txs = self.generate_tx_qml_two(block_center, block_cell_ratio)
+                    for tx in txs:
+                        for _ in range(repeat):
+                            thetas = []
+                            for rx_i in sensors:
+                                rx = self.sensordata['sensors'][f'{rx_i}']
+                                distance = Utility.distance(tx, rx, self.cell_length)
+                                phase_shift, _ = self.unitary_operator.compute_H(distance, noise=True)
+                                thetas.append(phase_shift)
+                            np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
+                            np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
+                            counter += 1
         print('Generating data done!')
+
+
+    def generate_tx_qml_two(self, block_center: tuple, block_cell_ratio: int) -> list:
+        '''given the tx locations given the block center and block_cell_ratio 
+        Args:
+            block_center = (1, 1)
+            block_cell_ratio = 2
+        Return:
+            [(0.5, 0.5), (0.5, 1.5), (1.5, 0.5), (1.5, 1.5)]
+        '''
+        half_block = block_cell_ratio / 2
+        origin = (block_center[0] - half_block, block_center[1] - half_block)
+        txs = []
+        for i in range(block_cell_ratio):
+            for j in range(block_cell_ratio):
+                tx = (origin[0] + i + 0.5, origin[1] + j + 0.5)
+                txs.append(tx)
+        return txs
 
 
     def generate_tx(self, cell: tuple, threshold: float) -> tuple:

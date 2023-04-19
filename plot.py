@@ -589,7 +589,7 @@ if __name__ == '__main__':
     # continuous_varysensornum()
     # localization_error_cdf()
 
-    discrete_varygrid()
+    # discrete_varygrid()
     discrete_varysensornum()
 
 
@@ -628,7 +628,40 @@ Plot 2 -- continuous, fix grid size (16x16), all four methods, vary sensor
 
 
 
+Plot 4 -- discrete, sensor=8, vary grid length, all four methods
+
+Onelevel
+  Grid Length    povmloc-one     qml-c
+-------------  -------------  --------
+            2       1         1
+            4       1         1
+            6       1         1
+            8       0.9375    1
+            9       0.790123  1
+           10       0.68      1
+           12       0.451389  0.993056
+           14       0.244898  0.928571
+           16       0.12549   0.800781
+
+Twolevel
+  Grid Length    povmloc    qml-c-two
+-------------  ---------  -----------
+            4   0.5625       1
+            9   0.654321     0.604938
+           12   0.847222     0.805556
+           16   0.765625     0.808594
+
            
+           
+Plot 5 -- discrete, grid length = 16, vary sensor, all four methods
+
+Sensor Number    povmloc-one     povmloc     qml-c    qml-c-two
+---------------  -------------  ----------  --------  -----------
+              4       0.078125    0.582031  0.523438     0.648438
+              8       0.12549     0.765625  0.800781     0.808594
+             16     nan         nan         0.949219     0.789062
+
+
 '''
 
 

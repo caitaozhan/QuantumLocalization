@@ -256,6 +256,7 @@ def generate_data():
     template = "python main.py -m qml-two -l {} -s {} -rd  qml-data/{}x{}.{}.two -gd"
     # sen = 8
     # grid_length = [4,9,12,16]
+    # for gl in grid_length:
     gl = 16
     sennum = [4, 16]
     for sen in sennum:
@@ -270,7 +271,7 @@ def generate_data():
 
 if  __name__ == '__main__':
     
-    discrete()
+    # discrete()
     
     # plot1_part1()
     # plot1_part2()
@@ -281,5 +282,5 @@ if  __name__ == '__main__':
 
     # table()
 
-    # generate_data()
+    generate_data()
     

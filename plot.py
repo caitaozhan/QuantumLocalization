@@ -286,7 +286,7 @@ class Plot:
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
         CC_acc = "$CC_{acc}$"
         ax1.set_ylabel(f'{CC_acc} (%)', labelpad=10)
-        # ax1.set_ylim([0, 40])
+        ax1.set_ylim([0, 101.5])
         ax1.set_title(f'Performance of Localization Algorithms', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
 

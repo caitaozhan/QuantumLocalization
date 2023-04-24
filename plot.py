@@ -252,8 +252,8 @@ class Plot:
             print_table.append([x] + tmp_list)
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + onelevel_methods))
         arr = np.array(print_table)
-        povmloc_one = arr[:, 1]
-        qml_c_one   = arr[:, 2]
+        povmloc_one = arr[:, 1] * 100
+        qml_c_one   = arr[:, 2] * 100
         X_one       = arr[:, 0]
 
         print('\nTwolevel')
@@ -263,8 +263,8 @@ class Plot:
             print_table.append([x] + tmp_list)
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + twolevel_methods))
         arr = np.array(print_table)
-        povmloc   = arr[:, 1]
-        qml_c_two = arr[:, 2]
+        povmloc   = arr[:, 1] * 100
+        qml_c_two = arr[:, 2] * 100
         X_two     = arr[:, 0]
 
         # step 2: plotting
@@ -285,8 +285,8 @@ class Plot:
         ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=38, rotation=10)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
         CC_acc = "$CC_{acc}$"
-        ax1.set_ylabel(f'{CC_acc} (%)')
-        # ax1.set_ylim([0, 40])
+        ax1.set_ylabel(f'{CC_acc} (%)', labelpad=10)
+        ax1.set_ylim([0, 101.5])
         ax1.set_title(f'Performance of Localization Algorithms', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
 
@@ -415,11 +415,11 @@ def runtime():
 
 if __name__ == '__main__':
 
-    continuous_varygrid()
+    # continuous_varygrid()
     # continuous_varysensornum()
     # localization_error_cdf()
 
-    # discrete_varygrid()
+    discrete_varygrid()
     # discrete_varysensornum()
 
 

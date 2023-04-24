@@ -15,7 +15,7 @@ from torchquantum.plugins.qiskit_plugin import tq2qiskit
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.utils.data import DataLoader
 from dataset import QuantumSensingDataset
-from qnn import QuantumSensing, QuantumMLclassification, QuantumMLregression
+from qnn import QuantumSensing, QuantumMLclassification, QuantumMLregression, QuantumMLregressionIBM
 from utility import Utility
 from default import Default
 
@@ -335,6 +335,66 @@ def train_save_onelevel_continuous(dataset_dir: str):
     print('final train accu:\n', train_error)
 
 
+'''one level + continuous, save model + ibm version'''
+def train_save_oneLevel_continuous_ibm(dataset_dir: str):
+    info = json.load(open(os.path.join(dataset_dir, 'info')))
+    print(info)
+    root_dir = os.path.join(dataset_dir, 'train')
+    train_dataset = QuantumSensingDataset(root_dir)
+    train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
+    use_cuda = torch.cuda.is_available()
+    device = torch.device('cuda' if use_cuda else 'cpu')
+    n_qubits = info['sensor_num']
+    area = info['area']
+    area_length = area[1][0] - area[0][0]
+    model = QuantumMLregressionIBM(n_wires=n_qubits).to(device)
+    n_epochs = 80
+    optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
+    scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
+
+    model.train()
+    train_loss = []
+    train_error = []
+    for e in range(n_epochs):
+        start = time.time()
+        loss_list = []
+        target_all = []
+        output_all = []
+        for _, sample in enumerate(train_dataloader):
+            thetas = sample['phase'].to(device)
+            targets = sample['label'].to(device)
+            # the model
+            outputs = model(thetas, use_qiskit=False)
+            # compute loss, gradient, optimize ...
+            loss = F.mse_loss(outputs, targets)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            loss_list.append(loss.item())
+            target_all.append(targets)
+            output_all.append(outputs)
+        train_loss.append(np.mean(loss_list))
+        target_all = torch.cat(target_all)
+        output_all = torch.cat(output_all)
+        loc_error = compute_loc_error(output_all, target_all, area_length * Default.cell_length)
+        train_error.append(loc_error)
+        scheduler.step()
+        epoch_time = time.time() - start
+        
+        print(f'epoch={e}, time = {epoch_time:.2f}, train loss={train_loss[-1]:.4f}, train accuracy={train_error[-1]:.4f}')
+
+        if e % 10 == 9: # save a model every 10 epochs
+            model_dir = dataset_dir.replace('qml-data', 'qml-model')
+            if not os.path.exists(model_dir):
+                os.makedirs(model_dir)
+            with open(os.path.join(model_dir, f'model.pt'), 'wb') as f:
+                pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
+
+
+    print('\nfinal train loss:\n', train_loss)
+    print('final train accu:\n', train_error)
+
+
 '''two level + discrete, save model'''
 def train_save_twolevel(folder: str):
     for i, dataset_dir in enumerate(sorted(glob.glob(folder + '/*'))):   # dataset_dir: ../40x40.two/level-0-set-0
@@ -412,7 +472,7 @@ def train_save_twolevel_continuous(folder: str):
         print(info)
         root_dir = os.path.join(dataset_dir, 'train')
         train_dataset = QuantumSensingDataset(root_dir)
-        train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
+        train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=False, num_workers=4)
         # train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
         use_cuda = torch.cuda.is_available()
         device = torch.device('cuda' if use_cuda else 'cpu')
@@ -476,18 +536,27 @@ def main():
 
 
 '''for training qml one level'''
-def main1level(continuous: bool):
-    if continuous:
-        sen = 8
-        for length in [9]:#,4,6,8,10,12,14,16]:
+def main1level(continuous: bool, ibm: bool = False):
+    if ibm:
+        if continuous:
+            sen = 4
+            length = 4
             folder = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}')
-            train_save_onelevel_continuous(folder)
+            train_save_oneLevel_continuous_ibm(folder)
+        else:
+            pass
     else:
-        # time.sleep(2400)
-        sen = 8
-        for length in [9]:
-            folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}')
-            train_save_onelevel(folder)
+        if continuous:
+            sen = 4
+            for length in [4]:#,4,6,8,10,12,14,16]:
+                folder = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}')
+                train_save_onelevel_continuous(folder)
+        else:
+            # time.sleep(2400)
+            sen = 8
+            for length in [9]:
+                folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}')
+                train_save_onelevel(folder)
         
 
 
@@ -514,8 +583,8 @@ def main2level(continuous: bool):
 
 if __name__ == '__main__':
     # main()
-    # main1level(continuous=False)
-    main2level(continuous=False)
+    main1level(continuous=True, ibm=True)
+    # main2level(continuous=False)
 
 
 

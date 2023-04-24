@@ -6,6 +6,13 @@ import torchquantum.functional as tqf
 import numpy as np
 from torch.utils.data import DataLoader
 from dataset import QuantumSensingDataset
+from torchquantum.plugins import (
+    op_history2qiskit_expand_params,
+    op_history2qiskit,
+    tq2qiskit_measurement,
+    qiskit_assemble_circs
+)
+
 
 
 class QuantumSensing(tq.QuantumModule):
@@ -79,8 +86,7 @@ class QuantumMLregression(tq.QuantumModule):
     def __init__(self, n_wires):
         super().__init__()
         self.n_wires = n_wires
-        self.q_device = tq.QuantumDevice(n_wires=self.n_wires)
-        self.arch = {'n_wires': self.n_wires, 'n_blocks': 4, 'n_layers_per_block': 2}
+        self.arch = {'n_wires': self.n_wires, 'n_blocks': 4}
         self.quantum_layer = tq.layers.U3CU3Layer0(self.arch)
         self.measure = tq.MeasureAll(tq.PauliZ)
         self.linear = nn.Linear(n_wires, 2)  # (x, y)
@@ -92,6 +98,63 @@ class QuantumMLregression(tq.QuantumModule):
         # classical part
         loc = self.linear(x)
         return loc
+
+
+class QuantumMLregressionIBM(tq.QuantumModule):
+    '''the IBM implementation for class QuantumMLregression
+       currently for 4 qubits only
+    '''
+
+    qsn_encoder = [
+        {"input_idx": [],  "func": "h",  "wires": [0]},
+        {"input_idx": [],  "func": "h",  "wires": [1]},
+        {"input_idx": [],  "func": "h",  "wires": [2]},
+        {"input_idx": [],  "func": "h",  "wires": [3]},
+        {"input_idx": [0], "func": "rz", "wires": [0]},
+        {"input_idx": [1], "func": "rz", "wires": [1]},
+        {"input_idx": [2], "func": "rz", "wires": [2]},
+        {"input_idx": [3], "func": "rz", "wires": [3]},
+    ]
+
+    def __init__(self, n_wires):
+        super().__init__()
+        self.n_wires = n_wires
+        self.encoder = tq.GeneralEncoder(QuantumMLregressionIBM.qsn_encoder)
+        self.arch = {'n_wires': self.n_wires, 'n_blocks': 4}
+        self.quantum_layer = tq.layers.U3CU3Layer0(self.arch)
+        self.measure = tq.MeasureAll(tq.PauliZ)
+        self.linear = nn.Linear(n_wires, 2)
+
+    def forward(self, x, use_qiskit=False):
+        '''x is the tensor of phase shifts in batches
+        '''
+        bsz = x.shape[0]
+        device = x.device
+        qdev = tq.QuantumDevice(n_wires=self.n_wires, bsz=bsz, device=device, record_op=True)
+        if use_qiskit:
+            self.encoder(qdev, x)
+            op_history_parameterized = qdev.op_history
+            qdev.reset_op_history()
+            encoder_circ = op_history2qiskit_expand_params(self.n_wires, op_history_parameterized, bsz=bsz)
+            self.q_layer(qdev)
+            op_history_fixed = qdev.op_history
+            qdev.reset_op_history()
+            q_layer_circ = op_history2qiskit(self.n_wires, op_history_fixed)
+            measurement_circ = tq2qiskit_measurement(qdev, self.measure)
+
+            assembed_circ = qiskit_assemble_circs(encoder_circ, q_layer_circ, measurement_circ)
+            x = self.qiskit_processor.process_ready_circ(qdev, assembed_circ).to(device)
+
+        else:
+            self.encoder(qdev, x)
+            self.quantum_layer(qdev)
+            x = self.measure(qdev)
+            
+        loc = self.linear(x)
+        return loc
+    
+
+
 
 
 # # quantum-classic hybrid that consists of both a quantum convolutional layer and classical fully connected layer

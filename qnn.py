@@ -7,7 +7,7 @@ import numpy as np
 from torch.utils.data import DataLoader
 from dataset import QuantumSensingDataset
 from torchquantum.plugins import (
-    op_history2qiskit_expand_params,
+    op_history2qiskit_expand_params_and_fixed,
     op_history2qiskit,
     tq2qiskit_measurement,
     qiskit_assemble_circs
@@ -135,21 +135,21 @@ class QuantumMLregressionIBM(tq.QuantumModule):
             self.encoder(qdev, x)
             op_history_parameterized = qdev.op_history
             qdev.reset_op_history()
-            encoder_circ = op_history2qiskit_expand_params(self.n_wires, op_history_parameterized, bsz=bsz)
-            self.q_layer(qdev)
+            encoder_circ = op_history2qiskit_expand_params_and_fixed(self.n_wires, op_history_parameterized, bsz=bsz)
+            self.quantum_layer(qdev)
             op_history_fixed = qdev.op_history
             qdev.reset_op_history()
-            q_layer_circ = op_history2qiskit(self.n_wires, op_history_fixed)
+            quantum_layer_circ = op_history2qiskit(self.n_wires, op_history_fixed)
             measurement_circ = tq2qiskit_measurement(qdev, self.measure)
 
-            assembed_circ = qiskit_assemble_circs(encoder_circ, q_layer_circ, measurement_circ)
-            x = self.qiskit_processor.process_ready_circ(qdev, assembed_circ).to(device)
+            assembed_circs = qiskit_assemble_circs(encoder_circ, quantum_layer_circ, measurement_circ)
+            x = self.qiskit_processor.process_ready_circs(qdev, assembed_circs).to(torch.float32).to(device)
 
         else:
             self.encoder(qdev, x)
             self.quantum_layer(qdev)
             x = self.measure(qdev)
-            
+
         loc = self.linear(x)
         return loc
     

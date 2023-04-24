@@ -18,6 +18,7 @@ from dataset import QuantumSensingDataset
 from qnn import QuantumSensing, QuantumMLclassification, QuantumMLregression, QuantumMLregressionIBM
 from utility import Utility
 from default import Default
+from torchquantum.plugins import QiskitProcessor
 
 
 def compute_accuracy(output_all, target_all):
@@ -351,6 +352,12 @@ def train_save_oneLevel_continuous_ibm(dataset_dir: str):
     n_epochs = 80
     optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
     scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
+    # qiskit processor
+    from qiskit import IBMQ
+    IBMQ.load_account()
+    backend_name = 'ibmq_quito'
+    processor_simulation = QiskitProcessor(use_real_qc=False, noise_model_name=backend_name, max_jobs=8)
+    model.set_qiskit_processor(processor_simulation)
 
     model.train()
     train_loss = []
@@ -364,7 +371,7 @@ def train_save_oneLevel_continuous_ibm(dataset_dir: str):
             thetas = sample['phase'].to(device)
             targets = sample['label'].to(device)
             # the model
-            outputs = model(thetas, use_qiskit=False)
+            outputs = model(thetas, use_qiskit=True)
             # compute loss, gradient, optimize ...
             loss = F.mse_loss(outputs, targets)
             optimizer.zero_grad()

@@ -14,6 +14,7 @@ class Input:
     sensor_num: int      # the number of sensors for the one level method (for two levels, the sensors are fixed)
     noise: int           # the standard deviation of shadowing
     continuous: bool     # whether the locations are continous during the testing phase
+    ibm: bool            # whether testing on IBM quantum computer
 
     def __str__(self):
         return self.to_json_str()
@@ -26,7 +27,8 @@ class Input:
             'grid_length': self.grid_length,
             'sensor_num': self.sensor_num,
             'noise': self.noise,
-            'continuous': self.continuous
+            'continuous': self.continuous,
+            'ibm': self.ibm
         }
         return json.dumps(inputdict)
 
@@ -35,7 +37,8 @@ class Input:
         '''init an Input object from json str
         '''
         indict = json.loads(json_str)
-        return cls(indict['ground_truth'], indict['grid_length'], indict['sensor_num'], indict['noise'], indict['continuous'])
+        ibm = indict['ibm'] if indict['ibm'] else False
+        return cls(indict['ground_truth'], indict['grid_length'], indict['sensor_num'], indict['noise'], indict['continuous'], ibm)
 
 
 @dataclass

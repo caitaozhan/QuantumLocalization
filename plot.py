@@ -15,14 +15,14 @@ class Plot:
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one', 'povmloc',  'qml-r',   'qml-r-two',      'qml-c',   'qml-c-two']
-    _LEGEND = ['QSD-One',     'QSD-Two',  'PQC-One', 'PQC-Two',        'PQC-One', 'PQC-Two']
+    METHOD  = ['povmloc-one', 'povmloc',    'qml-r',   'qml-r-two',      'qml-c',   'qml-c-two',      'qml-noise=False', 'qml-noise=True']
+    _LEGEND = ['QSD-One',     'QSD-Two',    'PQC-One', 'PQC-Two',        'PQC-One', 'PQC-Two',        'PQC-One (IBM)',   'PQC-One (IBM+Noisy Train)']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
-    _COLOR  = ['r',           'lightcoral', 'b',     'cornflowerblue', 'b',       'cornflowerblue']
+    _COLOR  = ['r',           'lightcoral', 'b',       'cornflowerblue', 'b',       'cornflowerblue', 'mediumpurple',    'springgreen']
     COLOR   = dict(zip(METHOD, _COLOR))
 
-    _LINE   = ['-',           '--',       '-',        '--',             '-',      '--']
+    _LINE   = ['-',           '--',         '-',        '--',            '-',        '--',            ':',               ':']
     LINE    = dict(zip(METHOD, _LINE))
 
 
@@ -225,7 +225,50 @@ class Plot:
         ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
         ax.set_title('Cumulative Distribution Function of $L_{err}$', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
+
+
+    @staticmethod
+    def error_cdf_ibm(data: list, figname: str):
+        # fix grid length at 16 and sensor number at 8
+        grid_length = 4
+        sensor_num = 4
+        table = defaultdict(list)
+        for myinput, output_by_method in data:
+            if myinput.grid_length != grid_length or myinput.sensor_num != sensor_num:
+                continue
+            for method, output in output_by_method.items():
+                table[method].append(output.localization_error)
+
+        n_bins = 100
+        method_n_bins = []
+        for method, error_list in table.items():
+            print(f'method={method}, avg. error = {np.average(error_list)}, error std. = {np.std(error_list)}')
+            Y, bins, _ = plt.hist(error_list, n_bins, density=True, histtype='step', cumulative=True, label=method)
+            method_n_bins.append((method, Y, bins))
+        plt.close()
+        method_n_bins[0], method_n_bins[1], method_n_bins[2] = method_n_bins[2], method_n_bins[0], method_n_bins[1]
+        fig, ax = plt.subplots(figsize=(18, 16))
+        fig.subplots_adjust(left=0.15, right=0.96, top=0.9, bottom=0.12)
+        for method, Y, bins in method_n_bins:
+            ax.plot(bins[1:], Y, label=Plot.LEGEND[method], color=Plot.COLOR[method], linestyle=Plot.LINE[method])
         
+        ax.grid(True)
+        X = list(range(0, 41, 5))
+        ax.set_xticks(X)
+        ax.set_xticklabels([f'{int(x)}' for x in X])
+        ax.legend(loc='lower right', fontsize=37)
+        ax.set_xlabel('$L_{err}$ (m)', labelpad=20)
+        ax.set_ylabel('Percentage (%)', labelpad=20)
+        Y = np.linspace(0, 1, 6)
+        ax.set_yticks(Y)
+        ax.set_yticklabels([int(y*100) for y in Y])
+        ax.set_ylim([0, 1.003])
+        ax.set_xlim([0, 40])
+        ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5)
+        ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax.set_title('Cumulative Distribution Function of $L_{err}$', pad=30, fontsize=45, fontweight='bold')
+        fig.savefig(figname)
+ 
 
     @staticmethod
     def discrete_varygrid(data: list, figname: str):
@@ -396,6 +439,15 @@ def localization_error_cdf():
     Plot.error_cdf(data, figname)
 
 
+def localization_error_cdf_ibm():
+    '''the classic error CDF plot for IBM
+    '''
+    logs = ['results/ibm.continuous.onelevel']
+    data = Utility.read_logs(logs)
+    figname = f'results/error_cdf_ibm.png'
+    Plot.error_cdf_ibm(data, figname)
+
+
 def discrete_varygrid():
     logs = ['results/discrete.onelevel.qsd', 'results/discrete.onelevel.pqc',\
             'results/discrete.twolevel.qsd', 'results/discrete.twolevel.pqc']
@@ -418,9 +470,11 @@ if __name__ == '__main__':
     # continuous_varygrid()
     # continuous_varysensornum()
     # localization_error_cdf()
+    localization_error_cdf_ibm()
 
-    discrete_varygrid()
+    # discrete_varygrid()
     # discrete_varysensornum()
+
 
 
     # runtime()
@@ -500,6 +554,13 @@ Plot 5 -- discrete, grid length = 16, vary sensor, all four methods
               8       0.12549     0.765625  0.800781     0.972656
              16     nan         nan         0.949219     0.984375
 
+
+             
+IBM -- CDF
+
+method=qml-noise=False, avg. error = 16.236119791666667, error std. = 5.907658642532727
+method=qml-noise=True, avg. error = 14.028208333333334, error std. = 6.785758629316787
+method=qml-r, avg. error = 3.3029218749999996, error std. = 3.069722834451804
 
 
 '''

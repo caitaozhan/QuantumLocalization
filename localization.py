@@ -506,7 +506,7 @@ class QuantumLocalization:
                     np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
                     np.save(f'{train_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
                     counter += 1
-            repeat = 5
+            repeat = 12
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):
@@ -582,7 +582,7 @@ class QuantumLocalization:
                     np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
                     np.save(f'{train_label_dir}/{counter}.npy', np.array(tx_continuous_target).astype(np.float32))
                     counter += 1
-            repeat = 5
+            repeat = 12
             counter = 0
             for i, tx in enumerate(txs):
                 for _ in range(repeat):

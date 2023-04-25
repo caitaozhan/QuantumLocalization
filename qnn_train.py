@@ -38,176 +38,6 @@ def compute_loc_error(output_all: Tensor, target_all: Tensor, dimension: int):
     return np.mean(errors)
 
 
-def train_test(grid_length: int, num_sensor: int):
-    print('-'*20)
-    print(f'grid_length={grid_length}, num_sensor={num_sensor}\n')
-    # data
-    folder = f'{grid_length}x{grid_length}.{num_sensor}'
-
-    root_dir = f'qml-data/{folder}/train'
-    train_dataset = QuantumSensingDataset(root_dir)
-    train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
-
-    root_dir = f'qml-data/{folder}/test'
-    test_dataset = QuantumSensingDataset(root_dir)
-    test_dataloader = DataLoader(test_dataset, batch_size=32, shuffle=True, num_workers=4)
-
-    use_cuda = torch.cuda.is_available()
-    device = torch.device('cuda' if use_cuda else 'cpu')
-    n_qubits = num_sensor
-    n_locations = grid_length ** 2
-    model = QuantumMLclassification(n_wires=n_qubits, n_locations=n_locations).to(device)
-    n_epochs = 100
-    optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
-    scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
-
-    train_loss = []
-    train_acc  = []
-    test_loss  = []
-    test_acc   = []
-
-    for e in range(n_epochs):
-        start = time.time()
-        model.train()
-        loss_list = []
-        target_all = []
-        output_all = []
-        for t, sample in enumerate(train_dataloader):
-            thetas = sample['phase']
-            targets = sample['label'].to(device)
-            # preparing sensing data
-            qsensing = QuantumSensing(n_qubits=n_qubits, device=device)
-            q_device = qsensing(thetas)
-            # the model
-            outputs = model(q_device)
-            # compute loss, gradient, optimize, etc...
-            loss = F.nll_loss(outputs, targets)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            loss_list.append(loss.item())
-            target_all.append(targets)
-            output_all.append(outputs)
-        train_loss.append(np.mean(loss_list))
-        target_all = torch.cat(target_all)
-        output_all = torch.cat(output_all)
-        accuracy = compute_accuracy(output_all, target_all)
-        train_acc.append(accuracy)
-        
-        model.eval()
-        loss_list = []
-        target_all = []
-        output_all = []
-        with torch.no_grad():
-            for t, sample in enumerate(test_dataloader):
-                thetas = sample['phase']
-                targets = sample['label'].to(device)
-                qsensing = QuantumSensing(n_qubits=n_qubits, device=device)
-                q_device = qsensing(thetas)
-                # the model
-                outputs = model(q_device)
-                loss = F.nll_loss(outputs, targets)
-                loss_list.append(loss.item())
-                target_all.append(targets)
-                output_all.append(outputs)
-            target_all = torch.cat(target_all)
-            output_all = torch.cat(output_all)
-        test_loss.append(np.mean(loss_list))
-        accuracy = compute_accuracy(output_all, target_all)
-        test_acc.append(accuracy)
-        scheduler.step()
-        epoch_time = time.time() - start
-        print(f'epoch={e}, time = {epoch_time:.2f}, test loss={test_loss[-1]:.4f}, test accuracy={test_acc[-1]:.4f}')
-
-    print('\nfinal test loss:\n', test_loss)
-    print('final test accu:\n', test_acc)
-
-
-def train_test_continuous(grid_length: int, num_sensor: int):
-    print('-'*20)
-    print(f'grid_length={grid_length}, num_sensor={num_sensor}\n')
-    # data
-    folder = f'{grid_length}x{grid_length}.{num_sensor}'
-
-    root_dir = f'qml-data/{folder}/train'
-    train_dataset = QuantumSensingDataset(root_dir)
-    train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
-
-    root_dir = f'qml-data/{folder}/test'
-    test_dataset = QuantumSensingDataset(root_dir)
-    test_dataloader = DataLoader(test_dataset, batch_size=32, shuffle=True, num_workers=4)
-
-    use_cuda = torch.cuda.is_available()
-    device = torch.device('cuda' if use_cuda else 'cpu')
-    n_qubits = num_sensor
-    n_locations = grid_length ** 2
-    model = QuantumMLregression(n_wires=n_qubits).to(device)
-    n_epochs = 100
-    optimizer = optim.Adam(model.parameters(), lr=5e-3, weight_decay=1e-4)
-    scheduler = CosineAnnealingLR(optimizer, T_max=n_epochs)
-
-    train_loss = []
-    train_acc  = []
-    test_loss  = []
-    test_acc   = []
-
-    for e in range(n_epochs):
-        start = time.time()
-        model.train()
-        loss_list = []
-        target_all = []
-        output_all = []
-        for t, sample in enumerate(train_dataloader):
-            thetas = sample['phase']
-            targets = sample['label'].to(device)
-            # preparing sensing data
-            qsensing = QuantumSensing(n_qubits=n_qubits, device=device)
-            q_device = qsensing(thetas)
-            # the model
-            outputs = model(q_device, qstate.states)
-            # compute loss, gradient, optimize, etc...
-            loss = F.mse_loss(outputs, targets)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            loss_list.append(loss.item())
-            target_all.append(targets)
-            output_all.append(outputs)
-        train_loss.append(np.mean(loss_list))
-        target_all = torch.cat(target_all)
-        output_all = torch.cat(output_all)
-        # accuracy = compute_accuracy(output_all, target_all)
-        # train_acc.append(accuracy)
-        
-        model.eval()
-        loss_list = []
-        target_all = []
-        output_all = []
-        with torch.no_grad():
-            for t, sample in enumerate(test_dataloader):
-                thetas = sample['phase']
-                targets = sample['label'].to(device)
-                qsensing = QuantumSensing(n_qubits=n_qubits, device=device)
-                q_device = qsensing(thetas)
-                # the model
-                outputs = model(q_device)
-                loss = F.mse_loss(outputs, targets)
-                loss_list.append(loss.item())
-                target_all.append(targets)
-                output_all.append(outputs)
-            target_all = torch.cat(target_all)
-            output_all = torch.cat(output_all)
-        test_loss.append(np.mean(loss_list))
-        # accuracy = compute_accuracy(output_all, target_all)
-        # test_acc.append(accuracy)
-        scheduler.step()
-        epoch_time = time.time() - start
-        print(f'epoch={e}, time = {epoch_time:.2f}, test loss={test_loss[-1]:.4f}, test accuracy={test_acc[-1]:.4f}')
-
-    print('\nfinal test loss:\n', test_loss)
-    print('final test accu:\n', test_acc)
-
-
 '''one level + discrete, save model'''
 def train_save_onelevel(dataset_dir: str):
     info = json.load(open(os.path.join(dataset_dir, 'info')))
@@ -215,7 +45,6 @@ def train_save_onelevel(dataset_dir: str):
     root_dir = os.path.join(dataset_dir, 'train')
     train_dataset = QuantumSensingDataset(root_dir)
     train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
-    # train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
     use_cuda = torch.cuda.is_available()
     device = torch.device('cuda' if use_cuda else 'cpu')
     n_qubits = info['sensor_num']
@@ -357,7 +186,7 @@ def train_save_oneLevel_continuous_ibm(dataset_dir: str):
     backend_name = 'ibmq_quito'
     processor_simulation = QiskitProcessor(use_real_qc=False, noise_model_name=backend_name, max_jobs=8)
     model.set_qiskit_processor(processor_simulation)
-
+    ibm = False
     model.train()
     train_loss = []
     train_error = []
@@ -370,7 +199,7 @@ def train_save_oneLevel_continuous_ibm(dataset_dir: str):
             thetas = sample['phase'].to(device)
             targets = sample['label'].to(device)
             # the model
-            outputs = model(thetas, use_qiskit=True)
+            outputs = model(thetas, use_qiskit=ibm)
             # compute loss, gradient, optimize ...
             loss = F.mse_loss(outputs, targets)
             optimizer.zero_grad()
@@ -393,7 +222,7 @@ def train_save_oneLevel_continuous_ibm(dataset_dir: str):
             model_dir = dataset_dir.replace('qml-data', 'qml-model')
             if not os.path.exists(model_dir):
                 os.makedirs(model_dir)
-            with open(os.path.join(model_dir, f'model-ibm.pt'), 'wb') as f:
+            with open(os.path.join(model_dir, f'model.pt'), 'wb') as f:
                 pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
 
 
@@ -464,11 +293,8 @@ def train_save_oneLevel_discrete_ibm(dataset_dir: str):
             with open(os.path.join(model_dir, f'model-ibm.pt'), 'wb') as f:
                 pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
 
-
     print('\nfinal train loss:\n', train_loss)
     print('final train accu:\n', train_error)
-
-
 
 
 '''two level + discrete, save model'''
@@ -481,7 +307,6 @@ def train_save_twolevel(folder: str):
         root_dir = os.path.join(dataset_dir, 'train')
         train_dataset = QuantumSensingDataset(root_dir)
         train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
-        # train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
         use_cuda = torch.cuda.is_available()
         device = torch.device('cuda' if use_cuda else 'cpu')
         n_qubits = info['sensor_num']
@@ -549,7 +374,6 @@ def train_save_twolevel_continuous(folder: str):
         root_dir = os.path.join(dataset_dir, 'train')
         train_dataset = QuantumSensingDataset(root_dir)
         train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=False, num_workers=4)
-        # train_dataloader = DataLoader(train_dataset, batch_size=7, shuffle=True, num_workers=4)
         use_cuda = torch.cuda.is_available()
         device = torch.device('cuda' if use_cuda else 'cpu')
         n_qubits = info['sensor_num']
@@ -605,12 +429,6 @@ def train_save_twolevel_continuous(folder: str):
     print('final train accu:\n', train_error)
 
 
-def main():
-    num_sensor = 16
-    for grid_length in [8, 10, 12, 14, 16]:
-        train_test(grid_length, num_sensor)
-
-
 '''for training qml one level'''
 def main1level(continuous: bool, ibm: bool = False):
     if ibm:
@@ -661,8 +479,7 @@ def main2level(continuous: bool):
 
 
 if __name__ == '__main__':
-    # main()
-    main1level(continuous=False, ibm=True)
+    main1level(continuous=True, ibm=True)
     # main2level(continuous=False)
 
 

@@ -198,7 +198,7 @@ def test_onelevel_discrete_ibm(length: int, sen: int, noise_in_training: bool, i
             targets = sample['label'].to(device)
             loc_all.append(sample['loc'])
             # the model
-            outputs = model(thetas, use_qiskit=False)
+            outputs = model(thetas, use_qiskit=True)
             loss = F.nll_loss(outputs, targets)
             loss_list.append(loss.item())
             target_all.append(targets)
@@ -283,9 +283,9 @@ def onelevel_ibm(continuous: bool):
         length = 4
         sen = 4
         noise_in_training = True
-        ibm_in_testing = False
+        ibm_in_testing = True
         output_dir = 'results'
-        output_file = 'ibm.discrete.onelevel'
+        output_file = 'ibm.discrete.onelevel.epoch9'
         test_onelevel_discrete_ibm(length, sen, noise_in_training, ibm_in_testing, output_dir, output_file)
 
 
@@ -306,5 +306,5 @@ def onelevel(continuous: bool):
 
 
 if __name__ == '__main__':
-    # onelevel_ibm(continuous=False)
-    onelevel(continuous=False)
+    onelevel_ibm(continuous=False)
+    # onelevel(continuous=False)

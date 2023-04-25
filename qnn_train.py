@@ -267,7 +267,7 @@ def train_save_oneLevel_discrete_ibm(dataset_dir: str):
             thetas = sample['phase'].to(device)
             targets = sample['label'].to(device)
             # the model
-            outputs = model(thetas, use_qiskit=False)
+            outputs = model(thetas, use_qiskit=True)
             # compute loss, gradient, optimize ...
             loss = F.nll_loss(outputs, targets)
             optimizer.zero_grad()
@@ -439,7 +439,7 @@ def main1level(continuous: bool, ibm: bool = False):
             train_save_oneLevel_continuous_ibm(folder)
         else:
             sen = 4
-            length = 4
+            length = 2
             folder = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}')
             train_save_oneLevel_discrete_ibm(folder)
     else:

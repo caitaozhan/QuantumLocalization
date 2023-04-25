@@ -247,7 +247,7 @@ class Plot:
             method_n_bins.append((method, Y, bins))
         plt.close()
         method_n_bins[0], method_n_bins[1], method_n_bins[2] = method_n_bins[2], method_n_bins[0], method_n_bins[1]
-        fig, ax = plt.subplots(figsize=(18, 16))
+        fig, ax = plt.subplots(figsize=(19, 16))
         fig.subplots_adjust(left=0.15, right=0.96, top=0.9, bottom=0.12)
         for method, Y, bins in method_n_bins:
             ax.plot(bins[1:], Y, label=Plot.LEGEND[method], color=Plot.COLOR[method], linestyle=Plot.LINE[method])
@@ -263,7 +263,7 @@ class Plot:
         ax.set_yticks(Y)
         ax.set_yticklabels([int(y*100) for y in Y])
         ax.set_ylim([0, 1.003])
-        ax.set_xlim([0, 40])
+        ax.set_xlim([0, 35])
         ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5)
         ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
         ax.set_title('Cumulative Distribution Function of $L_{err}$', pad=30, fontsize=45, fontweight='bold')

@@ -469,10 +469,12 @@ class QuantumLocalization:
             train_label_dir = os.path.join(root_dir, 'train', 'label')
             test_phase_dir = os.path.join(root_dir, 'test', 'phase')
             test_label_dir = os.path.join(root_dir, 'test', 'label')
+            test_loc_dir   = os.path.join(root_dir, 'test', 'loc')
             os.makedirs(train_phase_dir)
             os.makedirs(train_label_dir)
             os.makedirs(test_phase_dir)
             os.makedirs(test_label_dir)
+            os.makedirs(test_loc_dir)
             txs = []
             tx_loc = {}
             for i in range(self.grid_length):     # the transmitter locations
@@ -514,10 +516,11 @@ class QuantumLocalization:
                     for rx_i in sensors:  # rx_i is in str
                         rx = self.sensordata['sensors'][f'{rx_i}']
                         distance = Utility.distance(tx, rx, self.cell_length)
-                        phase_shift, _ = self.unitary_operator.compute(distance, noise=True)  # there is noise for quantum ml
+                        phase_shift, _ = self.unitary_operator.compute_H(distance, noise=True)  # there is noise for quantum ml
                         thetas.append(phase_shift)
                     np.save(f'{test_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
                     np.save(f'{test_label_dir}/{counter}.npy', np.array(i).astype(np.int64))
+                    np.save(f'{test_loc_dir}/{counter}.npy',   np.array(tx).astype(np.float32))
                     counter += 1
         else:
             if os.path.exists(root_dir) is False:

@@ -14,7 +14,7 @@ class Input:
     sensor_num: int      # the number of sensors for the one level method (for two levels, the sensors are fixed)
     noise: int           # the standard deviation of shadowing
     continuous: bool     # whether the locations are continous during the testing phase
-    ibm: bool            # whether testing on IBM quantum computer
+    ibm: bool = False    # whether testing on IBM quantum computer
 
     def __str__(self):
         return self.to_json_str()

@@ -21,7 +21,7 @@ from default import Default
 from torchquantum.plugins import QiskitProcessor
 
 
-def compute_accuracy(output_all, target_all):
+def compute_accuracy(output_all, target_all) -> float:
     _, indices = output_all.topk(1, dim=1)
     masks = indices.eq(target_all.view(-1, 1).expand_as(indices))
     size = target_all.shape[0]
@@ -30,7 +30,7 @@ def compute_accuracy(output_all, target_all):
     return accuracy
 
 
-def compute_loc_error(output_all: Tensor, target_all: Tensor, dimension: int):
+def compute_loc_error(output_all: Tensor, target_all: Tensor, dimension: int) -> float:
     errors = []
     for output, target in zip(output_all.cpu().detach().numpy(), target_all.cpu().detach().numpy()):
         error = Utility.distance(output, target, dimension)
@@ -267,7 +267,7 @@ def train_save_oneLevel_discrete_ibm(dataset_dir: str):
             thetas = sample['phase'].to(device)
             targets = sample['label'].to(device)
             # the model
-            outputs = model(thetas, use_qiskit=True)
+            outputs = model(thetas, use_qiskit=False)
             # compute loss, gradient, optimize ...
             loss = F.nll_loss(outputs, targets)
             optimizer.zero_grad()
@@ -290,7 +290,7 @@ def train_save_oneLevel_discrete_ibm(dataset_dir: str):
             model_dir = dataset_dir.replace('qml-data', 'qml-model')
             if not os.path.exists(model_dir):
                 os.makedirs(model_dir)
-            with open(os.path.join(model_dir, f'model-ibm.pt'), 'wb') as f:
+            with open(os.path.join(model_dir, f'model.pt'), 'wb') as f:
                 pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
 
     print('\nfinal train loss:\n', train_loss)
@@ -479,7 +479,7 @@ def main2level(continuous: bool):
 
 
 if __name__ == '__main__':
-    main1level(continuous=True, ibm=True)
+    main1level(continuous=False, ibm=True)
     # main2level(continuous=False)
 
 

@@ -4,15 +4,38 @@ import torch.nn.functional as F
 import torchquantum as tq
 import torchquantum.functional as tqf
 import numpy as np
+from qiskit import QuantumCircuit
 from torch.utils.data import DataLoader
 from dataset import QuantumSensingDataset
 from torchquantum.plugins import (
-    op_history2qiskit_expand_params_and_fixed,
+    append_fixed_gate,
     op_history2qiskit,
     tq2qiskit_measurement,
     qiskit_assemble_circs
 )
 
+
+def op_history2qiskit_expand_params_and_fixed(n_wires, op_history, bsz):
+    """convert a tq op_history to a qiskit QuantumCircuit
+       for encoders that has parameterized gates and fixed gates
+    Args:
+        n_wires: number of wires
+        op_history: a list of tq operations
+        bsz: batch size
+    Returns:
+        a qiskit QuantumCircuit object
+    """
+    circs_all = []
+    for i in range(bsz):
+        circ = QuantumCircuit(n_wires)
+        for op in op_history:
+            if op['params'] is not None:
+                append_fixed_gate(circ, op["name"], op["params"][i], op["wires"], op["inverse"])
+            else:
+                append_fixed_gate(circ, op["name"], None, op["wires"], op["inverse"])
+        circs_all.append(circ)
+
+    return circs_all
 
 
 class QuantumSensing(tq.QuantumModule):
@@ -64,7 +87,7 @@ class QuantumMLclassification(tq.QuantumModule):
     def __init__(self, n_wires, n_locations):
         super().__init__()
         self.n_wires = n_wires
-        self.arch = {'n_wires': self.n_wires, 'n_blocks': 4, 'n_layers_per_block': 2}
+        self.arch = {'n_wires': self.n_wires, 'n_blocks': 4}
         self.quantum_layer = tq.layers.U3CU3Layer0(self.arch)
         self.measure = tq.MeasureAll(tq.PauliZ)
         self.linear = nn.Linear(n_wires, n_locations)
@@ -74,6 +97,58 @@ class QuantumMLclassification(tq.QuantumModule):
         self.quantum_layer(q_device)
         x = self.measure(q_device)
         # classical part
+        x = self.linear(x)
+        return F.log_softmax(x, -1)
+
+
+# The ibm version for QuantumMLclassification
+class QuantumMLclassificationIBM(tq.QuantumModule):
+    ''' the quantum layer part is tq.layers.U3CU3Layer0 (4 blocks)
+    '''
+
+    qsn_encoder = [
+        {"input_idx": [],  "func": "h",  "wires": [0]},
+        {"input_idx": [],  "func": "h",  "wires": [1]},
+        {"input_idx": [],  "func": "h",  "wires": [2]},
+        {"input_idx": [],  "func": "h",  "wires": [3]},
+        {"input_idx": [0], "func": "rz", "wires": [0]},
+        {"input_idx": [1], "func": "rz", "wires": [1]},
+        {"input_idx": [2], "func": "rz", "wires": [2]},
+        {"input_idx": [3], "func": "rz", "wires": [3]},
+    ]
+
+    def __init__(self, n_wires, n_locations):
+        super().__init__()
+        self.n_wires = n_wires
+        self.encoder = tq.GeneralEncoder(QuantumMLclassificationIBM.qsn_encoder)
+        self.arch = {'n_wires': self.n_wires, 'n_blocks': 4}
+        self.quantum_layer = tq.layers.U3CU3Layer0(self.arch)
+        self.measure = tq.MeasureAll(tq.PauliZ)
+        self.linear = nn.Linear(n_wires, n_locations)
+
+    def forward(self, x: torch.Tensor, use_qiskit=False):
+        bsz = x.shape[0]
+        device = x.device
+        qdev = tq.QuantumDevice(n_wires=self.n_wires, bsz=bsz, device=device, record_op=True)
+        if use_qiskit:
+            self.encoder(qdev, x)
+            op_history_paramerized = qdev.op_history
+            qdev.reset_op_history()
+            encoder_circ = op_history2qiskit_expand_params_and_fixed(self.n_wires, op_history_paramerized, bsz=bsz)
+            self.quantum_layer(qdev)
+            op_history_fixed = qdev.op_history
+            qdev.reset_op_history()
+            quantum_layer_circ = op_history2qiskit(self.n_wires, op_history_fixed)
+            measurement_circ = tq2qiskit_measurement(qdev, self.measure)
+
+            assembed_circs = qiskit_assemble_circs(encoder_circ, quantum_layer_circ, measurement_circ)
+            x = self.qiskit_processor.process_ready_circs(qdev, assembed_circs).to(torch.float32).to(device)
+        
+        else:
+            self.encoder(qdev, x)
+            self.quantum_layer(qdev)
+            x = self.measure(qdev)
+
         x = self.linear(x)
         return F.log_softmax(x, -1)
 
@@ -100,6 +175,7 @@ class QuantumMLregression(tq.QuantumModule):
         return loc
 
 
+# The IBM version for QuantumMLregression
 class QuantumMLregressionIBM(tq.QuantumModule):
     '''the IBM implementation for class QuantumMLregression
        currently for 4 qubits only
@@ -125,7 +201,7 @@ class QuantumMLregressionIBM(tq.QuantumModule):
         self.measure = tq.MeasureAll(tq.PauliZ)
         self.linear = nn.Linear(n_wires, 2)
 
-    def forward(self, x, use_qiskit=False):
+    def forward(self, x: torch.Tensor, use_qiskit=False):
         '''x is the tensor of phase shifts in batches
         '''
         bsz = x.shape[0]

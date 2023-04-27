@@ -41,6 +41,32 @@ def onelevel_2x2grid_4sen(filename, fig_filename):
         json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)
 
 
+'''one levels, 4 sensors, 2 by 2 grid'''
+def onelevel_3x3grid_4sen(filename, fig_filename):
+    grid_len = 3
+    sensor_data = {}
+    # information
+    info = "grid size is 3x3, 4 sensors in one level."
+    sensor_data['info'] = info
+    # location of 4 sensors
+    sensors = {
+        0: (0, 1.5),
+        1: (1.5, 0),
+        2: (1.5, 3),
+        3: (3, 1.5),
+    }
+    sensor_data['sensors'] = sensors
+    # one level
+    levels = {}
+    sets = {}
+    sets['set-0'] = {'sensors': [0, 1, 2, 3], 'area': [[0, 0], [grid_len, grid_len]], 'block_cell_ratio': 1}
+    levels['level-0'] = sets
+    sensor_data['levels'] = levels
+    Plot.visualize_sensors(grid_len, sensors, sensors, fig_filename)
+    with open(filename, 'w') as f:
+        json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)
+
+
 '''one level, 4 sensors, 4 by 4 grid'''
 def onelevel_4x4grid_4sen(filename, fig_filename):
     grid_length = 4
@@ -1154,6 +1180,8 @@ if __name__ == '__main__':
 
     # filename = 'sensordata/onelevel.2x2.4.json'
     # onelevel_2x2grid_4sen(filename, fig_filename)
+    filename = 'sensordata/onelevel.3x3.4.json'
+    onelevel_3x3grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.4x4.4.json'
     # onelevel_4x4grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.6x6.4.json'
@@ -1225,8 +1253,8 @@ if __name__ == '__main__':
     # two_level_4by4grid_8sen(filename, fig_filename)
     # filename = 'sensordata/twolevel.9x9.8.json'
     # two_level_9by9grid_8sen(filename, fig_filename)
-    filename = 'sensordata/twolevel.12x12.8.json'
-    two_level_12by12grid_8sen(filename, fig_filename)
+    # filename = 'sensordata/twolevel.12x12.8.json'
+    # two_level_12by12grid_8sen(filename, fig_filename)
     # filename = 'sensordata/twolevel.16x16.8.json'
     # two_level_16by16grid_8sen(filename, fig_filename)
 

@@ -15,8 +15,8 @@ class Plot:
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one', 'povmloc',    'qml-r',   'qml-r-two',      'qml-c',   'qml-c-two',      'qml-noise=False', 'qml-noise=True']
-    _LEGEND = ['QSD-One',     'QSD-Two',    'PQC-One', 'PQC-Two',        'PQC-One', 'PQC-Two',        'PQC-One (IBM)',   'PQC-One (IBM+Noisy Train)']
+    METHOD  = ['povmloc-one', 'povmloc',    'qml-r',   'qml-r-two',      'qml-c',   'qml-c-two',      'qml-ibmq_quito',      'qml-ibmq_manila']
+    _LEGEND = ['QSD-One',     'QSD-Two',    'PQC-One', 'PQC-Two',        'PQC-One', 'PQC-Two',        'PQC-One (IBM Quito)', 'PQC-One (IBM Manila)']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
     _COLOR  = ['r',           'lightcoral', 'b',       'cornflowerblue', 'b',       'cornflowerblue', 'mediumpurple',    'springgreen']
@@ -128,6 +128,56 @@ class Plot:
 
 
     @staticmethod
+    def continuous_varygrid_ibm(data: list, figname: str):
+        # step 1.1: prepare accuracy data for QSD-One and PQC-One
+        reduce = Plot.reduce_average
+        sensor_num = 4
+        onelevel_methods = ['qml-r', 'qml-ibmq_quito']
+        table_onelevel = defaultdict(list)
+        table_twolevel = defaultdict(list)
+        for myinput, output_by_method in data:
+            if myinput.sensor_num != sensor_num:
+                continue
+            for method, output in output_by_method.items():
+                if method in onelevel_methods:
+                    if method in onelevel_methods:
+                        table_onelevel[myinput.grid_length].append({output.method: output.localization_error})
+
+        print('\nOnelevel')
+        print_table = []
+        for x, list_of_y_by_method in sorted(table_onelevel.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in onelevel_methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + onelevel_methods))
+        arr = np.array(print_table)
+        X_one      = arr[:, 0]
+        qml_r_one  = arr[:, 1]
+        qml_quito  = arr[:, 2]
+
+        # step 2: plotting
+        l_err = "$L_{err}$"
+        fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
+        fig.subplots_adjust(left=0.13, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
+        ax1.plot(X_one, qml_r_one, linestyle=Plot.LINE['qml-r'],          marker='o', label=Plot.LEGEND['qml-r'],          mec='black', color=Plot.COLOR['qml-r'])
+        ax1.plot(X_one, qml_quito, linestyle=Plot.LINE['qml-ibmq_quito'], marker='o', label=Plot.LEGEND['qml-ibmq_quito'], mec='black', color=Plot.COLOR['qml-ibmq_quito'])
+        # ax1
+        ax1.legend(ncol=1, handlelength=4, loc='upper left', fontsize=40)
+        ax1.set_xlabel('Grid Size', labelpad=30, fontsize=40)
+        ax1.grid(True)
+        X = list(X_one)
+        ax1.set_xticks(X)
+        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        Y = list(range(0, 19, 3))
+        ax1.set_yticks(Y)
+        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        ax1.set_ylabel(f'{l_err} (m)', labelpad=12)
+        # ax1.set_ylim([0, 40])
+        ax1.set_title(f'Performance on IBM Quantum Computers', pad=30, fontsize=45, fontweight='bold')
+        fig.savefig(figname)
+
+
+    @staticmethod
     def continuous_varysensornum(data: list, figname: str):
         # step 1.1: prepare accuracy data for QSD-One and PQC-One
         reduce = Plot.reduce_average
@@ -230,6 +280,7 @@ class Plot:
     @staticmethod
     def error_cdf_ibm(data: list, figname: str):
         # fix grid length at 16 and sensor number at 8
+        methods = ['qml-r', 'qml-ibmq_quito']
         grid_length = 4
         sensor_num = 4
         table = defaultdict(list)
@@ -237,7 +288,8 @@ class Plot:
             if myinput.grid_length != grid_length or myinput.sensor_num != sensor_num:
                 continue
             for method, output in output_by_method.items():
-                table[method].append(output.localization_error)
+                if method in methods:
+                    table[method].append(output.localization_error)
 
         n_bins = 100
         method_n_bins = []
@@ -246,7 +298,7 @@ class Plot:
             Y, bins, _ = plt.hist(error_list, n_bins, density=True, histtype='step', cumulative=True, label=method)
             method_n_bins.append((method, Y, bins))
         plt.close()
-        method_n_bins[0], method_n_bins[1], method_n_bins[2] = method_n_bins[2], method_n_bins[0], method_n_bins[1]
+        method_n_bins[0], method_n_bins[1] = method_n_bins[1], method_n_bins[0]
         fig, ax = plt.subplots(figsize=(19, 16))
         fig.subplots_adjust(left=0.15, right=0.96, top=0.9, bottom=0.12)
         for method, Y, bins in method_n_bins:
@@ -263,12 +315,12 @@ class Plot:
         ax.set_yticks(Y)
         ax.set_yticklabels([int(y*100) for y in Y])
         ax.set_ylim([0, 1.003])
-        ax.set_xlim([0, 35])
+        ax.set_xlim([0, 30])
         ax.tick_params(axis='x', pad=15, direction='in', length=10, width=5)
         ax.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
         ax.set_title('Cumulative Distribution Function of $L_{err}$', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
- 
+
 
     @staticmethod
     def discrete_varygrid(data: list, figname: str):
@@ -331,6 +383,55 @@ class Plot:
         ax1.set_ylabel(f'{CC_acc} (%)', labelpad=10)
         ax1.set_ylim([0, 101.5])
         ax1.set_title(f'Performance of Localization Algorithms', pad=30, fontsize=45, fontweight='bold')
+        fig.savefig(figname)
+
+
+    @staticmethod
+    def discrete_varygrid_ibm(data: list, figname: str):
+        # step 1.1: prepare accuracy data for QSD-One and PQC-One
+        reduce = Plot.reduce_average
+        sensor_num = 4
+        onelevel_methods = ['qml-c', 'qml-ibmq_quito', 'qml-ibmq_manila']
+        table_onelevel = defaultdict(list)
+        for myinput, output_by_method in data:
+            if myinput.sensor_num != sensor_num:
+                continue
+            for method, output in output_by_method.items():
+                if method in onelevel_methods:
+                    table_onelevel[myinput.grid_length].append({output.method: output.correct})
+        
+        print('\nOnelevel')
+        print_table = []
+        for x, list_of_y_by_method in sorted(table_onelevel.items()):
+            tmp_list = [reduce([(y_by_method[method] if method in y_by_method else None) for y_by_method in list_of_y_by_method]) for method in onelevel_methods]
+            print_table.append([x] + tmp_list)
+        print(tabulate.tabulate(print_table, headers=['Grid Length'] + onelevel_methods))
+
+        arr = np.array(print_table)
+        qml_c_one  = arr[:, 1] * 100
+        qml_quito  = arr[:, 2] * 100
+        qml_manila = arr[:, 3] * 100
+        X_one      = arr[:, 0]
+
+        # step 2: plotting
+        fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
+        fig.subplots_adjust(left=0.15, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
+        ax1.plot(X_one, qml_c_one,  linestyle=Plot.LINE['qml-c'],          marker='o',  label=Plot.LEGEND['qml-c'],           mec='black', color=Plot.COLOR['qml-c'])
+        ax1.plot(X_one, qml_manila, linestyle=Plot.LINE['qml-ibmq_manila'], marker='o', label=Plot.LEGEND['qml-ibmq_manila'], mec='black', color=Plot.COLOR['qml-ibmq_manila'])
+        ax1.plot(X_one, qml_quito,  linestyle=Plot.LINE['qml-ibmq_quito'], marker='o',  label=Plot.LEGEND['qml-ibmq_quito'],  mec='black', color=Plot.COLOR['qml-ibmq_quito'])
+        # ax1
+        ax1.legend(ncol=1, handlelength=4, loc='lower left', fontsize=40)
+        ax1.set_xlabel('Grid Size', labelpad=30, fontsize=40)
+        ax1.grid(True)
+        X = list(X_one)
+        ax1.set_xticks(X)
+        ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
+        ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5)
+        ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
+        CC_acc = "$CC_{acc}$"
+        ax1.set_ylabel(f'{CC_acc} (%)', labelpad=10)
+        ax1.set_ylim([0, 101.5])
+        ax1.set_title(f'Performance On IBM Quantum Computers', pad=30, fontsize=45, fontweight='bold')
         fig.savefig(figname)
 
 
@@ -413,6 +514,14 @@ def continuous_varygrid():
     Plot.continuous_varygrid(data, figname)
 
 
+def continuous_varygrid_ibm():
+    logs = ['results/ibm.continuous.onelevel', 'results/ibm.continuous.onelevel.2x2',\
+            'results/ibm.continuous.onelevel.3x3']
+    data = Utility.read_logs(logs)
+    figname = 'results/continuous.varygrid.ibm.png'
+    Plot.continuous_varygrid_ibm(data, figname)
+
+
 def continuous_varysensornum():
     logs = ['results/continuous.onelevel.qsd', 'results/continuous.onelevel.pqc',\
             'results/continuous.twolevel.qsd', 'results/continuous.twolevel.pqc']
@@ -456,6 +565,13 @@ def discrete_varygrid():
     Plot.discrete_varygrid(data, figname)
 
 
+def discrete_varygrid_ibm():
+    logs = ['results/ibm.discrete.onelevel.2x2', 'results/ibm.discrete.onelevel.3x3', 'results/ibm.discrete.onelevel']
+    data = Utility.read_logs(logs)
+    figname = 'results/discrete.varygrid.ibm.png'
+    Plot.discrete_varygrid_ibm(data, figname)
+
+
 def runtime():
     '''the runtime
     '''
@@ -468,11 +584,13 @@ def runtime():
 if __name__ == '__main__':
 
     # continuous_varygrid()
+    continuous_varygrid_ibm()
     # continuous_varysensornum()
     # localization_error_cdf()
-    localization_error_cdf_ibm()
+    # localization_error_cdf_ibm()
 
     # discrete_varygrid()
+    # discrete_varygrid_ibm()
     # discrete_varysensornum()
 
 

@@ -166,6 +166,9 @@ def train_save_onelevel_continuous(dataset_dir: str):
 
 '''one level + continuous, save model + ibm version'''
 def train_save_oneLevel_continuous_ibm(dataset_dir: str):
+    backend_name = 'ibmq_quito'
+    ibm = False
+    print(f'noise in training = {ibm}, backend_name = {backend_name}')
     info = json.load(open(os.path.join(dataset_dir, 'info')))
     print(info)
     root_dir = os.path.join(dataset_dir, 'train')
@@ -183,10 +186,8 @@ def train_save_oneLevel_continuous_ibm(dataset_dir: str):
     # qiskit processor
     from qiskit import IBMQ
     IBMQ.load_account()
-    backend_name = 'ibmq_quito'
     processor_simulation = QiskitProcessor(use_real_qc=False, noise_model_name=backend_name, max_jobs=8)
     model.set_qiskit_processor(processor_simulation)
-    ibm = False
     model.train()
     train_loss = []
     train_error = []
@@ -267,7 +268,7 @@ def train_save_oneLevel_discrete_ibm(dataset_dir: str):
             thetas = sample['phase'].to(device)
             targets = sample['label'].to(device)
             # the model
-            outputs = model(thetas, use_qiskit=True)
+            outputs = model(thetas, use_qiskit=False)
             # compute loss, gradient, optimize ...
             loss = F.nll_loss(outputs, targets)
             optimizer.zero_grad()
@@ -434,7 +435,7 @@ def main1level(continuous: bool, ibm: bool = False):
     if ibm:
         if continuous:
             sen = 4
-            length = 4
+            length = 2
             folder = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}')
             train_save_oneLevel_continuous_ibm(folder)
         else:
@@ -479,7 +480,7 @@ def main2level(continuous: bool):
 
 
 if __name__ == '__main__':
-    main1level(continuous=False, ibm=True)
+    main1level(continuous=True, ibm=True)
     # main2level(continuous=False)
 
 

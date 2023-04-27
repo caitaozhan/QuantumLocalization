@@ -51,7 +51,9 @@ def get_pred_correct(output_all: list, target_all: list, grid_length: int) -> Tu
     return pred_list, correct_list
 
 
-def test_onelevel_continuous_ibm(length: int, sen: int, noise_in_training: bool, ibm_in_testing: bool, output_dir: str, output_file: str):
+def test_onelevel_continuous_ibm(length: int, sen: int, noise_in_training: bool, ibm_in_testing: bool, \
+                                 output_dir: str, output_file: str, backend_name: str):
+    print(f'ibm_in_testing = {ibm_in_testing}, noise_in_training = {noise_in_training}, backend_name = {backend_name}')
     dataset_dir = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}')
     info = json.load(open(os.path.join(dataset_dir, 'info')))
     print(info)
@@ -71,7 +73,6 @@ def test_onelevel_continuous_ibm(length: int, sen: int, noise_in_training: bool,
         model = pickle.load(f)
     from qiskit import IBMQ
     IBMQ.load_account()
-    backend_name = 'ibmq_quito'
     if ibm_in_testing:
         processor = QiskitProcessor(use_real_qc=True, backend_name=backend_name)
     else:
@@ -104,7 +105,7 @@ def test_onelevel_continuous_ibm(length: int, sen: int, noise_in_training: bool,
         for tx, pred, error in zip(target_all, output_all, errors):
             myinput = Input((round(tx[0]*area_length, 3), round(tx[1]*area_length, 3)), length, sen, noise=0, continuous=True, ibm=True)
             outputs = []
-            outputs.append(Output(f'qml-noise={noise_in_training}', False, round(error, 3), (round(pred[0]*area_length, 3), round(pred[1]*area_length, 3)), -1))
+            outputs.append(Output(f'qml-{backend_name}', False, round(error, 3), (round(pred[0]*area_length, 3), round(pred[1]*area_length, 3)), -1))
             mylogger.log(myinput, outputs)
 
 
@@ -156,7 +157,9 @@ def test_onelevel_continuous(length: int, sen: int, output_dir: str, output_file
             mylogger.log(myinput, outputs)
 
 
-def test_onelevel_discrete_ibm(length: int, sen: int, noise_in_training: bool, ibm_in_testing: bool, output_dir: str, output_file: str):
+def test_onelevel_discrete_ibm(length: int, sen: int, noise_in_training: bool, ibm_in_testing: bool, \
+                               output_dir: str, output_file: str, backend_name: str):
+    print(f'noise in training = {noise_in_training}, backend_name = {backend_name}')
     dataset_dir = os.path.join(os.getcwd(), 'qml-data', f'{length}x{length}.{sen}')
     info = json.load(open(os.path.join(dataset_dir, 'info')))
     print(info)
@@ -178,7 +181,6 @@ def test_onelevel_discrete_ibm(length: int, sen: int, noise_in_training: bool, i
         model = pickle.load(f)
     from qiskit import IBMQ
     IBMQ.load_account()
-    backend_name = 'ibmq_quito'
     if ibm_in_testing:
         processor = QiskitProcessor(use_real_qc=True, backend_name=backend_name)
     else:
@@ -214,7 +216,7 @@ def test_onelevel_discrete_ibm(length: int, sen: int, noise_in_training: bool, i
         for tx, pred, correct in zip(loc_all, pred_list, correct_list):
             myinput = Input(tx, length, sen, noise=0, continuous=True, ibm=True)
             outputs = []
-            outputs.append(Output(f'qml-noise={noise_in_training}', correct, -1, pred, -1))
+            outputs.append(Output(f'qml-{backend_name}', correct, -1, pred, -1))
             mylogger.log(myinput, outputs)
 
 
@@ -272,39 +274,43 @@ def test_onelevel_discrete(length: int, sen: int, output_dir: str, output_file: 
 
 def onelevel_ibm(continuous: bool):
     if continuous:
-        length = 4
+        length = 3
         sen = 4
         noise_in_training = False
-        ibm_in_testing = False
+        ibm_in_testing = True
+        backend_name = 'ibmq_quito'
+        # backend_name = 'ibmq_manila'
         output_dir = 'results'
-        output_file = 'ibm.continuous.onelevel'
-        test_onelevel_continuous_ibm(length, sen, noise_in_training, ibm_in_testing, output_dir, output_file)
+        output_file = f'ibm.continuous.onelevel.{length}x{length}'
+        test_onelevel_continuous_ibm(length, sen, noise_in_training, ibm_in_testing, output_dir, output_file, backend_name)
     else:
         length = 4
         sen = 4
-        noise_in_training = True
+        noise_in_training = False
         ibm_in_testing = True
+        # backend_name = 'ibmq_quito'
+        backend_name = 'ibmq_manila'
         output_dir = 'results'
-        output_file = 'ibm.discrete.onelevel.epoch9'
-        test_onelevel_discrete_ibm(length, sen, noise_in_training, ibm_in_testing, output_dir, output_file)
+        output_file = 'ibm.discrete.onelevel'
+        test_onelevel_discrete_ibm(length, sen, noise_in_training, ibm_in_testing, output_dir, output_file, backend_name)
 
 
 def onelevel(continuous: bool):
     if continuous:
-        length = 4
+        length = 2
         sen = 4
         output_dir = 'results'
-        output_file = 'ibm.continuous.onelevel'
+        output_file = 'ibm.continuous.onelevel.2x2'
         test_onelevel_continuous(length, sen, output_dir, output_file)
     else:
-        length = 4
+        length = 3
         sen = 4
         output_dir = 'results'
-        output_file = 'ibm.discrete.onelevel'
+        output_file = 'ibm.discrete.onelevel.3x3'
         test_onelevel_discrete(length, sen, output_dir, output_file)
 
 
 
 if __name__ == '__main__':
-    onelevel_ibm(continuous=False)
-    # onelevel(continuous=False)
+    # onelevel_ibm(continuous=True)
+    onelevel(continuous=True)

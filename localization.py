@@ -543,8 +543,8 @@ class QuantumLocalization:
             Utility.remove_make(root_dir)
             train_phase_dir = os.path.join(root_dir, 'train', 'phase')
             train_label_dir = os.path.join(root_dir, 'train', 'label')
-            test_phase_dir = os.path.join(root_dir, 'test', 'phase')
-            test_label_dir = os.path.join(root_dir, 'test', 'label')
+            test_phase_dir  = os.path.join(root_dir, 'test', 'phase')
+            test_label_dir  = os.path.join(root_dir, 'test', 'label')
             os.makedirs(train_phase_dir)
             os.makedirs(train_label_dir)
             os.makedirs(test_phase_dir)
@@ -606,7 +606,7 @@ class QuantumLocalization:
                 raise Exception(f'directory {root_dir} does not exist')
         
         # step 2: train the quantum ml model
-        # training the quantum ml part is done on a jupyter notebook        
+        # training the quantum ml part is done in qnn_train.py        
         print('Data generation done!')
 
 
@@ -749,6 +749,32 @@ class QuantumLocalization:
                         np.save(f'{train_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
                         np.save(f'{train_label_dir}/{counter}.npy', np.array(tx_continuous_target).astype(np.float32))
                         counter += 1
+                # create a testing dataset only for the level-0
+                if key == 'level-0-set-0':
+                    test_phase_dir = os.path.join(root_dir, 'test', 'phase')
+                    test_label_dir = os.path.join(root_dir, 'test', 'label')
+                    os.makedirs(test_phase_dir)
+                    os.makedirs(test_label_dir)
+                    info_file = os.path.join(root_dir, 'info')
+                    with open(info_file, 'w') as f:
+                        json.dump(info, f)
+                        print(info)
+                    repeat = 12
+                    counter = 0
+                    for tx in tx_list:
+                        for _ in range(repeat):
+                            tx_continuous = self.generate_tx(tx, threshold=5)
+                            tx_continuous_target = ((tx_continuous[0] - a[0]) / area_length, (tx_continuous[1] - a[1]) / area_length)  # elrative location inside the block, normalize values to [0, 1]
+                            thetas = []
+                            for rx_i in sensors:
+                                rx = self.sensordata['sensors'][f'{rx_i}']
+                                distance = Utility.distance(tx_continuous, rx, self.cell_length)
+                                phase_shift, _ = self.unitary_operator.compute_H(distance, noise=True)
+                                thetas.append(phase_shift)
+                            np.save(f'{test_phase_dir}/{counter}.npy', np.array(thetas).astype(np.float32))
+                            np.save(f'{test_label_dir}/{counter}.npy', np.array(tx_continuous_target).astype(np.float32))
+                            counter += 1
+
         print('Generating data done!')
 
 

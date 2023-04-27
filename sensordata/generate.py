@@ -849,6 +849,56 @@ def onelevel_2x2grid_16sen(filename, fig_filename):
 
 
 
+# level-0: 1 set of 4 sensors that do 4 state discrimination
+# level-1: 4 set of 4 sensors, each set do 4 state discrimination
+def two_level_4by4grid_4sen(filename: str, fig_filename: str):
+    grid_len = 4
+    levels = {}
+    sensor_data = {}
+    info = 'grid size is 4x4, 2 levels, 4 sensors in the first level'
+    sensor_data['info'] = info
+    # level 0
+    level0_sen = 4
+    sensors = {
+        0: (0, 2),
+        1: (2, 0),
+        2: (2, 4),
+        3: (4, 2),
+    }
+
+    sensors_reverse = {val: key for key, val in sensors.items()}
+    level0_sensors = list(range(level0_sen))
+    level0_set = {'sensors': level0_sensors, 'area': [(0, 0), (grid_len, grid_len)], 'block_cell_ratio': 2}
+    levels['level-0'] = {'set-0': level0_set}
+    sensor_i = level0_sen
+    # level 1
+    set_i = 0
+    sets = {}
+    for i in range(2):
+        for j in range(2):
+            sensor_list = []
+            base = (i * 2, j * 2)
+            relative = [(0, 1), (1, 0), (1, 2), (2, 1)]
+            for r in relative:
+                loc = (base[0] + r[0], base[1] + r[1])
+                if loc not in sensors_reverse:
+                    sensors[sensor_i] = loc
+                    sensors_reverse[loc] = sensor_i
+                    sensor_list.append(sensor_i)
+                    sensor_i += 1
+                else:
+                    sensor_list.append(sensors_reverse[loc])
+            sets[f'set-{set_i}'] = {'sensors': sensor_list, 'area': [(i * 2, j * 2), ((i + 1) * 2, (j + 1) * 2)], 'block_cell_ratio': 1}
+            set_i += 1
+
+    sensor_data['sensors'] = sensors
+    levels['level-1'] = sets
+    sensor_data['levels'] = levels
+    Plot.visualize_sensors(grid_len, sensors, level0_sensors, fig_filename)
+    with open(filename, 'w') as f:
+        json.dump(sensor_data, f, indent=4, cls=MyJSONEncoder)
+
+
 # level-0: 1 set of 4 sensors that do 16 state discrimination
 # level-1: 16 set of 4 sensors, each set do 16 state discrimination
 def two_level_16by16grid_4sen(filename: str, fig_filename: str):
@@ -1180,8 +1230,8 @@ if __name__ == '__main__':
 
     # filename = 'sensordata/onelevel.2x2.4.json'
     # onelevel_2x2grid_4sen(filename, fig_filename)
-    filename = 'sensordata/onelevel.3x3.4.json'
-    onelevel_3x3grid_4sen(filename, fig_filename)
+    # filename = 'sensordata/onelevel.3x3.4.json'
+    # onelevel_3x3grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.4x4.4.json'
     # onelevel_4x4grid_4sen(filename, fig_filename)
     # filename = 'sensordata/onelevel.6x6.4.json'
@@ -1244,7 +1294,10 @@ if __name__ == '__main__':
 
 
     fig_filename = 'sensordata/tmp.twolevel.png'
+
     # TWO level 4 sensor
+    filename = 'sensordata/twolevel.4x4.4.json'
+    two_level_4by4grid_4sen(filename, fig_filename)
     # filename = 'sensordata/twolevel.16x16.4.json'
     # two_level_16by16grid_4sen(filename, fig_filename)
     

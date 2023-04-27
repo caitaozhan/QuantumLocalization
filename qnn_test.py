@@ -272,13 +272,71 @@ def test_onelevel_discrete(length: int, sen: int, output_dir: str, output_file: 
             mylogger.log(myinput, outputs)
 
 
+def test_twolevel_continuous_ibm(length: int, sen: int, ibm_in_testing: bool, output_dir: str, output_file: str, backend_name: str):
+    print(f'ibm_in_testing = {ibm_in_testing}, backend_name = {backend_name}')
+    dataset_dir = os.path.join(os.getcwd(), 'qml-data', f'c.{length}x{length}.{sen}.two')
+    info = json.load(open(os.path.join(dataset_dir, 'info')))
+    print(info)
+    area = info['area']
+    area_length = area[1][0] - area[0][0]
+    root_dir = os.path.join(dataset_dir, 'test')
+    test_dataset = QuantumSensingDataset(root_dir)
+    bsz = len(test_dataset)
+    if bsz > 500:
+        raise Exception('testing dataset too large!')
+    test_dataloader = DataLoader(test_dataset, batch_size=bsz, shuffle=False, num_workers=4)
+    use_cuda = torch.cuda.is_available()
+    device = torch.device('cuda' if use_cuda else 'cpu')
+    model_dir = dataset_dir.replace('data', 'model')
+    model_name = 'model-ibm.pt' if noise_in_training else 'model.pt'
+    with open(os.path.join(model_dir, model_name), 'rb') as f:
+        model = pickle.load(f)
+    from qiskit import IBMQ
+    IBMQ.load_account()
+    if ibm_in_testing:
+        processor = QiskitProcessor(use_real_qc=True, backend_name=backend_name)
+    else:
+        processor = QiskitProcessor(use_real_qc=False, noise_model_name=backend_name, max_jobs=8)
+    model.set_qiskit_processor(processor)
+    model.to(device=device)
+    model.eval()
+    
+    loss_list = []
+    target_all = []
+    output_all = []
+    start = time.time()
+    with torch.no_grad():
+        for _, sample in enumerate(test_dataloader):
+            thetas = sample['phase'].to(device)
+            targets = sample['label'].to(device)
+            outputs = model(thetas, use_qiskit=True)
+            # the model
+            loss = F.mse_loss(outputs, targets)
+            loss_list.append(loss.item())
+            target_all.append(targets)
+            output_all.append(outputs)
+        target_all = torch.cat(target_all).cpu().detach().numpy().tolist()
+        output_all = torch.cat(output_all).cpu().detach().numpy().tolist()
+        errors = get_loc_error(output_all, target_all, area_length * Default.cell_length)
+        avg_error = np.mean(errors)
+        print(f'time = {time.time() - start}, test loss = {np.mean(loss_list)}, test localization error = {avg_error}')
+        print(errors)
+        mylogger = MyLogger(output_dir, output_file)
+        for tx, pred, error in zip(target_all, output_all, errors):
+            myinput = Input((round(tx[0]*area_length, 3), round(tx[1]*area_length, 3)), length, sen, noise=0, continuous=True, ibm=True)
+            outputs = []
+            outputs.append(Output(f'qml-{backend_name}', False, round(error, 3), (round(pred[0]*area_length, 3), round(pred[1]*area_length, 3)), -1))
+            mylogger.log(myinput, outputs)
+
+
 def onelevel_ibm(continuous: bool):
     if continuous:
-        length = 3
+        length = 4
         sen = 4
         noise_in_training = False
         ibm_in_testing = True
-        backend_name = 'ibmq_quito'
+        backend_name = 'ibm_oslo'
+        # backend_name = 'ibmq_quito'
         # backend_name = 'ibmq_manila'
         output_dir = 'results'
         output_file = f'ibm.continuous.onelevel.{length}x{length}'
@@ -297,7 +355,7 @@ def onelevel_ibm(continuous: bool):
 
 def onelevel(continuous: bool):
     if continuous:
-        length = 2
+        length = 3
         sen = 4
         output_dir = 'results'
         output_file = 'ibm.continuous.onelevel.2x2'
@@ -310,7 +368,29 @@ def onelevel(continuous: bool):
         test_onelevel_discrete(length, sen, output_dir, output_file)
 
 
+def twolevel_ibm(continuous: bool):
+    if continuous:
+        length = 4
+        sen = 4
+        ibm_in_testing = False
+        backend_name = 'ibmq_quito'
+        output_dir = 'results'
+        output_file = 'ibm.continuous.twolevel'
+        test_twolevel_continuous_ibm(length, sen, ibm_in_testing, output_dir, output_file, backend_name)
+    else:
+        pass
+
+
+def twolevel(continuous: bool):
+    if continuous:
+        pass
+    else:
+        pass
+
 
 if __name__ == '__main__':
     # onelevel_ibm(continuous=True)
-    onelevel(continuous=True)
+    # onelevel(continuous=True)
+
+    twolevel(continuous=True)
+    twolevel_ibm(continuous=True)

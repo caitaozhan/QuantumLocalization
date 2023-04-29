@@ -391,7 +391,7 @@ class Plot:
         # step 1.1: prepare accuracy data for QSD-One and PQC-One
         reduce = Plot.reduce_average
         sensor_num = 4
-        onelevel_methods = ['qml-c', 'qml-ibmq_quito', 'qml-ibmq_manila']
+        onelevel_methods = ['qml-c', 'qml-ibmq_quito']#, 'qml-ibmq_manila']
         table_onelevel = defaultdict(list)
         for myinput, output_by_method in data:
             if myinput.sensor_num != sensor_num:
@@ -410,14 +410,14 @@ class Plot:
         arr = np.array(print_table)
         qml_c_one  = arr[:, 1] * 100
         qml_quito  = arr[:, 2] * 100
-        qml_manila = arr[:, 3] * 100
+        # qml_manila = arr[:, 3] * 100
         X_one      = arr[:, 0]
 
         # step 2: plotting
         fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
         fig.subplots_adjust(left=0.15, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
         ax1.plot(X_one, qml_c_one,  linestyle=Plot.LINE['qml-c'],          marker='o',  label=Plot.LEGEND['qml-c'],           mec='black', color=Plot.COLOR['qml-c'])
-        ax1.plot(X_one, qml_manila, linestyle=Plot.LINE['qml-ibmq_manila'], marker='o', label=Plot.LEGEND['qml-ibmq_manila'], mec='black', color=Plot.COLOR['qml-ibmq_manila'])
+        # ax1.plot(X_one, qml_manila, linestyle=Plot.LINE['qml-ibmq_manila'], marker='o', label=Plot.LEGEND['qml-ibmq_manila'], mec='black', color=Plot.COLOR['qml-ibmq_manila'])
         ax1.plot(X_one, qml_quito,  linestyle=Plot.LINE['qml-ibmq_quito'], marker='o',  label=Plot.LEGEND['qml-ibmq_quito'],  mec='black', color=Plot.COLOR['qml-ibmq_quito'])
         # ax1
         ax1.legend(ncol=1, handlelength=4, loc='lower left', fontsize=40)
@@ -584,13 +584,13 @@ def runtime():
 if __name__ == '__main__':
 
     # continuous_varygrid()
-    continuous_varygrid_ibm()
+    # continuous_varygrid_ibm()
     # continuous_varysensornum()
     # localization_error_cdf()
     # localization_error_cdf_ibm()
 
     # discrete_varygrid()
-    # discrete_varygrid_ibm()
+    discrete_varygrid_ibm()
     # discrete_varysensornum()
 
 

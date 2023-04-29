@@ -751,14 +751,10 @@ class QuantumLocalization:
                         counter += 1
                 # create a testing dataset only for the level-0
                 if key == 'level-0-set-0':
-                    test_phase_dir = os.path.join(root_dir, 'test', 'phase')
-                    test_label_dir = os.path.join(root_dir, 'test', 'label')
+                    test_phase_dir = os.path.join(root_dir, key, 'test', 'phase')
+                    test_label_dir = os.path.join(root_dir, key, 'test', 'label')
                     os.makedirs(test_phase_dir)
                     os.makedirs(test_label_dir)
-                    info_file = os.path.join(root_dir, 'info')
-                    with open(info_file, 'w') as f:
-                        json.dump(info, f)
-                        print(info)
                     repeat = 12
                     counter = 0
                     for tx in tx_list:

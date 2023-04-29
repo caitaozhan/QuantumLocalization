@@ -37,7 +37,7 @@ class Input:
         '''init an Input object from json str
         '''
         indict = json.loads(json_str)
-        ibm = indict['ibm'] if indict['ibm'] else False
+        ibm = indict['ibm'] if indict.get('ibm') else False
         return cls(indict['ground_truth'], indict['grid_length'], indict['sensor_num'], indict['noise'], indict['continuous'], ibm)
 
 

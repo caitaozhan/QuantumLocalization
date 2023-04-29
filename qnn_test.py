@@ -639,9 +639,9 @@ def onelevel_ibm(continuous: bool):
         sen = 4
         noise_in_training = False
         ibm_in_testing = True
-        backend_name = 'ibm_oslo'
+        # backend_name = 'ibm_oslo'
         # backend_name = 'ibmq_quito'
-        # backend_name = 'ibmq_manila'
+        backend_name = 'ibmq_manila'
         output_dir = 'results'
         output_file = f'ibm.continuous.onelevel.{length}x{length}'
         test_onelevel_continuous_ibm(length, sen, noise_in_training, ibm_in_testing, output_dir, output_file, backend_name)
@@ -697,8 +697,8 @@ def twolevel(continuous: bool):
 
 
 if __name__ == '__main__':
-    # onelevel_ibm(continuous=True)
+    onelevel_ibm(continuous=True)
     # onelevel(continuous=True)
 
     # twolevel(continuous=True)
-    twolevel_ibm(continuous=True)
+    # twolevel_ibm(continuous=True)

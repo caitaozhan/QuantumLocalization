@@ -574,3 +574,531 @@
 {"ground_truth": [3.492, 3.309], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
 {"method": "qml-r-two", "correct": false, "localization_error": 1.512, "pred": [3.54, 3.452], "elapse": -1}
 
+{"ground_truth": [0.648, 1.442], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.92, "pred": [0.243, 0.881], "elapse": -1}
+
+{"ground_truth": [0.569, 1.371], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 5.643, "pred": [0.227, 0.922], "elapse": -1}
+
+{"ground_truth": [0.544, 1.292], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 4.463, "pred": [0.273, 0.938], "elapse": -1}
+
+{"ground_truth": [0.469, 1.648], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.553, "pred": [0.155, 0.852], "elapse": -1}
+
+{"ground_truth": [0.392, 1.483], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.045, "pred": [0.24, 0.898], "elapse": -1}
+
+{"ground_truth": [0.683, 2.613], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 18.923, "pred": [0.101, 0.812], "elapse": -1}
+
+{"ground_truth": [0.991, 2.673], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 20.673, "pred": [0.03, 0.843], "elapse": -1}
+
+{"ground_truth": [0.462, 2.542], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 18.022, "pred": [0.116, 0.773], "elapse": -1}
+
+{"ground_truth": [0.435, 2.44], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.159, "pred": [0.098, 0.758], "elapse": -1}
+
+{"ground_truth": [0.903, 2.761], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.05, "pred": [0.132, 0.803], "elapse": -1}
+
+{"ground_truth": [0.56, 2.89], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.22, "pred": [0.023, 0.734], "elapse": -1}
+
+{"ground_truth": [0.631, 2.503], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.845, "pred": [0.072, 0.808], "elapse": -1}
+
+{"ground_truth": [0.966, 2.683], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 20.399, "pred": [0.079, 0.846], "elapse": -1}
+
+{"ground_truth": [0.948, 3.196], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.057, "pred": [-0.025, 0.779], "elapse": -1}
+
+{"ground_truth": [0.765, 3.327], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 27.306, "pred": [-0.122, 0.744], "elapse": -1}
+
+{"ground_truth": [0.899, 3.162], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.315, "pred": [-0.07, 0.715], "elapse": -1}
+
+{"ground_truth": [0.869, 3.244], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.876, "pred": [-0.14, 0.753], "elapse": -1}
+
+{"ground_truth": [0.958, 3.134], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 25.399, "pred": [0.067, 0.756], "elapse": -1}
+
+{"ground_truth": [1.825, 0.525], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 18.007, "pred": [0.028, 0.643], "elapse": -1}
+
+{"ground_truth": [1.547, 0.516], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 12.289, "pred": [0.341, 0.751], "elapse": -1}
+
+{"ground_truth": [1.675, 0.51], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 14.978, "pred": [0.184, 0.658], "elapse": -1}
+
+{"ground_truth": [1.386, 0.464], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 11.99, "pred": [0.215, 0.721], "elapse": -1}
+
+{"ground_truth": [1.021, 2.757], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.457, "pred": [0.118, 0.81], "elapse": -1}
+
+{"ground_truth": [1.072, 2.707], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.22, "pred": [0.095, 0.823], "elapse": -1}
+
+{"ground_truth": [1.44, 2.875], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 24.645, "pred": [0.112, 0.799], "elapse": -1}
+
+{"ground_truth": [1.341, 3.23], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 28.644, "pred": [-0.108, 0.759], "elapse": -1}
+
+{"ground_truth": [1.473, 3.321], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 29.971, "pred": [-0.101, 0.77], "elapse": -1}
+
+{"ground_truth": [1.403, 3.149], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 27.981, "pred": [-0.079, 0.776], "elapse": -1}
+
+{"ground_truth": [1.107, 3.196], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 27.145, "pred": [-0.048, 0.74], "elapse": -1}
+
+{"ground_truth": [1.324, 3.202], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 27.859, "pred": [0.016, 0.742], "elapse": -1}
+
+{"ground_truth": [1.258, 3.197], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 27.704, "pred": [-0.063, 0.762], "elapse": -1}
+
+{"ground_truth": [1.303, 3.035], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.214, "pred": [0.043, 0.737], "elapse": -1}
+
+{"ground_truth": [2.41, 0.429], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.798, "pred": [0.278, 0.886], "elapse": -1}
+
+{"ground_truth": [2.368, 0.429], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.167, "pred": [0.191, 0.846], "elapse": -1}
+
+{"ground_truth": [2.366, 0.514], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 23.719, "pred": [0.005, 0.745], "elapse": -1}
+
+{"ground_truth": [2.506, 0.375], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.315, "pred": [0.348, 0.945], "elapse": -1}
+
+{"ground_truth": [2.376, 0.625], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.038, "pred": [-0.226, 0.711], "elapse": -1}
+
+{"ground_truth": [2.654, 0.404], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 23.634, "pred": [0.363, 0.986], "elapse": -1}
+
+{"ground_truth": [0.378, 3.569], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 2.316, "pred": [0.572, 3.443], "elapse": -1}
+
+{"ground_truth": [0.659, 3.538], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 2.206, "pred": [0.679, 3.318], "elapse": -1}
+
+{"ground_truth": [0.514, 3.355], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 0.945, "pred": [0.603, 3.321], "elapse": -1}
+
+{"ground_truth": [2.25, 0.462], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 30.531, "pred": [0.709, 3.098], "elapse": -1}
+
+{"ground_truth": [2.734, 3.294], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 19.203, "pred": [0.833, 3.027], "elapse": -1}
+
+{"ground_truth": [2.622, 3.262], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.502, "pred": [0.884, 3.057], "elapse": -1}
+
+{"ground_truth": [2.731, 3.519], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 19.813, "pred": [0.812, 3.029], "elapse": -1}
+
+{"ground_truth": [2.778, 3.392], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 19.516, "pred": [0.862, 3.017], "elapse": -1}
+
+{"ground_truth": [0.493, 2.126], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 23.983, "pred": [2.871, 1.815], "elapse": -1}
+
+{"ground_truth": [0.44, 3.562], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 30.233, "pred": [2.95, 1.878], "elapse": -1}
+
+{"ground_truth": [2.919, 3.32], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.148, "pred": [3.104, 2.526], "elapse": -1}
+
+{"ground_truth": [2.914, 3.015], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 7.364, "pred": [3.113, 2.306], "elapse": -1}
+
+{"ground_truth": [2.724, 3.09], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 7.143, "pred": [3.045, 2.452], "elapse": -1}
+
+{"ground_truth": [2.646, 3.075], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.207, "pred": [3.018, 2.344], "elapse": -1}
+
+{"ground_truth": [3.699, 1.521], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.176, "pred": [2.782, 1.496], "elapse": -1}
+
+{"ground_truth": [3.57, 2.38], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 5.526, "pred": [3.33, 1.882], "elapse": -1}
+
+{"ground_truth": [3.021, 2.836], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.217, "pred": [3.143, 2.226], "elapse": -1}
+
+{"ground_truth": [3.688, 2.404], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 4.761, "pred": [3.377, 2.044], "elapse": -1}
+
+{"ground_truth": [3.254, 3.41], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 10.326, "pred": [3.108, 2.388], "elapse": -1}
+
+{"ground_truth": [3.214, 3.488], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 11.534, "pred": [3.067, 2.344], "elapse": -1}
+
+{"ground_truth": [3.151, 3.408], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.203, "pred": [3.139, 2.488], "elapse": -1}
+
+{"ground_truth": [3.425, 3.208], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 3.205, "pred": [3.506, 2.898], "elapse": -1}
+
+{"ground_truth": [3.448, 3.438], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.154, "pred": [3.468, 2.823], "elapse": -1}
+
+{"ground_truth": [3.428, 3.48], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.814, "pred": [3.381, 2.8], "elapse": -1}
+
+{"ground_truth": [3.665, 3.726], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 7.437, "pred": [3.49, 3.004], "elapse": -1}
+
+{"ground_truth": [3.362, 3.462], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.996, "pred": [3.221, 2.574], "elapse": -1}
+
+{"ground_truth": [3.152, 3.521], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 14.254, "pred": [2.926, 2.114], "elapse": -1}
+
+{"ground_truth": [0.587, 0.819], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 24.439, "pred": [3.024, 0.642], "elapse": -1}
+
+{"ground_truth": [0.655, 0.676], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 23.911, "pred": [3.046, 0.674], "elapse": -1}
+
+{"ground_truth": [0.397, 0.693], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 27.36, "pred": [3.131, 0.574], "elapse": -1}
+
+{"ground_truth": [0.512, 0.152], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.782, "pred": [3.161, 0.544], "elapse": -1}
+
+{"ground_truth": [0.31, 0.569], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 29.135, "pred": [3.222, 0.461], "elapse": -1}
+
+{"ground_truth": [0.441, 0.583], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.805, "pred": [3.122, 0.584], "elapse": -1}
+
+{"ground_truth": [0.48, 0.711], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.331, "pred": [3.111, 0.595], "elapse": -1}
+
+{"ground_truth": [0.221, 0.343], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 29.699, "pred": [3.187, 0.501], "elapse": -1}
+
+{"ground_truth": [0.951, 0.777], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 19.88, "pred": [2.937, 0.678], "elapse": -1}
+
+{"ground_truth": [0.788, 0.685], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.326, "pred": [3.021, 0.651], "elapse": -1}
+
+{"ground_truth": [0.888, 0.534], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 20.849, "pred": [2.967, 0.692], "elapse": -1}
+
+{"ground_truth": [0.558, 1.165], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 25.943, "pred": [3.094, 0.616], "elapse": -1}
+
+{"ground_truth": [0.895, 1.202], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.134, "pred": [2.946, 0.695], "elapse": -1}
+
+{"ground_truth": [0.638, 1.127], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 24.997, "pred": [3.084, 0.609], "elapse": -1}
+
+{"ground_truth": [0.536, 1.159], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.169, "pred": [3.092, 0.598], "elapse": -1}
+
+{"ground_truth": [0.504, 1.846], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 29.707, "pred": [3.168, 0.531], "elapse": -1}
+
+{"ground_truth": [0.87, 1.292], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.604, "pred": [2.946, 0.695], "elapse": -1}
+
+{"ground_truth": [1.197, 0.942], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.472, "pred": [2.914, 0.616], "elapse": -1}
+
+{"ground_truth": [1.351, 0.702], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 16.385, "pred": [2.98, 0.524], "elapse": -1}
+
+{"ground_truth": [1.041, 0.891], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 19.016, "pred": [2.932, 0.687], "elapse": -1}
+
+{"ground_truth": [1.32, 0.595], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 15.536, "pred": [2.872, 0.655], "elapse": -1}
+
+{"ground_truth": [1.065, 0.804], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 18.574, "pred": [2.92, 0.713], "elapse": -1}
+
+{"ground_truth": [1.288, 0.723], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 16.849, "pred": [2.966, 0.576], "elapse": -1}
+
+{"ground_truth": [1.131, 0.968], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.905, "pred": [2.896, 0.671], "elapse": -1}
+
+{"ground_truth": [1.498, 0.784], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 18.056, "pred": [3.25, 0.347], "elapse": -1}
+
+{"ground_truth": [1.374, 1.593], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.629, "pred": [2.872, 0.663], "elapse": -1}
+
+{"ground_truth": [1.763, 1.598], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 16.024, "pred": [3.005, 0.586], "elapse": -1}
+
+{"ground_truth": [1.674, 1.61], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 15.594, "pred": [2.906, 0.654], "elapse": -1}
+
+{"ground_truth": [1.548, 1.819], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.819, "pred": [2.898, 0.655], "elapse": -1}
+
+{"ground_truth": [1.841, 1.742], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 14.429, "pred": [2.836, 0.697], "elapse": -1}
+
+{"ground_truth": [1.126, 1.104], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.997, "pred": [2.875, 0.678], "elapse": -1}
+
+{"ground_truth": [1.665, 1.867], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.051, "pred": [2.865, 0.656], "elapse": -1}
+
+{"ground_truth": [1.379, 1.483], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.152, "pred": [2.897, 0.685], "elapse": -1}
+
+{"ground_truth": [1.74, 1.724], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 15.175, "pred": [2.839, 0.678], "elapse": -1}
+
+{"ground_truth": [1.498, 1.496], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.169, "pred": [2.949, 0.578], "elapse": -1}
+
+{"ground_truth": [1.065, 1.134], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 19.174, "pred": [2.927, 0.679], "elapse": -1}
+
+{"ground_truth": [1.333, 1.469], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.593, "pred": [2.899, 0.667], "elapse": -1}
+
+{"ground_truth": [1.388, 2.41], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 25.543, "pred": [3.188, 0.599], "elapse": -1}
+
+{"ground_truth": [1.995, 2.153], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 18.519, "pred": [2.955, 0.57], "elapse": -1}
+
+{"ground_truth": [1.956, 2.041], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 16.957, "pred": [2.893, 0.628], "elapse": -1}
+
+{"ground_truth": [1.904, 2.416], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.108, "pred": [3.157, 0.595], "elapse": -1}
+
+{"ground_truth": [1.991, 2.226], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 19.168, "pred": [3.006, 0.601], "elapse": -1}
+
+{"ground_truth": [1.758, 2.283], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.305, "pred": [3.071, 0.605], "elapse": -1}
+
+{"ground_truth": [1.301, 2.448], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 25.602, "pred": [3.09, 0.617], "elapse": -1}
+
+{"ground_truth": [1.175, 2.725], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 30.651, "pred": [3.26, 0.479], "elapse": -1}
+
+{"ground_truth": [1.243, 2.44], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 26.766, "pred": [3.162, 0.573], "elapse": -1}
+
+{"ground_truth": [1.727, 3.505], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 34.482, "pred": [3.344, 0.459], "elapse": -1}
+
+{"ground_truth": [2.634, 0.615], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 4.389, "pred": [2.928, 0.29], "elapse": -1}
+
+{"ground_truth": [2.65, 0.499], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 4.604, "pred": [3.079, 0.332], "elapse": -1}
+
+{"ground_truth": [2.864, 0.521], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 1.718, "pred": [2.962, 0.38], "elapse": -1}
+
+{"ground_truth": [2.623, 0.917], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.819, "pred": [2.967, 0.328], "elapse": -1}
+
+{"ground_truth": [2.607, 0.789], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.938, "pred": [3.035, 0.242], "elapse": -1}
+
+{"ground_truth": [2.789, 1.2], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.454, "pred": [2.86, 0.258], "elapse": -1}
+
+{"ground_truth": [2.184, 1.909], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 15.027, "pred": [2.856, 0.565], "elapse": -1}
+
+{"ground_truth": [2.231, 1.808], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 12.785, "pred": [2.749, 0.639], "elapse": -1}
+
+{"ground_truth": [2.793, 1.24], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.576, "pred": [2.855, 0.284], "elapse": -1}
+
+{"ground_truth": [2.608, 1.361], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.619, "pred": [2.801, 0.419], "elapse": -1}
+
+{"ground_truth": [2.327, 1.76], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 12.126, "pred": [2.818, 0.652], "elapse": -1}
+
+{"ground_truth": [2.825, 1.412], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.71, "pred": [2.85, 0.441], "elapse": -1}
+
+{"ground_truth": [2.615, 1.241], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.12, "pred": [2.869, 0.365], "elapse": -1}
+
+{"ground_truth": [2.986, 1.083], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.674, "pred": [2.949, 0.217], "elapse": -1}
+
+{"ground_truth": [2.848, 1.299], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 10.163, "pred": [2.852, 0.283], "elapse": -1}
+
+{"ground_truth": [2.242, 1.644], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 11.654, "pred": [2.794, 0.618], "elapse": -1}
+
+{"ground_truth": [2.772, 1.205], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.736, "pred": [2.858, 0.235], "elapse": -1}
+
+{"ground_truth": [2.972, 2.718], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.992, "pred": [3.188, 0.429], "elapse": -1}
+
+{"ground_truth": [2.965, 2.625], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.384, "pred": [3.297, 0.512], "elapse": -1}
+
+{"ground_truth": [2.78, 2.535], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 20.135, "pred": [3.277, 0.583], "elapse": -1}
+
+{"ground_truth": [2.157, 2.095], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 17.0, "pred": [2.878, 0.556], "elapse": -1}
+
+{"ground_truth": [2.417, 2.34], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 18.983, "pred": [3.088, 0.564], "elapse": -1}
+
+{"ground_truth": [2.047, 2.482], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.747, "pred": [3.087, 0.572], "elapse": -1}
+
+{"ground_truth": [2.534, 2.278], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 16.972, "pred": [3.128, 0.688], "elapse": -1}
+
+{"ground_truth": [2.532, 2.585], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.164, "pred": [3.19, 0.469], "elapse": -1}
+
+{"ground_truth": [2.091, 2.203], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 18.233, "pred": [2.944, 0.591], "elapse": -1}
+
+{"ground_truth": [2.372, 2.62], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.534, "pred": [3.142, 0.502], "elapse": -1}
+
+{"ground_truth": [2.241, 2.001], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 15.269, "pred": [2.858, 0.604], "elapse": -1}
+
+{"ground_truth": [2.795, 2.721], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 23.159, "pred": [3.174, 0.436], "elapse": -1}
+
+{"ground_truth": [3.303, 0.587], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 7.035, "pred": [2.903, 0.008], "elapse": -1}
+
+{"ground_truth": [3.533, 0.808], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.237, "pred": [3.235, 0.261], "elapse": -1}
+
+{"ground_truth": [3.953, 0.187], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 7.697, "pred": [3.298, -0.216], "elapse": -1}
+
+{"ground_truth": [3.012, 0.927], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 7.251, "pred": [2.955, 0.204], "elapse": -1}
+
+{"ground_truth": [3.391, 0.376], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 4.401, "pred": [3.11, 0.037], "elapse": -1}
+
+{"ground_truth": [3.839, 0.167], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 7.26, "pred": [3.203, -0.183], "elapse": -1}
+
+{"ground_truth": [3.892, 0.496], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 7.483, "pred": [3.188, 0.243], "elapse": -1}
+
+{"ground_truth": [3.345, 0.532], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.157, "pred": [2.933, 0.074], "elapse": -1}
+
+{"ground_truth": [3.438, 0.673], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.591, "pred": [3.157, 0.077], "elapse": -1}
+
+{"ground_truth": [3.524, 0.277], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 5.017, "pred": [3.056, 0.097], "elapse": -1}
+
+{"ground_truth": [3.519, 0.784], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 6.209, "pred": [3.214, 0.243], "elapse": -1}
+
+{"ground_truth": [3.185, 0.936], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.242, "pred": [3.163, 0.112], "elapse": -1}
+
+{"ground_truth": [3.249, 1.505], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 10.031, "pred": [3.18, 0.504], "elapse": -1}
+
+{"ground_truth": [3.459, 1.186], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.189, "pred": [3.573, 0.375], "elapse": -1}
+
+{"ground_truth": [3.558, 1.372], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.858, "pred": [3.53, 0.487], "elapse": -1}
+
+{"ground_truth": [3.333, 1.175], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 7.998, "pred": [3.41, 0.379], "elapse": -1}
+
+{"ground_truth": [3.38, 1.675], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 12.59, "pred": [3.179, 0.432], "elapse": -1}
+
+{"ground_truth": [3.262, 1.159], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.451, "pred": [3.392, 0.324], "elapse": -1}
+
+{"ground_truth": [3.363, 1.392], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.296, "pred": [3.347, 0.463], "elapse": -1}
+
+{"ground_truth": [3.386, 1.39], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.904, "pred": [3.433, 0.501], "elapse": -1}
+
+{"ground_truth": [3.334, 1.213], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 8.46, "pred": [3.492, 0.382], "elapse": -1}
+
+{"ground_truth": [3.38, 1.576], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.987, "pred": [3.16, 0.602], "elapse": -1}
+
+{"ground_truth": [3.533, 1.402], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 9.317, "pred": [3.61, 0.474], "elapse": -1}
+
+{"ground_truth": [3.274, 2.933], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 24.437, "pred": [3.145, 0.493], "elapse": -1}
+
+{"ground_truth": [3.225, 2.933], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 24.111, "pred": [3.138, 0.523], "elapse": -1}
+
+{"ground_truth": [3.28, 2.518], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 19.557, "pred": [3.325, 0.563], "elapse": -1}
+
+{"ground_truth": [3.432, 2.621], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.579, "pred": [3.068, 0.494], "elapse": -1}
+
+{"ground_truth": [3.375, 2.805], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.987, "pred": [3.062, 0.528], "elapse": -1}
+
+{"ground_truth": [3.359, 2.406], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 18.169, "pred": [3.332, 0.589], "elapse": -1}
+
+{"ground_truth": [3.592, 2.507], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 21.468, "pred": [2.951, 0.458], "elapse": -1}
+
+{"ground_truth": [3.361, 2.721], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 22.303, "pred": [3.017, 0.517], "elapse": -1}
+
+{"ground_truth": [3.363, 2.885], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 24.174, "pred": [3.081, 0.484], "elapse": -1}
+
+{"ground_truth": [3.492, 3.005], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 25.377, "pred": [3.243, 0.48], "elapse": -1}
+
+{"ground_truth": [3.173, 3.155], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 25.783, "pred": [3.244, 0.578], "elapse": -1}
+
+{"ground_truth": [3.492, 3.309], "grid_length": 4, "sensor_num": 4, "noise": 0, "continuous": true, "ibm": false}
+{"method": "qml-two-ibmq_manila", "correct": false, "localization_error": 27.861, "pred": [3.35, 0.526], "elapse": -1}
+

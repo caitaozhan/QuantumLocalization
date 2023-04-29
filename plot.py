@@ -15,14 +15,14 @@ class Plot:
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one', 'povmloc',    'qml-r',   'qml-r-two',      'qml-c',   'qml-c-two',      'qml-ibmq_quito',      'qml-ibmq_manila']
-    _LEGEND = ['QSD-One',     'QSD-Two',    'PQC-One', 'PQC-Two',        'PQC-One', 'PQC-Two',        'PQC-One (IBM Quito)', 'PQC-One (IBM Manila)']
+    METHOD  = ['povmloc-one', 'povmloc',    'qml-r',   'qml-r-two',      'qml-c',   'qml-c-two',      'qml-ibmq_manila',        'qml-two-ibmq_manila']
+    _LEGEND = ['QSD-One',     'QSD-Two',    'PQC-One', 'PQC-Two',        'PQC-One', 'PQC-Two',        'PQC-One (IBM Quantum)', 'PQC-two (IBM Quantum)']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
-    _COLOR  = ['r',           'lightcoral', 'b',       'cornflowerblue', 'b',       'cornflowerblue', 'mediumpurple',    'springgreen']
+    _COLOR  = ['r',           'lightcoral', 'b',       'cornflowerblue', 'b',       'cornflowerblue', 'green',                 'springgreen']
     COLOR   = dict(zip(METHOD, _COLOR))
 
-    _LINE   = ['-',           '--',         '-',        '--',            '-',        '--',            ':',               ':']
+    _LINE   = ['-',           '--',         '-',        '--',            '-',        '--',            '-',                     '--']
     LINE    = dict(zip(METHOD, _LINE))
 
 
@@ -105,10 +105,10 @@ class Plot:
         l_err = "$L_{err}$"
         fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
         fig.subplots_adjust(left=0.13, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
-        ax1.plot(X_one, povmloc_one, linestyle=':', marker='o', label=Plot.LEGEND['povmloc-one'], mec='black', color=Plot.COLOR['povmloc-one'])
-        ax1.plot(X_two, povmloc,     linestyle='-', marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc'])
-        ax1.plot(X_one, qml_r_one,   linestyle=':', marker='o', label=Plot.LEGEND['qml-r'],       mec='black', color=Plot.COLOR['qml-r'])
-        ax1.plot(X_two, qml_r_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-r-two'],   mec='black', color=Plot.COLOR['qml-r-two'])
+        ax1.plot(X_one, povmloc_one, linestyle=Plot.LINE['povmloc-one'], marker='o', label=Plot.LEGEND['povmloc-one'], mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X_two, povmloc,     linestyle=Plot.LINE['povmloc'], marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc'])
+        ax1.plot(X_one, qml_r_one,   linestyle=Plot.LINE['qml-r'], marker='o', label=Plot.LEGEND['qml-r'],       mec='black', color=Plot.COLOR['qml-r'])
+        ax1.plot(X_two, qml_r_two,   linestyle=Plot.LINE['qml-r-two'], marker='o', label=Plot.LEGEND['qml-r-two'],   mec='black', color=Plot.COLOR['qml-r-two'])
         # ax1
         ax1.legend(ncol=1, handlelength=4, loc='upper left', fontsize=40)
         ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
@@ -132,9 +132,8 @@ class Plot:
         # step 1.1: prepare accuracy data for QSD-One and PQC-One
         reduce = Plot.reduce_average
         sensor_num = 4
-        onelevel_methods = ['qml-r', 'qml-ibmq_quito']
+        onelevel_methods = ['qml-r', 'qml-ibmq_manila']
         table_onelevel = defaultdict(list)
-        table_twolevel = defaultdict(list)
         for myinput, output_by_method in data:
             if myinput.sensor_num != sensor_num:
                 continue
@@ -150,16 +149,16 @@ class Plot:
             print_table.append([x] + tmp_list)
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + onelevel_methods))
         arr = np.array(print_table)
-        X_one      = arr[:, 0]
-        qml_r_one  = arr[:, 1]
-        qml_quito  = arr[:, 2]
+        X_one     = arr[:, 0]
+        qml_r_one = arr[:, 1]
+        qml_ibm   = arr[:, 2]
 
         # step 2: plotting
         l_err = "$L_{err}$"
         fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
         fig.subplots_adjust(left=0.13, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
-        ax1.plot(X_one, qml_r_one, linestyle=Plot.LINE['qml-r'],          marker='o', label=Plot.LEGEND['qml-r'],          mec='black', color=Plot.COLOR['qml-r'])
-        ax1.plot(X_one, qml_quito, linestyle=Plot.LINE['qml-ibmq_quito'], marker='o', label=Plot.LEGEND['qml-ibmq_quito'], mec='black', color=Plot.COLOR['qml-ibmq_quito'])
+        ax1.plot(X_one, qml_r_one, linestyle=Plot.LINE['qml-r'],           marker='o', label=Plot.LEGEND['qml-r'],           mec='black', color=Plot.COLOR['qml-r'])
+        ax1.plot(X_one, qml_ibm,   linestyle=Plot.LINE['qml-ibmq_manila'], marker='o', label=Plot.LEGEND['qml-ibmq_manila'], mec='black', color=Plot.COLOR['qml-ibmq_manila'])
         # ax1
         ax1.legend(ncol=1, handlelength=4, loc='upper left', fontsize=40)
         ax1.set_xlabel('Grid Size', labelpad=30, fontsize=40)
@@ -167,7 +166,7 @@ class Plot:
         X = list(X_one)
         ax1.set_xticks(X)
         ax1.set_xticklabels([f'{int(x)}x{int(x)}' for x in X])
-        Y = list(range(0, 19, 3))
+        Y = list(range(0, 16, 3))
         ax1.set_yticks(Y)
         ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
@@ -280,7 +279,7 @@ class Plot:
     @staticmethod
     def error_cdf_ibm(data: list, figname: str):
         # fix grid length at 16 and sensor number at 8
-        methods = ['qml-r', 'qml-ibmq_quito']
+        methods = ['qml-r', 'qml-ibmq_manila', 'qml-r-two', 'qml-two-ibmq_manila']
         grid_length = 4
         sensor_num = 4
         table = defaultdict(list)
@@ -298,7 +297,7 @@ class Plot:
             Y, bins, _ = plt.hist(error_list, n_bins, density=True, histtype='step', cumulative=True, label=method)
             method_n_bins.append((method, Y, bins))
         plt.close()
-        method_n_bins[0], method_n_bins[1] = method_n_bins[1], method_n_bins[0]
+        # method_n_bins[0], method_n_bins[1] = method_n_bins[1], method_n_bins[0]
         fig, ax = plt.subplots(figsize=(19, 16))
         fig.subplots_adjust(left=0.15, right=0.96, top=0.9, bottom=0.12)
         for method, Y, bins in method_n_bins:
@@ -365,10 +364,10 @@ class Plot:
         # step 2: plotting
         fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
         fig.subplots_adjust(left=0.15, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
-        ax1.plot(X_one, povmloc_one, linestyle=':', marker='o', label=Plot.LEGEND['povmloc-one'], mec='black', color=Plot.COLOR['povmloc-one'])
-        ax1.plot(X_two, povmloc,     linestyle='-', marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc'])
-        ax1.plot(X_one, qml_c_one,   linestyle=':', marker='o', label=Plot.LEGEND['qml-c'],       mec='black', color=Plot.COLOR['qml-c'])
-        ax1.plot(X_two, qml_c_two,   linestyle='-', marker='o', label=Plot.LEGEND['qml-c-two'],   mec='black', color=Plot.COLOR['qml-c-two'])
+        ax1.plot(X_one, povmloc_one, linestyle=Plot.LINE['povmloc-one'], marker='o', label=Plot.LEGEND['povmloc-one'], mec='black', color=Plot.COLOR['povmloc-one'])
+        ax1.plot(X_two, povmloc,     linestyle=Plot.LINE['povmloc'], marker='o', label=Plot.LEGEND['povmloc'],     mec='black', color=Plot.COLOR['povmloc'])
+        ax1.plot(X_one, qml_c_one,   linestyle=Plot.LINE['qml-c'], marker='o', label=Plot.LEGEND['qml-c'],       mec='black', color=Plot.COLOR['qml-c'])
+        ax1.plot(X_two, qml_c_two,   linestyle=Plot.LINE['qml-c-two'], marker='o', label=Plot.LEGEND['qml-c-two'],   mec='black', color=Plot.COLOR['qml-c-two'])
         # ax1
         ax1.legend(ncol=1, handlelength=4, loc='lower left', fontsize=40)
         ax1.set_xlabel('Grid Size', labelpad=10, fontsize=40)
@@ -391,7 +390,7 @@ class Plot:
         # step 1.1: prepare accuracy data for QSD-One and PQC-One
         reduce = Plot.reduce_average
         sensor_num = 4
-        onelevel_methods = ['qml-c', 'qml-ibmq_quito']#, 'qml-ibmq_manila']
+        onelevel_methods = ['qml-c', 'qml-ibmq_manila']
         table_onelevel = defaultdict(list)
         for myinput, output_by_method in data:
             if myinput.sensor_num != sensor_num:
@@ -408,17 +407,15 @@ class Plot:
         print(tabulate.tabulate(print_table, headers=['Grid Length'] + onelevel_methods))
 
         arr = np.array(print_table)
-        qml_c_one  = arr[:, 1] * 100
-        qml_quito  = arr[:, 2] * 100
-        # qml_manila = arr[:, 3] * 100
-        X_one      = arr[:, 0]
+        qml_c_one = arr[:, 1] * 100
+        qml_ibm   = arr[:, 2] * 100
+        X_one     = arr[:, 0]
 
         # step 2: plotting
         fig, ax1 = plt.subplots(1, 1, figsize=(18, 16))
         fig.subplots_adjust(left=0.15, right=0.98, top=0.91, bottom=0.12, wspace=0.13)
-        ax1.plot(X_one, qml_c_one,  linestyle=Plot.LINE['qml-c'],          marker='o',  label=Plot.LEGEND['qml-c'],           mec='black', color=Plot.COLOR['qml-c'])
-        # ax1.plot(X_one, qml_manila, linestyle=Plot.LINE['qml-ibmq_manila'], marker='o', label=Plot.LEGEND['qml-ibmq_manila'], mec='black', color=Plot.COLOR['qml-ibmq_manila'])
-        ax1.plot(X_one, qml_quito,  linestyle=Plot.LINE['qml-ibmq_quito'], marker='o',  label=Plot.LEGEND['qml-ibmq_quito'],  mec='black', color=Plot.COLOR['qml-ibmq_quito'])
+        ax1.plot(X_one, qml_c_one, linestyle=Plot.LINE['qml-c'],          marker='o',  label=Plot.LEGEND['qml-c'],           mec='black', color=Plot.COLOR['qml-c'])
+        ax1.plot(X_one, qml_ibm,   linestyle=Plot.LINE['qml-ibmq_manila'], marker='o',  label=Plot.LEGEND['qml-ibmq_manila'],  mec='black', color=Plot.COLOR['qml-ibmq_manila'])
         # ax1
         ax1.legend(ncol=1, handlelength=4, loc='lower left', fontsize=40)
         ax1.set_xlabel('Grid Size', labelpad=30, fontsize=40)
@@ -515,8 +512,7 @@ def continuous_varygrid():
 
 
 def continuous_varygrid_ibm():
-    logs = ['results/ibm.continuous.onelevel', 'results/ibm.continuous.onelevel.2x2',\
-            'results/ibm.continuous.onelevel.3x3']
+    logs = ['results/ibm.continuous.onelevel']
     data = Utility.read_logs(logs)
     figname = 'results/continuous.varygrid.ibm.png'
     Plot.continuous_varygrid_ibm(data, figname)
@@ -551,7 +547,7 @@ def localization_error_cdf():
 def localization_error_cdf_ibm():
     '''the classic error CDF plot for IBM
     '''
-    logs = ['results/ibm.continuous.onelevel']
+    logs = ['results/ibm.continuous.onelevel', 'results/ibm.continuous.twolevel']
     data = Utility.read_logs(logs)
     figname = f'results/error_cdf_ibm.png'
     Plot.error_cdf_ibm(data, figname)
@@ -566,7 +562,7 @@ def discrete_varygrid():
 
 
 def discrete_varygrid_ibm():
-    logs = ['results/ibm.discrete.onelevel.2x2', 'results/ibm.discrete.onelevel.3x3', 'results/ibm.discrete.onelevel']
+    logs = ['results/ibm.discrete.onelevel']
     data = Utility.read_logs(logs)
     figname = 'results/discrete.varygrid.ibm.png'
     Plot.discrete_varygrid_ibm(data, figname)
@@ -584,14 +580,14 @@ def runtime():
 if __name__ == '__main__':
 
     # continuous_varygrid()
-    # continuous_varygrid_ibm()
     # continuous_varysensornum()
     # localization_error_cdf()
+    # continuous_varygrid_ibm()
     # localization_error_cdf_ibm()
 
-    # discrete_varygrid()
-    discrete_varygrid_ibm()
+    discrete_varygrid()
     # discrete_varysensornum()
+    # discrete_varygrid_ibm()
 
 
 

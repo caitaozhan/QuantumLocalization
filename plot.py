@@ -121,7 +121,7 @@ class Plot:
         ax1.set_yticks(Y)
         ax1.tick_params(axis='x', pad=15, direction='in', length=10, width=5, labelsize=43)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax1.set_ylabel(f'{l_err} (m)', labelpad=15, fontsize=55)
+        ax1.set_ylabel(f'Average {l_err} (m)', labelpad=15, fontsize=55)
         ax1.set_title(f'Performance of Localization Algorithms', pad=30, fontweight='bold')
         fig.savefig(figname)
 
@@ -223,7 +223,7 @@ class Plot:
         ax1.set_xticklabels([f'{int(x)}' for x in X])
         ax1.tick_params(axis='x', pad=15, length=10, width=5)
         ax1.tick_params(axis='y', pad=15, direction='in', length=10, width=5)
-        ax1.set_ylabel(f'{l_err} (m)', labelpad=20, fontsize=55)
+        ax1.set_ylabel(f'Average {l_err} (m)', labelpad=20, fontsize=55)
         ax1.set_title(f'Localization Performance in 16x16 Grid', pad=30, fontweight='bold')
         fig.savefig(figname)
 
@@ -578,10 +578,10 @@ if __name__ == '__main__':
 
     continuous_varygrid()
     continuous_varysensornum()
-    localization_error_cdf()
+    # localization_error_cdf()
     
-    discrete_varygrid()
-    discrete_varysensornum()
+    # discrete_varygrid()
+    # discrete_varysensornum()
     
 
     # IBM    

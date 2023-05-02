@@ -15,14 +15,14 @@ class Plot:
     plt.rcParams['font.weight'] = 'bold'
     plt.rcParams['axes.labelweight'] = 'bold'
 
-    METHOD  = ['povmloc-one', 'povmloc',    'qml-r',    'qml-r-two',      'qml-c',    'qml-c-two',     'qml-ibmq_manila',       'qml-two-ibmq_manila']
-    _LEGEND = ['QSD-One',     'QSD-Two',    'PQC-One',  'PQC-Two',        'PQC-One',  'PQC-Two',       'PQC-One (IBM Quantum)', 'PQC-two (IBM Quantum)']
+    METHOD  = ['povmloc-one',    'povmloc',  'qml-r',      'qml-r-two', 'qml-c',       'qml-c-two',     'qml-ibmq_manila',       'qml-two-ibmq_manila']
+    _LEGEND = ['QSD-One',        'QSD-Two',  'PQC-One',    'PQC-Two',   'PQC-One',     'PQC-Two',       'PQC-One (IBM Quantum)', 'PQC-two (IBM Quantum)']
     LEGEND  = dict(zip(METHOD, _LEGEND))
 
-    _COLOR  = ['r',           'darksalmon', 'darkblue', 'cornflowerblue', 'darkblue', 'cornflowerblue', 'green',                'springgreen']
+    _COLOR  = ['cornflowerblue', 'darkblue', 'darksalmon', 'r',          'darksalmon', 'r',             'springgreen',            'green']
     COLOR   = dict(zip(METHOD, _COLOR))
 
-    _LINE   = ['-',           '--',         '-',        '--',             '-',        '--',             '-',                    '--']
+    _LINE   = ['--',           '-',         '--',        '-',             '--',        '-',             '--',                    '-']
     LINE    = dict(zip(METHOD, _LINE))
 
 
@@ -578,10 +578,10 @@ if __name__ == '__main__':
 
     continuous_varygrid()
     continuous_varysensornum()
-    # localization_error_cdf()
+    localization_error_cdf()
     
-    # discrete_varygrid()
-    # discrete_varysensornum()
+    discrete_varygrid()
+    discrete_varysensornum()
     
 
     # IBM    
